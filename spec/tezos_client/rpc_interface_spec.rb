@@ -1,0 +1,12 @@
+
+RSpec.describe TezosClient::RpcInterface do
+
+  describe '#get' do
+
+    it 'works' do
+      res = subject.get '/monitor/bootstrapped'
+      expect(res).to be_a Hash
+      p res
+    end
+  end
+end
