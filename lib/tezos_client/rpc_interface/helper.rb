@@ -13,7 +13,8 @@ class TezosClient
                             amount:,
                             fee:,
                             gas_limit:,
-                            storage_limit:)
+                            storage_limit:,
+                            parameters: nil)
         content = {
             'branch' => branch,
             'contents' => [
@@ -29,7 +30,11 @@ class TezosClient
                 }
             ]
         }
-        p content
+
+        if parameters
+          content['contents'][0]['parameters'] = parameters
+        end
+
         post('chains/main/blocks/head/helpers/forge/operations', content)
       end
 
@@ -55,11 +60,14 @@ class TezosClient
                     'storage_limit' => storage_limit.to_satoshi.to_s,
                     'counter' => counter.to_s,
                     'fee' => fee.to_satoshi.to_s,
-                    'parameters' => parameters
                 }
             ],
             'signature' => signature
         }
+
+        if parameters
+          content['contents'][0]['parameters'] = parameters
+        end
 
         post('chains/main/blocks/head/helpers/scripts/run_operation', content)
       end
@@ -73,7 +81,8 @@ class TezosClient
                               fee:,
                               signature:,
                               gas_limit:,
-                              storage_limit:)
+                              storage_limit:,
+                              parameters: nil)
         content = {
             'protocol' => protocol,
             'branch' => branch,
@@ -91,6 +100,10 @@ class TezosClient
             ],
             'signature' => signature
         }
+
+        if parameters
+          content['contents'][0]['parameters'] = parameters
+        end
 
         res = post('chains/main/blocks/head/helpers/preapply/operations', [content])
         res[0]

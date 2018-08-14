@@ -7,12 +7,15 @@ require 'tezos_client/commands'
 require 'tezos_client/client_interface'
 require 'tezos_client/rpc_interface'
 
+require 'tezos_client/encode_utils'
+
 class TezosClient
   using CurrencyUtils
   using StringUtils
 
   include Commands
   include Crypto
+  include EncodeUtils
 
   attr_accessor :client_interface
   attr_accessor :rpc_interface
@@ -71,96 +74,6 @@ class TezosClient
     end
   end
 
-  def sexp2mic(expr)
-    expr = expr.gsub(/(?:@[a-z_]+)|(?:#.*$)/m, '')
-               .gsub(/\s+/, ' ')
-               .strip
-
-    pl = 0
-    popen = false
-    sopen = false
-    escaped = false
-
-    ret = {
-      prim: nil,
-      args: []
-    }
-
-    val = ''
-    expr.each_char.with_index do |char, i|
-
-      is_last_char = (i == (expr.length - 1))
-
-      if escaped
-        val += char
-        escaped = false
-        next
-
-      elsif (!sopen && is_last_char) ||
-            (!sopen && char == ' ' && pl.zero?)
-
-        val += char if is_last_char
-
-        unless val.empty?
-          if val == val.to_i.to_s
-            if !ret[:prim]
-              return { 'int' => val }
-            else
-              ret[:args] <<  {'int' => val}
-            end
-          elsif ret[:prim]
-            ret[:args] << sexp2mic(val)
-          else
-            ret[:prim] = val
-          end
-          val = ''
-        end
-        next
-
-      elsif char == '"' && sopen
-        sopen = false
-        if !ret[:prim]
-          return { 'string' => val }
-        else
-          ret[:args] << { 'string' => val }
-        end
-        val = ''
-        next
-
-      elsif char == '"' && !sopen && pl.zero?
-        sopen = true
-        next
-
-      elsif char == '\\'
-        escaped = true
-
-      elsif char == '('
-        if pl == 0
-          popen = true
-        else
-          pl += 1
-        end
-
-      elsif char == ')'
-        if ! popen
-          raise "closing parenthesis while none was opened #{val}"
-        elsif pl >= 1
-          pl -= 1
-        else
-          return sexp2mic(val)
-        end
-      end
-
-      val += char
-    end
-
-    if sopen
-      raise ArgumentError, "string '#{val}' has not been closed"
-    end
-
-    ret
-  end
-
 
   def transfer(args)
 
@@ -193,7 +106,7 @@ class TezosClient
     }
 
     if args[:parameters]
-      transaction_args[:parameters] = sexp2mic(args[:parameters])
+      transaction_args[:parameters] = encode_args(args[:parameters])
     end
 
     adjust_gas(transaction_args)

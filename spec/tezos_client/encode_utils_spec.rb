@@ -1,29 +1,4 @@
 RSpec.describe TezosClient do
-  it 'has a version number' do
-    expect(TezosClient::VERSION).not_to be nil
-  end
-
-  describe '#transfer' do
-    it 'works' do
-      sleep(1)
-      subject.transfer(amount: 1,
-                       from: 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq',
-                       to: 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq',
-                       secret_key: 'edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN')
-    end
-
-    context 'with parameters' do
-      it 'works' do
-        sleep(1)
-        subject.transfer(amount: 0,
-                         from: 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq',
-                         to: 'KT1DYhtwokM5SX1V8UfqnDe2cMBXA4mS5MFr',
-                         secret_key: 'edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN',
-                         parameters: '"pierre"')
-      end
-    end
-  end
-
   describe '#encode_args' do
     it 'works with a string' do
       res = subject.encode_args('"test"')
@@ -32,12 +7,22 @@ RSpec.describe TezosClient do
 
     it 'works with a Pair' do
       res = subject.encode_args('Pair 82 37')
-      expect(res).to eq(prim: 'Pair', args: [{ 'int' => '82' }, { 'int' => '37' }])
+      expect(res).to eq(
+        prim: 'Pair',
+        args: [
+          { 'int' => '82' }, { 'int' => '37' }
+        ]
+      )
     end
 
     it 'works with a Pair of string' do
       res = subject.encode_args('Pair "82" "37"')
-      expect(res).to eq(prim: 'Pair', args: [{ 'string' => '82' }, { 'string' => '37' }])
+      expect(res).to eq(
+        prim: 'Pair',
+        args: [
+          { 'string' => '82' }, { 'string' => '37' }
+        ]
+      )
     end
 
     it 'works with recursive pair' do
