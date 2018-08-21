@@ -41,28 +41,28 @@ class TezosClient
     }.freeze
 
     def hex_prefix(type)
-      PREFIXES[type].pack('C*').unpack('H*')[0]
+      PREFIXES[type].pack('C*').to_hex
     end
 
     def decode_base58(base58_val)
       bin_val = Base58.base58_to_binary(base58_val, :bitcoin)
-      bin_val.unpack('H*')[0]
+      bin_val.to_hex
     end
 
     def encode_base58(hex_val)
-      bin_val = [hex_val].pack('H*')
+      bin_val = hex_val.to_bin
       Base58.binary_to_base58(bin_val, :bitcoin)
     end
 
     def checksum(hex)
-      b = [hex].pack('H*') # unpack hex
+      b = hex.to_bin
       Digest::SHA256.hexdigest(Digest::SHA256.digest(b))[0...8]
     end
 
     def get_prefix_and_payload(str)
       PREFIXES.keys.each do |prefix|
         if str.start_with? hex_prefix(prefix)
-          return prefix, str[ (hex_prefix(prefix).size) .. -1]
+          return prefix, str[(hex_prefix(prefix).size) .. -1]
         end
       end
     end
@@ -152,6 +152,30 @@ class TezosClient
         edsig
       end
     end
+
+    def operation_id(signed_operation_hex)
+      hash = RbNaCl::Hash::Blake2b.digest(
+        signed_operation_hex.to_bin,
+        digest_size: 32
+      )
+      encode_tz(:o, hash.to_hex)
+    end
+
+
+    def sign_operation(secret_key:, operation_hex:)
+      sign(secret_key: secret_key,
+           data: operation_hex,
+           watermark: :generic) do |edsig, signed_data|
+        op_id = operation_id(signed_data)
+
+        if block_given?
+          yield(edsig, signed_data, op_id)
+        else
+          edsig
+        end
+      end
+    end
+
 
   end
 end

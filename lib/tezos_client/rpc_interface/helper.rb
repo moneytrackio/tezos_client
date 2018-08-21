@@ -73,7 +73,11 @@ class TezosClient
           operation['parameters'] = args.fetch(:parameters)
         end
 
-        run_operation(operation: operation, branch: args.fetch(:branch), signature: args.fetch(:signature))
+        run_operation(
+          operation: operation,
+          branch: args.fetch(:branch),
+          signature: args.fetch(:signature)
+        )
       end
 
       def run_origination(args)
