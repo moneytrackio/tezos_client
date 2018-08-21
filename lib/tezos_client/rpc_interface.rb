@@ -33,7 +33,7 @@ class TezosClient
       url = "http://#{@host}:#{@port}/#{path}"
       response = HTTParty.post(url,
                                body: content.to_json,
-                               :headers => { 'Content-Type' => 'application/json' })
+                               headers: { 'Content-Type' => 'application/json' })
       unless response.success?
         raise "#{url} failed with code #{response.code}: #{response.parsed_response}"
       end

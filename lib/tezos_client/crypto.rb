@@ -148,9 +148,9 @@ class TezosClient
 
       if block_given?
         yield(edsig, signed_data)
+      else
+        edsig
       end
-
-      edsig
     end
 
   end
