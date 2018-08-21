@@ -73,42 +73,19 @@ class TezosClient
     }
   end
 
-  def run_origination(args)
-    res = rpc_interface.run_origination(**args, signature: RANDOM_SIGNATURE)
-
-    ensure_operation_applied!(res)
-
-    operation_result = res['metadata']['operation_result']
-    consumed_storage = operation_result.fetch('paid_storage_size_diff', '0').to_i.from_satoshi
-    consumed_gas = (operation_result['consumed_gas']).to_i.from_satoshi
-    originated_contract = operation_result['originated_contracts'][0]
-
-    {
-      status: :applied,
-      consumed_gas: consumed_gas,
-      consumed_storage: consumed_storage,
-      originated_contract: originated_contract
-    }
-  end
-
-  def transfer(args)
+  def prepare_transaction_args(args)
     default_args = {
       gas_limit: 0.04,
       storage_limit: 0.006,
       fee: 0.05
     }
-    args = default_args.merge args
 
-    raise ArgumentError, 'must pass :amount' unless args.include? :amount
-    raise ArgumentError, 'must pass :from' unless args.include? :from
-    raise ArgumentError, 'must pass :to' unless args.include? :to
-    raise ArgumentError, 'must pass :secret_key' unless args.include? :secret_key
+    transaction_args = default_args.merge(args)
 
     branch  = rpc_interface.head_hash
     counter = rpc_interface.contract_counter(args[:from]) + 1
-    protocol = rpc_interface.protocols[0]
 
-    transaction_args = args.merge(
+    transaction_args = transaction_args.merge(
       branch: branch,
       counter: counter
     )
@@ -116,6 +93,18 @@ class TezosClient
     if args.key? :parameters
       transaction_args[:parameters] = encode_args(args[:parameters])
     end
+
+    transaction_args
+  end
+
+  def transfer(args)
+    raise ArgumentError, 'must pass :amount' unless args.include? :amount
+    raise ArgumentError, 'must pass :from' unless args.include? :from
+    raise ArgumentError, 'must pass :to' unless args.include? :to
+    raise ArgumentError, 'must pass :secret_key' unless args.include? :secret_key
+
+    protocol = rpc_interface.protocols[0]
+    transaction_args = prepare_transaction_args(args)
 
     # simulate operation and adjust gas limits
     run_result = run_transaction(transaction_args)
@@ -175,7 +164,7 @@ class TezosClient
     including_block
   end
 
-  def originate_contract(args)
+  def prepare_origination_args(args)
     default_args = {
       amount: 0,
       spendable: false,
@@ -187,19 +176,46 @@ class TezosClient
 
     branch  = rpc_interface.head_hash
     counter = rpc_interface.contract_counter(args.fetch(:from)) + 1
-    protocol = rpc_interface.protocols[0]
 
     origination_script = liquidity_interface.origination_script(
       args.slice(:from, :script, :init_params)
     )
 
-    origination_args = default_args.merge(
+    default_args.merge(
       **args,
       branch: branch,
       script: origination_script,
       counter: counter,
       manager: args.fetch(:from)
     )
+  end
+
+  def run_origination(args)
+    res = rpc_interface.run_origination(**args, signature: RANDOM_SIGNATURE)
+
+    ensure_operation_applied!(res)
+
+    operation_result = res['metadata']['operation_result']
+    consumed_storage = operation_result.fetch('paid_storage_size_diff', '0').to_i.from_satoshi
+    consumed_gas = (operation_result['consumed_gas']).to_i.from_satoshi
+    originated_contract = operation_result['originated_contracts'][0]
+
+    {
+      status: :applied,
+      consumed_gas: consumed_gas,
+      consumed_storage: consumed_storage,
+      originated_contract: originated_contract
+    }
+  end
+
+  def preapply_origination(args)
+    res = rpc_interface.preapply_origination(args)
+    ensure_operation_applied!(res)
+    res['metadata']['operation_result']['originated_contracts'][0]
+  end
+
+  def originate_contract(args)
+    origination_args = prepare_origination_args(args)
 
     # simulate operation and adjust gas limits
     run_result = run_origination(origination_args)
@@ -214,15 +230,12 @@ class TezosClient
       operation_hex: origination_hex
     ) do |base_58_signature, signed_origination_hex|
 
-      res = rpc_interface.preapply_origination(
+      originated_contract = preapply_origination(
         **origination_args,
         signature: base_58_signature,
-        protocol: protocol
+        protocol: rpc_interface.protocols[0]
       )
 
-      ensure_operation_applied!(res)
-
-      originated_contract = res['metadata']['operation_result']['originated_contracts'][0]
       op_id = rpc_interface.broadcast_operation(signed_origination_hex)
 
       {

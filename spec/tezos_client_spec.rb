@@ -20,11 +20,11 @@ RSpec.describe TezosClient do
       it 'works' do
         sleep(1)
         subject.transfer(
-          amount: 0,
+          amount: 5,
           from: 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq',
-          to: 'KT1DYhtwokM5SX1V8UfqnDe2cMBXA4mS5MFr',
+          to: 'KT1MZTrMDPB42P9yvjf7Cy8Lkjxjj4jetbCt',
           secret_key: 'edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN',
-          parameters: '"pierre"'
+          parameters: '"pro"'
         )
       end
     end
