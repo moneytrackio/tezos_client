@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TezosClient
   class ClientInterface
     # Commands managing keys and accounts

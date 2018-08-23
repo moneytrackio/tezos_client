@@ -1,46 +1,46 @@
+# frozen_string_literal: true
 
 RSpec.describe TezosClient do
-
-  it 'has a version number' do
+  it "has a version number" do
     expect(TezosClient::VERSION).not_to be nil
   end
 
-  describe '#transfer' do
-    it 'works' do
+  describe "#transfer" do
+    it "works" do
       sleep(1)
       op_id = subject.transfer(
         amount: 1,
-        from: 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq',
-        to: 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq',
-        secret_key: 'edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN'
+        from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
       )
       expect(op_id).to be_a String
-      expect(op_id).to start_with 'o'
+      expect(op_id).to start_with "o"
       p op_id
     end
 
-    context 'with parameters' do
-      it 'works' do
+    context "with parameters" do
+      it "works" do
         sleep(1)
         subject.transfer(
           amount: 5,
-          from: 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq',
-          to: 'KT1MZTrMDPB42P9yvjf7Cy8Lkjxjj4jetbCt',
-          secret_key: 'edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN',
+          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          to: "KT1MZTrMDPB42P9yvjf7Cy8Lkjxjj4jetbCt",
+          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
           parameters: '"pro"'
         )
       end
     end
   end
 
-  describe '#monitor_operation' do
-    it 'works' do
+  describe "#monitor_operation" do
+    it "works" do
       sleep(1)
       op_id = subject.transfer(
         amount: 1,
-        from: 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq',
-        to: 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq',
-        secret_key: 'edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN'
+        from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
       )
 
       block_id = subject.monitor_operation(op_id)
@@ -49,15 +49,14 @@ RSpec.describe TezosClient do
   end
 
 
-  describe '#originate_contract' do
-
-    let(:script) { File.expand_path('./spec/fixtures/demo.liq') }
-    let(:source) { 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq' }
-    let(:secret_key) { 'edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN' }
+  describe "#originate_contract" do
+    let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
+    let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
+    let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
     let(:amount) { 0 }
     let(:init_params) { '"test"' }
 
-    it 'works' do
+    it "works" do
       res = subject.originate_contract(
         from: source,
         amount: amount,
@@ -74,16 +73,16 @@ RSpec.describe TezosClient do
     end
   end
 
-  context '#multisig' do
-    let(:script) { File.expand_path('./spec/fixtures/multisig.liq') }
-    let(:source) { 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq' }
-    let(:secret_key) { 'edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN' }
+  context "#multisig" do
+    let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
+    let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
+    let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
     let(:amount) { 0 }
 
-    describe '#originate_contract' do
-      let(:init_params) { ["Set [#{source}]", '1p'] }
+    describe "#originate_contract" do
+      let(:init_params) { ["Set [#{source}]", "1p"] }
 
-      it 'works' do
+      it "works" do
         res = subject.originate_contract(
           from: source,
           amount: amount,
@@ -101,11 +100,11 @@ RSpec.describe TezosClient do
       end
     end
 
-    describe '#call Manage' do
-      let(:contract_address) { 'KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs' }
-      let(:call_params) { 'Manage (Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })' }
+    describe "#call Manage" do
+      let(:contract_address) { "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs" }
+      let(:call_params) { "Manage (Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })" }
 
-      it 'works' do
+      it "works" do
         res = subject.call_contract(
           from: source,
           amount: amount,
@@ -118,12 +117,12 @@ RSpec.describe TezosClient do
       end
     end
 
-    describe '#call Pay' do
-      let(:contract_address) { 'KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs' }
-      let(:call_params) { 'Pay' }
+    describe "#call Pay" do
+      let(:contract_address) { "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs" }
+      let(:call_params) { "Pay" }
       let(:amount) { 1 }
 
-      it 'works' do
+      it "works" do
         res = subject.call_contract(
           from: source,
           amount: amount,

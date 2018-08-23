@@ -1,13 +1,14 @@
-require 'httparty'
-require 'rest-client'
+# frozen_string_literal: true
 
-require_relative 'rpc_interface/monitor'
-require_relative 'rpc_interface/contracts'
-require_relative 'rpc_interface/context'
-require_relative 'rpc_interface/helper'
+require "httparty"
+require "rest-client"
+
+require_relative "rpc_interface/monitor"
+require_relative "rpc_interface/contracts"
+require_relative "rpc_interface/context"
+require_relative "rpc_interface/helper"
 
 class TezosClient
-
   class RpcInterface
     include Monitor
     include Contracts
@@ -19,9 +20,13 @@ class TezosClient
       @port = port
     end
 
+    def log(obj)
+      STDERR.puts obj
+    end
+
     def get(path)
       url = "http://#{@host}:#{@port}/#{path}"
-      response = HTTParty.get(url, options: { headers: { 'Content-Type' => 'application/json' } })
+      response = HTTParty.get(url, options: { headers: { "Content-Type" => "application/json" } })
       unless response.success?
         raise "#{url} failed with code #{response.code}: #{response.parsed_response}"
       end
@@ -33,8 +38,12 @@ class TezosClient
       url = "http://#{@host}:#{@port}/#{path}"
       response = HTTParty.post(url,
                                body: content.to_json,
-                               headers: { 'Content-Type' => 'application/json' })
+                               headers: { "Content-Type" => "application/json" })
       unless response.success?
+        log("-------")
+        log(">>> POST #{url} \n #{pp content}")
+        log("<<< code: #{response.code} \n #{pp(response.parsed_response)}")
+        log("-------")
         raise "#{url} failed with code #{response.code}:\n #{pp(response.parsed_response)}"
       end
 
@@ -59,7 +68,5 @@ class TezosClient
                                     accept: :json)
       end
     end
-
   end
-
 end

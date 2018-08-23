@@ -1,14 +1,14 @@
+# frozen_string_literal: true
+
 class TezosClient
-
   module EncodeUtils
-
     class ArgsEncoder
       attr_accessor :expr, :popen, :sopen, :escaped, :pl, :ret
 
 
       def initialize(expr)
-        @expr = expr.gsub(/(?:@[a-z_]+)|(?:#.*$)/m, '')
-                    .gsub(/\s+/, ' ')
+        @expr = expr.gsub(/(?:@[a-z_]+)|(?:#.*$)/m, "")
+                    .gsub(/\s+/, " ")
                     .strip
         initialize_statuses
         initialize_ret
@@ -19,7 +19,7 @@ class TezosClient
         @sopen = false
         @escaped = false
         @pl = 0
-        @val = ''
+        @val = ""
       end
 
       def initialize_ret
@@ -33,16 +33,16 @@ class TezosClient
         unless @val.empty?
           if @val == @val.to_i.to_s
             if !ret[:prim]
-              @ret = { 'int' => @val }
+              @ret = { "int" => @val }
             else
-              @ret[:args] << { 'int' => @val }
+              @ret[:args] << { "int" => @val }
             end
           elsif ret[:prim]
             @ret[:args] << ArgsEncoder.new(@val).encode
           else
             @ret[:prim] = @val
           end
-          @val = ''
+          @val = ""
         end
       end
 
@@ -52,11 +52,11 @@ class TezosClient
         if @sopen
           @sopen = false
           if !ret[:prim]
-            @ret = { 'string' => @val }
+            @ret = { "string" => @val }
           else
-            @ret[:args] << { 'string' => @val }
+            @ret[:args] << { "string" => @val }
           end
-          @val = ''
+          @val = ""
         else
           @sopen = true
         end
@@ -65,17 +65,17 @@ class TezosClient
 
       def treat_parenthesis(char)
         case char
-        when '('
+        when "("
           @val += char if @popen
           @popen = true
           @pl += 1
           true
-        when ')'
+        when ")"
           raise "closing parenthesis while none was opened #{val}" unless popen
           @pl -= 1
           if pl.zero?
             @ret[:args] << ArgsEncoder.new(@val).encode
-            @val = ''
+            @val = ""
             @popen = false
           else
             @val += char
@@ -99,11 +99,10 @@ class TezosClient
       end
 
       def treat_char(char, is_last_char)
-
         return if treat_escape(char)
 
         unless popen || sopen
-          if is_last_char || char == ' '
+          if is_last_char || char == " "
             @val += char if is_last_char
             treat_val
             return
@@ -121,7 +120,6 @@ class TezosClient
 
       def encode
         expr.each_char.with_index do |char, i|
-
           is_last_char = (i == (expr.length - 1))
           treat_char(char, is_last_char)
         end
@@ -137,7 +135,5 @@ class TezosClient
     def encode_args(expr)
       ArgsEncoder.new(expr).encode
     end
-
-
   end
 end

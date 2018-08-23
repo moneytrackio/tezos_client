@@ -1,9 +1,10 @@
-require 'base58'
-require 'rbnacl'
-require 'digest'
+# frozen_string_literal: true
+
+require "base58"
+require "rbnacl"
+require "digest"
 
 class TezosClient
-
   module Crypto
     using StringUtils
 
@@ -35,13 +36,13 @@ class TezosClient
     }.freeze
 
     WATERMARK = {
-      block: '01',
-      endorsement: '02',
-      generic: '03'
+      block: "01",
+      endorsement: "02",
+      generic: "03"
     }.freeze
 
     def hex_prefix(type)
-      PREFIXES[type].pack('C*').to_hex
+      PREFIXES[type].pack("C*").to_hex
     end
 
     def decode_base58(base58_val)
@@ -119,7 +120,6 @@ class TezosClient
         public_key: public_key,
         address: address
       }
-
     end
 
     def signing_key(secret_key)
@@ -131,12 +131,11 @@ class TezosClient
     end
 
     def sign(secret_key:, data:, watermark: nil)
-
       watermarked_data = if watermark.nil?
-                           data
-                         else
-                           WATERMARK[watermark] + data
-                         end
+        data
+      else
+        WATERMARK[watermark] + data
+      end
 
       hash = RbNaCl::Hash::Blake2b.digest(watermarked_data.to_bin, digest_size: 32)
 
@@ -175,7 +174,5 @@ class TezosClient
         end
       end
     end
-
-
   end
 end

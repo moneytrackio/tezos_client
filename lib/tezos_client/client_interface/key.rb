@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class TezosClient
   class ClientInterface
-
     # Commands managing keys and accounts
     module Key
       def gen_keys(name)
@@ -8,7 +9,7 @@ class TezosClient
       end
 
       def addresses
-        output = call_client('list known addresses')
+        output = call_client("list known addresses")
         output.lines.reduce({}) do |acc, address_output|
           address_format = /([^:]+): (\w+) /
           res = address_format.match(address_output)
@@ -29,7 +30,6 @@ class TezosClient
 
         call_client(cmd)
       end
-
     end
   end
 end

@@ -1,5 +1,7 @@
-require 'bigdecimal'
-require 'bigdecimal/util'
+# frozen_string_literal: true
+
+require "bigdecimal"
+require "bigdecimal/util"
 
 class TezosClient
   module CurrencyUtils
@@ -13,7 +15,6 @@ class TezosClient
       def to_satoshi
         (self * TEZOS_SATOSHI).to_i
       end
-
     end
   end
 end

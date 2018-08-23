@@ -1,7 +1,8 @@
-require 'forwardable'
+# frozen_string_literal: true
+
+require "forwardable"
 
 class TezosClient
-
   module Commands
     extend Forwardable
 
@@ -18,7 +19,5 @@ class TezosClient
                    :import_secret_key,
                    :known_contracts,
                    :transfer
-
   end
-
 end

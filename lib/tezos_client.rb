@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
-require 'tezos_client/version'
-require 'tezos_client/string_utils'
-require 'tezos_client/currency_utils'
-require 'tezos_client/crypto'
-require 'tezos_client/commands'
-require 'tezos_client/logger'
+require "tezos_client/version"
+require "tezos_client/string_utils"
+require "tezos_client/currency_utils"
+require "tezos_client/crypto"
+require "tezos_client/commands"
+require "tezos_client/logger"
 
-require 'tezos_client/client_interface'
-require 'tezos_client/rpc_interface'
-require 'tezos_client/liquidity_interface'
+require "tezos_client/client_interface"
+require "tezos_client/rpc_interface"
+require "tezos_client/liquidity_interface"
 
-require 'tezos_client/encode_utils'
+require "tezos_client/encode_utils"
 
-require 'timeout'
+require "timeout"
 
 class TezosClient
   using CurrencyUtils
@@ -29,13 +29,13 @@ class TezosClient
   attr_accessor :rpc_interface
   attr_accessor :liquidity_interface
 
-  RANDOM_SIGNATURE = 'edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ'
+  RANDOM_SIGNATURE = "edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"
 
-  def initialize(rpc_node_address: '127.0.0.1', rpc_node_port: 8732)
+  def initialize(rpc_node_address: "127.0.0.1", rpc_node_port: 8732)
     @rpc_node_address = rpc_node_address
     @rpc_node_port = rpc_node_port
 
-    @client_config_file = ENV['TEZOS_CLIENT_CONFIG_FILE']
+    @client_config_file = ENV["TEZOS_CLIENT_CONFIG_FILE"]
     @client_interface = ClientInterface.new(
       config_file: @client_config_file
     )
@@ -52,9 +52,9 @@ class TezosClient
   end
 
   def ensure_operation_applied!(rpc_response)
-    operation_result = rpc_response['metadata']['operation_result']
-    status = operation_result['status']
-    raise "Operation status != 'applied': #{status}\n #{pp(rpc_response)}" if status != 'applied'
+    operation_result = rpc_response["metadata"]["operation_result"]
+    status = operation_result["status"]
+    raise "Operation status != 'applied': #{status}\n #{pp(rpc_response)}" if status != "applied"
   end
 
   def run_transaction(args)
@@ -62,9 +62,9 @@ class TezosClient
 
     ensure_operation_applied!(res)
 
-    operation_result = res['metadata']['operation_result']
-    consumed_storage = operation_result.fetch('paid_storage_size_diff', '0').to_i.from_satoshi
-    consumed_gas = operation_result.fetch('consumed_gas').to_i.from_satoshi
+    operation_result = res["metadata"]["operation_result"]
+    consumed_storage = operation_result.fetch("paid_storage_size_diff", "0").to_i.from_satoshi
+    consumed_gas = operation_result.fetch("consumed_gas").to_i.from_satoshi
 
     {
       status: :applied,
@@ -92,20 +92,20 @@ class TezosClient
 
     if args.key? :parameters
       transaction_args[:parameters] = if args[:parameters].is_a? String
-                                        encode_args(args[:parameters])
-                                      else
-                                        args[:parameters]
-                                      end
+        encode_args(args[:parameters])
+      else
+        args[:parameters]
+      end
     end
 
     transaction_args
   end
 
   def transfer(args)
-    raise ArgumentError, 'must pass :amount' unless args.include? :amount
-    raise ArgumentError, 'must pass :from' unless args.include? :from
-    raise ArgumentError, 'must pass :to' unless args.include? :to
-    raise ArgumentError, 'must pass :secret_key' unless args.include? :secret_key
+    raise ArgumentError, "must pass :amount" unless args.include? :amount
+    raise ArgumentError, "must pass :from" unless args.include? :from
+    raise ArgumentError, "must pass :to" unless args.include? :to
+    raise ArgumentError, "must pass :secret_key" unless args.include? :secret_key
 
     protocol = rpc_interface.protocols[0]
     transaction_args = prepare_transaction_args(args)
@@ -146,7 +146,7 @@ class TezosClient
 
     monitoring_thread = rpc_interface.monitor_block do |block_header|
       log "recently received block: #{block_header}"
-      hash = block_header['hash']
+      hash = block_header["hash"]
       if block_include_operation?(operation_id, hash)
         log "operation #{operation_id} found in block #{hash}"
         including_block = hash
@@ -196,10 +196,10 @@ class TezosClient
 
     ensure_operation_applied!(res)
 
-    operation_result = res['metadata']['operation_result']
-    consumed_storage = operation_result.fetch('paid_storage_size_diff', '0').to_i.from_satoshi
-    consumed_gas = (operation_result['consumed_gas']).to_i.from_satoshi
-    originated_contract = operation_result['originated_contracts'][0]
+    operation_result = res["metadata"]["operation_result"]
+    consumed_storage = operation_result.fetch("paid_storage_size_diff", "0").to_i.from_satoshi
+    consumed_gas = (operation_result["consumed_gas"]).to_i.from_satoshi
+    originated_contract = operation_result["originated_contracts"][0]
 
     {
       status: :applied,
@@ -212,7 +212,7 @@ class TezosClient
   def preapply_origination(args)
     res = rpc_interface.preapply_origination(args)
     ensure_operation_applied!(res)
-    res['metadata']['operation_result']['originated_contracts'][0]
+    res["metadata"]["operation_result"]["originated_contracts"][0]
   end
 
   def originate_contract(args)
@@ -263,5 +263,4 @@ class TezosClient
     return unless TezosClient.logger
     TezosClient.logger << out + "\n"
   end
-
 end

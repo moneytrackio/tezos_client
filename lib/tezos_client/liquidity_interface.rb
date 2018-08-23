@@ -1,18 +1,19 @@
-require_relative 'liquidity_inteface/liquidity_wrapper'
+# frozen_string_literal: true
+
+require_relative "liquidity_inteface/liquidity_wrapper"
 
 class TezosClient
-
   class LiquidityInterface
     include LiquidityWrapper
 
-    def initialize(rpc_node_address: '127.0.0.1', rpc_node_port: 8732)
+    def initialize(rpc_node_address: "127.0.0.1", rpc_node_port: 8732)
       @rpc_node_address = rpc_node_address
       @rpc_node_port = rpc_node_port
     end
 
     def format_params(params)
       params = [params] if params.is_a? String
-      params.map { |s| "'#{s}'" }.join(' ')
+      params.map { |s| "'#{s}'" }.join(" ")
     end
 
     def initial_storage(args)
@@ -26,7 +27,7 @@ class TezosClient
     end
 
     def with_tempfile(extension)
-      file = Tempfile.new(['script', extension])
+      file = Tempfile.new(["script", extension])
       yield(file)
 
     ensure
@@ -34,7 +35,7 @@ class TezosClient
     end
 
     def with_file_copy(source_file_path)
-      source_file = File.open(source_file_path, 'r')
+      source_file = File.open(source_file_path, "r")
       source_extention = File.extname(source_file_path)
 
       file_copy_path = nil
@@ -99,7 +100,7 @@ class TezosClient
       script = args.fetch :script
       init_params = args.fetch :init_params
 
-      res = call_liquidity "--source #{source} #{spendable ? '--spendable' : ''} #{delegatable ? '--delegatable': ''} --amount #{amount}tz --forge-deploy #{script} '#{init_params}'"
+      res = call_liquidity "--source #{source} #{spendable ? '--spendable' : ''} #{delegatable ? '--delegatable' : ''} --amount #{amount}tz --forge-deploy #{script} '#{init_params}'"
       res.strip
     end
 
@@ -117,7 +118,5 @@ class TezosClient
       res = call_liquidity "--json --data #{script} #{parameters}"
       JSON.parse res.strip
     end
-
   end
-
 end

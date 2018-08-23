@@ -1,5 +1,6 @@
-class TezosClient
+# frozen_string_literal: true
 
+class TezosClient
   class RpcInterface
     using CurrencyUtils
 
@@ -21,8 +22,6 @@ class TezosClient
       def contract_manager_key(contract_id)
         get "#{contract_link(contract_id)}/manager_key"
       end
-
     end
-
   end
 end
