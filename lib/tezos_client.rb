@@ -54,7 +54,7 @@ class TezosClient
   def ensure_operation_applied!(rpc_response)
     operation_result = rpc_response['metadata']['operation_result']
     status = operation_result['status']
-    raise "Operation status != 'applied': #{status}\n #{rpc_response}" if status != 'applied'
+    raise "Operation status != 'applied': #{status}\n #{pp(rpc_response)}" if status != 'applied'
   end
 
   def run_transaction(args)
@@ -63,8 +63,8 @@ class TezosClient
     ensure_operation_applied!(res)
 
     operation_result = res['metadata']['operation_result']
-    consumed_storage = operation_result.fetch('consumed_storage', '0').to_i.from_satoshi
-    consumed_gas = (operation_result['paid_storage_size_diff']).to_i.from_satoshi
+    consumed_storage = operation_result.fetch('paid_storage_size_diff', '0').to_i.from_satoshi
+    consumed_gas = operation_result.fetch('consumed_gas').to_i.from_satoshi
 
     {
       status: :applied,
@@ -91,7 +91,11 @@ class TezosClient
     )
 
     if args.key? :parameters
-      transaction_args[:parameters] = encode_args(args[:parameters])
+      transaction_args[:parameters] = if args[:parameters].is_a? String
+                                        encode_args(args[:parameters])
+                                      else
+                                        args[:parameters]
+                                      end
     end
 
     transaction_args
@@ -114,7 +118,6 @@ class TezosClient
     # forge transaction hex
     transaction_hex = rpc_interface.forge_transaction(transaction_args)
 
-    op_id = nil
     sign_operation(
       secret_key: args[:secret_key],
       operation_hex: transaction_hex
@@ -129,10 +132,8 @@ class TezosClient
 
       ensure_operation_applied!(res)
 
-      op_id = rpc_interface.broadcast_operation(signed_transaction_hex)
+      rpc_interface.broadcast_operation(signed_transaction_hex)
     end
-
-    op_id
   end
 
   def block_include_operation?(operation_id, block_id)
@@ -169,7 +170,7 @@ class TezosClient
       amount: 0,
       spendable: false,
       delegatable: false,
-      gas_limit: 0.04,
+      gas_limit: 0.1,
       storage_limit: 0.006,
       fee: 0.05
     }
@@ -243,6 +244,19 @@ class TezosClient
         originated_contract: originated_contract
       }
     end
+  end
+
+  def call_contract(args)
+    parameters = args.fetch(:parameters)
+
+    json_params = liquidity_interface.call_parameters(
+      script: args.fetch(:script),
+      parameters: parameters
+    )
+
+    transfer_args = args.merge(parameters: json_params)
+
+    transfer(transfer_args)
   end
 
   def log(out)

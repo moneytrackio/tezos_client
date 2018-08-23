@@ -8,12 +8,15 @@ RSpec.describe TezosClient do
   describe '#transfer' do
     it 'works' do
       sleep(1)
-      subject.transfer(
+      op_id = subject.transfer(
         amount: 1,
         from: 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq',
         to: 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq',
         secret_key: 'edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN'
       )
+      expect(op_id).to be_a String
+      expect(op_id).to start_with 'o'
+      p op_id
     end
 
     context 'with parameters' do
@@ -52,6 +55,7 @@ RSpec.describe TezosClient do
     let(:source) { 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq' }
     let(:secret_key) { 'edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN' }
     let(:amount) { 0 }
+    let(:init_params) { '"test"' }
 
     it 'works' do
       res = subject.originate_contract(
@@ -59,7 +63,7 @@ RSpec.describe TezosClient do
         amount: amount,
         script: script,
         secret_key: secret_key,
-        init_params: '"test"'
+        init_params: init_params
       )
 
       expect(res).to be_a Hash
@@ -67,6 +71,69 @@ RSpec.describe TezosClient do
       expect(res).to have_key :originated_contract
       expect(res[:operation_id]).to be_a String
       expect(res[:originated_contract]).to be_a String
+    end
+  end
+
+  context '#multisig' do
+    let(:script) { File.expand_path('./spec/fixtures/multisig.liq') }
+    let(:source) { 'tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq' }
+    let(:secret_key) { 'edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN' }
+    let(:amount) { 0 }
+
+    describe '#originate_contract' do
+      let(:init_params) { ["Set [#{source}]", '1p'] }
+
+      it 'works' do
+        res = subject.originate_contract(
+          from: source,
+          amount: amount,
+          script: script,
+          secret_key: secret_key,
+          init_params: init_params
+        )
+
+        expect(res).to be_a Hash
+        expect(res).to have_key :operation_id
+        expect(res).to have_key :originated_contract
+        expect(res[:operation_id]).to be_a String
+        expect(res[:originated_contract]).to be_a String
+        p res
+      end
+    end
+
+    describe '#call Manage' do
+      let(:contract_address) { 'KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs' }
+      let(:call_params) { 'Manage (Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })' }
+
+      it 'works' do
+        res = subject.call_contract(
+          from: source,
+          amount: amount,
+          script: script,
+          secret_key: secret_key,
+          to: contract_address,
+          parameters: call_params
+        )
+        p res
+      end
+    end
+
+    describe '#call Pay' do
+      let(:contract_address) { 'KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs' }
+      let(:call_params) { 'Pay' }
+      let(:amount) { 1 }
+
+      it 'works' do
+        res = subject.call_contract(
+          from: source,
+          amount: amount,
+          script: script,
+          secret_key: secret_key,
+          to: contract_address,
+          parameters: call_params
+        )
+        p res
+      end
     end
   end
 end

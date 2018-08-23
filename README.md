@@ -1,5 +1,7 @@
 # TezosClient
 
+<a href="https://codeclimate.com/repos/5b7c26bf74ced669d600b227/maintainability"><img src="https://api.codeclimate.com/v1/badges/ac0971942ce01da4a5e1/maintainability" /></a>
+
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tezos_client`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 TODO: Delete this and the text above, and describe your gem

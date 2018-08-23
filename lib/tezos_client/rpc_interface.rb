@@ -35,7 +35,7 @@ class TezosClient
                                body: content.to_json,
                                headers: { 'Content-Type' => 'application/json' })
       unless response.success?
-        raise "#{url} failed with code #{response.code}: #{response.parsed_response}"
+        raise "#{url} failed with code #{response.code}:\n #{pp(response.parsed_response)}"
       end
 
       response.parsed_response

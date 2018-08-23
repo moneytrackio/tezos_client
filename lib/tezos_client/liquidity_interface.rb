@@ -10,12 +10,18 @@ class TezosClient
       @rpc_node_port = rpc_node_port
     end
 
+    def format_params(params)
+      params = [params] if params.is_a? String
+      params.map { |s| "'#{s}'" }.join(' ')
+    end
+
     def initial_storage(args)
       from = args.fetch :from
       script = args.fetch :script
       init_params = args.fetch :init_params
+      init_params = format_params(init_params)
 
-      res = call_liquidity "--source #{from} --json --init-storage #{script} '#{init_params}'"
+      res = call_liquidity "--source #{from} --json --init-storage #{script} #{init_params}"
       JSON.parse res.strip
     end
 
@@ -99,6 +105,17 @@ class TezosClient
 
     def tezos_node
       "#{@rpc_node_address}:#{@rpc_node_port}"
+    end
+
+    def get_storage(script:, contract_address:)
+      res = call_liquidity "--get-storage #{script} #{contract_address}"
+      res.strip
+    end
+
+    def call_parameters(script:, parameters:)
+      parameters = format_params(parameters)
+      res = call_liquidity "--json --data #{script} #{parameters}"
+      JSON.parse res.strip
     end
 
   end

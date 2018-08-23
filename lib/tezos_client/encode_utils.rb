@@ -36,7 +36,7 @@ class TezosClient
               if !ret[:prim]
                 return { 'int' => val }
               else
-                ret[:args] <<  {'int' => val}
+                ret[:args] << {'int' => val}
               end
             elsif ret[:prim]
               ret[:args] << encode_args(val)
