@@ -25,7 +25,7 @@ RSpec.describe TezosClient do
       )
     end
 
-    it 'works with recursive pair' do
+    it 'works with recursive pair with int values ' do
       res = subject.encode_args('Pair 0 (Pair 1 (Pair 2 255))')
 
       expect(res).to eq(
