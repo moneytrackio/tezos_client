@@ -93,7 +93,7 @@ class TezosClient
       end
 
       def broadcast_operation(data)
-        post("injection/operations?chain=main", data)
+        post("injection/operation?chain=main", data)
       end
     end
   end
