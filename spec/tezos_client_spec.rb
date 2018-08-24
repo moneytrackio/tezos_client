@@ -8,41 +8,46 @@ RSpec.describe TezosClient do
   describe "#transfer" do
     it "works" do
       sleep(1)
-      op_id = subject.transfer(
+      res = subject.transfer(
         amount: 1,
         from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
         to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
         secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
       )
-      expect(op_id).to be_a String
-      expect(op_id).to start_with "o"
-      p op_id
+      expect(res).to be_a Hash
+      expect(res).to have_key :operation_id
+      expect(res[:operation_id]).to be_a String
     end
 
     context "with parameters" do
       it "works" do
         sleep(1)
-        subject.transfer(
+        res = subject.transfer(
           amount: 5,
           from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
           to: "KT1MZTrMDPB42P9yvjf7Cy8Lkjxjj4jetbCt",
           secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
           parameters: '"pro"'
         )
+        expect(res).to be_a Hash
+        expect(res).to have_key :operation_id
+        expect(res[:operation_id]).to be_a String
       end
     end
   end
 
   describe "#monitor_operation" do
-    it "works" do
-      sleep(1)
-      op_id = subject.transfer(
+    let(:op_id) do
+      res = subject.transfer(
         amount: 1,
         from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
         to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
         secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
       )
-
+      res[:operation_id]
+    end
+    it "works" do
+      sleep(1)
       block_id = subject.monitor_operation(op_id)
       expect(block_id).to be_a String
     end
@@ -71,7 +76,26 @@ RSpec.describe TezosClient do
       expect(res[:operation_id]).to be_a String
       expect(res[:originated_contract]).to be_a String
     end
+
+    context "with no script" do
+      it "works" do
+        res = subject.originate_contract(
+          from: source,
+          amount: amount,
+          secret_key: secret_key,
+          spendable: true
+        )
+
+        expect(res).to be_a Hash
+        expect(res).to have_key :operation_id
+        expect(res).to have_key :originated_contract
+        expect(res[:operation_id]).to be_a String
+        expect(res[:originated_contract]).to be_a String
+        pp res
+      end
+    end
   end
+
 
   context "#multisig" do
     let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
@@ -113,7 +137,7 @@ RSpec.describe TezosClient do
           to: contract_address,
           parameters: call_params
         )
-        p res
+        pp res
       end
     end
 
@@ -131,7 +155,7 @@ RSpec.describe TezosClient do
           to: contract_address,
           parameters: call_params
         )
-        p res
+        pp res
       end
     end
   end

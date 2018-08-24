@@ -21,7 +21,7 @@ class TezosClient
       end
 
       def origination_operation(args)
-        {
+        operation = {
           kind: "origination",
           delegatable: args.fetch(:delegatable),
           spendable: args.fetch(:spendable),
@@ -31,78 +31,69 @@ class TezosClient
           storage_limit: args.fetch(:storage_limit).to_satoshi.to_s,
           counter: args.fetch(:counter).to_s,
           fee: args.fetch(:fee).to_satoshi.to_s,
-          managerPubkey: args.fetch(:manager),
-          script: args.fetch(:script)
+          managerPubkey: args.fetch(:manager)
         }
+
+        operation[:script] = args[:script] if args[:script]
+        operation
       end
 
-      %w(origination transaction).each do |operation_type|
+      def operation(args)
+        operation_kind = args.fetch(:operation_kind) { raise ArgumentError, ":operation_kind argument missing" }
+        send("#{operation_kind}_operation", args)
+      end
+
+      %w(origination transaction).each do |operation_kind|
         # preapply_transaction, preapply_origination ...
-        define_method "preapply_#{operation_type}" do |args|
-          operation = send("#{operation_type}_operation", args)
-
-          res = preapply_operation(
-            operation: operation,
-            protocol: args.fetch(:protocol),
-            branch: args.fetch(:branch),
-            signature: args.fetch(:signature)
-          )
-
-          res["contents"][0]
+        define_method "preapply_#{operation_kind}" do |args|
+          preapply_operation(operation_kind: operation_kind, **args)
         end
 
         # run_transaction, run_origination ...
-        define_method "run_#{operation_type}" do |args|
-          operation = send("#{operation_type}_operation", args)
-
-          run_operation(
-            operation: operation,
-            branch: args.fetch(:branch),
-            signature: args.fetch(:signature)
-          )
+        define_method "run_#{operation_kind}" do |args|
+          run_operation(operation_kind: operation_kind, **args)
         end
 
         # forge_transaction, forge_origination ...
-        define_method "forge_#{operation_type}" do |args|
-          operation = send("#{operation_type}_operation", args)
-          forge_operation(branch: args.fetch(:branch), operation: operation)
+        define_method "forge_#{operation_kind}" do |args|
+          forge_operation(operation_kind: operation_kind, **args)
         end
       end
 
 
-      def preapply_operation(operation:, protocol:, branch:, signature:)
+      def preapply_operation(args)
         content = {
-          protocol: protocol,
-          branch: branch,
-          contents: [operation],
-          signature: signature
+          protocol: args.fetch(:protocol),
+          branch: args.fetch(:branch),
+          contents: [operation(args)],
+          signature: args.fetch(:signature)
         }
 
         res = post("chains/main/blocks/head/helpers/preapply/operations",
                    [content])
-        res[0]
+        res[0]["contents"][0]
       end
 
-      def run_operation(branch:, operation:, signature:)
+      def run_operation(args)
         content = {
-          branch: branch,
-          contents: [operation],
-          signature: signature
+          branch: args.fetch(:branch),
+          contents: [operation(args)],
+          signature: args.fetch(:signature)
         }
         res = post("chains/main/blocks/head/helpers/scripts/run_operation", content)
         res["contents"][0]
       end
 
-      def forge_operation(branch:, operation:)
+      def forge_operation(args)
         content = {
-          branch: branch,
-          contents: [operation]
+          branch: args.fetch(:branch),
+          contents: [operation(args)]
         }
         post("chains/main/blocks/head/helpers/forge/operations", content)
       end
 
       def broadcast_operation(data)
-        post("/injection/operation?chain=main", data)
+        post("injection/operations?chain=main", data)
       end
     end
   end

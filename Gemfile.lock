@@ -2,10 +2,11 @@ PATH
   remote: .
   specs:
     tezos_client (0.1.0)
+      activesupport (~> 5.2.0)
       base58 (~> 0.2.3)
       httparty (~> 0.16.2)
       rbnacl (~> 5.0.0)
-      rest-client
+      rest-client (~> 2.0.0)
 
 GEM
   remote: https://rubygems.org/

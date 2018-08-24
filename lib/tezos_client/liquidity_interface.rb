@@ -4,6 +4,7 @@ require_relative "liquidity_inteface/liquidity_wrapper"
 
 class TezosClient
   class LiquidityInterface
+    include Logger
     include LiquidityWrapper
 
     def initialize(rpc_node_address: "127.0.0.1", rpc_node_port: 8732)

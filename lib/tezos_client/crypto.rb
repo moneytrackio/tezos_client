@@ -130,7 +130,7 @@ class TezosClient
       RbNaCl::SigningKey.new(secret_key.to_bin)
     end
 
-    def sign(secret_key:, data:, watermark: nil)
+    def sign_bytes(secret_key:, data:, watermark: nil)
       watermarked_data = if watermark.nil?
         data
       else
@@ -162,9 +162,9 @@ class TezosClient
 
 
     def sign_operation(secret_key:, operation_hex:)
-      sign(secret_key: secret_key,
-           data: operation_hex,
-           watermark: :generic) do |edsig, signed_data|
+      sign_bytes(secret_key: secret_key,
+                 data: operation_hex,
+                 watermark: :generic) do |edsig, signed_data|
         op_id = operation_id(signed_data)
 
         if block_given?

@@ -10,6 +10,8 @@ class TezosClient
   class ClientInterface
     attr_reader :config_file
 
+    include Logger
+
     include ClientWrapper
     include Misc
     include Key
