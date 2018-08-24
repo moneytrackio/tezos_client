@@ -53,18 +53,6 @@ RSpec.describe TezosClient do
     end
   end
 
-
-  describe "#transfer" do
-    include_context "shared wallet"
-
-    let(:from) {}
-    let(:to) {}
-    it "works" do
-      res = subject.transfer(quantity: 1, from: rich_wallet, to: test_wallet, dry_run: false)
-      p res
-    end
-  end
-
   describe "#monitor_block" do
     it "monitors the new blocks in a separate thread" do
       nbblocks = 0

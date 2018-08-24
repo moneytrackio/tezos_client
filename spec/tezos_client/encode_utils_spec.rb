@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient do
+RSpec.describe TezosClient::EncodeUtils do
+  let(:test_klass) do
+    Class.new do
+      include TezosClient::EncodeUtils
+    end
+  end
+  subject {test_klass.new}
+
   describe "#encode_args" do
     it "works with a string" do
       res = subject.encode_args('"test"')

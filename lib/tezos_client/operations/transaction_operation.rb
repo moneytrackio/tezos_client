@@ -10,7 +10,7 @@ class TezosClient
         counter: counter
       )
       if has_parameters?
-        @operation_args = operation_args[:parameters] = parameters
+        @operation_args[:parameters] = parameters
       end
     end
 

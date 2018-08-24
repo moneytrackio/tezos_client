@@ -85,15 +85,9 @@ RSpec.describe TezosClient::LiquidityInterface do
       end
 
       it "gets the current params" do
-        storage = subject.get_storage(
-          script: script,
-          contract_address: contract_address
-        )
-
         res = subject.call_parameters(
           script: script,
-          parameters: call_parameters,
-          storage: storage
+          parameters: call_parameters
         )
         p res
       end

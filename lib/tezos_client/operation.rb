@@ -10,7 +10,8 @@ class TezosClient
                   :base_58_signature,
                   :signed_hex,
                   :from,
-                  :operation_args
+                  :operation_args,
+                  :rpc_args
 
     def initialize(liquidity_interface:, rpc_interface:, **args)
       @liquidity_interface = liquidity_interface
@@ -19,7 +20,9 @@ class TezosClient
       @secret_key = args.fetch(:secret_key)
       @init_args = args
       @signed = false
+      @operation_args = {}
       initialize_operation_args
+      @rpc_args = rpc_interface.operation(@operation_args)
     end
 
     def initialize_operation_args
@@ -35,7 +38,7 @@ class TezosClient
     end
 
     def counter
-      rpc_interface.contract_counter(from) + 1
+      @init_args.fetch(:counter) { rpc_interface.contract_counter(from) + 1 }
     end
 
     def protocol

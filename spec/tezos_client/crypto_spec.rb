@@ -34,13 +34,13 @@ RSpec.describe TezosClient::Crypto do
     end
   end
 
-  describe "#sign" do
+  describe "#sign_bytes" do
     let(:secret_key) { "edsk3r9ipNNemnVamKsJzggijP9tQUcnu8YLaJhEbdMzV1Jq7kkJWC" }
     let(:expected_signature) { "edsigtp4wchrxPLWscwNQKyUssJixap4njeS3keCTwphwhx4MkQaFn8GfXkCJtk8vi5uV2ahrdS5YWc3qeC74awqWTGJfngKGrs" }
     let(:data) { "1234" }
 
     it "signs the data" do
-      signature = subject.sign(secret_key: secret_key, data: data)
+      signature = subject.sign_bytes(secret_key: secret_key, data: data)
       expect(signature).to eq expected_signature
     end
   end
