@@ -16,7 +16,7 @@ class TezosClient
       @liquidity_interface = liquidity_interface
       @rpc_interface = rpc_interface
       @from = args.fetch(:from) { raise ArgumentError, "Argument :from missing" }
-      @secret_key = args[:secret_key]
+      @secret_key = args.fetch(:secret_key)
       @init_args = args
       @signed = false
       initialize_operation_args
@@ -57,7 +57,7 @@ class TezosClient
       sign_operation(
         secret_key: @secret_key,
         operation_hex: to_hex
-      ) do |base_58_signature, signed_hex|
+      ) do |base_58_signature, signed_hex, _op_id|
         @base_58_signature = base_58_signature
         @signed_hex = signed_hex
       end
