@@ -54,6 +54,8 @@ class TezosClient
             StdOutLogger.new
           elsif param == "stderr"
             StdErrLogger.new
+          elsif param.respond_to? "<<"
+            param
           else
             FileLogger.new(param)
           end
