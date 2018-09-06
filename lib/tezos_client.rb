@@ -56,11 +56,27 @@ class TezosClient
     )
   end
 
-  def originate_contract(args)
+  # Originates a contract on the tezos blockchain
+  #
+  # @param from [String] Address originating the contract
+  # @param amount [Numeric] amount to send to the contract
+  # @param secret_key [String] Secret key of the origination address
+  # @param args [Hash] keyword options for the origination
+  # @option args [String] :script path of the liquidity script
+  # @option args [Array, String] :init_params params to pass to the storage initialization process
+  # @option args [Boolean] :spendable decide wether the contract is spendable or not
+  # @option args [Boolean] :delegatable decide wether the contract is delegatable or not
+  #
+  # @return [Hash] result of the origination containing :operation_id, :operation_result and :originated_contract
+  #
+  def originate_contract(from:, amount:, secret_key:, **args)
     res = OriginationOperation.new(
-      **args,
       liquidity_interface: liquidity_interface,
-      rpc_interface: rpc_interface
+      rpc_interface: rpc_interface,
+      from: from,
+      secret_key: secret_key,
+      amount: amount,
+      **args
     ).test_and_broadcast
 
     res.merge(originated_contract: res[:operation_result][:originated_contracts][0])
