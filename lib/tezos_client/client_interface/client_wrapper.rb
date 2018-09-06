@@ -14,7 +14,7 @@ class TezosClient
             raise "command '#{cmd}' existed with status #{status}: #{err}"
           end
 
-          STDERR.puts err
+          log err
           output = stdout.read
 
           if block_given?
