@@ -14,7 +14,7 @@ eval $(opam config env)
 opam update
 make build-deps
 make clone-tezos
-tezos/scripts/install_build_deps.raw.sh
+#tezos/scripts/install_build_deps.raw.sh
 make -C tezos build-deps
 make
 sudo make install

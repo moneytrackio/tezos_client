@@ -1,5 +1,6 @@
 ---
-sudo: false
+dist: trusty
+sudo: required
 language: ruby
 cache: bundler
 rvm:
