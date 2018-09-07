@@ -5,10 +5,7 @@ cache: bundler
 rvm:
   - 2.5.1
 before_install:
-  - sudo add-apt-repository ppa:chris-lea/libsodium -y
-  - echo "deb http://ppa.launchpad.net/chris-lea/libsodium/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list
-  - echo "deb-src http://ppa.launchpad.net/chris-lea/libsodium/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-get update -qq
-  - sudo apt-get install -y libsodium-dev
+  - sh travis-scripts/prepare-trusty.sh
+  - sh travis-scripts/install-liquidity.sh
   - gem install bundler -v 1.16.3
 script: bundle exec rake
