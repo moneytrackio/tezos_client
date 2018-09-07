@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient::RpcInterface do
+RSpec.describe TezosClient::RpcInterface, :vcr do
   describe "#get" do
     it "works" do
       res = subject.get "/monitor/bootstrapped"

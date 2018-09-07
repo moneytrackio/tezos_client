@@ -1,0 +1,32 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//monitor/bootstrapped
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"block":"BLZEQDFUdmE7hQcMopFqXGP26N5ZKxgq84zqvnodnQWWuT3xpRF","timestamp":"2018-09-07T14:10:02Z"}
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 14:12:18 GMT
+recorded_with: VCR 4.0.0
