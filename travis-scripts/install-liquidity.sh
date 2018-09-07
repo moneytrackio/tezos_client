@@ -24,4 +24,4 @@ tezos/scripts/install_build_deps.raw.sh
 ### make -C tezos build-deps
 
 make
-sudo make install
+make install

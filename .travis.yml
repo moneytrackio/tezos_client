@@ -15,5 +15,6 @@ before_install:
   - sh travis-scripts/prepare-trusty.sh
   - sh travis-scripts/install-opam.sh
   - sh travis-scripts/install-liquidity.sh
+  - export PATH=$PATH:$PWD/liquidity/bin/
   - gem install bundler -v 1.16.3
 script: bundle exec rake

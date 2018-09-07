@@ -53,6 +53,8 @@ class TezosClient
                                       block_response: event_reader,
                                       content_type: :json,
                                       accept: :json)
+        rescue => e
+          log "#{uuid}: failed with error #{e}"
         end
       end
 

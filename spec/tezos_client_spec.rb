@@ -2,20 +2,18 @@
 
 RSpec.describe TezosClient, :vcr do
 
-  def wait_new_block
+  def wait_new_block(timeout: 60)
     blocks_to_wait = 2
     monitor_thread = subject.monitor_block do
       blocks_to_wait -= 1
     end
 
-    while blocks_to_wait > 0
+    limit_time = Time.now + timeout
+
+    while blocks_to_wait > 0 && Time.now < limit_time
       sleep(1)
     end
     monitor_thread.terminate
-  end
-
-  it "has a version number" do
-    expect(TezosClient::VERSION).not_to be nil
   end
 
   before do
