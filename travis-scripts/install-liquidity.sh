@@ -16,8 +16,9 @@ yes "" | sh install.sh
 opam switch create liquidity 4.06.1
 
 eval $(opam config env)
-
 opam update
+eval $(opam config env)
+cat Makefile
 make build-deps
 make clone-tezos
 #tezos/scripts/install_build_deps.raw.sh
