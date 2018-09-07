@@ -51,20 +51,22 @@ RSpec.describe TezosClient, :vcr do
     end
   end
 
-  describe "#monitor_operation" do
-    let(:op_id) do
-      res = subject.transfer(
-        amount: 1,
-        from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-        to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-        secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
-      )
-      res[:operation_id]
-    end
-    it "works" do
-      disabling_vcr do
-        block_id = subject.monitor_operation(op_id)
-        expect(block_id).to be_a String
+  unless ENV["TRAVIS"]
+    describe "#monitor_operation" do
+      let(:op_id) do
+        res = subject.transfer(
+          amount: 1,
+          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+        )
+        res[:operation_id]
+      end
+      it "works" do
+        disabling_vcr do
+          block_id = subject.monitor_operation(op_id)
+          expect(block_id).to be_a String
+        end
       end
     end
   end
