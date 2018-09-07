@@ -6,6 +6,7 @@ set -ex
 
 [ -d liquidity ] || git clone --depth=50 https://github.com/OCamlPro/liquidity.git liquidity
 cd liquidity
+git pull
 
 export OPAMYES=1
 wget https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh
