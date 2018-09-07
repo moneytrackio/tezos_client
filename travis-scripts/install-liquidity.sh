@@ -18,10 +18,10 @@ eval $(opam config env)
 
 echo $PWD
 
-#make build-deps
-#make clone-tezos
-#tezos/scripts/install_build_deps.raw.sh
+make build-deps
+make clone-tezos
+tezos/scripts/install_build_deps.raw.sh
 ### make -C tezos build-deps
 
-#make
-#sudo make install
+make
+sudo make install
