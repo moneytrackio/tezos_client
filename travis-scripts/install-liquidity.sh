@@ -17,11 +17,10 @@ eval $(opam config env)
 
 echo $PWD
 
-make build-deps
-make clone-tezos
+#make build-deps
+#make clone-tezos
 #tezos/scripts/install_build_deps.raw.sh
-make -C tezos build-deps
+### make -C tezos build-deps
 
-opam install ocp-build typerex
-make
-sudo make install
+#make
+#sudo make install
