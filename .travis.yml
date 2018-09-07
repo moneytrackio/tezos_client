@@ -7,11 +7,13 @@ cache:
   directories:
   - $HOME/.opam
   - liquidity
-
 rvm:
   - 2.5.1
+env:
+  - OPAMYES=1
 before_install:
   - sh travis-scripts/prepare-trusty.sh
+  - sh travis-scripts/install-opam.sh
   - sh travis-scripts/install-liquidity.sh
   - gem install bundler -v 1.16.3
 script: bundle exec rake

@@ -8,7 +8,6 @@ set -ex
 cd liquidity
 git pull
 
-export OPAMYES=1
 wget https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh
 yes "" | sh install.sh
 
@@ -25,6 +24,5 @@ make clone-tezos
 make -C tezos build-deps
 
 opam install ocp-build typerex
-
 make
 sudo make install
