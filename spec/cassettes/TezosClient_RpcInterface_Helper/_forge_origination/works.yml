@@ -1,0 +1,88 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '6'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"259"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 13:51:34 GMT
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//chains/main/blocks/head/hash
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"BMAR6E2VRDprQByjbH4qP3QYX2RArLmv8mZWy7sNZeezMABYgNb"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 13:51:34 GMT
+- request:
+    method: post
+    uri: http://127.0.0.1:8732/chains/main/blocks/head/helpers/forge/operations
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BMAR6E2VRDprQByjbH4qP3QYX2RArLmv8mZWy7sNZeezMABYgNb","contents":[{"kind":"origination","delegatable":false,"spendable":false,"balance":"50000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"260","fee":"50000","managerPubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR"}]]},{"prim":"CAR"},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
+        enough money, at least 5tz to vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@storage"]}]]},{"prim":"SWAP"}],[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@parameter"]}]]},{"prim":"SWAP"}],{"prim":"GET"},{"prim":"IF_NONE","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Bad
+        vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@storage"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"PUSH","args":[{"prim":"int"},{"int":"1"}]},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@x"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"ADD"},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@parameter"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"DIP","args":[[{"prim":"SOME"}]]},{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DROP"}]]}]]}]]},{"prim":"UPDATE","annots":["@storage"]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}]]},{"prim":"DIP","args":[[{"prim":"DROP"},{"prim":"DROP"}]]}]]}],"storage":[{"prim":"Elt","args":[{"string":"ocaml"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"pro"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"test"},{"int":"0"}]}]}}]}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '1137'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"bf092fc4011ac1a700152df1c69294e2257addaa0f3ac13d649eae4fa0c1a0b1090000982fd7853b46e70022bc56f12b427855a2adb67ed086038402d08603f02e00982fd7853b46e70022bc56f12b427855a2adb67ed08603000000ff000001a602000001a105000368050107600368035b0502020000018e0321051f0200000002031703160743036a0080ade20404130000000740616d6f756e7403190337072c02000000310743036801000000264e6f7420656e6f756768206d6f6e65792c206174206c656173742035747a20746f20766f74650327020000011f0200000017051f020000000e0421000000084073746f72616765034c0200000019051f020000001004210000000a40706172616d65746572034c0329072f020000001307430368010000000842616420766f7465032702000000c40200000025051f020000001c0200000017051f020000000e0421000000084073746f72616765034c034c0743035b0001020000001f051f02000000160200000011051f02000000080421000000024078034c034c03120200000035051f020000002c0200000027051f020000001e0200000019051f020000001004210000000a40706172616d65746572034c034c034c051f02000000020346051f0200000010051f0200000009051f020000000203200450000000084073746f72616765053d036d0342051f0200000004032003200000002c0200000027070401000000056f63616d6c00000704010000000370726f000007040100000004746573740000"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 13:51:34 GMT
+recorded_with: VCR 4.0.0

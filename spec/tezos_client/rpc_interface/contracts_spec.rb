@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient::RpcInterface do
+RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
+  subject { TezosClient::RpcInterface.new }
+
   let(:contract_address) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
 
   describe "#balance" do

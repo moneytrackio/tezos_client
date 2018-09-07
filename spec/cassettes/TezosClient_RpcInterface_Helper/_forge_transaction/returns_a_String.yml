@@ -1,0 +1,86 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//chains/main/blocks/head/hash
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"BMAR6E2VRDprQByjbH4qP3QYX2RArLmv8mZWy7sNZeezMABYgNb"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 13:51:34 GMT
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '6'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"259"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 13:51:34 GMT
+- request:
+    method: post
+    uri: http://127.0.0.1:8732/chains/main/blocks/head/helpers/forge/operations
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BMAR6E2VRDprQByjbH4qP3QYX2RArLmv8mZWy7sNZeezMABYgNb","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"260","fee":"50000"}]}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '185'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"bf092fc4011ac1a700152df1c69294e2257addaa0f3ac13d649eae4fa0c1a0b1080000982fd7853b46e70022bc56f12b427855a2adb67ed086038402d08603f02ec0843d0000982fd7853b46e70022bc56f12b427855a2adb67e00"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 13:51:34 GMT
+recorded_with: VCR 4.0.0

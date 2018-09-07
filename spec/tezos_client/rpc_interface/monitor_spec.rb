@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient::RpcInterface do
+RSpec.describe TezosClient::RpcInterface::Monitor do
+  subject { TezosClient::RpcInterface.new }
   describe "#bootstrapped" do
     around do |example|
       disabling_vcr { example.call }

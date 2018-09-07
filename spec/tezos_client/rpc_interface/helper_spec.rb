@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 
-RSpec.describe TezosClient::RpcInterface do
+RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   using TezosClient::StringUtils
+
+  subject { TezosClient::RpcInterface.new }
 
 
   let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }

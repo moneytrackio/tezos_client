@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient::RpcInterface do
+RSpec.describe TezosClient::RpcInterface, :vcr do
   describe "#constants" do
     it "returns the constants" do
       res = subject.constants

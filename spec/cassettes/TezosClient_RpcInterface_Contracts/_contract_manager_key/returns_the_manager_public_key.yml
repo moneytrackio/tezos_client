@@ -1,0 +1,32 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/manager_key
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '114'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"manager":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","key":"edpkugJHjEZLNyTuX3wW2dT4P7PY5crLqq3zeDFvXohAs3tnRAaZKR"}
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 13:51:42 GMT
+recorded_with: VCR 4.0.0
