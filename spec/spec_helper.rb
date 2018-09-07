@@ -6,6 +6,7 @@ require "securerandom"
 
 require_relative "../lib/tezos_client/string_utils"
 
+Dir["./spec/support/**/*.rb"].each { |f| require f }
 Dir["./spec/shared/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|

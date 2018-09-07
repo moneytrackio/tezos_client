@@ -2,6 +2,10 @@
 
 RSpec.describe TezosClient::RpcInterface do
   describe "#bootstrapped" do
+    around do |example|
+      disabling_vcr { example.call }
+    end
+
     it "works" do
       res = subject.bootstrapped
 
@@ -13,13 +17,13 @@ RSpec.describe TezosClient::RpcInterface do
     end
 
     it "test monitor" do
+      received = []
       monitoring_thread = subject.monitor("/monitor/heads/main") do |chunk|
-        p chunk
+        received << chunk
       end
-      p "monitoring"
-      sleep 10
-      puts "time to sleep"
+      sleep 60
       monitoring_thread.kill
+      expect(received.size).to be > 1
     end
   end
 end

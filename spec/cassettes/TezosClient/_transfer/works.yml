@@ -1,0 +1,190 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//chains/main/blocks/head/hash
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"BMXJer3hpsRz1cTRLTYoXUf66CLsq89bicMUWuK74igJeGQ5Ltq"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 10:11:52 GMT
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '6'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"248"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 10:11:52 GMT
+- request:
+    method: post
+    uri: http://127.0.0.1:8732/chains/main/blocks/head/helpers/scripts/run_operation
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BMXJer3hpsRz1cTRLTYoXUf66CLsq89bicMUWuK74igJeGQ5Ltq","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"40000","storage_limit":"6000","counter":"249","fee":"50000"}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '841'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"249","gas_limit":"40000","storage_limit":"6000","amount":"1000000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","level":45,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-1000000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"1000000"}],"consumed_gas":"100"}}}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"}
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 10:11:52 GMT
+- request:
+    method: post
+    uri: http://127.0.0.1:8732/chains/main/blocks/head/helpers/forge/operations
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BMXJer3hpsRz1cTRLTYoXUf66CLsq89bicMUWuK74igJeGQ5Ltq","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"10100","storage_limit":"0","counter":"249","fee":"50000"}]}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '181'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"ee7788d9aa8ae3b2b3d61478ad91620420bc1457cae6f9fdb5e2acd3a7e3fd07080000982fd7853b46e70022bc56f12b427855a2adb67ed08603f901f44e00c0843d0000982fd7853b46e70022bc56f12b427855a2adb67e00"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 10:11:52 GMT
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//protocols
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '110'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '["PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","Ps6mwMrF2ER2s51cp9yYpjDcuzQjsc2yAz8bQsRgdaRxw4Fk95H"]
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 10:11:52 GMT
+- request:
+    method: post
+    uri: http://127.0.0.1:8732/chains/main/blocks/head/helpers/preapply/operations
+    body:
+      encoding: UTF-8
+      string: '[{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","branch":"BMXJer3hpsRz1cTRLTYoXUf66CLsq89bicMUWuK74igJeGQ5Ltq","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"10100","storage_limit":"0","counter":"249","fee":"50000"}],"signature":"edsigtaoTMJETLHsFuf4JpKigf7isX4MsHnTd45F6DTap2HGTmfqCzGAqzjTHfEcgDJPi2vnLiEqh6B35NUtHebZVVTD842Rkzm"}]'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '840'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '[{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"249","gas_limit":"10100","storage_limit":"0","amount":"1000000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","level":45,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-1000000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"1000000"}],"consumed_gas":"100"}}}],"signature":"edsigtaoTMJETLHsFuf4JpKigf7isX4MsHnTd45F6DTap2HGTmfqCzGAqzjTHfEcgDJPi2vnLiEqh6B35NUtHebZVVTD842Rkzm"}]
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 10:11:52 GMT
+- request:
+    method: post
+    uri: http://127.0.0.1:8732/injection/operation?chain=main
+    body:
+      encoding: UTF-8
+      string: '"ee7788d9aa8ae3b2b3d61478ad91620420bc1457cae6f9fdb5e2acd3a7e3fd07080000982fd7853b46e70022bc56f12b427855a2adb67ed08603f901f44e00c0843d0000982fd7853b46e70022bc56f12b427855a2adb67e0016e3e963e365f39640717623e436cd292c18c68d07d7ef296006d1149b8a145ba854899fd8fffd8f0afba0d2d9aef023e487f6bdfb26df2be13c0458f57d300d"'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"ooHYQL65sn8x9ZzmZDSPsYtUhEax2sCuaTm1bJ4GPQ4tRERCJZD"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 10:11:52 GMT
+recorded_with: VCR 4.0.0

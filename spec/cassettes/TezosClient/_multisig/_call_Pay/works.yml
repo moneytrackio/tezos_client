@@ -1,0 +1,190 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//chains/main/blocks/head/hash
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"BLv7yXMvkhUpb8o4DzpAnFMuihMJQ1SGNbgo3xgwkhkbxEJoi1x"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 08:17:46 GMT
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '6'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"244"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 08:17:46 GMT
+- request:
+    method: post
+    uri: http://127.0.0.1:8732/chains/main/blocks/head/helpers/scripts/run_operation
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BLv7yXMvkhUpb8o4DzpAnFMuihMJQ1SGNbgo3xgwkhkbxEJoi1x","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs","gas_limit":"40000","storage_limit":"6000","counter":"245","fee":"50000","parameters":{"prim":"Left","args":[{"prim":"Unit"}]}}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '1090'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"245","gas_limit":"40000","storage_limit":"6000","amount":"1000000","destination":"KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs","parameters":{"prim":"Left","args":[{"prim":"Unit"}]},"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","level":45,"change":"50000"}],"operation_result":{"status":"applied","storage":{"prim":"Pair","args":[[{"bytes":"0000982fd7853b46e70022bc56f12b427855a2adb67e"}],{"prim":"Pair","args":[[],{"prim":"Pair","args":[{"int":"1"},{"int":"1"}]}]}]},"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-1000000"},{"kind":"contract","contract":"KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs","change":"1000000"}],"consumed_gas":"38268","storage_size":"1719"}}}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"}
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 08:17:46 GMT
+- request:
+    method: post
+    uri: http://127.0.0.1:8732/chains/main/blocks/head/helpers/forge/operations
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BLv7yXMvkhUpb8o4DzpAnFMuihMJQ1SGNbgo3xgwkhkbxEJoi1x","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs","gas_limit":"48268","storage_limit":"0","counter":"245","fee":"50000","parameters":{"prim":"Left","args":[{"prim":"Unit"}]}}]}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '199'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"9e93be461606bc191dd61b19edc6bd919c9d62ca9eb0c9fc30df0ed13d6ea1e4080000982fd7853b46e70022bc56f12b427855a2adb67ed08603f5018cf90200c0843d01c42a6cf9f6f1fa3aa1a6cf090dda400223dece7100ff000000040505030b"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 08:17:46 GMT
+- request:
+    method: get
+    uri: http://127.0.0.1:8732//protocols
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '110'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '["PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","Ps6mwMrF2ER2s51cp9yYpjDcuzQjsc2yAz8bQsRgdaRxw4Fk95H"]
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 08:17:46 GMT
+- request:
+    method: post
+    uri: http://127.0.0.1:8732/chains/main/blocks/head/helpers/preapply/operations
+    body:
+      encoding: UTF-8
+      string: '[{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","branch":"BLv7yXMvkhUpb8o4DzpAnFMuihMJQ1SGNbgo3xgwkhkbxEJoi1x","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs","gas_limit":"48268","storage_limit":"0","counter":"245","fee":"50000","parameters":{"prim":"Left","args":[{"prim":"Unit"}]}}],"signature":"edsigtYGMnu6By2LfBVyjQrNosN4NdW25PtHN2XAmG1PGQJh6WFdLetBMqr7wrm4opiGUSRkbiYnsNXA4p2nVXEPHfKUR3fExEd"}]'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '1089'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '[{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"245","gas_limit":"48268","storage_limit":"0","amount":"1000000","destination":"KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs","parameters":{"prim":"Left","args":[{"prim":"Unit"}]},"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","level":45,"change":"50000"}],"operation_result":{"status":"applied","storage":{"prim":"Pair","args":[[{"bytes":"0000982fd7853b46e70022bc56f12b427855a2adb67e"}],{"prim":"Pair","args":[[],{"prim":"Pair","args":[{"int":"1"},{"int":"1"}]}]}]},"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-1000000"},{"kind":"contract","contract":"KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs","change":"1000000"}],"consumed_gas":"38268","storage_size":"1719"}}}],"signature":"edsigtYGMnu6By2LfBVyjQrNosN4NdW25PtHN2XAmG1PGQJh6WFdLetBMqr7wrm4opiGUSRkbiYnsNXA4p2nVXEPHfKUR3fExEd"}]
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 08:17:46 GMT
+- request:
+    method: post
+    uri: http://127.0.0.1:8732/injection/operation?chain=main
+    body:
+      encoding: UTF-8
+      string: '"9e93be461606bc191dd61b19edc6bd919c9d62ca9eb0c9fc30df0ed13d6ea1e4080000982fd7853b46e70022bc56f12b427855a2adb67ed08603f5018cf90200c0843d01c42a6cf9f6f1fa3aa1a6cf090dda400223dece7100ff000000040505030b03814d6653d0f3cdfd7a60c934211ecc48003cc2566590bb420483a58209e6d97097244642f7fae0d5ea7ba5073b561472a436e86020d659fd6988ec05f5ef09"'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"ooWCyQniCybVrF496GX8V2brLG7a2xtZAJc2hRzx6JfprDPQ5KK"
+
+'
+    http_version: 
+  recorded_at: Fri, 07 Sep 2018 08:17:46 GMT
+recorded_with: VCR 4.0.0

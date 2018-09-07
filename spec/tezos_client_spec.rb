@@ -1,13 +1,29 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient do
+RSpec.describe TezosClient, :vcr do
+
+  def wait_new_block
+    blocks_to_wait = 2
+    monitor_thread = subject.monitor_block do
+      blocks_to_wait -= 1
+    end
+
+    while blocks_to_wait > 0
+      sleep(1)
+    end
+    monitor_thread.terminate
+  end
+
   it "has a version number" do
     expect(TezosClient::VERSION).not_to be nil
   end
 
+  before do
+    disabling_vcr { wait_new_block } if VCR.current_cassette.recording?
+  end
+
   describe "#transfer" do
     it "works" do
-      sleep(1)
       res = subject.transfer(
         amount: 1,
         from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
@@ -21,7 +37,6 @@ RSpec.describe TezosClient do
 
     context "with parameters" do
       it "works" do
-        sleep(1)
         res = subject.transfer(
           amount: 5,
           from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
@@ -47,9 +62,10 @@ RSpec.describe TezosClient do
       res[:operation_id]
     end
     it "works" do
-      sleep(1)
-      block_id = subject.monitor_operation(op_id)
-      expect(block_id).to be_a String
+      disabling_vcr do
+        block_id = subject.monitor_operation(op_id)
+        expect(block_id).to be_a String
+      end
     end
   end
 
