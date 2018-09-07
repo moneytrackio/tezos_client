@@ -8,9 +8,6 @@ set -ex
 cd liquidity
 git pull
 
-wget https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh
-yes "" | sh install.sh
-
 # currently, we only target OCaml 4.06.1 because we reuse the parser of OCaml
 opam switch create liquidity 4.06.1
 
