@@ -22,5 +22,8 @@ make build-deps
 make clone-tezos
 #tezos/scripts/install_build_deps.raw.sh
 make -C tezos build-deps
+
+opam install ocp-build typerex
+
 make
 sudo make install
