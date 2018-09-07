@@ -6,6 +6,7 @@ cache:
   bundler: true
   directories:
   - $HOME/.opam
+  - liquidity
 
 rvm:
   - 2.5.1
