@@ -4,4 +4,11 @@ language: ruby
 cache: bundler
 rvm:
   - 2.5.1
-before_install: gem install bundler -v 1.16.3
+before_install:
+  - gem install bundler -v 1.16.3
+  - sudo add-apt-repository ppa:chris-lea/libsodium
+  - sudo echo "deb http://ppa.launchpad.net/chris-lea/libsodium/ubuntu trusty main" >> /etc/apt/sources.list
+  - sudo echo "deb-src http://ppa.launchpad.net/chris-lea/libsodium/ubuntu trusty main" >> /etc/apt/sources.list
+  - sudo apt-get update
+  - sudo apt-get install -y libsodium-dev
+script: bundle exec rake
