@@ -1,6 +1,10 @@
+#!/bin/sh
+set -ex
 # This script is used in .travis.yml for continuous integration on travis.
 # BTW, it also show some needed system packages to build liquidity
 # Travis CI is done on Ubuntu trusty
+git clone --depth=50 https://github.com/OCamlPro/liquidity.git OCamlPro/liquidity
+cd liquidity
 
 export OPAMYES=1
 wget https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh
