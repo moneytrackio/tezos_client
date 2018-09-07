@@ -4,9 +4,10 @@ set -ex
 # BTW, it also show some needed system packages to build liquidity
 # Travis CI is done on Ubuntu trusty
 
-[ -f liquidity/Makefile ] || git clone --depth=50 https://github.com/OCamlPro/liquidity.git liquidity
+[ -f liquidity ] || git clone --depth=50 https://github.com/OCamlPro/liquidity.git liquidity
 cd liquidity
 git pull
+git checkout next
 
 # currently, we only target OCaml 4.06.1 because we reuse the parser of OCaml
 opam switch create liquidity 4.06.1
