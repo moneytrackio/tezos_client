@@ -103,7 +103,7 @@ class TezosClient
     transfer(transfer_args)
   end
 
-  def monitor_operation(operation_id, timeout: 60)
+  def monitor_operation(operation_id, timeout: 120)
     including_block = nil
 
     monitoring_thread = rpc_interface.monitor_block do |block_header|

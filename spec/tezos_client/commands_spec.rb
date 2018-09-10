@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient do
+RSpec.describe TezosClient::Commands do
+  include_context "public rpc interface"
+
+  subject { tezos_client }
+
+
   unless ENV["TRAVIS"]
     describe "#known_contracts" do
       it "works" do
@@ -51,20 +56,6 @@ RSpec.describe TezosClient do
         expect(res).to be_a Hash
         expect(res["block"]).to be_a String
         expect(res["timestamp"]).to be_a DateTime
-      end
-    end
-
-    describe "#monitor_block" do
-      it "monitors the new blocks in a separate thread" do
-        nbblocks = 0
-        monitor_thread = subject.monitor_block do |block|
-          nbblocks += 1
-          expect(block).to have_key "hash"
-        end
-
-        sleep(1)
-        monitor_thread.terminate
-        expect(nbblocks).to be >= 1
       end
     end
   end

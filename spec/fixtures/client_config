@@ -1,7 +1,7 @@
 {
 	"base_dir": "/tmp/rpsec/tezos-client",
-	"node_addr": "127.0.0.1",
-  	"node_port": 8732,
+	"node_addr": "alphanet-node.tzscan.io",
+  	"node_port": 80,
   	"tls": false,
   	"confirmations": 0
 }

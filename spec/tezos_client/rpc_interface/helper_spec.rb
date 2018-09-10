@@ -4,7 +4,9 @@
 RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   using TezosClient::StringUtils
 
-  subject { TezosClient::RpcInterface.new }
+  include_context "public rpc interface"
+
+  subject { TezosClient::RpcInterface.new(host: rpc_node_address, port: rpc_node_port) }
 
 
   let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
@@ -12,7 +14,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   let(:branch) { subject.head_hash }
   let(:protocol) { subject.protocols[0] }
 
-  let(:liquidity_interface) { TezosClient::LiquidityInterface.new }
+  let(:liquidity_interface) { TezosClient::LiquidityInterface.new(rpc_node_address: rpc_node_address, rpc_node_port: rpc_node_port) }
 
   let(:script_path) { File.expand_path("./spec/fixtures/demo.liq") }
 

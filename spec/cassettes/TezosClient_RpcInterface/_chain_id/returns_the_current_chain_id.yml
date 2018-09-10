@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:8732//chains/main/chain_id
+    uri: http://alphanet-node.tzscan.io//chains/main/chain_id
     body:
       encoding: US-ASCII
       string: ''
@@ -18,15 +18,21 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Length:
-      - '18'
+      Server:
+      - nginx/1.10.3
+      Date:
+      - Mon, 10 Sep 2018 13:07:12 GMT
       Content-Type:
       - application/json
+      Content-Length:
+      - '18'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: '"NetXZUqeBjDnWde"
 
 '
     http_version: 
-  recorded_at: Fri, 07 Sep 2018 13:51:48 GMT
+  recorded_at: Mon, 10 Sep 2018 13:07:12 GMT
 recorded_with: VCR 4.0.0
