@@ -5,7 +5,13 @@ RSpec.describe TezosClient::LiquidityInterface do
   let(:from) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
   let(:contract_address) { "KT1MZTrMDPB42P9yvjf7Cy8Lkjxjj4jetbCt" }
 
+
+  let(:rpc_node_address) { "alphanet-node.tzscan.io" }
+  let(:rpc_node_port) { 80 }
+  subject { TezosClient::LiquidityInterface.new(rpc_node_address: rpc_node_address, rpc_node_port: rpc_node_port) }
+
   describe "#forge_deploy" do
+
     it "works" do
       res = subject.forge_deploy(
         from: from,

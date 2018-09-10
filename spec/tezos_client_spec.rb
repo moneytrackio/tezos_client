@@ -2,6 +2,10 @@
 
 RSpec.describe TezosClient, :vcr do
 
+  let(:rpc_node_address) { "alphanet-node.tzscan.io" }
+  let(:rpc_node_port) { 80 }
+  subject { TezosClient.new(rpc_node_address: rpc_node_address, rpc_node_port: rpc_node_port) }
+
   def wait_new_block(timeout: 60)
     blocks_to_wait = 2
     monitor_thread = subject.monitor_block do
