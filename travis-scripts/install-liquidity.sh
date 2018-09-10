@@ -1,5 +1,5 @@
 #!/bin/sh
-set -ex
+#set -ex
 # This script is used in .travis.yml for continuous integration on travis.
 # BTW, it also show some needed system packages to build liquidity
 # Travis CI is done on Ubuntu trusty
