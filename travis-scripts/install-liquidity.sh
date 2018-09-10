@@ -21,7 +21,7 @@ echo $PWD
 make build-deps
 make clone-tezos
 tezos/scripts/install_build_deps.raw.sh
-### make -C tezos build-deps
+# make -C tezos build-deps
 
 make
 make install
