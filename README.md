@@ -1,6 +1,6 @@
 # TezosClient
 
-<a href="https://codeclimate.com/repos/5b7c26bf74ced669d600b227/maintainability"><img src="https://api.codeclimate.com/v1/badges/ac0971942ce01da4a5e1/maintainability" /></a>
+[![Maintainability](https://api.codeclimate.com/v1/badges/54ab3bbbdc10c1faf933/maintainability)](https://codeclimate.com/github/moneytrackio/tezos_client/maintainability)
 
 [![Build Status](https://travis-ci.org/moneytrackio/tezos_client.svg?branch=master)](https://travis-ci.org/moneytrackio/tezos_client)
 
