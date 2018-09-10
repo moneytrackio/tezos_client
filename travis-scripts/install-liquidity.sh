@@ -4,7 +4,7 @@ set -ex
 # BTW, it also show some needed system packages to build liquidity
 # Travis CI is done on Ubuntu trusty
 
-[ -f liquidity ] || git clone --depth=50 https://github.com/OCamlPro/liquidity.git liquidity
+[ -d liquidity ] || git clone --depth=50 https://github.com/OCamlPro/liquidity.git liquidity
 cd liquidity
 git pull
 git checkout next
