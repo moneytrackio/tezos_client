@@ -1,0 +1,32 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://127.0.0.1:8732/chains/main/blocks/head/header
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '719'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"BMSZB8H8Mh3JiAhymd1rdsJj2Tv1rZZmWEvM4syGNsM2CxfK85S","level":114304,"proto":1,"predecessor":"BKvbas8QUNUsrz1Zb4D2hJzG5vh3pdH8A3K7LaB7XKix7XqQg9X","timestamp":"2018-09-21T13:11:22Z","validation_pass":4,"operations_hash":"LLoZxJDXpoeHP2vP5GnWYDaEZBovxaTkWzLH2evEivPoVCS2FyYMK","fitness":["00","0000000000329fc5"],"context":"CoVrzwMj6LN6Hi7Sy9LrK6it6ybMY6yppYmT7WBDS8ePdNvAfrVM","priority":1,"proof_of_work_nonce":"5a2673bfce32c4ca","seed_nonce_hash":"nceVnL7Wvr9FRYoyA3k1GM2HZBYv4bzdTmGZK3ZrMsq1cHLCWMSPk","signature":"siguUjos9umyb3riahDRkc7ZH4rcawzwb5apXCcRth9FumhwxKSNTonnKNFBpi64H6DwkUA4K8G9PFFBhvKH3JzuxzuoiHKk"}
+
+'
+    http_version: 
+  recorded_at: Fri, 21 Sep 2018 13:12:15 GMT
+recorded_with: VCR 4.0.0

@@ -1,0 +1,32 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://127.0.0.1:8732/chains/main/blocks/BLyqFgbrJ5PRo3hFTSjhJKYjdFHcc2jFjQPg4naQiqrYtG15KgJ/operations
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '3511'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '[[{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"opWgBS4Bo6xFFN7dWQRuPFxMRZhwMcCt8ty2KVENB2AwokfXAKM","branch":"BKzL8XFLo1DvTzRp5iFWk5V8zzMXZgrpUsXLm4hfUxbMwuSnQgp","contents":[{"kind":"endorsement","level":114274,"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1eUsgK6aj752Fbxwk5sAoEFvSDnPjZ4qvk","change":"-64000000"},{"kind":"freezer","category":"deposits","delegate":"tz1eUsgK6aj752Fbxwk5sAoEFvSDnPjZ4qvk","level":55,"change":"64000000"},{"kind":"freezer","category":"rewards","delegate":"tz1eUsgK6aj752Fbxwk5sAoEFvSDnPjZ4qvk","level":55,"change":"2000000"}],"delegate":"tz1eUsgK6aj752Fbxwk5sAoEFvSDnPjZ4qvk","slots":[14]}}],"signature":"sigZqBGcn34BQjy7J8HNJB7XFX1iqM9vKDsMPoick6Ky9J7B1KoyJoBWvahfjPcZX7LTnGZRBcWoSRShzjUrz9jTzHL73TFY"},{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"onjQh49ziCMxyshS6SVSpWxsc13FjYATVKvoNnXxTfV5XnNgmtq","branch":"BKzL8XFLo1DvTzRp5iFWk5V8zzMXZgrpUsXLm4hfUxbMwuSnQgp","contents":[{"kind":"endorsement","level":114274,"metadata":{"balance_updates":[{"kind":"contract","contract":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","change":"-832000000"},{"kind":"freezer","category":"deposits","delegate":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","level":55,"change":"832000000"},{"kind":"freezer","category":"rewards","delegate":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","level":55,"change":"26000000"}],"delegate":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","slots":[30,28,25,24,21,20,15,11,10,9,4,3,1]}}],"signature":"sigPsYC2NvcCVvi5TBMrgJ8Q1oTgJW1hMuNzWzrDiK6jS4rFSjArr3DWQZneb7oTK64AxawAMMnJbLMB3S7HUQRc5URiPMbw"},{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"ooNBmWhb2AhhEZ8rd2YsWxKnF7gfHVig7Ea3ZdqU9n5wZtds2yF","branch":"BKzL8XFLo1DvTzRp5iFWk5V8zzMXZgrpUsXLm4hfUxbMwuSnQgp","contents":[{"kind":"endorsement","level":114274,"metadata":{"balance_updates":[{"kind":"contract","contract":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","change":"-1088000000"},{"kind":"freezer","category":"deposits","delegate":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","level":55,"change":"1088000000"},{"kind":"freezer","category":"rewards","delegate":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","level":55,"change":"34000000"}],"delegate":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","slots":[31,29,27,26,23,22,19,18,17,16,13,12,8,6,5,2,0]}}],"signature":"sigXjJqQd4u3BpepC8TzfzrttoCk9uBXWzZc4UoGk8D3jWbhffiYFjxXUWsCwtNJaHWupX9QURHvW9UuBGLeesf3zMw8oxcz"}],[],[],[{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"ooF3U9HDK546x6sYYFrD8YFSFBp4TEtffL8EprG66UuKGBGUxez","branch":"BKzL8XFLo1DvTzRp5iFWk5V8zzMXZgrpUsXLm4hfUxbMwuSnQgp","contents":[{"kind":"origination","source":"tz1hL8qxynLMqvob6pAUXoeECSSZxDE8HVyg","fee":"0","counter":"22247","gas_limit":"0","storage_limit":"0","managerPubkey":"tz1hL8qxynLMqvob6pAUXoeECSSZxDE8HVyg","balance":"20000000","metadata":{"balance_updates":[],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1hL8qxynLMqvob6pAUXoeECSSZxDE8HVyg","change":"-257000"},{"kind":"contract","contract":"tz1hL8qxynLMqvob6pAUXoeECSSZxDE8HVyg","change":"-20000000"},{"kind":"contract","contract":"KT1HbuMjc1xmPFAAHQ5sGKmgho7XCHrSH4LR","change":"20000000"}],"originated_contracts":["KT1HbuMjc1xmPFAAHQ5sGKmgho7XCHrSH4LR"]}}}],"signature":"sigjHPP5fWjjEN2UQ3FMsgADJkRuQmqDvFtNCRkpUULvgAPTaktdSABYhBqrmaJV3iPztpZtRAse6JCdrMFuo68VbZXJS9DV"}]]
+
+'
+    http_version: 
+  recorded_at: Fri, 21 Sep 2018 13:39:45 GMT
+recorded_with: VCR 4.0.0

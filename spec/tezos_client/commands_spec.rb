@@ -6,6 +6,7 @@ RSpec.describe TezosClient::Commands do
   subject { tezos_client }
 
 
+  # Tezos client is not installed on travis machine
   unless ENV["TRAVIS"]
     describe "#known_contracts" do
       it "works" do
@@ -52,11 +53,12 @@ RSpec.describe TezosClient::Commands do
       end
 
       it "returns the block Header" do
-        res = subject.bootstrapped
+        res = subject.block_header
         expect(res).to be_a Hash
         expect(res["block"]).to be_a String
         expect(res["timestamp"]).to be_a DateTime
       end
     end
+
   end
 end

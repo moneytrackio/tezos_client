@@ -9,7 +9,13 @@ RSpec.describe TezosClient::RpcInterface, :vcr do
     it "works" do
       res = subject.get "/monitor/bootstrapped"
       expect(res).to be_a Hash
-      p res
+    end
+  end
+
+  describe "#get block head" do
+    it "works" do
+      res = subject.get "chains/main/blocks/head"
+      expect(res).to be_a Hash
     end
   end
 end

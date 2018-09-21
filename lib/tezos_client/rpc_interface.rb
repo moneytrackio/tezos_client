@@ -8,6 +8,7 @@ require_relative "rpc_interface/contracts"
 require_relative "rpc_interface/context"
 require_relative "rpc_interface/helper"
 require_relative "rpc_interface/request_manager"
+require_relative "rpc_interface/blocks"
 
 class TezosClient
   class RpcInterface
@@ -17,6 +18,7 @@ class TezosClient
     include Context
     include Helper
     include RequestManager
+    include Blocks
 
     def initialize(host: "127.0.0.1", port: "8732")
       @host = host

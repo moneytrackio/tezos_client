@@ -10,7 +10,10 @@ class TezosClient
                    :bootstrapped,
                    :monitor_block,
                    :head_hash,
-                   :contract_counter
+                   :contract_counter,
+                   :block_header,
+                   :block_operations,
+                   :block_operation_hashes
 
     def_delegators :client_interface,
                    :gen_keys,
