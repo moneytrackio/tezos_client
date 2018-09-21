@@ -49,6 +49,7 @@ class TezosClient
         Thread.new do
           log("Monitor #{uuid}: Start monitoring GET #{url}")
           RestClient::Request.execute(method: :get,
+                                      read_timeout: 60 * 60 * 24 * 365,
                                       url: url,
                                       block_response: event_reader,
                                       content_type: :json,

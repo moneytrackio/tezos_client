@@ -32,7 +32,8 @@ RSpec.describe TezosClient::RpcInterface::Monitor do
       end
 
       monitoring_thread.kill
-      expect(received.size).to be > 1
+      block_hashes = received.map { |e| e["hash"] }.uniq
+      expect(block_hashes.size).to be > 1
     end
   end
 end
