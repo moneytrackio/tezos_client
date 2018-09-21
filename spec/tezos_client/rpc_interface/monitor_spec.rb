@@ -5,7 +5,7 @@ RSpec.describe TezosClient::RpcInterface::Monitor do
 
   subject { rpc_interface }
 
-  describe "#bootstrapped" do
+  describe "#monitor" do
     around do |example|
       disabling_vcr { example.call }
     end
@@ -20,20 +20,22 @@ RSpec.describe TezosClient::RpcInterface::Monitor do
       expect(res["timestamp"]).to be_a DateTime
     end
 
-    it "test monitor" do
-      received = []
-      monitoring_thread = subject.monitor("/monitor/heads/main") do |chunk|
-        received << chunk
-      end
+    describe "#monitor_block" do
+      it "test monitor" do
+        received = []
+        monitoring_thread = subject.monitor_block do |chunk|
+          received << chunk
+        end
 
-      timeout = Time.now + 120
-      while received.size < 2 && Time.now < timeout
-        sleep 1
-      end
+        timeout = Time.now + 120
+        while received.size < 2 && Time.now < timeout
+          sleep 1
+        end
 
-      monitoring_thread.kill
-      block_hashes = received.map { |e| e["hash"] }.uniq
-      expect(block_hashes.size).to be > 1
+        monitoring_thread.kill
+        block_hashes = received.map { |e| e["hash"] }.uniq
+        expect(block_hashes.size).to be > 1
+      end
     end
   end
 end
