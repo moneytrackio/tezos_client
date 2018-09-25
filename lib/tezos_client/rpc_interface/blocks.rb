@@ -7,6 +7,17 @@ class TezosClient
         get "chains/main/blocks/#{block_hash}"
       end
 
+      def blocks(length: 50, head: nil, min_date: nil)
+        query = {
+          length: length,
+          head: head,
+          min_date: min_date&.to_datetime&.to_i
+        }.compact
+
+        res = get "chains/main/blocks/", query: query
+        res[0]
+      end
+
       def block_header(block_hash = "head")
         get "chains/main/blocks/#{block_hash}/header"
       end

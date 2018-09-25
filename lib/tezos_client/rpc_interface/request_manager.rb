@@ -3,13 +3,14 @@
 class TezosClient
   class RpcInterface
     module RequestManager
-      def get(path)
+      def get(path, query: {})
         url = "http://#{@host}:#{@port}/#{path}"
-        response = HTTParty.get(url, options: { headers: { "Content-Type" => "application/json" } })
+
+        response = HTTParty.get(url, headers: { "Content-Type" => "application/json" }, query: query)
         formatted_response = format_response(response.parsed_response)
 
         log("-------")
-        log(">>> GET #{url} \n")
+        log(">>> GET #{response.request.uri.to_s} \n")
         log("<<< code: #{response.code} \n #{formatted_response.pretty_inspect}")
         log("-------")
         unless response.success?

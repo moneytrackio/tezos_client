@@ -6,6 +6,33 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
   let(:block_hash) { "BLXhD7T43aKby6aDasVhB9u4tCdbhUqKZaDPC2sMqZc5Lqh4JpR" }
 
 
+  describe "#blocks" do
+    context "default arguments" do
+      it "returns the last 50 blocks" do
+        res = subject.blocks
+        expect(res).to be_an Array
+        expect(res.length).to eq 50
+      end
+      context "given a block head" do
+        let(:head) { "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46" }
+        it "returns the 50 previous blocks" do
+          res = subject.blocks(head: head)
+          expect(res).to be_an Array
+          expect(res.length).to eq 50
+          expect(res[0]).to eq "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46"
+        end
+      end
+    end
+
+    context "specific block" do
+      it "returns the block" do
+        res = subject.block(block_hash)
+        expect(res).to be_a Hash
+        expect(res).to have_key "operations"
+      end
+    end
+  end
+
   describe "#block" do
     context "default block" do
       it "returns the head block" do

@@ -13,7 +13,8 @@ class TezosClient
                    :contract_counter,
                    :block_header,
                    :block_operations,
-                   :block_operation_hashes
+                   :block_operation_hashes,
+                   :blocks
 
     def_delegators :client_interface,
                    :gen_keys,

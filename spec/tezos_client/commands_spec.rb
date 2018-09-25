@@ -53,7 +53,7 @@ RSpec.describe TezosClient::Commands do
       end
 
       it "returns the block Header" do
-        res = subject.block_header
+        res = subject.bootstrapped
         expect(res).to be_a Hash
         expect(res["block"]).to be_a String
         expect(res["timestamp"]).to be_a DateTime
