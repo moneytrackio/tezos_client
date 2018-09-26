@@ -13,22 +13,34 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
         expect(res).to be_an Array
         expect(res.length).to eq 50
       end
-      context "given a block head" do
-        let(:head) { "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46" }
-        it "returns the 50 previous blocks" do
-          res = subject.blocks(head: head)
-          expect(res).to be_an Array
-          expect(res.length).to eq 50
-          expect(res[0]).to eq "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46"
-        end
+    end
+
+    context "given a block head" do
+      let(:head) { "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46" }
+      it "returns the 50 previous blocks" do
+        res = subject.blocks(head: head)
+        expect(res).to be_an Array
+        expect(res.length).to eq 50
+        expect(res[0]).to eq "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46"
       end
     end
 
-    context "specific block" do
-      it "returns the block" do
-        res = subject.block(block_hash)
-        expect(res).to be_a Hash
-        expect(res).to have_key "operations"
+    context "given a min_date" do
+      let(:min_date) { Time.parse("2050-09-26T00:00:00Z") }
+      it "returns an empty set" do
+        res = subject.blocks(length: 10, min_date: min_date)
+        expect(res).to be_nil
+      end
+    end
+
+    context "given a min_date and a block head" do
+      let(:head) { "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46" }
+      let(:min_date) { Time.parse("2050-09-26T00:00:00Z") }
+      it "ignores the min_date argument :(" do
+        res = subject.blocks(head: head, min_date: min_date)
+        expect(res).to be_an Array
+        expect(res.length).to eq 50
+        expect(res[0]).to eq "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46"
       end
     end
   end
