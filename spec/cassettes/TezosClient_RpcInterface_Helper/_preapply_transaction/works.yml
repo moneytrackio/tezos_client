@@ -2,17 +2,13 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    uri: https://alphanet-node.tzscan.io//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -21,7 +17,7 @@ http_interactions:
       Server:
       - nginx/1.10.3
       Date:
-      - Mon, 10 Sep 2018 12:55:58 GMT
+      - Mon, 01 Oct 2018 09:57:40 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -30,24 +26,20 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '"BLGQEVLXJabybAADa8JqYW3JaCZxyxcLBjXr4fE6bk9oBJp3Y8V"
+      string: '"BLHrbMeJdbd5f52gPYdJiJYxGKmzxstaerGUPx53t9qD2GykmBj"
 
 '
     http_version: 
-  recorded_at: Mon, 10 Sep 2018 12:55:58 GMT
+  recorded_at: Mon, 01 Oct 2018 09:57:40 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    uri: https://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -56,7 +48,7 @@ http_interactions:
       Server:
       - nginx/1.10.3
       Date:
-      - Mon, 10 Sep 2018 12:55:58 GMT
+      - Mon, 01 Oct 2018 09:57:40 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -65,24 +57,20 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '"274"
+      string: '"295"
 
 '
     http_version: 
-  recorded_at: Mon, 10 Sep 2018 12:55:58 GMT
+  recorded_at: Mon, 01 Oct 2018 09:57:40 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//protocols
+    uri: https://alphanet-node.tzscan.io//protocols
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
@@ -91,7 +79,7 @@ http_interactions:
       Server:
       - nginx/1.10.3
       Date:
-      - Mon, 10 Sep 2018 12:55:58 GMT
+      - Mon, 01 Oct 2018 09:57:40 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -104,13 +92,13 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Mon, 10 Sep 2018 12:55:58 GMT
+  recorded_at: Mon, 01 Oct 2018 09:57:40 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: https://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
-      string: '{"branch":"BLGQEVLXJabybAADa8JqYW3JaCZxyxcLBjXr4fE6bk9oBJp3Y8V","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"275","fee":"50000"}]}'
+      string: '{"branch":"BLHrbMeJdbd5f52gPYdJiJYxGKmzxstaerGUPx53t9qD2GykmBj","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"296","fee":"50000"}]}'
     headers:
       Content-Type:
       - application/json
@@ -122,7 +110,7 @@ http_interactions:
       Server:
       - nginx/1.10.3
       Date:
-      - Mon, 10 Sep 2018 12:55:58 GMT
+      - Mon, 01 Oct 2018 09:57:40 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -131,17 +119,17 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '"48ee116840b550eaf144b3fb728c2b89b074281d7ac9e8a580c7425ec71bf8ac080000982fd7853b46e70022bc56f12b427855a2adb67ed086039302d08603f02ec0843d0000982fd7853b46e70022bc56f12b427855a2adb67e00"
+      string: '"4c3b86cc6ed104d71786ecea5457eeb106fe51e34c8df949cb8fbab429859de7080000982fd7853b46e70022bc56f12b427855a2adb67ed08603a802d08603f02ec0843d0000982fd7853b46e70022bc56f12b427855a2adb67e00"
 
 '
     http_version: 
-  recorded_at: Mon, 10 Sep 2018 12:55:58 GMT
+  recorded_at: Mon, 01 Oct 2018 09:57:40 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/preapply/operations
+    uri: https://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
-      string: '[{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","branch":"BLGQEVLXJabybAADa8JqYW3JaCZxyxcLBjXr4fE6bk9oBJp3Y8V","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"275","fee":"50000"}],"signature":"edsigtnrF7BPPf4XZF4xZk4AcGpMr3t4VrCnv43NtbYHLVPjUmpeX6by4ge4Vwx1iZ7dZ5HwjKJw4smvbxpPnY8B6WpcBVvbvov"}]'
+      string: '[{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","branch":"BLHrbMeJdbd5f52gPYdJiJYxGKmzxstaerGUPx53t9qD2GykmBj","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"296","fee":"50000"}],"signature":"edsigu2j61Zox172HD5v8fLpJhVp1eWmoujq9DBHPssiuKDw9PGYuZ6MHQCg4m2Z1Fsthb4fhA8HWc2fycSndhn6cgHUhWDxA8F"}]'
     headers:
       Content-Type:
       - application/json
@@ -153,7 +141,7 @@ http_interactions:
       Server:
       - nginx/1.10.3
       Date:
-      - Mon, 10 Sep 2018 12:55:58 GMT
+      - Mon, 01 Oct 2018 09:57:40 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -162,9 +150,9 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '[{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"275","gas_limit":"50000","storage_limit":"6000","amount":"1000000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","level":47,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-1000000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"1000000"}],"consumed_gas":"100"}}}],"signature":"edsigtnrF7BPPf4XZF4xZk4AcGpMr3t4VrCnv43NtbYHLVPjUmpeX6by4ge4Vwx1iZ7dZ5HwjKJw4smvbxpPnY8B6WpcBVvbvov"}]
+      string: '[{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"296","gas_limit":"50000","storage_limit":"6000","amount":"1000000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","level":62,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-1000000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"1000000"}],"consumed_gas":"100"}}}],"signature":"edsigu2j61Zox172HD5v8fLpJhVp1eWmoujq9DBHPssiuKDw9PGYuZ6MHQCg4m2Z1Fsthb4fhA8HWc2fycSndhn6cgHUhWDxA8F"}]
 
 '
     http_version: 
-  recorded_at: Mon, 10 Sep 2018 12:55:58 GMT
+  recorded_at: Mon, 01 Oct 2018 09:57:40 GMT
 recorded_with: VCR 4.0.0

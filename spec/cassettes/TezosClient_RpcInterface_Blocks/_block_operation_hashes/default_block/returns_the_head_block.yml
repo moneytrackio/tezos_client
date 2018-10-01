@@ -7,26 +7,22 @@ http_interactions:
       encoding: US-ASCII
       string: ''
     headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
       message: OK
     headers:
       Content-Length:
-      - '175'
+      - '121'
       Content-Type:
       - application/json
     body:
       encoding: UTF-8
-      string: '[["ooDShSZ3etQ1ZK3ffv1giV9z12hPRLewnQQv42Jg9njf4xzb73Z","onmSTAr6VpoD57YPT36QG1HTqMEM8DkKUeD9t2Ke3dS3Wpvszx5","oorCh1oNVppGu9Q6NWi8bLAgEjavvQ2Hhfv5MgB6MFyYZ8b5CCJ"],[],[],[]]
+      string: '[["op2MHLWbRv9EhWNA77wDJALNoL2FS9hb76eYqrhc8BE9EwoBpgj","ooGhQdXNLe683ufvcrncw3iSq8EajueKCso9K31jtL4RpNT9W1z"],[],[],[]]
 
 '
     http_version: 
-  recorded_at: Fri, 21 Sep 2018 13:12:15 GMT
+  recorded_at: Mon, 01 Oct 2018 10:15:14 GMT
 recorded_with: VCR 4.0.0

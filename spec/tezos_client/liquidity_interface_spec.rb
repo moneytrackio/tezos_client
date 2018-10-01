@@ -7,7 +7,7 @@ RSpec.describe TezosClient::LiquidityInterface do
 
 
   let(:rpc_node_address) { "alphanet-node.tzscan.io" }
-  let(:rpc_node_port) { 80 }
+  let(:rpc_node_port) { 443 }
   subject { TezosClient::LiquidityInterface.new(rpc_node_address: rpc_node_address, rpc_node_port: rpc_node_port) }
 
   describe "#forge_deploy" do

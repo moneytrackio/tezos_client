@@ -20,7 +20,8 @@ class TezosClient
     include RequestManager
     include Blocks
 
-    def initialize(host: "127.0.0.1", port: "8732")
+    def initialize(host: "127.0.0.1", port: "8732", secured: false)
+      @secured = secured
       @host = host
       @port = port
     end

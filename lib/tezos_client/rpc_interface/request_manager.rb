@@ -4,7 +4,7 @@ class TezosClient
   class RpcInterface
     module RequestManager
       def get(path, query: {})
-        url = "http://#{@host}:#{@port}/#{path}"
+        url = "#{base_url}/#{path}"
 
         response = HTTParty.get(url, headers: { "Content-Type" => "application/json" }, query: query)
         formatted_response = format_response(response.parsed_response)
@@ -21,7 +21,7 @@ class TezosClient
       end
 
       def post(path, content)
-        url = "http://#{@host}:#{@port}/#{path}"
+        url = "#{base_url}/#{path}"
         response = HTTParty.post(url,
                                  body: content.to_json,
                                  headers: { "Content-Type" => "application/json" })
@@ -43,7 +43,7 @@ class TezosClient
       def monitor(path, &event_handler)
         uuid = SecureRandom.uuid
 
-        url = "http://#{@host}:#{@port}/#{path}"
+        url = "#{base_url}/#{path}"
 
         event_reader = monitor_event_reader(uuid, event_handler)
 
@@ -61,6 +61,11 @@ class TezosClient
       end
 
       private
+
+      def base_url
+        protocol = @secured ? "https" : "http"
+        "#{protocol}://#{@host}:#{@port}"
+      end
 
       def monitor_event_reader(uuid, event_handler)
         proc do |event_response|

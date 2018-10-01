@@ -7,26 +7,22 @@ http_interactions:
       encoding: US-ASCII
       string: ''
     headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
       message: OK
     headers:
       Content-Length:
-      - '1745'
+      - '3448'
       Content-Type:
       - application/json
     body:
       encoding: UTF-8
-      string: '{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"BL8BLV6nMkQYwFpPeFBkCrWSxsKRkty5qWN7ELFv4TBs5U3aHtw","header":{"level":114298,"proto":1,"predecessor":"BLSFGTohptptPARVdf6fbdDccX3HUZcLivy9ohJFyJPrvCAAqyD","timestamp":"2018-09-21T13:04:22Z","validation_pass":4,"operations_hash":"LLoa7bxRTKaQN2bLYoitYB6bU2DvLnBAqrVjZcvJ364cTcX2PZYKU","fitness":["00","0000000000329f07"],"context":"CoVrTmqDeWZSXeA6LwZghrTZkTXpoNB18ZUNUQTSraD2XkaH18x9","priority":1,"proof_of_work_nonce":"7df799772c3ed5a4","signature":"sigmTyVUWMgjmwzBrUA6Eee5D36pkAigDehiqK2SDVwB4z9yNChCRnKNpGr6NNBerw2DgS1fXcBviXWaom1ffEerCzRZGRGX"},"metadata":{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","next_protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","test_chain_status":{"status":"not_running"},"max_operations_ttl":60,"max_operation_data_length":16384,"max_block_header_length":238,"max_operation_list_length":[{"max_size":32768,"max_op":32},{"max_size":32768},{"max_size":135168,"max_op":132},{"max_size":524288}],"baker":"tz1eUsgK6aj752Fbxwk5sAoEFvSDnPjZ4qvk","level":{"level":114298,"level_position":114297,"cycle":55,"cycle_position":1657,"voting_period":3,"voting_period_position":15993,"expected_commitment":false},"voting_period_kind":"proposal","nonce_hash":null,"consumed_gas":"0","deactivated":[],"balance_updates":[{"kind":"contract","contract":"tz1eUsgK6aj752Fbxwk5sAoEFvSDnPjZ4qvk","change":"-512000000"},{"kind":"freezer","category":"deposits","delegate":"tz1eUsgK6aj752Fbxwk5sAoEFvSDnPjZ4qvk","level":55,"change":"512000000"},{"kind":"freezer","category":"rewards","delegate":"tz1eUsgK6aj752Fbxwk5sAoEFvSDnPjZ4qvk","level":55,"change":"16000000"}]},"operations":[[],[],[],[]]}
+      string: '{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"BKiqStAqCbS7p7Nb152iqMBZb4ognLy9nr9oGL7W5Gn7cz1P7ww","header":{"level":127201,"proto":1,"predecessor":"BLnwmYSjP3LaYgLpGsHFWYzP6KjHxTsXJLTpfExp5SxjVdhW9zk","timestamp":"2018-10-01T10:13:52Z","validation_pass":4,"operations_hash":"LLoa716anyMV5W1NFSQu3LmRNJFiibzUxZfWsks7ECEXkvJ5ocGXW","fitness":["00","000000000036bdd8"],"context":"CoVqg2MsnmHhQYzVEHjSUpZnVNTRhPv2EpEukmmBczhogVcWGKf2","priority":0,"proof_of_work_nonce":"7b0a42f16b0cbc73","signature":"sigeBTcJWrvJW4jaK6EXMwEhfH2BccWhFyAqbSn9xMLhc7hd4d6hAAmkmte4bdbQZLCSaRfrQqN1SReDmDuYJhWokFnnrHzf"},"metadata":{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","next_protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","test_chain_status":{"status":"not_running"},"max_operations_ttl":60,"max_operation_data_length":16384,"max_block_header_length":238,"max_operation_list_length":[{"max_size":32768,"max_op":32},{"max_size":32768},{"max_size":135168,"max_op":132},{"max_size":524288}],"baker":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","level":{"level":127201,"level_position":127200,"cycle":62,"cycle_position":224,"voting_period":3,"voting_period_position":28896,"expected_commitment":false},"voting_period_kind":"proposal","nonce_hash":null,"consumed_gas":"0","deactivated":[],"balance_updates":[{"kind":"contract","contract":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","change":"-512000000"},{"kind":"freezer","category":"deposits","delegate":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","level":62,"change":"512000000"},{"kind":"freezer","category":"rewards","delegate":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","level":62,"change":"16000000"}]},"operations":[[{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"op2MHLWbRv9EhWNA77wDJALNoL2FS9hb76eYqrhc8BE9EwoBpgj","branch":"BLnwmYSjP3LaYgLpGsHFWYzP6KjHxTsXJLTpfExp5SxjVdhW9zk","contents":[{"kind":"endorsement","level":127200,"metadata":{"balance_updates":[{"kind":"contract","contract":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","change":"-1152000000"},{"kind":"freezer","category":"deposits","delegate":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","level":62,"change":"1152000000"},{"kind":"freezer","category":"rewards","delegate":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","level":62,"change":"9000000"}],"delegate":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","slots":[31,30,29,25,24,21,20,17,13,12,9,8,7,6,5,3,2,1]}}],"signature":"sigaz9PKPfj3x1ZWxPUctfNwyCK5qwBRkNn7D7pNqRvjUQ6hGecWGwUC9wi1vtdN9mJzYHQJYRwnkwJrQGZ9fDfmstWLS8dT"},{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"ooGhQdXNLe683ufvcrncw3iSq8EajueKCso9K31jtL4RpNT9W1z","branch":"BLnwmYSjP3LaYgLpGsHFWYzP6KjHxTsXJLTpfExp5SxjVdhW9zk","contents":[{"kind":"endorsement","level":127200,"metadata":{"balance_updates":[{"kind":"contract","contract":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","change":"-832000000"},{"kind":"freezer","category":"deposits","delegate":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","level":62,"change":"832000000"},{"kind":"freezer","category":"rewards","delegate":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","level":62,"change":"6500000"}],"delegate":"tz3WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5","slots":[28,27,26,23,22,19,18,16,14,11,10,4,0]}}],"signature":"sigj3vFCVp3Naq6RmLMkDPuqGeh4b8kwUgda8D4qJJifvt2biiQ8Xab1VUE245f3QJwQMkS88GppLL8BN15kd9BpEbTRNH4G"}],[],[],[]]}
 
 '
     http_version: 
-  recorded_at: Fri, 21 Sep 2018 13:06:24 GMT
+  recorded_at: Mon, 01 Oct 2018 10:15:14 GMT
 recorded_with: VCR 4.0.0

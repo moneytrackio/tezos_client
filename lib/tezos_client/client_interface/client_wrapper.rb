@@ -10,11 +10,11 @@ class TezosClient
           err = stderr.read
           status = wait_thr.value.exitstatus
 
+          log err
           if status != 0
             raise "command '#{cmd}' existed with status #{status}: #{err}"
           end
 
-          log err
           output = stdout.read
 
           if block_given?

@@ -106,7 +106,7 @@ class TezosClient
     end
 
     def tezos_node
-      "#{@rpc_node_address}:#{@rpc_node_port}"
+      "https://#{@rpc_node_address}:#{@rpc_node_port}"
     end
 
     def get_storage(script:, contract_address:)
