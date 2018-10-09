@@ -85,17 +85,19 @@ class TezosClient
   # Transfer funds to an account
   #
   # @param from [String] Address originating the transfer
+  # @param to [String] Address receiving the transfer
   # @param amount [Numeric] amount to send to the account
   # @param secret_key [String] Secret key of the origination address
   # @param args [Hash] keyword options for the transfer
   #
   # @return [Hash] result of the transfer containing :operation_id and :operation_result
   #
-  def transfer(from:, amount:, secret_key:, **args)
+  def transfer(from:, amount:, to:, secret_key:, **args)
     TransactionOperation.new(
       liquidity_interface: liquidity_interface,
       rpc_interface: rpc_interface,
       from: from,
+      to: to,
       secret_key: secret_key,
       amount: amount,
       **args
