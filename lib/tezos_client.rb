@@ -82,11 +82,23 @@ class TezosClient
     res.merge(originated_contract: res[:operation_result][:originated_contracts][0])
   end
 
-  def transfer(args)
+  # Transfer funds to an account
+  #
+  # @param from [String] Address originating the transfer
+  # @param amount [Numeric] amount to send to the account
+  # @param secret_key [String] Secret key of the origination address
+  # @param args [Hash] keyword options for the transfer
+  #
+  # @return [Hash] result of the transfer containing :operation_id and :operation_result
+  #
+  def transfer(from:, amount:, secret_key:, **args)
     TransactionOperation.new(
-      **args,
       liquidity_interface: liquidity_interface,
-      rpc_interface: rpc_interface
+      rpc_interface: rpc_interface,
+      from: from,
+      secret_key: secret_key,
+      amount: amount,
+      **args
     ).test_and_broadcast
   end
 
