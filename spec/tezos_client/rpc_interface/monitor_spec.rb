@@ -27,7 +27,7 @@ RSpec.describe TezosClient::RpcInterface::Monitor do
           received << chunk
         end
 
-        timeout = Time.now + 120
+        timeout = Time.now + 240
         while received.size < 2 && Time.now < timeout
           sleep 1
         end
