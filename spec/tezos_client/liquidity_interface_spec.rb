@@ -69,7 +69,8 @@ RSpec.describe TezosClient::LiquidityInterface do
       let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
       let(:contract_address) { "KT19tZPx3so7n2bQLfzDTUGTLYNhgVxBMGe1" }
       let(:init_params) { ["Set [#{from}]", "1p"] }
-      let(:call_parameters) { "Pay" }
+      let(:call_parameters) do  ["pay", "()"]
+      end
 
       it "gets the initial storage" do
         res = subject.initial_storage(

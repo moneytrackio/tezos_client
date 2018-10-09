@@ -145,7 +145,7 @@ RSpec.describe TezosClient, :vcr do
 
     describe "#call Manage" do
       let(:contract_address) { "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs" }
-      let(:call_params) { "Manage (Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })" }
+      let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })" ] }
 
       it "works" do
         res = subject.call_contract(
@@ -162,7 +162,7 @@ RSpec.describe TezosClient, :vcr do
 
     describe "#call Pay" do
       let(:contract_address) { "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs" }
-      let(:call_params) { "Pay" }
+      let(:call_params) { [ "pay", "()" ] }
       let(:amount) { 1 }
 
       it "works" do

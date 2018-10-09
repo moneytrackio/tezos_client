@@ -23,8 +23,10 @@ class TezosClient
       init_params = args.fetch :init_params
       init_params = format_params(init_params)
 
-      res = call_liquidity "--source #{from} --json --init-storage #{script} #{init_params}"
-      JSON.parse res.strip
+      with_tempfile(".json") do |json_file|
+        call_liquidity "--source #{from} --json #{script} -o #{json_file.path} --init-storage #{init_params}"
+        JSON.parse json_file.read.strip
+      end
     end
 
     def with_tempfile(extension)
@@ -101,7 +103,7 @@ class TezosClient
       script = args.fetch :script
       init_params = args.fetch :init_params
 
-      res = call_liquidity "--source #{source} #{spendable ? '--spendable' : ''} #{delegatable ? '--delegatable' : ''} --amount #{amount}tz --forge-deploy #{script} '#{init_params}'"
+      res = call_liquidity "--source #{source} #{spendable ? '--spendable' : ''} #{delegatable ? '--delegatable' : ''} --amount #{amount}tz #{script} --forge-deploy '#{init_params}'"
       res.strip
     end
 
@@ -110,14 +112,16 @@ class TezosClient
     end
 
     def get_storage(script:, contract_address:)
-      res = call_liquidity "--get-storage #{script} #{contract_address}"
+      res = call_liquidity "#{script} --get-storage #{contract_address}"
       res.strip
     end
 
     def call_parameters(script:, parameters:)
       parameters = format_params(parameters)
-      res = call_liquidity "--json --data #{script} #{parameters}"
-      JSON.parse res.strip
+      with_tempfile(".json") do |json_file|
+        res = call_liquidity "--json -o #{json_file.path} #{script} --data #{parameters}"
+        JSON.parse res
+      end
     end
   end
 end

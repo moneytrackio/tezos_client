@@ -6,6 +6,7 @@ class TezosClient
     module LiquidityWrapper
       def call_liquidity(command)
         cmd = "#{liquidity_cmd} #{command}"
+        log cmd
         Open3.popen3(cmd) do |_stdin, stdout, stderr, wait_thr|
           err = stderr.read
           status = wait_thr.value.exitstatus
