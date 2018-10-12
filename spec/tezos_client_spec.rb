@@ -5,18 +5,22 @@ RSpec.describe TezosClient, :vcr do
   include_context "public rpc interface"
   subject { tezos_client }
 
-  def wait_new_block(timeout: 60)
+  def wait_new_block(timeout: 240)
     blocks_to_wait = 2
-    monitor_thread = subject.monitor_block do
-      blocks_to_wait -= 1
+    received_blocks = []
+    monitor_thread = subject.monitor_block do |block|
+      received_blocks << block[:hash]
+      received_blocks.uniq!
     end
 
     limit_time = Time.now + timeout
 
-    while blocks_to_wait > 0 && Time.now < limit_time
+    while received_blocks.size < blocks_to_wait && Time.now < limit_time
       sleep(1)
     end
     monitor_thread.terminate
+
+    raise "no block received for 4 minutes" unless received_blocks.size == blocks_to_wait
   end
 
   before do
@@ -34,6 +38,8 @@ RSpec.describe TezosClient, :vcr do
       expect(res).to be_a Hash
       expect(res).to have_key :operation_id
       expect(res[:operation_id]).to be_a String
+      expect(res).to have_key :counter
+      expect(res[:counter]).to be_an Integer
     end
 
     context "with parameters" do
@@ -48,6 +54,48 @@ RSpec.describe TezosClient, :vcr do
         expect(res).to be_a Hash
         expect(res).to have_key :operation_id
         expect(res[:operation_id]).to be_a String
+      end
+    end
+
+    context "with decimal amount" do
+      it "works" do
+        res = subject.transfer(
+          amount: 0.1,
+          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+        )
+        expect(res).to be_a Hash
+        expect(res).to have_key :operation_id
+        expect(res[:operation_id]).to be_a String
+      end
+    end
+
+    context "caching counter" do
+
+      let(:previous_transaction) do
+        subject.transfer(
+          amount: 0.1,
+          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+        )
+      end
+
+      let(:cached_counter_value) { previous_transaction[:counter] }
+
+      it "can used cached counter" do
+        expect(cached_counter_value).to be > 0
+
+        res = subject.transfer(
+          amount: 0.2,
+          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
+          counter: cached_counter_value + 1
+        )
+
+        expect(res[:counter]).to eq (cached_counter_value + 1)
       end
     end
   end
@@ -143,9 +191,10 @@ RSpec.describe TezosClient, :vcr do
       end
     end
 
-    describe "#call Manage" do
+    describe "#call Pay" do
       let(:contract_address) { "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs" }
-      let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })" ] }
+      let(:call_params) { [ "pay", "()" ] }
+      let(:amount) { 1 }
 
       it "works" do
         res = subject.call_contract(
@@ -160,10 +209,9 @@ RSpec.describe TezosClient, :vcr do
       end
     end
 
-    describe "#call Pay" do
+    describe "#call Manage" do
       let(:contract_address) { "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs" }
-      let(:call_params) { [ "pay", "()" ] }
-      let(:amount) { 1 }
+      let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })" ] }
 
       it "works" do
         res = subject.call_contract(

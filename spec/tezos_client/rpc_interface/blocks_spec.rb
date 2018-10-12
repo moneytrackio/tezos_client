@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
-  subject { TezosClient::RpcInterface.new }
+  include_context "public rpc interface"
+  subject { rpc_interface }
 
   let(:block_hash) { "BLXhD7T43aKby6aDasVhB9u4tCdbhUqKZaDPC2sMqZc5Lqh4JpR" }
 

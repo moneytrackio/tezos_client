@@ -2,31 +2,33 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:8732/chains/main/blocks/BLXhD7T43aKby6aDasVhB9u4tCdbhUqKZaDPC2sMqZc5Lqh4JpR/header
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/BLXhD7T43aKby6aDasVhB9u4tCdbhUqKZaDPC2sMqZc5Lqh4JpR/header
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
       message: OK
     headers:
-      Content-Length:
-      - '645'
+      Server:
+      - nginx/1.10.3
+      Date:
+      - Fri, 12 Oct 2018 14:21:37 GMT
       Content-Type:
       - application/json
+      Content-Length:
+      - '645'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: '{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"BLXhD7T43aKby6aDasVhB9u4tCdbhUqKZaDPC2sMqZc5Lqh4JpR","level":113468,"proto":1,"predecessor":"BLc1ZDxQ2Ni2zksLxdGDmt5MZ1UR5iSguCJcX6cZizkK7ugaxvA","timestamp":"2018-09-20T22:29:22Z","validation_pass":4,"operations_hash":"LLobFoL4AARhrAF8iaNyCi2x5mNjfV9TFTme9S8Q5ikb2YqqtAEY7","fitness":["00","00000000003256ee"],"context":"CoVGJkmPHquRCVQSkc85ocA9hubYMvKCGXR7Cwe3LpJBWVHNBiUG","priority":0,"proof_of_work_nonce":"6664846c6bf54b6d","signature":"sigvc74F9xib36x6wSiwMsiucMmGvujThPi1yPFNLizhawcBSmGA6fzJ82TcuReuopka61y9fLBQirCEVUigcrmEcg9Y1Myi"}
 
 '
     http_version: 
-  recorded_at: Fri, 21 Sep 2018 13:12:15 GMT
+  recorded_at: Fri, 12 Oct 2018 14:21:37 GMT
 recorded_with: VCR 4.0.0
