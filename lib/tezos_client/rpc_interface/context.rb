@@ -20,7 +20,8 @@ class TezosClient
       end
 
       def protocol
-        get "/protocols/main"
+        metadata = get "/chains/main/blocks/head/metadata"
+        metadata[:protocol]
       end
     end
   end

@@ -2,31 +2,33 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:8732/chains/main/blocks/head/header
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/header
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
       message: OK
     headers:
-      Content-Length:
-      - '719'
+      Server:
+      - nginx/1.10.3
+      Date:
+      - Fri, 12 Oct 2018 14:21:37 GMT
       Content-Type:
       - application/json
+      Content-Length:
+      - '645'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"BMSZB8H8Mh3JiAhymd1rdsJj2Tv1rZZmWEvM4syGNsM2CxfK85S","level":114304,"proto":1,"predecessor":"BKvbas8QUNUsrz1Zb4D2hJzG5vh3pdH8A3K7LaB7XKix7XqQg9X","timestamp":"2018-09-21T13:11:22Z","validation_pass":4,"operations_hash":"LLoZxJDXpoeHP2vP5GnWYDaEZBovxaTkWzLH2evEivPoVCS2FyYMK","fitness":["00","0000000000329fc5"],"context":"CoVrzwMj6LN6Hi7Sy9LrK6it6ybMY6yppYmT7WBDS8ePdNvAfrVM","priority":1,"proof_of_work_nonce":"5a2673bfce32c4ca","seed_nonce_hash":"nceVnL7Wvr9FRYoyA3k1GM2HZBYv4bzdTmGZK3ZrMsq1cHLCWMSPk","signature":"siguUjos9umyb3riahDRkc7ZH4rcawzwb5apXCcRth9FumhwxKSNTonnKNFBpi64H6DwkUA4K8G9PFFBhvKH3JzuxzuoiHKk"}
+      string: '{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"BLQSz2Vb5u6dX16ySKj3FUZJXYEAo6BXT4EvqsqsuPWAzrswr2E","level":140383,"proto":1,"predecessor":"BLf87nzyZBY4i4c8vNfjxXy2ifFeoiBv119RkGfwr2rnbBXQJ93","timestamp":"2018-10-12T14:19:32Z","validation_pass":4,"operations_hash":"LLoa7bxRTKaQN2bLYoitYB6bU2DvLnBAqrVjZcvJ364cTcX2PZYKU","fitness":["00","00000000003aa35a"],"context":"CoVuerpaPMwchRVE6tjk2MhKnyQzRfhiqPzg71t5pafhKuNrEv3a","priority":0,"proof_of_work_nonce":"ef6ef00a52147752","signature":"sigqdHShSVp4jakhxmPA4FTwnrHE1AQQ51RrvZU74hqGcA3FeocGu2jhgujDtyq3FfkDG1To6cqaPMzEFTrjGTrqzjJryAip"}
 
 '
     http_version: 
-  recorded_at: Fri, 21 Sep 2018 13:12:15 GMT
+  recorded_at: Fri, 12 Oct 2018 14:21:37 GMT
 recorded_with: VCR 4.0.0
