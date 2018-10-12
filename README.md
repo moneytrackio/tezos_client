@@ -4,9 +4,11 @@
 
 [![Build Status](https://travis-ci.org/moneytrackio/tezos_client.svg?branch=master)](https://travis-ci.org/moneytrackio/tezos_client)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tezos_client`. To experiment with that code, run `bin/console` for an interactive prompt.
+Tezos Client interracts with tezos nodes using RPC commands. 
 
-TODO: Delete this and the text above, and describe your gem
+## Requirements:
+Tezos client requires liquidity to be installed in order to work properly.
+For installing on linux, you can basically follow the steps coded in travis-script folder. 
 
 ## Installation
 
@@ -26,7 +28,65 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Transfer funds
+
+```ruby 
+client = TezosClient.new 
+
+client.transfer(
+    amount: 1,
+    from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+    to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+    secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+)
+```
+
+### Call a contract
+
+```ruby
+client = TezosClient.new  
+client.transfer(
+    amount: 5,
+    from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+    to: "KT1MZTrMDPB42P9yvjf7Cy8Lkjxjj4jetbCt",
+    secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
+    parameters: '"pro"'
+)
+```
+
+### Originate a contract written in liquidity
+
+```ruby
+script = File.expand_path("./spec/fixtures/demo.liq")
+source = "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq"
+secret_key = "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+amount =  0
+init_params = '"test"'
+client = TezosClient.new
+
+res = client.originate_contract(
+    from: source,
+    amount: amount,
+    script: script,
+    secret_key: secret_key,
+    init_params: init_params
+)
+
+puts "Origination operation: #{res[:operation_id]}"
+puts "Contract address: #{res[:originated_contract]}"
+```
+
+### Call a contract written in liquidity
+```ruby
+TezosClient.new.call_contract(
+  from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+  amount: 0,
+  script: File.expand_path("./spec/fixtures/demo.liq"),
+  secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
+  to: "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs",
+  parameters: [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })" ]
+)
+```
 
 ## Development
 
