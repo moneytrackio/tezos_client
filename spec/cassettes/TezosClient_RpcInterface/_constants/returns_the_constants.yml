@@ -15,20 +15,20 @@ http_interactions:
       message: OK
     headers:
       Server:
-      - nginx/1.10.3
+      - nginx
       Date:
-      - Fri, 12 Oct 2018 14:17:45 GMT
+      - Mon, 07 Jan 2019 16:33:37 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '763'
+      - '789'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"proof_of_work_nonce_size":8,"nonce_length":32,"max_revelations_per_block":32,"max_operation_data_length":16384,"preserved_cycles":5,"blocks_per_cycle":2048,"blocks_per_commitment":32,"blocks_per_roll_snapshot":256,"blocks_per_voting_period":32768,"time_between_blocks":["30","40"],"endorsers_per_block":32,"hard_gas_limit_per_operation":"400000","hard_gas_limit_per_block":"4000000","proof_of_work_threshold":"70368744177663","tokens_per_roll":"10000000000","michelson_maximum_type_size":1000,"seed_nonce_revelation_tip":"125000","origination_burn":"257000","block_security_deposit":"512000000","endorsement_security_deposit":"64000000","block_reward":"16000000","endorsement_reward":"2000000","cost_per_byte":"1000","hard_storage_limit_per_operation":"60000"}
+      string: '{"proof_of_work_nonce_size":8,"nonce_length":32,"max_revelations_per_block":32,"max_operation_data_length":16384,"max_proposals_per_delegate":20,"preserved_cycles":3,"blocks_per_cycle":2048,"blocks_per_commitment":32,"blocks_per_roll_snapshot":256,"blocks_per_voting_period":8192,"time_between_blocks":["30","40"],"endorsers_per_block":32,"hard_gas_limit_per_operation":"400000","hard_gas_limit_per_block":"4000000","proof_of_work_threshold":"70368744177663","tokens_per_roll":"10000000000","michelson_maximum_type_size":1000,"seed_nonce_revelation_tip":"125000","origination_size":257,"block_security_deposit":"512000000","endorsement_security_deposit":"64000000","block_reward":"16000000","endorsement_reward":"2000000","cost_per_byte":"1000","hard_storage_limit_per_operation":"60000"}
 
 '
     http_version: 
-  recorded_at: Fri, 12 Oct 2018 14:17:45 GMT
+  recorded_at: Mon, 07 Jan 2019 16:33:37 GMT
 recorded_with: VCR 4.0.0

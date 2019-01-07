@@ -15,20 +15,20 @@ http_interactions:
       message: OK
     headers:
       Server:
-      - nginx/1.10.3
+      - nginx
       Date:
-      - Fri, 12 Oct 2018 14:22:30 GMT
+      - Mon, 07 Jan 2019 16:33:37 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '114'
+      - '51'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"manager":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","key":"edpkugJHjEZLNyTuX3wW2dT4P7PY5crLqq3zeDFvXohAs3tnRAaZKR"}
+      string: '{"manager":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq"}
 
 '
     http_version: 
-  recorded_at: Fri, 12 Oct 2018 14:22:30 GMT
+  recorded_at: Mon, 07 Jan 2019 16:33:37 GMT
 recorded_with: VCR 4.0.0

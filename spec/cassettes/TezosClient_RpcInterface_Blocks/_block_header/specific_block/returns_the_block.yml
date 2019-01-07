@@ -11,24 +11,20 @@ http_interactions:
       - application/json
   response:
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
     headers:
       Server:
-      - nginx/1.10.3
+      - nginx
       Date:
-      - Fri, 12 Oct 2018 14:21:37 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '645'
+      - Mon, 07 Jan 2019 16:33:37 GMT
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"protocol":"PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt","chain_id":"NetXZUqeBjDnWde","hash":"BLXhD7T43aKby6aDasVhB9u4tCdbhUqKZaDPC2sMqZc5Lqh4JpR","level":113468,"proto":1,"predecessor":"BLc1ZDxQ2Ni2zksLxdGDmt5MZ1UR5iSguCJcX6cZizkK7ugaxvA","timestamp":"2018-09-20T22:29:22Z","validation_pass":4,"operations_hash":"LLobFoL4AARhrAF8iaNyCi2x5mNjfV9TFTme9S8Q5ikb2YqqtAEY7","fitness":["00","00000000003256ee"],"context":"CoVGJkmPHquRCVQSkc85ocA9hubYMvKCGXR7Cwe3LpJBWVHNBiUG","priority":0,"proof_of_work_nonce":"6664846c6bf54b6d","signature":"sigvc74F9xib36x6wSiwMsiucMmGvujThPi1yPFNLizhawcBSmGA6fzJ82TcuReuopka61y9fLBQirCEVUigcrmEcg9Y1Myi"}
-
-'
+      string: ''
     http_version: 
-  recorded_at: Fri, 12 Oct 2018 14:21:37 GMT
+  recorded_at: Mon, 07 Jan 2019 16:33:37 GMT
 recorded_with: VCR 4.0.0

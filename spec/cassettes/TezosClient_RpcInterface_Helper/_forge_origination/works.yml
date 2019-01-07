@@ -15,84 +15,20 @@ http_interactions:
       message: OK
     headers:
       Server:
-      - nginx/1.10.3
+      - nginx
       Date:
-      - Fri, 12 Oct 2018 14:17:46 GMT
+      - Mon, 07 Jan 2019 16:33:37 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '6'
+      - '8'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '"360"
+      string: '"13680"
 
 '
     http_version: 
-  recorded_at: Fri, 12 Oct 2018 14:17:46 GMT
-- request:
-    method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx/1.10.3
-      Date:
-      - Fri, 12 Oct 2018 14:17:46 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '54'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '"BMRi3GyT6A5Y6wLYhi8sQpKjM1rUyfFKmzXkxvqfvJMzFNwVQaG"
-
-'
-    http_version: 
-  recorded_at: Fri, 12 Oct 2018 14:17:46 GMT
-- request:
-    method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
-    body:
-      encoding: UTF-8
-      string: '{"branch":"BMRi3GyT6A5Y6wLYhi8sQpKjM1rUyfFKmzXkxvqfvJMzFNwVQaG","contents":[{"kind":"origination","delegatable":false,"spendable":false,"balance":"50000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"361","fee":"50000","managerPubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR"}]]},{"prim":"CAR"},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
-        enough money, at least 5tz to vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}],[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}],{"prim":"GET"},{"prim":"IF_NONE","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Bad
-        vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"PUSH","args":[{"prim":"int"},{"int":"1"}]},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@x"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"ADD"},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"DIP","args":[[{"prim":"SOME"}]]},{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DROP"}]]}]]}]]},{"prim":"UPDATE","annots":["@votes"]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}]]},{"prim":"DIP","args":[[{"prim":"DROP"},{"prim":"DROP"}]]}]]}],"storage":[{"prim":"Elt","args":[{"string":"ocaml"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"pro"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"test"},{"int":"0"}]}]}}]}'
-    headers:
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx/1.10.3
-      Date:
-      - Fri, 12 Oct 2018 14:17:46 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1113'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '"e1c23de107313cd39943c5107b001270d69b934429ee1537ed9ba0da0c062a63090000982fd7853b46e70022bc56f12b427855a2adb67ed08603e902d08603f02e00982fd7853b46e70022bc56f12b427855a2adb67ed08603000000ff0000019a020000019505000368050107600368035b050202000001820321051f0200000002031703160743036a0080ade20404130000000740616d6f756e7403190337072c02000000310743036801000000264e6f7420656e6f756768206d6f6e65792c206174206c656173742035747a20746f20766f7465032702000001130200000015051f020000000c04210000000640766f746573034c0200000016051f020000000d0421000000074063686f696365034c0329072f020000001307430368010000000842616420766f7465032702000000bd0200000023051f020000001a0200000015051f020000000c04210000000640766f746573034c034c0743035b0001020000001f051f02000000160200000011051f02000000080421000000024078034c034c03120200000032051f02000000290200000024051f020000001b0200000016051f020000000d0421000000074063686f696365034c034c034c051f02000000020346051f0200000010051f0200000009051f0200000002032004500000000640766f746573053d036d0342051f0200000004032003200000002c0200000027070401000000056f63616d6c00000704010000000370726f000007040100000004746573740000"
-
-'
-    http_version: 
-  recorded_at: Fri, 12 Oct 2018 14:17:46 GMT
+  recorded_at: Mon, 07 Jan 2019 16:33:37 GMT
 recorded_with: VCR 4.0.0
