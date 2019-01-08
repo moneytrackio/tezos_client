@@ -7,7 +7,7 @@
 [[ -d "liquidity/.git" ]] || git clone --depth=50 https://github.com/OCamlPro/liquidity.git liquidity
 cd liquidity
 git pull
-git checkout 7ef09a878005845ba4a80e7cc4351c487a5581db
+git checkout next
 
 # currently, we only target OCaml 4.06.1 because we reuse the parser of OCaml
 opam switch create liquidity 4.06.1 || opam switch set liquidity
