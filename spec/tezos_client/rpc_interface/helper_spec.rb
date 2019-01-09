@@ -12,7 +12,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
   let(:from) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
   let(:branch) { subject.head_hash }
-  let(:protocol) { subject.protocols[0] }
+  let(:protocol) { "PsddFKi32cMJ2qPjf43Qv5GDWLDPZb3T3bF6fLKiF5HtvHNU7aP" }
 
   let(:liquidity_interface) { TezosClient::LiquidityInterface.new(rpc_node_address: rpc_node_address, rpc_node_port: rpc_node_port) }
 

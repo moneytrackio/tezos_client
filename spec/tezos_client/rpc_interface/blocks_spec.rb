@@ -4,7 +4,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
   include_context "public rpc interface"
   subject { rpc_interface }
 
-  let(:block_hash) { "BLXhD7T43aKby6aDasVhB9u4tCdbhUqKZaDPC2sMqZc5Lqh4JpR" }
+  let(:block_hash) { "BLHKSpcKZkLjf1e4dPUy8AFcMVtdRRTAxfhfYJ7SM5dH38VDmZR" }
 
 
   describe "#blocks" do
@@ -17,12 +17,12 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
     end
 
     context "given a block head" do
-      let(:head) { "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46" }
+      let(:head) { "BLHKSpcKZkLjf1e4dPUy8AFcMVtdRRTAxfhfYJ7SM5dH38VDmZR" }
       it "returns the 50 previous blocks" do
         res = subject.blocks(head: head)
         expect(res).to be_an Array
         expect(res.length).to eq 50
-        expect(res[0]).to eq "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46"
+        expect(res[0]).to eq "BLHKSpcKZkLjf1e4dPUy8AFcMVtdRRTAxfhfYJ7SM5dH38VDmZR"
       end
     end
 
@@ -35,13 +35,12 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
     end
 
     context "given a min_date and a block head" do
-      let(:head) { "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46" }
+      let(:head) { "BLHKSpcKZkLjf1e4dPUy8AFcMVtdRRTAxfhfYJ7SM5dH38VDmZR" }
       let(:min_date) { Time.parse("2050-09-26T00:00:00Z") }
       it "ignores the min_date argument :(" do
         res = subject.blocks(head: head, min_date: min_date)
         expect(res).to be_an Array
         expect(res.length).to eq 50
-        expect(res[0]).to eq "BLCJiR9YDRW4FBYP8dfbp2rf2iokT8gTBwTjNhzUqJzRtcLDh46"
       end
     end
   end
@@ -100,7 +99,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
     end
 
     context "bock with originations" do
-      let(:block_hash) { "BLyqFgbrJ5PRo3hFTSjhJKYjdFHcc2jFjQPg4naQiqrYtG15KgJ" }
+      let(:block_hash) { "BL1UtJ4HWFvM6Lz1ZA6ZEiPnv52Hqk63depECVqr34xuT3E25i3" }
       it "contain the origination operation" do
         res = subject.block_operations(block_hash)
         expect(res).to be_an Array

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/BLXhD7T43aKby6aDasVhB9u4tCdbhUqKZaDPC2sMqZc5Lqh4JpR/operation_hashes
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/BLHKSpcKZkLjf1e4dPUy8AFcMVtdRRTAxfhfYJ7SM5dH38VDmZR/operation_hashes
     body:
       encoding: US-ASCII
       string: ''
@@ -11,20 +11,24 @@ http_interactions:
       - application/json
   response:
     status:
-      code: 404
-      message: Not Found
+      code: 200
+      message: OK
     headers:
       Server:
       - nginx
       Date:
-      - Mon, 07 Jan 2019 16:33:37 GMT
-      Transfer-Encoding:
-      - chunked
+      - Tue, 08 Jan 2019 17:17:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '444'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: ''
+      string: '[["onphbFHctGdZyJU3BQwpQAXb5dn63QTAGQft4mj2qfPJhKCyx4B","oox59oLaUoRcNJwDE3n2qz44dqi2HYUtTwVpeLG5ue4jdyv16f9","ooxoNuEWE2FStXEdFabCoMD9Y3xyH5Z3w9Z4vnEyZkTriun56js","onkXaSvE9Qw3zQoea1L7cCHwBA6uyyBM86E4h2UWZf6Vnei7ify","ookFfq2NtWVyhcPokbx72RNjUG4qJc5qeqrrCoUX1HtPtniRv2P","opXZ8jthw9iYmLaaosBLigdtrkGLRX7ggzbWpTe8Bu1shr8NxJk","op9vArzmTZKqhhFxbTauxjUHQvaquPML2LFPgjAoKQm5TDbrzVn"],[],[],["ooHc6ccnUgqDJo5UzwBbumL3Wtyn9RycTcq2BJtNfWbvPXQYG2t"]]
+
+'
     http_version: 
-  recorded_at: Mon, 07 Jan 2019 16:33:37 GMT
+  recorded_at: Tue, 08 Jan 2019 17:17:14 GMT
 recorded_with: VCR 4.0.0

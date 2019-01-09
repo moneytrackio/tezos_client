@@ -3,7 +3,7 @@
 RSpec.describe TezosClient::LiquidityInterface do
   let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
   let(:from) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
-  let(:contract_address) { "KT1MZTrMDPB42P9yvjf7Cy8Lkjxjj4jetbCt" }
+  let(:contract_address) { "KT1FLmwGK2ptfyG8gxAPWPMVS7iGgPzkJEBE" }
 
 
   let(:rpc_node_address) { "alphanet-node.tzscan.io" }
@@ -67,7 +67,7 @@ RSpec.describe TezosClient::LiquidityInterface do
 
     context "multisig.liq contract" do
       let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
-      let(:contract_address) { "KT19tZPx3so7n2bQLfzDTUGTLYNhgVxBMGe1" }
+      let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
       let(:init_params) { ["Set [#{from}]", "1p"] }
       let(:call_parameters) do  ["pay", "()"]
       end

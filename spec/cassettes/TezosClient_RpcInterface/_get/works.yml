@@ -17,7 +17,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 07 Jan 2019 16:33:43 GMT
+      - Tue, 08 Jan 2019 17:26:30 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -26,9 +26,9 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"block":"BLfUYV7LjAa82k5v2pgy5VCLNQnSkFH7WWQ2kZC3FB6scvp5wPU","timestamp":"2019-01-07T16:33:18Z"}
+      string: '{"block":"BLc4CB221AK1ehwnwTrcbKqK7cZwM6RapEFrpeV9aZPrvwT97FW","timestamp":"2019-01-08T17:25:48Z"}
 
 '
     http_version: 
-  recorded_at: Mon, 07 Jan 2019 16:33:43 GMT
+  recorded_at: Tue, 08 Jan 2019 17:26:30 GMT
 recorded_with: VCR 4.0.0

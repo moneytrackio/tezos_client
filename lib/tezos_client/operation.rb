@@ -51,7 +51,8 @@ class TezosClient
       run_result = run
 
       @operation_args[:gas_limit] = run_result[:consumed_gas] + 0.01
-      @operation_args[:storage_limit] = run_result[:consumed_storage]
+      #@operation_args[:storage_limit] = run_result[:consumed_storage]
+      @operation_args[:storage_limit] =  0.006
     end
 
     def to_hex
@@ -105,10 +106,21 @@ class TezosClient
     def run
       rpc_response = rpc_interface.run_operation(**operation_args, signature: base_58_signature)
 
-      operation_result = ensure_applied!(rpc_response)
+      consumed_storage = 0
+      consumed_gas = 0
 
-      consumed_storage = operation_result.fetch(:paid_storage_size_diff, "0").to_i.from_satoshi
-      consumed_gas = operation_result.fetch(:consumed_gas, "0").to_i.from_satoshi
+      operation_result = ensure_applied!(rpc_response) do |result|
+        consumed_storage = (result.dig(:operation_result, :paid_storage_size_diff) || "0").to_i.from_satoshi
+        consumed_gas = (result.dig(:operation_result, :consumed_gas) || "0").to_i.from_satoshi
+
+        unless result[:internal_operation_results].nil?
+          result[:internal_operation_results].each do |internal_operation_result|
+            consumed_gas += (internal_operation_result[:result][:consumed_gas] || "0").to_i.from_satoshi
+          end
+        end
+
+        result[:operation_result]
+      end
 
       {
         status: :applied,
@@ -138,7 +150,11 @@ class TezosClient
       operation_result = rpc_response[:metadata][:operation_result]
       status = operation_result[:status]
       raise "Operation status != 'applied': #{status}\n #{rpc_response.pretty_inspect}" if status != "applied"
-      operation_result
+      if block_given?
+        yield rpc_response[:metadata]
+      else
+        operation_result
+      end
     end
   end
 end

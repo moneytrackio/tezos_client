@@ -47,7 +47,7 @@ RSpec.describe TezosClient, :vcr do
         res = subject.transfer(
           amount: 5,
           from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-          to: "KT1MZTrMDPB42P9yvjf7Cy8Lkjxjj4jetbCt",
+          to: "KT1FLmwGK2ptfyG8gxAPWPMVS7iGgPzkJEBE",
           secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
           parameters: '"pro"'
         )
@@ -152,7 +152,6 @@ RSpec.describe TezosClient, :vcr do
           secret_key: secret_key,
           spendable: true
         )
-
         expect(res).to be_a Hash
         expect(res).to have_key :operation_id
         expect(res).to have_key :originated_contract
@@ -192,7 +191,7 @@ RSpec.describe TezosClient, :vcr do
     end
 
     describe "#call Pay" do
-      let(:contract_address) { "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs" }
+      let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
       let(:call_params) { [ "pay", "()" ] }
       let(:amount) { 1 }
 
@@ -210,7 +209,7 @@ RSpec.describe TezosClient, :vcr do
     end
 
     describe "#call Manage" do
-      let(:contract_address) { "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs" }
+      let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
       let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })" ] }
 
       it "works" do

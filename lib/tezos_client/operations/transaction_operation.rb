@@ -30,7 +30,7 @@ class TezosClient
 
     def default_args
       {
-        gas_limit: 0.04,
+        gas_limit: 0.1,
         storage_limit: 0.006,
         fee: 0.05
       }

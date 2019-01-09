@@ -4,7 +4,7 @@
 # BTW, it also show some needed system packages to build liquidity
 # Travis CI is done on Ubuntu trusty
 
-[[ -d "liquidity/.git" ]] || git clone --depth=50 https://github.com/OCamlPro/liquidity.git liquidity
+[ -d "liquidity/.git" ] || git clone --depth=50 https://github.com/OCamlPro/liquidity.git liquidity
 cd liquidity
 git pull
 git checkout next
@@ -16,10 +16,11 @@ eval `opam config env`
 opam update
 eval `opam config env`
 
-make build-deps
 make clone-tezos
 tezos/scripts/install_build_deps.raw.sh
-# make -C tezos build-deps
+
+cd tezos && make build-deps all install && cd -
+make build-deps
 
 make
 make install
