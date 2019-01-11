@@ -120,7 +120,8 @@ class TezosClient
       {
         secret_key: secret_key,
         public_key: public_key,
-        address: address
+        address: address,
+        path: path
       }
     end
 
