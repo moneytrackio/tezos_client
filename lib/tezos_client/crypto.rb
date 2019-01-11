@@ -3,6 +3,8 @@
 require "base58"
 require "rbnacl"
 require "digest"
+require "money-tree"
+require "bip_mnemonic"
 
 class TezosClient
   module Crypto
@@ -108,8 +110,8 @@ class TezosClient
       encode_tz(:tz1, hex_hash)
     end
 
-    def generate_key
-      signing_key = RbNaCl::SigningKey.generate.to_bytes.to_hex
+    def generate_key(mnemonic: nil, wallet_seed: nil, path: nil)
+      signing_key = generate_signing_key(mnemonic: mnemonic, wallet_seed: wallet_seed, path: path).to_bytes.to_hex
 
       secret_key = encode_tz(:edsk2, signing_key)
       public_key = secret_key_to_public_key(secret_key)
@@ -174,5 +176,19 @@ class TezosClient
         end
       end
     end
+
+    private
+      def generate_signing_key(mnemonic: nil, wallet_seed: nil, path: nil)
+        if mnemonic
+          wallet_seed = BipMnemonic.to_seed(mnemonic: mnemonic)
+        end
+        if path && wallet_seed
+          master = MoneyTree::Master.new seed_hex: wallet_seed
+          node = master.node_for_path path
+          node.private_key
+        else
+          RbNaCl::SigningKey.generate
+        end
+      end
   end
 end

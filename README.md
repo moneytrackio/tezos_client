@@ -28,6 +28,44 @@ Or install it yourself as:
 
 ## Usage
 
+### Generate Tezos key paris
+
+Generate a prefectly random key pair:
+```ruby 
+client = TezosClient.new 
+key = subject.generate_key
+          expect(key[:address]).to eq "tz1RfnzRopJXH32SSDap2wMYGULBAnmHxdP1"
+# => {
+#       :secret_key=>"edsk4T2fHv5RLL3VSXHz82SQiyFx7vZ4wwtA2u67AvAaw5yqNEvuU2", 
+#       :public_key=>"edpkuncp7KSVhV57Qg7odwhMFcnAHnNrMppbitBPKBfvdg6fFVeNjr", 
+#       :address=>"tz1a97x7GAvMDyrwwKTLQo131CoidXyUef48"
+#    }
+```
+
+Generate a key pair from a seed and a BIP 44 Path:
+```ruby
+key = subject.generate_key(wallet_seed:"000102030405060708090a0b0c0d0e0f", path: "m/44'/1729'/0'/0'/0'")
+          expect(key[:address]).to eq "tz1RfnzRopJXH32SSDap2wMYGULBAnmHxdP1"
+# => {
+#       :secret_key=>"edsk4T2fHv5RLL3VSXHz82SQiyFx7vZ4wwtA2u67AvAaw5yqNEvuU2", 
+#       :public_key=>"edpkuncp7KSVhV57Qg7odwhMFcnAHnNrMppbitBPKBfvdg6fFVeNjr", 
+#       :address=>"tz1a97x7GAvMDyrwwKTLQo131CoidXyUef48"
+#    }
+```
+Generate a key pair from a  BIP-39 mnemonic sentence and a BIP 44 Path:
+```ruby
+key = subject.generate_key(
+          mnemonic: "below dove cushion divide future artefact orange congress maple fiscal flower enable", 
+          path: "m/44'/1729'/0'/0'/0'")
+          expect(key[:address]).to eq "tz1RfnzRopJXH32SSDap2wMYGULBAnmHxdP1"
+# => {
+#       :secret_key=>"edsk4T2fHv5RLL3VSXHz82SQiyFx7vZ4wwtA2u67AvAaw5yqNEvuU2", 
+#       :public_key=>"edpkuncp7KSVhV57Qg7odwhMFcnAHnNrMppbitBPKBfvdg6fFVeNjr", 
+#       :address=>"tz1a97x7GAvMDyrwwKTLQo131CoidXyUef48"
+#    }
+```
+
+
 ### Transfer funds
 
 ```ruby 

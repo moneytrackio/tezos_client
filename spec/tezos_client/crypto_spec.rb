@@ -32,8 +32,28 @@ RSpec.describe TezosClient::Crypto do
       expect(address).to be_a String
       expect(address).to start_with "tz1"
     end
-  end
 
+    context "from path" do
+      context "with seed" do
+        let(:wallet_seed) { "000102030405060708090a0b0c0d0e0f" }
+        it "generates keys" do
+          key = subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/0'")
+          expect(key[:address]).to eq "tz1RfnzRopJXH32SSDap2wMYGULBAnmHxdP1"
+          key = subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/1'")
+          expect(key[:address]).to eq "tz1gxKJCyZ3wnoRsGVcWvEtdu1q4hK4MiQVr"
+        end
+      end
+
+      context "with mnemonic" do
+        let(:mnemonic) { "below dove cushion divide future artefact orange congress maple fiscal flower enable" }
+        it "generates keys" do
+          key = subject.generate_key(mnemonic: mnemonic, path: "m/44'/1729'/0'/0'/0'")
+          expect(key[:address]).to eq "tz1NBk9mG7F4jsf76rjES6WqVo3Ah8aZUYKM"
+        end
+      end
+    end
+  end
+  # puppy hundred squirrel border crystal then eye immense chat view flock mystery
   describe "#sign_bytes" do
     let(:secret_key) { "edsk3r9ipNNemnVamKsJzggijP9tQUcnu8YLaJhEbdMzV1Jq7kkJWC" }
     let(:expected_signature) { "edsigtp4wchrxPLWscwNQKyUssJixap4njeS3keCTwphwhx4MkQaFn8GfXkCJtk8vi5uV2ahrdS5YWc3qeC74awqWTGJfngKGrs" }
