@@ -57,6 +57,7 @@ class TezosClient
                                       accept: :json)
         rescue => e
           log "#{uuid}: failed with error #{e}"
+          raise
         end
       end
 

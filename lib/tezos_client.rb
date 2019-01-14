@@ -135,6 +135,7 @@ class TezosClient
     monitoring_thread = rpc_interface.monitor_block do |block_header|
       log "recently received block: #{block_header.pretty_inspect}"
       hash = block_header["hash"]
+
       if block_include_operation?(operation_id, hash)
         log "operations #{operation_id} found in block #{hash}"
         including_block = hash
@@ -144,11 +145,18 @@ class TezosClient
     Timeout.timeout(timeout) do
       loop do
         sleep(0.1)
+        break unless monitoring_thread.alive?
         break unless including_block.nil?
       end
     end
 
-    monitoring_thread.terminate
+    if monitoring_thread.status.nil?
+      # when thread raise an Exception, reraise it
+      log "monitoring thread raised an exception"
+      monitoring_thread.value
+    else
+      monitoring_thread.terminate
+    end
 
     including_block
   end

@@ -135,6 +135,15 @@ RSpec.describe TezosClient, :vcr do
           expect(block_id).to be_a String
         end
       end
+
+      context "when monitoring thread raises an exception" do
+        it "redirects the exception" do
+          disabling_vcr do
+            allow_any_instance_of(TezosClient).to receive(:block_include_operation?).and_raise(Exception, "rspec makes me fail")
+            expect { subject.monitor_operation(op_id) }.to raise_exception Exception, "rspec makes me fail"
+          end
+        end
+      end
     end
   end
 
