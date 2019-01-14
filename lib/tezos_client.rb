@@ -15,6 +15,7 @@ require "tezos_client/encode_utils"
 require "tezos_client/operation"
 require "tezos_client/operations/origination_operation"
 require "tezos_client/operations/transaction_operation"
+require "tezos_client/operations/transactions_operation"
 
 require "tezos_client/client_interface"
 require "tezos_client/rpc_interface"
@@ -100,6 +101,17 @@ class TezosClient
       to: to,
       secret_key: secret_key,
       amount: amount,
+      **args
+    ).test_and_broadcast
+  end
+
+  def transfer_to_many(from:, amounts:, secret_key:, **args)
+    TransactionsOperation.new(
+      liquidity_interface: liquidity_interface,
+      rpc_interface: rpc_interface,
+      from: from,
+      amounts: amounts,
+      secret_key: secret_key,
       **args
     ).test_and_broadcast
   end

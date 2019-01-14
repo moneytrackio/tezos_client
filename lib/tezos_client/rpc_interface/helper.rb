@@ -20,6 +20,21 @@ class TezosClient
         operation
       end
 
+      def transactions_operation(args)
+        args[:amounts].map.with_index do |(destination, amount), index|
+          {
+            kind: "transaction",
+            amount: amount.to_satoshi.to_s,
+            source: args.fetch(:from),
+            destination: destination,
+            gas_limit: args.fetch(:gas_limit).to_satoshi.to_s,
+            storage_limit: args.fetch(:storage_limit).to_satoshi.to_s,
+            counter: (args.fetch(:counter) + index).to_s,
+            fee: args.fetch(:fee).to_satoshi.to_s
+          }
+        end
+      end
+
       def origination_operation(args)
         operation = {
           kind: "origination",
@@ -65,7 +80,7 @@ class TezosClient
         content = {
           protocol: args.fetch(:protocol),
           branch: args.fetch(:branch),
-          contents: [operation(args)],
+          contents: contents(args),
           signature: args.fetch(:signature)
         }
 
@@ -77,7 +92,7 @@ class TezosClient
       def run_operation(args)
         content = {
           branch: args.fetch(:branch),
-          contents: [operation(args)],
+          contents: contents(args),
           signature: args.fetch(:signature)
         }
         res = post("chains/main/blocks/head/helpers/scripts/run_operation", content)
@@ -87,13 +102,18 @@ class TezosClient
       def forge_operation(args)
         content = {
           branch: args.fetch(:branch),
-          contents: [operation(args)]
+          contents: contents(args)
         }
         post("chains/main/blocks/head/helpers/forge/operations", content)
       end
 
       def broadcast_operation(data)
         post("injection/operation?chain=main", data)
+      end
+
+      def contents(args)
+        operation = operation(args)
+        (operation.is_a?(Array)) ? operation : [operation]
       end
     end
   end

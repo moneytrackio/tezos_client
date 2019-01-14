@@ -100,6 +100,24 @@ RSpec.describe TezosClient, :vcr do
     end
   end
 
+  describe "#transfer_to_many" do
+    it "works" do
+      res = subject.transfer_to_many(
+        from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        amounts: {
+          "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" => 0.01,
+          "tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn" => 0.02
+        },
+        secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+      )
+      expect(res).to be_a Hash
+      expect(res).to have_key :operation_id
+      expect(res[:operation_id]).to be_a String
+      expect(res).to have_key :counter
+      expect(res[:counter]).to be_an Integer
+    end
+  end
+
   unless ENV["TRAVIS"]
     describe "#monitor_operation" do
       let(:op_id) do

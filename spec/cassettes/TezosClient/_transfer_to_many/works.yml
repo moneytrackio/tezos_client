@@ -1,0 +1,251 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jan 2019 17:34:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '54'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"BKzbexVCgWdMXwiUv5BzBwkAwkeWZ75afQVXDNT7gJ8z33MZBBB"
+
+'
+    http_version: 
+  recorded_at: Fri, 11 Jan 2019 17:34:14 GMT
+- request:
+    method: get
+    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jan 2019 17:34:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '8'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"13873"
+
+'
+    http_version: 
+  recorded_at: Fri, 11 Jan 2019 17:34:14 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BKzbexVCgWdMXwiUv5BzBwkAwkeWZ75afQVXDNT7gJ8z33MZBBB","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"13874","fee":"50000"},{"kind":"transaction","amount":"20000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","gas_limit":"100000","storage_limit":"6000","counter":"13875","fee":"50000"}]}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jan 2019 17:34:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '301'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"250c11ca446c92844c2847cb29929fd0fa22275c9aea533bff75de84faa7c9e3080000982fd7853b46e70022bc56f12b427855a2adb67ed08603b26ca08d06f02e904e0000982fd7853b46e70022bc56f12b427855a2adb67e00080000982fd7853b46e70022bc56f12b427855a2adb67ed08603b36ca08d06f02ea09c010000992ce5f891f96942de5e07fa5f85087b70a04e3100"
+
+'
+    http_version: 
+  recorded_at: Fri, 11 Jan 2019 17:34:14 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/scripts/run_operation
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BKzbexVCgWdMXwiUv5BzBwkAwkeWZ75afQVXDNT7gJ8z33MZBBB","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"13874","fee":"50000"},{"kind":"transaction","amount":"20000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","gas_limit":"100000","storage_limit":"6000","counter":"13875","fee":"50000"}],"signature":"edsigu16MyzWaQqZSGxK721jcLnPvKMh11MavcctAegsrXawfCJJAaYZLo9S9Md98jcDUbjqF9DdQvT8wSavaszj3p6eCdeSWdd"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jan 2019 17:34:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1551'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"13874","gas_limit":"100000","storage_limit":"6000","amount":"10000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","level":47,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-10000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"10000"}],"consumed_gas":"10100"}}},{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"13875","gas_limit":"100000","storage_limit":"6000","amount":"20000","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","level":47,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-20000"},{"kind":"contract","contract":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","change":"20000"}],"consumed_gas":"10100"}}}],"signature":"edsigu16MyzWaQqZSGxK721jcLnPvKMh11MavcctAegsrXawfCJJAaYZLo9S9Md98jcDUbjqF9DdQvT8wSavaszj3p6eCdeSWdd"}
+
+'
+    http_version: 
+  recorded_at: Fri, 11 Jan 2019 17:34:14 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BKzbexVCgWdMXwiUv5BzBwkAwkeWZ75afQVXDNT7gJ8z33MZBBB","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"20100","storage_limit":"6000","counter":"13874","fee":"50000"},{"kind":"transaction","amount":"20000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","gas_limit":"20100","storage_limit":"6000","counter":"13875","fee":"50000"}]}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jan 2019 17:34:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '301'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"250c11ca446c92844c2847cb29929fd0fa22275c9aea533bff75de84faa7c9e3080000982fd7853b46e70022bc56f12b427855a2adb67ed08603b26c849d01f02e904e0000982fd7853b46e70022bc56f12b427855a2adb67e00080000982fd7853b46e70022bc56f12b427855a2adb67ed08603b36c849d01f02ea09c010000992ce5f891f96942de5e07fa5f85087b70a04e3100"
+
+'
+    http_version: 
+  recorded_at: Fri, 11 Jan 2019 17:34:14 GMT
+- request:
+    method: get
+    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/metadata
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jan 2019 17:34:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1048'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"protocol":"PsddFKi32cMJ2qPjf43Qv5GDWLDPZb3T3bF6fLKiF5HtvHNU7aP","next_protocol":"PsddFKi32cMJ2qPjf43Qv5GDWLDPZb3T3bF6fLKiF5HtvHNU7aP","test_chain_status":{"status":"not_running"},"max_operations_ttl":60,"max_operation_data_length":16384,"max_block_header_length":238,"max_operation_list_length":[{"max_size":32768,"max_op":32},{"max_size":32768},{"max_size":135168,"max_op":132},{"max_size":524288}],"baker":"tz1YCABRTa6H8PLKx2EtDWeCGPaKxUhNgv47","level":{"level":96472,"level_position":96471,"cycle":47,"cycle_position":215,"voting_period":11,"voting_period_position":6359,"expected_commitment":false},"voting_period_kind":"proposal","nonce_hash":null,"consumed_gas":"0","deactivated":[],"balance_updates":[{"kind":"contract","contract":"tz1YCABRTa6H8PLKx2EtDWeCGPaKxUhNgv47","change":"-512000000"},{"kind":"freezer","category":"deposits","delegate":"tz1YCABRTa6H8PLKx2EtDWeCGPaKxUhNgv47","level":47,"change":"512000000"},{"kind":"freezer","category":"rewards","delegate":"tz1YCABRTa6H8PLKx2EtDWeCGPaKxUhNgv47","level":47,"change":"16000000"}]}
+
+'
+    http_version: 
+  recorded_at: Fri, 11 Jan 2019 17:34:14 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/preapply/operations
+    body:
+      encoding: UTF-8
+      string: '[{"protocol":"PsddFKi32cMJ2qPjf43Qv5GDWLDPZb3T3bF6fLKiF5HtvHNU7aP","branch":"BKzbexVCgWdMXwiUv5BzBwkAwkeWZ75afQVXDNT7gJ8z33MZBBB","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"20100","storage_limit":"6000","counter":"13874","fee":"50000"},{"kind":"transaction","amount":"20000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","gas_limit":"20100","storage_limit":"6000","counter":"13875","fee":"50000"}],"signature":"edsigtqN3rakEhTGqk3dDLZaWzZPPZJYvtzFAJCSz9mwrRXNQAciXfQi2nw63V3vDCqVigNVGwwki1ZYYoy5NxqJiXijSNhJYq1"}]'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jan 2019 17:34:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1551'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '[{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"13874","gas_limit":"20100","storage_limit":"6000","amount":"10000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","level":47,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-10000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"10000"}],"consumed_gas":"10100"}}},{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"13875","gas_limit":"20100","storage_limit":"6000","amount":"20000","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","level":47,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-20000"},{"kind":"contract","contract":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","change":"20000"}],"consumed_gas":"10100"}}}],"signature":"edsigtqN3rakEhTGqk3dDLZaWzZPPZJYvtzFAJCSz9mwrRXNQAciXfQi2nw63V3vDCqVigNVGwwki1ZYYoy5NxqJiXijSNhJYq1"}]
+
+'
+    http_version: 
+  recorded_at: Fri, 11 Jan 2019 17:34:14 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/injection/operation?chain=main
+    body:
+      encoding: UTF-8
+      string: '"250c11ca446c92844c2847cb29929fd0fa22275c9aea533bff75de84faa7c9e3080000982fd7853b46e70022bc56f12b427855a2adb67ed08603b26c849d01f02e904e0000982fd7853b46e70022bc56f12b427855a2adb67e00080000982fd7853b46e70022bc56f12b427855a2adb67ed08603b36c849d01f02ea09c010000992ce5f891f96942de5e07fa5f85087b70a04e310086323914f222982bb2982479554af7f4a46baaebff5a7bbe5e7b03557acbf494fe56f6cc2327eb7293c6f19a45c662c4bafccc9bfa013c21312adceb06582d04"'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 11 Jan 2019 17:34:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '54'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"opYUcXUAcqx6vA3kVtfxaDC3486tpBxmVahKfPEJGKEEysdxSsR"
+
+'
+    http_version: 
+  recorded_at: Fri, 11 Jan 2019 17:34:14 GMT
+recorded_with: VCR 4.0.0
