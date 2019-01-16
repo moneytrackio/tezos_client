@@ -95,23 +95,22 @@ class TezosClient
       signing_key = signing_key(secret_key)
       verify_key = signing_key.verify_key
       hex_pubkey = verify_key.to_s.to_hex
-
       encode_tz(:edpk, hex_pubkey)
     end
 
     def public_key_to_address(public_key)
-      public_key = decode_tz(public_key) do |type, _key|
+      hex_public_key = decode_tz(public_key) do |type, _key|
         raise "invalid public key: #{public_key} " unless type == :edpk
       end
 
-      hash = RbNaCl::Hash::Blake2b.digest(public_key, digest_size: 20)
+      hash = RbNaCl::Hash::Blake2b.digest(hex_public_key.to_bin, digest_size: 20)
       hex_hash = hash.to_hex
 
       encode_tz(:tz1, hex_hash)
     end
 
-    def generate_key(mnemonic: nil, wallet_seed: nil, path: nil)
-      signing_key = generate_signing_key(mnemonic: mnemonic, wallet_seed: wallet_seed, path: path).to_bytes.to_hex
+    def generate_key(mnemonic: nil, password: nil, wallet_seed: nil, path: nil)
+      signing_key = generate_signing_key(mnemonic: mnemonic, password: password, wallet_seed: wallet_seed, path: path).to_bytes.to_hex
 
       secret_key = encode_tz(:edsk2, signing_key)
       public_key = secret_key_to_public_key(secret_key)
@@ -179,14 +178,18 @@ class TezosClient
     end
 
     private
-      def generate_signing_key(mnemonic: nil, wallet_seed: nil, path: nil)
+      def generate_signing_key(mnemonic: nil, password: nil, wallet_seed: nil, path: nil)
         if mnemonic
-          wallet_seed = BipMnemonic.to_seed(mnemonic: mnemonic)
+          # ensure mnemonic validity
+          BipMnemonic.to_entropy(mnemonic: mnemonic)
+          wallet_seed = BipMnemonic.to_seed(mnemonic: mnemonic, password: password)
         end
         if path && wallet_seed
           master = MoneyTree::Master.new seed_hex: wallet_seed
           node = master.node_for_path path
           node.private_key
+        elsif wallet_seed
+          RbNaCl::SigningKey.new(wallet_seed.to_bin[0...32])
         else
           RbNaCl::SigningKey.generate
         end

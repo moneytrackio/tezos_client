@@ -38,17 +38,26 @@ RSpec.describe TezosClient::Crypto do
         let(:wallet_seed) { "000102030405060708090a0b0c0d0e0f" }
         it "generates keys" do
           key = subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/0'")
-          expect(key[:address]).to eq "tz1RfnzRopJXH32SSDap2wMYGULBAnmHxdP1"
+          expect(key[:address]).to eq "tz1ULB19s3BXyXkYL5M6i7VWXspWuxqQk3Xq"
           key = subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/1'")
-          expect(key[:address]).to eq "tz1gxKJCyZ3wnoRsGVcWvEtdu1q4hK4MiQVr"
+          expect(key[:address]).to eq "tz1UTikevS42TFpT4uhtxkNbeYsG3ea7bsrB"
+        end
+      end
+
+      context "with mnemonic and path" do
+        let(:mnemonic) { "below dove cushion divide future artefact orange congress maple fiscal flower enable" }
+        it "generates keys" do
+          key = subject.generate_key(mnemonic: mnemonic, path: "m/44'/1729'/0'/0'/0'")
+          expect(key[:address]).to eq "tz1TxN95o3i97ZMpTTwfy3vh4Y6eqwUwyLK1"
         end
       end
 
       context "with mnemonic" do
-        let(:mnemonic) { "below dove cushion divide future artefact orange congress maple fiscal flower enable" }
+        let(:mnemonic) { "build sadness song umbrella entire step giraffe muffin embody funny shove use boat eyebrow width" }
+        let(:password) { "uzluxros.hxitrvda@tezos.example.orgrghSrg6WJG".encode("utf-8") }
         it "generates keys" do
-          key = subject.generate_key(mnemonic: mnemonic, path: "m/44'/1729'/0'/0'/0'")
-          expect(key[:address]).to eq "tz1NBk9mG7F4jsf76rjES6WqVo3Ah8aZUYKM"
+          key = subject.generate_key(mnemonic: mnemonic, password: password)
+          expect(key[:address]).to eq "tz1QfnpcAcKaVs8nQ1YDVGafBRd6WFUvjiX5"
         end
       end
     end
@@ -62,6 +71,26 @@ RSpec.describe TezosClient::Crypto do
     it "signs the data" do
       signature = subject.sign_bytes(secret_key: secret_key, data: data)
       expect(signature).to eq expected_signature
+    end
+  end
+
+  describe "secret_key_to_public_key" do
+    let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
+    let(:expected_public_key) { "edpkugJHjEZLNyTuX3wW2dT4P7PY5crLqq3zeDFvXohAs3tnRAaZKR" }
+
+    it "computes the public key" do
+      public_key = subject.secret_key_to_public_key(secret_key)
+      expect(public_key).to eq expected_public_key
+    end
+  end
+
+  describe "public_key_to_address" do
+    let(:public_key) { "edpkugJHjEZLNyTuX3wW2dT4P7PY5crLqq3zeDFvXohAs3tnRAaZKR" }
+    let(:expected_address) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
+
+    it "computes the public key" do
+      address = subject.public_key_to_address(public_key)
+      expect(address).to eq expected_address
     end
   end
 end
