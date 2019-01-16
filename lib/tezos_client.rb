@@ -16,6 +16,7 @@ require "tezos_client/operation"
 require "tezos_client/operations/origination_operation"
 require "tezos_client/operations/transaction_operation"
 require "tezos_client/operations/transactions_operation"
+require "tezos_client/operations/activate_account_operation"
 
 require "tezos_client/client_interface"
 require "tezos_client/rpc_interface"
@@ -101,6 +102,16 @@ class TezosClient
       to: to,
       secret_key: secret_key,
       amount: amount,
+      **args
+    ).test_and_broadcast
+  end
+
+  def activate_account(pkh:, secret:, **args)
+    ActivateAccountOperation.new(
+      liquidity_interface: liquidity_interface,
+      rpc_interface: rpc_interface,
+      pkh: pkh,
+      secret: secret,
       **args
     ).test_and_broadcast
   end

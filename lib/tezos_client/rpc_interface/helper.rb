@@ -53,6 +53,15 @@ class TezosClient
         operation
       end
 
+
+      def activate_account_operation(args)
+        {
+          kind: "activate_account",
+          pkh: args.fetch(:pkh),
+          secret: args.fetch(:secret)
+        }
+      end
+
       def operation(args)
         operation_kind = args.fetch(:operation_kind) { raise ArgumentError, ":operation_kind argument missing" }
         send("#{operation_kind}_operation", args)

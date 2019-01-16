@@ -24,7 +24,7 @@ RSpec.describe TezosClient, :vcr do
   end
 
   before do
-    disabling_vcr { wait_new_block } if VCR.current_cassette.recording?
+    disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
   end
 
   describe "#transfer" do
@@ -250,6 +250,30 @@ RSpec.describe TezosClient, :vcr do
         )
         pp res
       end
+    end
+  end
+
+
+  describe "#activate account" do
+    let(:mnemonic) { "twelve april shield tell audit fever strike radio lunch father orphan lock fancy clutch sister" }
+    let(:password) { "igfcjveu.zufhhxdz@tezos.example.orgS6fvIJnDXQ".encode("utf-8") }
+    let(:secret) { "23d18abce360452faa65b9909b6bf259562af0f8" }
+
+    let(:key) { subject.generate_key(mnemonic: mnemonic, password: password) }
+    let(:secret_key) { key[:secret_key] }
+    let(:pkh) { key[:address] }
+
+
+    it "works" do
+      expect(key[:address]).to eq "tz1RdraebVC4gRbrnMDWQjZ28FtvgQZWJp21"
+
+      res = subject.activate_account(
+        pkh: pkh,
+        secret: secret,
+        from: pkh,
+        secret_key: secret_key
+      )
+      pp res
     end
   end
 end
