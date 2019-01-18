@@ -62,6 +62,18 @@ class TezosClient
         }
       end
 
+      def reveal_operation(args)
+        {
+          kind: "reveal",
+          source: args.fetch(:from),
+          fee: args.fetch(:fee).to_satoshi.to_s,
+          counter: args.fetch(:counter).to_s,
+          gas_limit: args.fetch(:gas_limit).to_satoshi.to_s,
+          storage_limit: args.fetch(:storage_limit).to_satoshi.to_s,
+          public_key: args.fetch(:public_key)
+        }
+      end
+
       def operation(args)
         operation_kind = args.fetch(:operation_kind) { raise ArgumentError, ":operation_kind argument missing" }
         send("#{operation_kind}_operation", args)

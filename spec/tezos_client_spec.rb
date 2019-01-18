@@ -256,7 +256,7 @@ RSpec.describe TezosClient, :vcr do
 
   describe "#activate account" do
     let(:mnemonic) { "twelve april shield tell audit fever strike radio lunch father orphan lock fancy clutch sister" }
-    let(:password) { "igfcjveu.zufhhxdz@tezos.example.orgS6fvIJnDXQ".encode("utf-8") }
+    let(:password) { "igfcjveu.zufhhxdz@tezos.example.orgS6fvIJnDXQ" }
     let(:secret) { "23d18abce360452faa65b9909b6bf259562af0f8" }
 
     let(:key) { subject.generate_key(mnemonic: mnemonic, password: password) }
@@ -273,6 +273,33 @@ RSpec.describe TezosClient, :vcr do
         from: pkh,
         secret_key: secret_key
       )
+      pp res
+    end
+  end
+
+  describe "#reveal public key" do
+    let(:wallet_seed) { "000102030405060708090a0b0c0d0e0f" }
+    let(:key) { subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/0'") }
+    let(:secret_key) { key[:secret_key] }
+
+    before do
+      subject.transfer(
+        amount: 0.1,
+        from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        to: key[:address],
+        secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+      )
+      disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
+    end
+
+
+    it "works" do
+      res = subject.reveal_pubkey(
+        secret_key: secret_key
+      )
+
+      expect(res).to have_key(:operation_id)
+      expect(res[:operation_id]).to match /o[a-zA-Z1-9]+/
       pp res
     end
   end

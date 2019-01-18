@@ -17,6 +17,7 @@ require "tezos_client/operations/origination_operation"
 require "tezos_client/operations/transaction_operation"
 require "tezos_client/operations/transactions_operation"
 require "tezos_client/operations/activate_account_operation"
+require "tezos_client/operations/reveal_operation"
 
 require "tezos_client/client_interface"
 require "tezos_client/rpc_interface"
@@ -122,6 +123,21 @@ class TezosClient
       rpc_interface: rpc_interface,
       from: from,
       amounts: amounts,
+      secret_key: secret_key,
+      **args
+    ).test_and_broadcast
+  end
+
+  def reveal_pubkey(secret_key:, **args)
+
+    public_key = secret_key_to_public_key(secret_key)
+    from = public_key_to_address(public_key)
+
+    RevealOperation.new(
+      liquidity_interface: liquidity_interface,
+      rpc_interface: rpc_interface,
+      public_key: public_key,
+      from: from,
       secret_key: secret_key,
       **args
     ).test_and_broadcast
