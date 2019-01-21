@@ -303,4 +303,31 @@ RSpec.describe TezosClient, :vcr do
       pp res
     end
   end
+
+  describe "#contract_manager_key" do
+    let(:wallet_seed) { "000102030405060708090a0b0c0d0e0f" }
+    let(:key) { subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/0'") }
+
+    it "works" do
+      res = subject.contract_manager_key(key[:address])
+      expect(res).to have_key(:manager)
+      expect(res[:manager]).to eq key[:address]
+      expect(res).to have_key(:key)
+      expect(res[:key]).to match /edpk[a-zA-Z1-9]+/
+    end
+
+    context "not reveal key" do
+      let(:wallet_seed) { "000102030405060708090a0b0c0d0e0f" }
+      let(:key) { subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/456789658'") }
+
+      it "works" do
+        res = subject.contract_manager_key(key[:address])
+        expect(res).to have_key(:manager)
+        expect(res[:manager]).to eq key[:address]
+        expect(res).not_to have_key(:key)
+      end
+    end
+  end
+
+
 end

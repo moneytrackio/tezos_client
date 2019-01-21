@@ -15,7 +15,8 @@ class TezosClient
                    :block_operations,
                    :block_operation_hashes,
                    :blocks,
-                   :balance
+                   :balance,
+                   :contract_manager_key
 
     def_delegators :client_interface,
                    :gen_keys,
