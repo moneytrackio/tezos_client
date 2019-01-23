@@ -329,5 +329,15 @@ RSpec.describe TezosClient, :vcr do
     end
   end
 
+  describe "#get_storage", vcr: false do
+    let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
+    let(:contract_address) { "KT1FLmwGK2ptfyG8gxAPWPMVS7iGgPzkJEBE" }
+
+    it "works" do
+      res = subject.get_storage(script: script, contract_address: contract_address)
+      expect(res).to be_a String
+    end
+  end
+
 
 end

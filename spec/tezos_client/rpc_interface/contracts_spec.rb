@@ -31,4 +31,13 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
       expect(res["key"]).to start_with("edpk")
     end
   end
+
+  describe "#contract_storage" do
+    let(:contract_address) { "KT1T1QYR6VD2LLtRSP4CHNyKkGbAPHoVu7wc" }
+    it "returns the contract storage" do
+      res = subject.contract_storage(contract_address)
+      p res
+
+    end
+  end
 end

@@ -22,6 +22,10 @@ class TezosClient
       def contract_manager_key(contract_id)
         get "#{contract_link(contract_id)}/manager_key"
       end
+
+      def contract_storage(contract_id)
+        get "#{contract_link(contract_id)}/storage"
+      end
     end
   end
 end
