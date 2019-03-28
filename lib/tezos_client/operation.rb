@@ -52,7 +52,6 @@ class TezosClient
 
       @operation_args[:gas_limit] = run_result[:consumed_gas] + 0.01
       #@operation_args[:storage_limit] = run_result[:consumed_storage]
-      @operation_args[:storage_limit] =  0.006
     end
 
     def to_hex
