@@ -42,7 +42,7 @@ class TezosClient
         spendable: false,
         delegatable: false,
         gas_limit: 0.1,
-        storage_limit: 0.006,
+        storage_limit: 0.06,
         fee: 0.05
       }
     end
