@@ -124,6 +124,10 @@ class TezosClient
       }
     end
 
+    def generate_mnemonic
+      BipMnemonic.to_mnemonic(nil)
+    end
+
     def signing_key(secret_key)
       secret_key = decode_tz(secret_key) do |type, _key|
         raise "invalid secret key: #{secret_key} " unless type == :edsk2
@@ -175,6 +179,15 @@ class TezosClient
           edsig
         end
       end
+    end
+
+    def decode_account_wallet(wallet)
+      wallet_config = JSON.load(wallet).with_indifferent_access
+
+      mnemonic = wallet_config[:mnemonic].join(" ")
+      password = "#{wallet_config[:email]}#{wallet_config[:password]}"
+      key = generate_key(mnemonic: mnemonic, password: password)
+      key.merge(activation_secret: wallet_config[:secret])
     end
 
     private

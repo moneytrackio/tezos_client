@@ -93,4 +93,31 @@ RSpec.describe TezosClient::Crypto do
       expect(address).to eq expected_address
     end
   end
+
+  describe "generate_mnemonic" do
+    it "generates a random mnemonic" do
+      mnemonic = subject.generate_mnemonic
+      expect(mnemonic).to be_a String
+    end
+  end
+
+  describe "decode_account_wallet" do
+    let(:wallet_path) { Pathname.new(File.expand_path("./spec/fixtures/account.json")) }
+    let(:wallet_string) { File.read(File.expand_path("./spec/fixtures/account.json")) }
+
+    it "reads a wallet file" do
+      key = subject.decode_account_wallet(wallet_path)
+      expect(key).to be_a Hash
+      expect(key).to have_key :address
+      expect(key).to have_key :secret_key
+    end
+
+    it "accepts a string" do
+      key = subject.decode_account_wallet(wallet_string)
+      expect(key).to be_a Hash
+      expect(key).to have_key :address
+      expect(key).to have_key :secret_key
+      expect(key).to have_key :activation_secret
+    end
+  end
 end
