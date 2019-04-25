@@ -8,8 +8,7 @@ class TezosClient
     attr_accessor :liquidity_interface,
                   :rpc_interface,
                   :from,
-                  :operation_args,
-                  :rpc_args
+                  :operation_args
 
     def initialize(liquidity_interface:, rpc_interface:, **args)
       @liquidity_interface = liquidity_interface
@@ -20,7 +19,6 @@ class TezosClient
       @operation_args = {}
       initialize_operation_args
       @signed_operation_args_h = nil
-      @rpc_args = rpc_interface.operation(@operation_args)
     end
 
     def initialize_operation_args
@@ -51,7 +49,6 @@ class TezosClient
       run_result = run
 
       @operation_args[:gas_limit] = run_result[:consumed_gas] + 0.01
-      #@operation_args[:storage_limit] = run_result[:consumed_storage]
     end
 
     def to_hex

@@ -21,17 +21,17 @@ class TezosClient
       end
 
       def transactions_operation(args)
-        args[:amounts].map.with_index do |(destination, amount), index|
-          {
-            kind: "transaction",
-            amount: amount.to_satoshi.to_s,
-            source: args.fetch(:from),
-            destination: destination,
-            gas_limit: args.fetch(:gas_limit).to_satoshi.to_s,
-            storage_limit: args.fetch(:storage_limit).to_satoshi.to_s,
-            counter: (args.fetch(:counter) + index).to_s,
-            fee: args.fetch(:fee).to_satoshi.to_s
-          }
+        txs_args = args.clone
+        initial_counter = txs_args.delete(:counter)
+        amounts = txs_args.delete(:amounts)
+        amounts.map.with_index do |(destination, amount), index|
+          counter = (initial_counter + index)
+          transaction_operation(
+            amount: amount,
+            to: destination,
+            counter: counter,
+            **txs_args
+          )
         end
       end
 
@@ -79,57 +79,18 @@ class TezosClient
         send("#{operation_kind}_operation", args)
       end
 
-      %w(origination transaction).each do |operation_kind|
-        # preapply_transaction, preapply_origination ...
-        define_method "preapply_#{operation_kind}" do |args|
-          preapply_operation(operation_kind: operation_kind, **args)
-        end
-
-        # run_transaction, run_origination ...
-        define_method "run_#{operation_kind}" do |args|
-          run_operation(operation_kind: operation_kind, **args)
-        end
-
-        # forge_transaction, forge_origination ...
-        define_method "forge_#{operation_kind}" do |args|
-          forge_operation(operation_kind: operation_kind, **args)
-        end
-      end
-
-
       def preapply_operation(args)
-        content = {
-          protocol: args.fetch(:protocol),
-          branch: args.fetch(:branch),
-          contents: contents(args),
-          signature: args.fetch(:signature)
-        }
-
-        res = post("chains/main/blocks/head/helpers/preapply/operations",
-                   [content])
-        res[0]["contents"][0]
+        res = preapply_operations(operations: contents(args), **args)
+        res[0]
       end
 
       def run_operation(args)
-        content = {
-          branch: args.fetch(:branch),
-          contents: contents(args),
-          signature: args.fetch(:signature)
-        }
-        res = post("chains/main/blocks/head/helpers/scripts/run_operation", content)
-        res["contents"][0]
+        res = run_operations(operations: contents(args), **args)
+        res[0]
       end
 
       def forge_operation(args)
-        content = {
-          branch: args.fetch(:branch),
-          contents: contents(args)
-        }
-        post("chains/main/blocks/head/helpers/forge/operations", content)
-      end
-
-      def broadcast_operation(data)
-        post("injection/operation?chain=main", data)
+        forge_operations(operations: contents(args), **args)
       end
 
       def contents(args)

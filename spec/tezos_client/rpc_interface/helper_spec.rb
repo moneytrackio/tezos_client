@@ -31,6 +31,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   describe "#forge_transaction" do
     let(:transaction_args) do
       {
+        operation_kind: "transaction",
         branch: branch,
         counter: counter,
         from: from,
@@ -43,7 +44,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
     end
 
     it "returns a String" do
-      transaction_hex = subject.forge_transaction(transaction_args)
+      transaction_hex = subject.forge_operation(transaction_args)
       expect(transaction_hex).to be_a String
       expect { transaction_hex.to_bin } .not_to raise_error
     end
@@ -51,7 +52,8 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
 
   describe "#forge_origination" do
     it "works" do
-      origination_hex = subject.forge_origination(
+      origination_hex = subject.forge_operation(
+        operation_kind: "origination",
         delegatable: false,
         spendable: false,
         from: from,
@@ -72,7 +74,8 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
 
   describe "#run_transaction" do
     it "returns a hash" do
-      res = subject.run_transaction(
+      res = subject.run_operation(
+        operation_kind: "transaction",
         from: from,
         to: from,
         amount: 1,
@@ -93,7 +96,8 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
 
   describe "#run_origination" do
     it "returns a hash" do
-      res = subject.run_origination(
+      res = subject.run_operation(
+        operation_kind: "origination",
         delegatable: false,
         spendable: false,
         from: from,
@@ -124,6 +128,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   describe "#preapply_transaction" do
     let(:transaction_args) do
       {
+        operation_kind: "transaction",
         from: from,
         to: from,
         amount: 1,
@@ -135,7 +140,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
       }
     end
 
-    let(:transaction_hex) { subject.forge_transaction(transaction_args) }
+    let(:transaction_hex) { subject.forge_operation(transaction_args) }
 
     let(:signature) do
       TezosClient.new.sign_operation(
@@ -145,7 +150,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
     end
 
     it "works" do
-      res = subject.preapply_transaction(
+      res = subject.preapply_operation(
         transaction_args.merge(
           protocol: protocol,
           signature: signature
@@ -162,6 +167,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   describe "#preapply_origination" do
     let(:origination_args) do
       {
+        operation_kind: "origination",
         delegatable: false,
         spendable: false,
         from: from,
@@ -176,7 +182,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
       }
     end
 
-    let(:origination_hex) { subject.forge_origination(origination_args) }
+    let(:origination_hex) { subject.forge_operation(origination_args) }
 
     let(:signature) do
       TezosClient.new.sign_operation(
@@ -186,7 +192,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
     end
 
     it "works" do
-      res = subject.preapply_origination(
+      res = subject.preapply_operation(
         origination_args.merge(
           protocol: protocol,
           signature: signature
