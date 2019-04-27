@@ -3,6 +3,7 @@
 require "pp"
 require "active_support/core_ext/hash/indifferent_access"
 require "active_support/core_ext/string/inflections"
+require "active_support/core_ext/module/delegation"
 require "timeout"
 
 require "tezos_client/version"
@@ -12,7 +13,8 @@ require "tezos_client/crypto"
 require "tezos_client/commands"
 require "tezos_client/logger"
 require "tezos_client/encode_utils"
-require "tezos_client/operation"
+require "tezos_client/operation_mgr"
+require "tezos_client/operations/operation"
 require "tezos_client/operations/origination_operation"
 require "tezos_client/operations/transaction_operation"
 require "tezos_client/operations/transactions_operation"
@@ -154,6 +156,11 @@ class TezosClient
     transfer_args = args.merge(parameters: json_params)
 
     transfer(transfer_args)
+  end
+
+  def send_operations(secret_key:, operations:, **args)
+    public_key = secret_key_to_public_key(secret_key)
+    from = public_key_to_address(public_key)
   end
 
   def monitor_operation(operation_id, timeout: 120)

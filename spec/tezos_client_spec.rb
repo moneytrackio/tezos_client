@@ -38,8 +38,6 @@ RSpec.describe TezosClient, :vcr do
       expect(res).to be_a Hash
       expect(res).to have_key :operation_id
       expect(res[:operation_id]).to be_a String
-      expect(res).to have_key :counter
-      expect(res[:counter]).to be_an Integer
     end
 
     context "with parameters" do
@@ -70,34 +68,6 @@ RSpec.describe TezosClient, :vcr do
         expect(res[:operation_id]).to be_a String
       end
     end
-
-    context "caching counter" do
-
-      let(:previous_transaction) do
-        subject.transfer(
-          amount: 0.1,
-          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
-        )
-      end
-
-      let(:cached_counter_value) { previous_transaction[:counter] }
-
-      it "can used cached counter" do
-        expect(cached_counter_value).to be > 0
-
-        res = subject.transfer(
-          amount: 0.2,
-          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
-          counter: cached_counter_value + 1
-        )
-
-        expect(res[:counter]).to eq (cached_counter_value + 1)
-      end
-    end
   end
 
   describe "#transfer_to_many" do
@@ -113,8 +83,6 @@ RSpec.describe TezosClient, :vcr do
       expect(res).to be_a Hash
       expect(res).to have_key :operation_id
       expect(res[:operation_id]).to be_a String
-      expect(res).to have_key :counter
-      expect(res[:counter]).to be_an Integer
     end
   end
 
@@ -338,6 +306,4 @@ RSpec.describe TezosClient, :vcr do
       expect(res).to be_a String
     end
   end
-
-
 end

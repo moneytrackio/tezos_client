@@ -11,42 +11,29 @@ class TezosClient
           amount: args.fetch(:amount).to_satoshi.to_s,
           source: args.fetch(:from),
           destination: args.fetch(:to),
-          gas_limit: args.fetch(:gas_limit).to_satoshi.to_s,
-          storage_limit: args.fetch(:storage_limit).to_satoshi.to_s,
-          counter: args.fetch(:counter).to_s,
-          fee: args.fetch(:fee).to_satoshi.to_s
+          gas_limit: args.fetch(:gas_limit, 0.1).to_satoshi.to_s,
+          storage_limit: args.fetch(:storage_limit, 0.006).to_satoshi.to_s,
+          counter: counter(args).to_s,
+          fee: args.fetch(:fee, 0.05).to_satoshi.to_s
         }
         operation[:parameters] = args[:parameters] if args[:parameters]
         operation
       end
 
-      def transactions_operation(args)
-        txs_args = args.clone
-        initial_counter = txs_args.delete(:counter)
-        amounts = txs_args.delete(:amounts)
-        amounts.map.with_index do |(destination, amount), index|
-          counter = (initial_counter + index)
-          transaction_operation(
-            amount: amount,
-            to: destination,
-            counter: counter,
-            **txs_args
-          )
-        end
-      end
-
       def origination_operation(args)
+        manager = (args.fetch(:manager) { args.fetch(:from) })
+
         operation = {
           kind: "origination",
-          delegatable: args.fetch(:delegatable),
-          spendable: args.fetch(:spendable),
-          balance: args.fetch(:amount).to_satoshi.to_s,
+          delegatable: args.fetch(:delegatable, false),
+          spendable: args.fetch(:spendable, false),
+          balance: args.fetch(:amount,0).to_satoshi.to_s,
           source: args.fetch(:from),
-          gas_limit: args.fetch(:gas_limit).to_satoshi.to_s,
-          storage_limit: args.fetch(:storage_limit).to_satoshi.to_s,
-          counter: args.fetch(:counter).to_s,
-          fee: args.fetch(:fee).to_satoshi.to_s,
-          managerPubkey: args.fetch(:manager)
+          gas_limit: args.fetch(:gas_limit, 0.1).to_satoshi.to_s,
+          storage_limit: args.fetch(:storage_limit, 0.06).to_satoshi.to_s,
+          counter: counter(args).to_s,
+          fee: args.fetch(:fee, 0.05).to_satoshi.to_s,
+          managerPubkey: manager
         }
 
         operation[:script] = args[:script] if args[:script]
@@ -66,36 +53,32 @@ class TezosClient
         {
           kind: "reveal",
           source: args.fetch(:from),
-          fee: args.fetch(:fee).to_satoshi.to_s,
-          counter: args.fetch(:counter).to_s,
-          gas_limit: args.fetch(:gas_limit).to_satoshi.to_s,
-          storage_limit: args.fetch(:storage_limit).to_satoshi.to_s,
+          fee: args.fetch(:fee, 0.05).to_satoshi.to_s,
+          counter: counter(args).to_s,
+          gas_limit: args.fetch(:gas_limit, 0.1).to_satoshi.to_s,
+          storage_limit: args.fetch(:storage_limit, 0).to_satoshi.to_s,
           public_key: args.fetch(:public_key)
         }
       end
 
-      def operation(args)
-        operation_kind = args.fetch(:operation_kind) { raise ArgumentError, ":operation_kind argument missing" }
-        send("#{operation_kind}_operation", args)
+      def counter(args)
+        args.fetch(:counter) do
+          contract_counter(args.fetch(:from)) + 1
+        end
       end
 
-      def preapply_operation(args)
-        res = preapply_operations(operations: contents(args), **args)
+      def preapply_operation(operation:, **options)
+        res = preapply_operations(operations: [operation], **options)
         res[0]
       end
 
-      def run_operation(args)
-        res = run_operations(operations: contents(args), **args)
+      def run_operation(operation:, **options)
+        res = run_operations(operations: [operation], **options)
         res[0]
       end
 
-      def forge_operation(args)
-        forge_operations(operations: contents(args), **args)
-      end
-
-      def contents(args)
-        operation = operation(args)
-        (operation.is_a?(Array)) ? operation : [operation]
+      def forge_operation(operation:, **options)
+        forge_operations(operations: [operation], **options)
       end
     end
   end
