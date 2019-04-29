@@ -13,7 +13,7 @@ rvm:
 env:
   - OPAMYES=1
 before_install:
-  - sh travis-scripts/prepare-trusty.sh
+  - sh travis-scripts/prepare-ubuntu.sh
   - sh travis-scripts/install-opam.sh
   - sh travis-scripts/install-liquidity.sh
   - gem install bundler -v 1.16.3
