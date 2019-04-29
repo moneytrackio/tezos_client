@@ -22,6 +22,10 @@ class TezosClient
       @multiple_operations
     end
 
+    def single_operation?
+      !multiple_operations?
+    end
+
     def branch
       @branch ||= rpc_interface.head_hash
     end
@@ -34,7 +38,9 @@ class TezosClient
       run_result = run
 
       run_result[:operations_result].zip(rpc_operation_args) do |operation_result, rpc_operation_args|
-        rpc_operation_args[:gas_limit] = (operation_result[:consumed_gas].to_i + 0.001.to_satoshi).to_s
+        if rpc_operation_args.key?(:gas_limit)
+          rpc_operation_args[:gas_limit] = (operation_result[:consumed_gas].to_i + 0.001.to_satoshi).to_s
+        end
       end
 
       run_result
@@ -91,18 +97,11 @@ class TezosClient
       consumed_gas = 0
 
       operations_result = rpc_responses.map do |rpc_response|
-        ensure_applied!(rpc_response) do |result|
-          consumed_storage += (result.dig(:operation_result, :paid_storage_size_diff) || "0").to_i.from_satoshi
-          consumed_gas += (result.dig(:operation_result, :consumed_gas) || "0").to_i.from_satoshi
-
-          unless result[:internal_operation_results].nil?
-            result[:internal_operation_results].each do |internal_operation_result|
-              consumed_gas += (internal_operation_result[:result][:consumed_gas] || "0").to_i.from_satoshi
-            end
-          end
-
-          result[:operation_result]
-        end
+        metadata = rpc_response[:metadata]
+        ensure_applied!(metadata)
+        consumed_storage += compute_consumed_storage(metadata)
+        consumed_gas += compute_consumed_gas(metadata)
+        metadata[:operation_result]
       end
 
       {
@@ -113,15 +112,31 @@ class TezosClient
       }
     end
 
+    def compute_consumed_gas(metadata)
+      consumed_gas = (metadata.dig(:operation_result, :consumed_gas) || "0").to_i.from_satoshi
+
+      if metadata.key?(:internal_operation_results)
+        metadata[:internal_operation_results].each do |internal_operation_result|
+          consumed_gas += (internal_operation_result[:result][:consumed_gas] || "0").to_i.from_satoshi
+        end
+      end
+      consumed_gas
+    end
+
+    def compute_consumed_storage(metadata)
+      (metadata.dig(:operation_result, :paid_storage_size_diff) || "0").to_i.from_satoshi
+    end
+
+
     def preapply
-      results = rpc_interface.preapply_operations(
+      rpc_responses = rpc_interface.preapply_operations(
         operations: rpc_operation_args,
         signature: base_58_signature,
         protocol: protocol,
         branch: branch)
 
-      results.map do |result|
-        ensure_applied!(result)
+      rpc_responses.map do |rpc_response|
+        ensure_applied!(rpc_response[:metadata])
       end
     end
 
@@ -131,19 +146,15 @@ class TezosClient
 
     private
 
-    def ensure_applied!(rpc_response)
-      operation_result = rpc_response[:metadata][:operation_result]
+    def ensure_applied!(metadata)
+      operation_result = metadata[:operation_result]
 
       unless operation_result.nil?
         status = operation_result[:status]
         raise "Operation status != 'applied': #{status}\n #{rpc_response.pretty_inspect}" if status != "applied"
       end
 
-      if block_given?
-        yield rpc_response[:metadata]
-      else
-        operation_result
-      end
+      operation_result
     end
   end
 end

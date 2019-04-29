@@ -32,7 +32,6 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
     let(:transaction_args) do
       {
         operation_kind: "transaction",
-        branch: branch,
         counter: counter,
         from: from,
         to: from,
@@ -44,7 +43,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
     end
 
     it "returns a String" do
-      transaction_hex = subject.forge_operation(transaction_args)
+      transaction_hex = subject.forge_operation(operation: transaction_args, branch: branch)
       expect(transaction_hex).to be_a String
       expect { transaction_hex.to_bin } .not_to raise_error
     end
@@ -53,17 +52,19 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   describe "#forge_origination" do
     it "works" do
       origination_hex = subject.forge_operation(
-        operation_kind: "origination",
-        delegatable: false,
-        spendable: false,
-        from: from,
-        amount: 0.05,
-        fee: 0.05,
-        gas_limit: 0.05,
-        storage_limit: 0.006,
-        counter: counter,
-        manager: from,
-        script: script,
+        operation: {
+          operation_kind: "origination",
+          delegatable: false,
+          spendable: false,
+          from: from,
+          amount: 0.05,
+          fee: 0.05,
+          gas_limit: 0.05,
+          storage_limit: 0.006,
+          counter: counter,
+          manager: from,
+          script: script
+        },
         branch: branch
       )
 
@@ -75,16 +76,18 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   describe "#run_transaction" do
     it "returns a hash" do
       res = subject.run_operation(
-        operation_kind: "transaction",
-        from: from,
-        to: from,
-        amount: 1,
-        branch: branch,
-        fee: 0.05,
-        gas_limit: 0.05,
-        storage_limit: 0.006,
-        counter: counter,
-        signature: TezosClient::RANDOM_SIGNATURE
+         operation: {
+           operation_kind: "transaction",
+           from: from,
+           to: from,
+           amount: 1,
+           fee: 0.05,
+           gas_limit: 0.05,
+           storage_limit: 0.006,
+           counter: counter
+         },
+         branch: branch,
+         signature: TezosClient::RANDOM_SIGNATURE
       )
       pp res
       expect(res).to have_key("metadata")
@@ -97,17 +100,19 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   describe "#run_origination" do
     it "returns a hash" do
       res = subject.run_operation(
-        operation_kind: "origination",
-        delegatable: false,
-        spendable: false,
-        from: from,
-        amount: 0.05,
-        fee: 0.05,
-        gas_limit: 0.05,
-        storage_limit: 0.006,
-        counter: counter,
-        manager: from,
-        script: script,
+        operation: {
+          operation_kind: "origination",
+          delegatable: false,
+          spendable: false,
+          from: from,
+          amount: 0.05,
+          fee: 0.05,
+          gas_limit: 0.05,
+          storage_limit: 0.006,
+          counter: counter,
+          manager: from,
+          script: script,
+        },
         branch: branch,
         signature: TezosClient::RANDOM_SIGNATURE
       )
@@ -128,15 +133,17 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   describe "#preapply_transaction" do
     let(:transaction_args) do
       {
-        operation_kind: "transaction",
-        from: from,
-        to: from,
-        amount: 1,
-        branch: branch,
-        fee: 0.05,
-        gas_limit: 0.05,
-        storage_limit: 0.006,
-        counter: counter
+        operation: {
+          operation_kind: "transaction",
+          from: from,
+          to: from,
+          amount: 1,
+          fee: 0.05,
+          gas_limit: 0.05,
+          storage_limit: 0.006,
+          counter: counter
+        },
+        branch: branch
       }
     end
 
@@ -167,17 +174,19 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   describe "#preapply_origination" do
     let(:origination_args) do
       {
-        operation_kind: "origination",
-        delegatable: false,
-        spendable: false,
-        from: from,
-        amount: 0.05,
-        fee: 0.05,
-        gas_limit: 0.05,
-        storage_limit: 0.006,
-        counter: counter,
-        manager: from,
-        script: script,
+        operation: {
+          operation_kind: "origination",
+          delegatable: false,
+          spendable: false,
+          from: from,
+          amount: 0.05,
+          fee: 0.05,
+          gas_limit: 0.05,
+          storage_limit: 0.006,
+          counter: counter,
+          manager: from,
+          script: script,
+        },
         branch: branch
       }
     end

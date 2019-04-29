@@ -84,7 +84,7 @@ class TezosClient
       **args
     ).test_and_broadcast
 
-    res.merge(originated_contract: res[:operation_result][:originated_contracts][0])
+    res.merge(originated_contract: res[:operations_result][0][:originated_contracts][0])
   end
 
   # Transfer funds to an account
@@ -131,7 +131,6 @@ class TezosClient
   end
 
   def reveal_pubkey(secret_key:, **args)
-
     public_key = secret_key_to_public_key(secret_key)
     from = public_key_to_address(public_key)
 
