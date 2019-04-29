@@ -1,6 +1,6 @@
 ---
 dist: xenial
-language: generic
+language: ruby
 sudo: required
 cache:
   bundler: true

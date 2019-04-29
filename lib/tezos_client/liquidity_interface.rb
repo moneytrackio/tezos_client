@@ -57,8 +57,10 @@ class TezosClient
 
     def json_scripts(args)
       with_file_copy(args[:script]) do |script_copy_path|
-        json_init_script_path = "#{script_copy_path}.initializer.tz.json"
-        json_contract_script_path = "#{script_copy_path}.tz.json"
+        script_basename = script_copy_path.sub(/.liq$/, "")
+
+        json_init_script_path = "#{script_basename}.initializer.tz.json"
+        json_contract_script_path = "#{script_basename}.tz.json"
 
         call_liquidity "--json #{script_copy_path}"
 
