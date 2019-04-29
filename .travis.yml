@@ -17,4 +17,5 @@ before_install:
   - sh travis-scripts/install-liquidity.sh
   - gem install bundler -v 1.16.3
 script:
+  - bundle install
   - bundle exec rake
