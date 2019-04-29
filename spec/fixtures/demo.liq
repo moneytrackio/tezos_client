@@ -1,4 +1,3 @@
-[%%version 0.4]
 
 type storage = (string, int) map
 
@@ -16,4 +15,4 @@ let%entry main (choice : string) votes =
     | None -> Current.failwith "Bad vote"
     | Some x ->
        let votes = Map.add choice (x+1) votes in
-       ( ([] : operation list), votes )
+       ( [], votes )
