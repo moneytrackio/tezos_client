@@ -12,6 +12,28 @@ class TezosClient
       self.class.logger << out + "\n"
     end
 
+    FILTERED_KEYS = [:code]
+    def tezos_contents_log_filter(content)
+      if content.is_a? Array
+        content.map { |el| tezos_contents_log_filter(el) }
+      elsif content.is_a? Hash
+        content.reduce({}) do |h, (k, v)|
+          value = if FILTERED_KEYS.include? k.to_sym
+            "#{v.to_s[0..30]}..."
+          else
+            tezos_contents_log_filter(v)
+          end
+          h.merge(k => value)
+        end
+      else
+        content
+      end
+    end
+
+    def tezos_contents_log(content)
+      tezos_contents_log_filter(content).pretty_inspect
+    end
+
     class_methods do
       # Setup the log for TezosClient calls.
       # Value should be a logger but can can be stdout, stderr, or a filename.

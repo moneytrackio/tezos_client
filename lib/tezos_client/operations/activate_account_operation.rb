@@ -1,35 +1,17 @@
 class TezosClient
   class ActivateAccountOperation < Operation
 
-    def initialize_operation_args
-      @operation_args = default_args.merge(
-        **@init_args,
-        operation_kind: operation_kind,
-        branch: branch)
+    def rpc_operation_args
+      @rpc_operation_args ||= rpc_interface.activate_account_operation(
+        operation_args
+      )
     end
 
-    def operation_kind
-      :activate_account
+    def operation_args
+      {
+        pkh: @args.fetch(:pkh),
+        secret: @args.fetch(:secret)
+      }
     end
-
-    def ensure_applied!(rpc_response)
-      balance_updates = rpc_response[:metadata][:balance_updates]
-      raise "Operation failed\n #{rpc_response.pretty_inspect}" if balance_updates.nil?
-      if block_given?
-        yield rpc_response[:metadata]
-      else
-        rpc_response[:metadata]
-      end
-    end
-
-    private
-
-      def default_args
-        {
-          gas_limit: 0.1,
-          storage_limit: 0.006,
-          fee: 0.05
-        }
-      end
   end
 end

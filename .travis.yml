@@ -1,8 +1,7 @@
 ---
-dist: trusty
+dist: xenial
+language: ruby
 sudo: required
-#language: ruby
-language: ocaml
 cache:
   bundler: true
   directories:
@@ -13,9 +12,11 @@ rvm:
 env:
   - OPAMYES=1
 before_install:
-  - sh travis-scripts/prepare-trusty.sh
+  - sh travis-scripts/prepare-ubuntu.sh
   - sh travis-scripts/install-opam.sh
   - sh travis-scripts/install-liquidity.sh
   - gem install bundler -v 1.16.3
 script:
+  - eval `opam config env`
+  - bundle install
   - bundle exec rake

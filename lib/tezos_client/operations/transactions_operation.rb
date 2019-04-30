@@ -1,29 +1,31 @@
 class TezosClient
   class TransactionsOperation < Operation
-    include EncodeUtils
-
-    def initialize_operation_args
-      @operation_args = default_args.merge(
-        **@init_args,
-        operation_kind: operation_kind,
-        branch: branch,
-        counter: counter
-      )
+    def rpc_operation_args
+      @rpc_operation_args ||= begin
+        OperationArray.new(
+          operations: operations,
+          secret_key: @args.fetch(:secret_key),
+          from: @args.fetch(:from),
+          rpc_interface: rpc_interface,
+          liquidity_interface: liquidity_interface
+        ).rpc_operation_args
+      end
     end
 
-
-    def operation_kind
-      :transactions
-    end
-
-    private
-
-    def default_args
-      {
-        gas_limit: 0.1,
-        storage_limit: 0.006,
-        fee: 0.05
-      }
+    def operations
+      @args[:amounts].map do |destination, amount|
+        {
+          kind: :transaction,
+          amount: amount,
+          to: destination
+        }.merge(
+          @args.slice(
+            :gas_limit,
+            :storage_limit,
+            :fee
+          )
+        )
+      end
     end
   end
 end

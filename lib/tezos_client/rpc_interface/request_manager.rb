@@ -11,10 +11,10 @@ class TezosClient
 
         log("-------")
         log(">>> GET #{response.request.uri.to_s} \n")
-        log("<<< code: #{response.code} \n #{formatted_response.pretty_inspect}")
+        log("<<< code: #{response.code} \n #{tezos_contents_log(formatted_response)}")
         log("-------")
         unless response.success?
-          raise "#{url} failed with code #{response.code}: #{formatted_response.pretty_inspect}"
+          raise "#{url} failed with code #{response.code}: #{tezos_contents_log(formatted_response)}"
         end
 
         formatted_response
@@ -29,12 +29,12 @@ class TezosClient
         formatted_response = format_response(response.parsed_response)
 
         log("-------")
-        log(">>> POST #{url} \n #{content.pretty_inspect}")
-        log("<<< code: #{response.code} \n #{formatted_response.pretty_inspect}")
+        log(">>> POST #{url} \n #{tezos_contents_log(content)}")
+        log("<<< code: #{response.code} \n #{tezos_contents_log(formatted_response)}")
         log("-------")
 
         unless response.success?
-          raise "#{url} failed with code #{response.code}:\n #{formatted_response.pretty_inspect}"
+          raise "#{url} failed with code #{response.code}:\n #{tezos_contents_log(formatted_response)}"
         end
 
         formatted_response
@@ -62,6 +62,8 @@ class TezosClient
       end
 
       private
+
+
 
       def monitor_event_reader(uuid, event_handler)
         proc do |event_response|

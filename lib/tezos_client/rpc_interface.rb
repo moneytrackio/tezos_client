@@ -7,6 +7,7 @@ require_relative "rpc_interface/monitor"
 require_relative "rpc_interface/contracts"
 require_relative "rpc_interface/context"
 require_relative "rpc_interface/helper"
+require_relative "rpc_interface/operations"
 require_relative "rpc_interface/request_manager"
 require_relative "rpc_interface/blocks"
 
@@ -17,6 +18,7 @@ class TezosClient
     include Contracts
     include Context
     include Helper
+    include Operations
     include RequestManager
     include Blocks
 
