@@ -2,19 +2,16 @@
 
 class TezosClient
   class RpcRequestFailure < Exception
-    include Logger
 
     attr_reader :status_code
     attr_reader :error
-    attr_reader :formatted_response
 
     def initialize(error:, url:, status_code:)
       @status_code = status_code
       @error = error
-      @formatted_response = formatted_response
 
       if @message.nil?
-        @message = "#{url} failed with status #{status_code}:\n #{tezos_contents_log(formatted_response)}"
+        @message = "#{url} failed with status #{status_code}:\n #{error}"
       end
 
       super @message
