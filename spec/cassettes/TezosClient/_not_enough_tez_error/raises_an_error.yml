@@ -1,0 +1,127 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 30 Apr 2019 13:27:08 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '8'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"14990"
+
+'
+    http_version: 
+  recorded_at: Tue, 30 Apr 2019 13:27:08 GMT
+- request:
+    method: get
+    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 30 Apr 2019 13:27:08 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '54'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"BKrZxwjwMQjQhKTRUYpwA86GFmoirvpn9BgAgUJWoi1MmFugGZG"
+
+'
+    http_version: 
+  recorded_at: Tue, 30 Apr 2019 13:27:08 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BKrZxwjwMQjQhKTRUYpwA86GFmoirvpn9BgAgUJWoi1MmFugGZG","contents":[{"kind":"transaction","amount":"1000000000000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"14991","fee":"50000"}]}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 30 Apr 2019 13:27:08 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '195'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"12d0e61f0fcb143a3f9a41149da77383f33da977ce5e825ddcaf552551330eaa080000982fd7853b46e70022bc56f12b427855a2adb67ed086038f75a08d06f02e80809aa6eaafe3010000982fd7853b46e70022bc56f12b427855a2adb67e00"
+
+'
+    http_version: 
+  recorded_at: Tue, 30 Apr 2019 13:27:08 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/scripts/run_operation
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BKrZxwjwMQjQhKTRUYpwA86GFmoirvpn9BgAgUJWoi1MmFugGZG","contents":[{"kind":"transaction","amount":"1000000000000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"14991","fee":"50000"}],"signature":"edsigtyY5VxSr7eNeMe7r3YFzA9WG9rnddorKnDJ5DR36FRBjHuc4zi9UrqmKz6XQ7rziasNQ2PULApAxXVNejGDiBUXNaTk9HL"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 30 Apr 2019 13:27:08 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '817'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"14991","gas_limit":"100000","storage_limit":"6000","amount":"1000000000000000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","level":166,"change":"50000"}],"operation_result":{"status":"failed","errors":[{"kind":"temporary","id":"proto.003-PsddFKi3.contract.balance_too_low","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","balance":"7478478763","amount":"1000000000000000"}]}}}],"signature":"edsigtyY5VxSr7eNeMe7r3YFzA9WG9rnddorKnDJ5DR36FRBjHuc4zi9UrqmKz6XQ7rziasNQ2PULApAxXVNejGDiBUXNaTk9HL"}
+
+'
+    http_version: 
+  recorded_at: Tue, 30 Apr 2019 13:27:08 GMT
+recorded_with: VCR 4.0.0
