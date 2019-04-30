@@ -187,7 +187,7 @@ RSpec.describe TezosClient, :vcr do
 
     describe "#call Pay" do
       let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
-      let(:call_params) { [ "pay", "()" ] }
+      let(:call_params) { %w{pay ()} }
       let(:amount) { 1 }
 
       it "works" do
@@ -304,6 +304,60 @@ RSpec.describe TezosClient, :vcr do
     it "works" do
       res = subject.get_storage(script: script, contract_address: contract_address)
       expect(res).to be_a String
+    end
+  end
+
+
+  describe "#activation error" do
+    let(:mnemonic) { "twelve april shield tell audit fever strike radio lunch father orphan lock fancy clutch sister" }
+    let(:password) { "igfcjveu.zufhhxdz@tezos.example.orgS6fvIJnDXQ" }
+    let(:secret) { "23d18abce360452faa65b9909b6bf259562af0f8" }
+
+    let(:key) { subject.generate_key(mnemonic: mnemonic, password: password) }
+    let(:secret_key) { key[:secret_key] }
+    let(:pkh) { key[:address] }
+
+
+    it "raises an error" do
+      expect do
+        subject.activate_account(pkh: pkh, secret: secret, from: pkh, secret_key: secret_key)
+      end.to raise_exception TezosClient::InvalidActivation, "Invalid activation (pkh: tz1RdraebVC4gRbrnMDWQjZ28FtvgQZWJp21)"
+    end
+  end
+
+  describe "#not enough tez error" do
+    it "raises an error" do
+      expect do
+        subject.transfer(
+          amount: 1000000000,
+          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+        )
+      end.to raise_exception TezosClient::TezBalanceTooLow, /Tezos balance too low for address tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq \(balance: \d+, amount 1000000000000000\)/
+    end
+  end
+
+  describe "#contract failure" do
+    let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
+    let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
+    let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
+    let(:amount) { 0 }
+    let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
+    let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 10000000000tz })" ] }
+
+
+    it "raises an error" do
+      expect do
+        subject.call_contract(
+          from: source,
+          amount: amount,
+          script: script,
+          secret_key: secret_key,
+          to: contract_address,
+          parameters: call_params
+        )
+      end.to raise_exception TezosClient::ScriptRuntimeError
     end
   end
 end

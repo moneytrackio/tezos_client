@@ -14,7 +14,7 @@ class TezosClient
         log("<<< code: #{response.code} \n #{tezos_contents_log(formatted_response)}")
         log("-------")
         unless response.success?
-          raise "#{url} failed with code #{response.code}: #{tezos_contents_log(formatted_response)}"
+          failed!(url: url, code: response.code, responses: formatted_response)
         end
 
         formatted_response
@@ -34,7 +34,7 @@ class TezosClient
         log("-------")
 
         unless response.success?
-          raise "#{url} failed with code #{response.code}:\n #{tezos_contents_log(formatted_response)}"
+          failed!(url: url, code: response.code, responses: formatted_response)
         end
 
         formatted_response
@@ -63,7 +63,23 @@ class TezosClient
 
       private
 
+      def exception_klass(error)
+        case error[:id]
+        when "proto.003-PsddFKi3.operation.invalid_activation"
+          TezosClient::InvalidActivation
+        else
+          TezosClient::RpcRequestFailure
+        end
+      end
 
+      def failed!(url:, code:, responses:)
+        error = responses[0]
+        raise exception_klass(error).new(
+          error: error,
+          url: url,
+          status_code: code
+        )
+      end
 
       def monitor_event_reader(uuid, event_handler)
         proc do |event_response|

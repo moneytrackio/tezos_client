@@ -151,10 +151,28 @@ class TezosClient
 
       unless operation_result.nil?
         status = operation_result[:status]
-        raise "Operation status != 'applied': #{status}\n #{metadata.pretty_inspect}" if status != "applied"
+        if status != "applied"
+          failed!(status, operation_result[:errors], metadata)
+        end
       end
 
       operation_result
+    end
+
+    def exception_klass(errors)
+      error = errors[0]
+      case error[:id]
+      when "proto.003-PsddFKi3.contract.balance_too_low"
+        TezBalanceTooLow
+      when "proto.003-PsddFKi3.scriptRuntimeError"
+        ScriptRuntimeError
+      else
+        OperationFailure
+      end
+    end
+
+    def failed!(status, errors, metadata)
+      raise exception_klass(errors).new(metadata: metadata, errors: errors, status: status)
     end
   end
 end
