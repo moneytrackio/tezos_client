@@ -1,26 +1,30 @@
 class TezosClient
   class TransactionsOperation < Operation
-
     def rpc_operation_args
       @rpc_operation_args ||= begin
-        initial_counter = rpc_interface.contract_counter(@args.fetch(:from)) + 1
+        OperationArray.new(
+          operations: operations,
+          secret_key: @args.fetch(:secret_key),
+          from: @args.fetch(:from),
+          rpc_interface: rpc_interface,
+          liquidity_interface: liquidity_interface
+        ).rpc_operation_args
+      end
+    end
 
-        @args[:amounts].map.with_index do |(destination, amount), index|
-          counter = (initial_counter + index)
-          TransactionOperation.new(
-            @args.slice(
-              :from,
-              :gas_limit,
-              :storage_limit,
-              :fee
-            ).merge(
-              rpc_interface: rpc_interface,
-              amount: amount,
-              to: destination,
-              counter: counter
-            )
-          ).rpc_operation_args
-        end
+    def operations
+      @args[:amounts].map do |destination, amount|
+        {
+          kind: :transaction,
+          amount: amount,
+          to: destination
+        }.merge(
+          @args.slice(
+            :gas_limit,
+            :storage_limit,
+            :fee
+          )
+        )
       end
     end
   end

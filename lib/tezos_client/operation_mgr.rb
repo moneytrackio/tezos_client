@@ -151,7 +151,7 @@ class TezosClient
 
       unless operation_result.nil?
         status = operation_result[:status]
-        raise "Operation status != 'applied': #{status}\n #{rpc_response.pretty_inspect}" if status != "applied"
+        raise "Operation status != 'applied': #{status}\n #{metadata.pretty_inspect}" if status != "applied"
       end
 
       operation_result

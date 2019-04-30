@@ -20,6 +20,7 @@ require "tezos_client/operations/transaction_operation"
 require "tezos_client/operations/transactions_operation"
 require "tezos_client/operations/activate_account_operation"
 require "tezos_client/operations/reveal_operation"
+require "tezos_client/operations/operation_array"
 
 require "tezos_client/client_interface"
 require "tezos_client/rpc_interface"
@@ -74,15 +75,24 @@ class TezosClient
   #
   # @return [Hash] result of the origination containing :operation_id, :operation_result and :originated_contract
   #
-  def originate_contract(from:, amount:, secret_key:, **args)
-    res = OriginationOperation.new(
-      liquidity_interface: liquidity_interface,
+  def originate_contract(from:, amount:, secret_key:, script: nil, init_params: nil, **args)
+    origination_args = {
       rpc_interface: rpc_interface,
       from: from,
       secret_key: secret_key,
       amount: amount,
       **args
-    ).test_and_broadcast
+    }
+
+    if script != nil
+      origination_args[:script] = liquidity_interface.origination_script(
+        from: from,
+        script: script,
+        init_params: init_params
+      )
+    end
+
+    res = OriginationOperation.new(origination_args).test_and_broadcast
 
     res.merge(originated_contract: res[:operations_result][0][:originated_contracts][0])
   end
@@ -99,7 +109,6 @@ class TezosClient
   #
   def transfer(from:, amount:, to:, secret_key:, **args)
     TransactionOperation.new(
-      liquidity_interface: liquidity_interface,
       rpc_interface: rpc_interface,
       from: from,
       to: to,
@@ -111,7 +120,6 @@ class TezosClient
 
   def activate_account(pkh:, secret:, **args)
     ActivateAccountOperation.new(
-      liquidity_interface: liquidity_interface,
       rpc_interface: rpc_interface,
       pkh: pkh,
       secret: secret,
@@ -121,7 +129,6 @@ class TezosClient
 
   def transfer_to_many(from:, amounts:, secret_key:, **args)
     TransactionsOperation.new(
-      liquidity_interface: liquidity_interface,
       rpc_interface: rpc_interface,
       from: from,
       amounts: amounts,
@@ -155,11 +162,6 @@ class TezosClient
     transfer_args = args.merge(parameters: json_params)
 
     transfer(transfer_args)
-  end
-
-  def send_operations(secret_key:, operations:, **args)
-    public_key = secret_key_to_public_key(secret_key)
-    from = public_key_to_address(public_key)
   end
 
   def monitor_operation(operation_id, timeout: 120)
