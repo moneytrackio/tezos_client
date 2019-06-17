@@ -63,8 +63,14 @@ class TezosClient
 
       private
 
+      def get_error_id(error)
+        error[:id]
+      rescue TypeError
+        nil
+      end
+
       def exception_klass(error)
-        case error[:id]
+        case get_error_id(error)
         when "proto.003-PsddFKi3.operation.invalid_activation"
           TezosClient::InvalidActivation
         else
