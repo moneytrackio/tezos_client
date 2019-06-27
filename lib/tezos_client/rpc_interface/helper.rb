@@ -33,7 +33,7 @@ class TezosClient
           storage_limit: args.fetch(:storage_limit, 0.06).to_satoshi.to_s,
           counter: counter(args).to_s,
           fee: args.fetch(:fee, 0.05).to_satoshi.to_s,
-          managerPubkey: manager
+          manager_pubkey: manager
         }
 
         operation[:script] = args[:script] if args[:script]
