@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tezos_client (0.4.2)
+    tezos_client (0.4.3)
       activesupport (~> 5.2.0)
       base58 (~> 0.2.3)
       bip_mnemonic (~> 0.0.2)
@@ -35,7 +35,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     ast (2.4.0)
     base58 (0.2.3)
-    bip_mnemonic (0.0.2)
+    bip_mnemonic (0.0.4)
     builder (3.2.3)
     concurrent-ruby (1.1.4)
     crack (0.4.3)
