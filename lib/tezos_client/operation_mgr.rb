@@ -96,9 +96,10 @@ class TezosClient
       consumed_storage = 0
       consumed_gas = 0
 
+      ensure_applied!(rpc_responses)
+
       operations_result = rpc_responses.map do |rpc_response|
         metadata = rpc_response[:metadata]
-        ensure_applied!(metadata)
         consumed_storage += compute_consumed_storage(metadata)
         consumed_gas += compute_consumed_gas(metadata)
         metadata[:operation_result]
@@ -135,9 +136,7 @@ class TezosClient
         protocol: protocol,
         branch: branch)
 
-      rpc_responses.map do |rpc_response|
-        ensure_applied!(rpc_response[:metadata])
-      end
+      ensure_applied!(rpc_responses)
     end
 
     def broadcast
@@ -146,25 +145,28 @@ class TezosClient
 
     private
 
-    def ensure_applied!(metadata)
-      operation_result = metadata[:operation_result]
+    def ensure_applied!(rpc_responses)
+      operation_results = rpc_responses.map { |response| response[:metadata][:operation_result] }
 
-      unless operation_result.nil?
-        status = operation_result[:status]
-        if status != "applied"
-          failed!(status, operation_result[:errors], metadata)
-        end
+      failed = operation_results.detect do |operation_result|
+        operation_result != nil && operation_result[:status] != "applied"
       end
 
-      operation_result
+      return operation_results if failed.nil?
+
+      failed_operation_result = operation_results.detect do |operation_result|
+        operation_result[:status] == "failed"
+      end
+
+      failed!("failed", failed_operation_result[:errors], operation_results)
     end
 
     def exception_klass(errors)
       error = errors[0]
       case error[:id]
-      when "proto.003-PsddFKi3.contract.balance_too_low"
+      when /proto\.[^.]*\.contract\.balance_too_low/
         TezBalanceTooLow
-      when "proto.003-PsddFKi3.scriptRuntimeError"
+      when /proto\.[^.]*\.scriptRuntimeError/
         ScriptRuntimeError
       else
         OperationFailure

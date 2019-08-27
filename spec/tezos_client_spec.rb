@@ -84,6 +84,21 @@ RSpec.describe TezosClient, :vcr do
       expect(res).to have_key :operation_id
       expect(res[:operation_id]).to be_a String
     end
+
+    context "not enough tezos" do
+      it "raises an exception" do
+        expect do
+          subject.transfer_to_many(
+            from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+            amounts: {
+              "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" => 0.01,
+              "tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn" => 100_000,
+            },
+            secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+          )
+        end.to raise_exception(TezosClient::TezBalanceTooLow)
+      end
+    end
   end
 
   unless ENV["TRAVIS"]
