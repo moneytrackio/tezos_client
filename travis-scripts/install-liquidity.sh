@@ -12,6 +12,7 @@ git checkout next
 
 eval `opam config env`
 
+opam install camlp4 ctypes-foreign ocaml-migrate-parsetree
 make build-deps
 make clone-tezos
 make
