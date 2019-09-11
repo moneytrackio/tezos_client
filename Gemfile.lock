@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tezos_client (0.4.4)
+    tezos_client (0.4.5)
       activesupport (~> 5.2.0)
       base58 (~> 0.2.3)
       bip_mnemonic (~> 0.0.2)
@@ -150,4 +150,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.3
+   1.17.3
