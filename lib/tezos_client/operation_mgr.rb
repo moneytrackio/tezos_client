@@ -39,11 +39,9 @@ class TezosClient
 
       run_result[:operations_result].zip(rpc_operation_args) do |operation_result, rpc_operation_args|
         if rpc_operation_args.key?(:gas_limit)
-          rpc_operation_args[:gas_limit] = (operation_result[:consumed_gas].to_i + 0.001.to_satoshi).to_s
+          rpc_operation_args[:gas_limit] = (operation_result[:consumed_gas] + 0.001).to_satoshi.to_s
         end
       end
-
-      run_result
     end
 
     def to_hex
@@ -78,6 +76,7 @@ class TezosClient
     def test_and_broadcast
       # simulate operations and adjust gas limits
       simulate_and_update_limits
+
       operations_result = preapply
 
       op_id = broadcast
@@ -93,22 +92,23 @@ class TezosClient
         signature: base_58_signature,
         branch: branch)
 
-      consumed_storage = 0
-      consumed_gas = 0
+      total_consumed_storage = 0
+      total_consumed_gas = 0
 
       ensure_applied!(rpc_responses)
 
       operations_result = rpc_responses.map do |rpc_response|
         metadata = rpc_response[:metadata]
-        consumed_storage += compute_consumed_storage(metadata)
-        consumed_gas += compute_consumed_gas(metadata)
-        metadata[:operation_result]
+        total_consumed_storage += compute_consumed_storage(metadata)
+        consumed_gas = compute_consumed_gas(metadata)
+        total_consumed_gas += consumed_gas
+        { result: metadata[:operation_result], consumed_gas: consumed_gas }
       end
 
       {
         status: :applied,
-        consumed_gas: consumed_gas,
-        consumed_storage: consumed_storage,
+        consumed_gas: total_consumed_gas,
+        consumed_storage: total_consumed_storage,
         operations_result: operations_result
       }
     end
