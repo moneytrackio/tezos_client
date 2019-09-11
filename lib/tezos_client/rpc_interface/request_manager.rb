@@ -79,7 +79,7 @@ class TezosClient
       end
 
       def failed!(url:, code:, responses:)
-        error = responses[0]
+        error = responses.is_a?(String) ? responses : responses[0]
         raise exception_klass(error).new(
           error: error,
           url: url,

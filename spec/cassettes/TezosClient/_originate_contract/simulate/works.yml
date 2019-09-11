@@ -1,0 +1,232 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 10 Sep 2019 13:58:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '8'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"15452"
+
+'
+    http_version: 
+  recorded_at: Tue, 10 Sep 2019 13:58:23 GMT
+- request:
+    method: get
+    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 10 Sep 2019 13:58:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '54'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"BLSJ5dKwevj4zgd7ztoZoULiFMosoM89o2KT1ja23aJkbbL19X3"
+
+'
+    http_version: 
+  recorded_at: Tue, 10 Sep 2019 13:58:23 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BLSJ5dKwevj4zgd7ztoZoULiFMosoM89o2KT1ja23aJkbbL19X3","contents":[{"kind":"origination","delegatable":false,"spendable":false,"balance":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"60000","counter":"15453","fee":"50000","manager_pubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR","annots":["@votes_slash_1"]}]]},{"prim":"CAR","annots":["@choice_slash_2"]},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
+        enough money, at least 5tz to vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}],[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}],{"prim":"GET"},{"prim":"IF_NONE","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Bad
+        vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"PUSH","args":[{"prim":"int"},{"int":"1"}]},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@x"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"ADD"},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"DIP","args":[[{"prim":"SOME"}]]},{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DROP"}]]}]]}]]},{"prim":"UPDATE","annots":["@votes"]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}]]},{"prim":"DIP","args":[[{"prim":"DROP"},{"prim":"DROP"}]]}]]}],"storage":[{"prim":"Elt","args":[{"string":"ocaml"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"pro"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"test"},{"int":"0"}]}]}}]}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 10 Sep 2019 13:58:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1185'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"5f65328e474dcd5bc33a24926f66e5c9a0c6e8d10929790bb9d307e49609fa26090000982fd7853b46e70022bc56f12b427855a2adb67ed08603dd78a08d06e0d40300982fd7853b46e70022bc56f12b427855a2adb67e00000000ff000001bf02000001ba05000368050107600368035b050202000001a70321051f020000001404170000000e40766f7465735f736c6173685f3104160000000f4063686f6963655f736c6173685f320743036a0080ade20404130000000740616d6f756e7403190337072c02000000310743036801000000264e6f7420656e6f756768206d6f6e65792c206174206c656173742035747a20746f20766f7465032702000001130200000015051f020000000c04210000000640766f746573034c0200000016051f020000000d0421000000074063686f696365034c0329072f020000001307430368010000000842616420766f7465032702000000bd0200000023051f020000001a0200000015051f020000000c04210000000640766f746573034c034c0743035b0001020000001f051f02000000160200000011051f02000000080421000000024078034c034c03120200000032051f02000000290200000024051f020000001b0200000016051f020000000d0421000000074063686f696365034c034c034c051f02000000020346051f0200000010051f0200000009051f0200000002032004500000000640766f746573053d036d0342051f0200000004032003200000002c0200000027070401000000056f63616d6c00000704010000000370726f000007040100000004746573740000"
+
+'
+    http_version: 
+  recorded_at: Tue, 10 Sep 2019 13:58:23 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/scripts/run_operation
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BLSJ5dKwevj4zgd7ztoZoULiFMosoM89o2KT1ja23aJkbbL19X3","contents":[{"kind":"origination","delegatable":false,"spendable":false,"balance":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"60000","counter":"15453","fee":"50000","manager_pubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR","annots":["@votes_slash_1"]}]]},{"prim":"CAR","annots":["@choice_slash_2"]},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
+        enough money, at least 5tz to vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}],[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}],{"prim":"GET"},{"prim":"IF_NONE","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Bad
+        vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"PUSH","args":[{"prim":"int"},{"int":"1"}]},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@x"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"ADD"},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"DIP","args":[[{"prim":"SOME"}]]},{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DROP"}]]}]]}]]},{"prim":"UPDATE","annots":["@votes"]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}]]},{"prim":"DIP","args":[[{"prim":"DROP"},{"prim":"DROP"}]]}]]}],"storage":[{"prim":"Elt","args":[{"string":"ocaml"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"pro"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"test"},{"int":"0"}]}]}}],"signature":"edsigtkaPhs7ZswdjY97M5LTxQ8AHd53zUMMuYndFQ3ZCqXpdZcaB2BWyqNqHmsrp7pPfCTsrNwuXLgve5jCrz5W5p6CXPywu6b"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 10 Sep 2019 13:58:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2816'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"contents":[{"kind":"origination","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"15453","gas_limit":"100000","storage_limit":"60000","manager_pubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","balance":"0","spendable":false,"delegatable":false,"script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR","annots":["@votes_slash_1"]}]]},{"prim":"CAR","annots":["@choice_slash_2"]},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
+        enough money, at least 5tz to vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}],[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}],{"prim":"GET"},{"prim":"IF_NONE","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Bad
+        vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"PUSH","args":[{"prim":"int"},{"int":"1"}]},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@x"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"ADD"},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"DIP","args":[[{"prim":"SOME"}]]},{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DROP"}]]}]]}]]},{"prim":"UPDATE","annots":["@votes"]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}]]},{"prim":"DIP","args":[[{"prim":"DROP"},{"prim":"DROP"}]]}]]}],"storage":[{"prim":"Elt","args":[{"string":"ocaml"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"pro"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"test"},{"int":"0"}]}]},"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":316,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-499000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-257000"}],"originated_contracts":["KT1Jh6ngVfLTeK4WCpp4Z2P2sMMf5fgiqWT4"],"consumed_gas":"21493","storage_size":"499","paid_storage_size_diff":"499"}}}],"signature":"edsigtkaPhs7ZswdjY97M5LTxQ8AHd53zUMMuYndFQ3ZCqXpdZcaB2BWyqNqHmsrp7pPfCTsrNwuXLgve5jCrz5W5p6CXPywu6b"}
+
+'
+    http_version: 
+  recorded_at: Tue, 10 Sep 2019 13:58:23 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BLSJ5dKwevj4zgd7ztoZoULiFMosoM89o2KT1ja23aJkbbL19X3","contents":[{"kind":"origination","delegatable":false,"spendable":false,"balance":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"22493","storage_limit":"60000","counter":"15453","fee":"50000","manager_pubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR","annots":["@votes_slash_1"]}]]},{"prim":"CAR","annots":["@choice_slash_2"]},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
+        enough money, at least 5tz to vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}],[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}],{"prim":"GET"},{"prim":"IF_NONE","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Bad
+        vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"PUSH","args":[{"prim":"int"},{"int":"1"}]},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@x"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"ADD"},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"DIP","args":[[{"prim":"SOME"}]]},{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DROP"}]]}]]}]]},{"prim":"UPDATE","annots":["@votes"]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}]]},{"prim":"DIP","args":[[{"prim":"DROP"},{"prim":"DROP"}]]}]]}],"storage":[{"prim":"Elt","args":[{"string":"ocaml"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"pro"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"test"},{"int":"0"}]}]}}]}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 10 Sep 2019 13:58:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1185'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '"5f65328e474dcd5bc33a24926f66e5c9a0c6e8d10929790bb9d307e49609fa26090000982fd7853b46e70022bc56f12b427855a2adb67ed08603dd78ddaf01e0d40300982fd7853b46e70022bc56f12b427855a2adb67e00000000ff000001bf02000001ba05000368050107600368035b050202000001a70321051f020000001404170000000e40766f7465735f736c6173685f3104160000000f4063686f6963655f736c6173685f320743036a0080ade20404130000000740616d6f756e7403190337072c02000000310743036801000000264e6f7420656e6f756768206d6f6e65792c206174206c656173742035747a20746f20766f7465032702000001130200000015051f020000000c04210000000640766f746573034c0200000016051f020000000d0421000000074063686f696365034c0329072f020000001307430368010000000842616420766f7465032702000000bd0200000023051f020000001a0200000015051f020000000c04210000000640766f746573034c034c0743035b0001020000001f051f02000000160200000011051f02000000080421000000024078034c034c03120200000032051f02000000290200000024051f020000001b0200000016051f020000000d0421000000074063686f696365034c034c034c051f02000000020346051f0200000010051f0200000009051f0200000002032004500000000640766f746573053d036d0342051f0200000004032003200000002c0200000027070401000000056f63616d6c00000704010000000370726f000007040100000004746573740000"
+
+'
+    http_version: 
+  recorded_at: Tue, 10 Sep 2019 13:58:23 GMT
+- request:
+    method: get
+    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/metadata
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 10 Sep 2019 13:58:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1058'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"protocol":"Pt24m4xiPbLDhVgVfABUjirbmda3yohdN82Sp9FeuAXJ4eV9otd","next_protocol":"Pt24m4xiPbLDhVgVfABUjirbmda3yohdN82Sp9FeuAXJ4eV9otd","test_chain_status":{"status":"not_running"},"max_operations_ttl":60,"max_operation_data_length":16384,"max_block_header_length":238,"max_operation_list_length":[{"max_size":32768,"max_op":32},{"max_size":32768},{"max_size":135168,"max_op":132},{"max_size":524288}],"baker":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","level":{"level":649150,"level_position":649149,"cycle":316,"cycle_position":1981,"voting_period":79,"voting_period_position":1981,"expected_commitment":false},"voting_period_kind":"proposal","nonce_hash":null,"consumed_gas":"20200","deactivated":[],"balance_updates":[{"kind":"contract","contract":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","change":"-512000000"},{"kind":"freezer","category":"deposits","delegate":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","cycle":316,"change":"512000000"},{"kind":"freezer","category":"rewards","delegate":"tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB","cycle":316,"change":"16000000"}]}
+
+'
+    http_version: 
+  recorded_at: Tue, 10 Sep 2019 13:58:23 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/preapply/operations
+    body:
+      encoding: UTF-8
+      string: '[{"protocol":"Pt24m4xiPbLDhVgVfABUjirbmda3yohdN82Sp9FeuAXJ4eV9otd","branch":"BLSJ5dKwevj4zgd7ztoZoULiFMosoM89o2KT1ja23aJkbbL19X3","contents":[{"kind":"origination","delegatable":false,"spendable":false,"balance":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"22493","storage_limit":"60000","counter":"15453","fee":"50000","manager_pubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR","annots":["@votes_slash_1"]}]]},{"prim":"CAR","annots":["@choice_slash_2"]},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
+        enough money, at least 5tz to vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}],[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}],{"prim":"GET"},{"prim":"IF_NONE","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Bad
+        vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"PUSH","args":[{"prim":"int"},{"int":"1"}]},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@x"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"ADD"},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"DIP","args":[[{"prim":"SOME"}]]},{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DROP"}]]}]]}]]},{"prim":"UPDATE","annots":["@votes"]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}]]},{"prim":"DIP","args":[[{"prim":"DROP"},{"prim":"DROP"}]]}]]}],"storage":[{"prim":"Elt","args":[{"string":"ocaml"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"pro"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"test"},{"int":"0"}]}]}}],"signature":"edsigtc2n7Mb2XrWeysAYnacR2vZr538V75KS5ZwEEtWNnPjUxin4DKVTfpsbkcdbivqRZfndqJ5U9ZgnvLzGMVMcqnRHA1KrgR"}]'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 10 Sep 2019 13:58:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2817'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '[{"contents":[{"kind":"origination","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"15453","gas_limit":"22493","storage_limit":"60000","manager_pubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","balance":"0","spendable":false,"delegatable":false,"script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR","annots":["@votes_slash_1"]}]]},{"prim":"CAR","annots":["@choice_slash_2"]},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
+        enough money, at least 5tz to vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}],[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}],{"prim":"GET"},{"prim":"IF_NONE","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Bad
+        vote"}]},{"prim":"FAILWITH"}],[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@votes"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"PUSH","args":[{"prim":"int"},{"int":"1"}]},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@x"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"ADD"},[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[[{"prim":"DIP","args":[[{"prim":"DUP","annots":["@choice"]}]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}]]]},{"prim":"SWAP"}],{"prim":"DIP","args":[[{"prim":"SOME"}]]},{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DIP","args":[[{"prim":"DROP"}]]}]]}]]},{"prim":"UPDATE","annots":["@votes"]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}]]},{"prim":"DIP","args":[[{"prim":"DROP"},{"prim":"DROP"}]]}]]}],"storage":[{"prim":"Elt","args":[{"string":"ocaml"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"pro"},{"int":"0"}]},{"prim":"Elt","args":[{"string":"test"},{"int":"0"}]}]},"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":316,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-499000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-257000"}],"originated_contracts":["KT1PVnjHKs5HsBjxaJ8xqjEU1toyfT42mTyd"],"consumed_gas":"21493","storage_size":"499","paid_storage_size_diff":"499"}}}],"signature":"edsigtc2n7Mb2XrWeysAYnacR2vZr538V75KS5ZwEEtWNnPjUxin4DKVTfpsbkcdbivqRZfndqJ5U9ZgnvLzGMVMcqnRHA1KrgR"}]
+
+'
+    http_version: 
+  recorded_at: Tue, 10 Sep 2019 13:58:23 GMT
+recorded_with: VCR 4.0.0

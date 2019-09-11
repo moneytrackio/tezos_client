@@ -130,6 +130,42 @@ RSpec.describe TezosClient, :vcr do
     end
   end
 
+  describe "random_operation" do
+    let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
+    let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
+    let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
+    let(:amount) { 0 }
+    let(:init_params) { '"test"' }
+
+    it "works" do
+      origination = subject.originate_contract(
+        from: source,
+        amount: amount,
+        script: script,
+        secret_key: secret_key,
+        init_params: init_params,
+        simulate: true
+      )
+
+      transfer = subject.transfer_to_many(
+        from: source,
+        amounts: {
+          "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" => 0.01,
+          "tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn" => 0.02
+        },
+        secret_key: secret_key,
+        simulate: true
+      )
+
+      raw_operations = transfer[:rpc_operation_args].push(origination[:rpc_operation_args])
+
+      subject.random_operation(
+        from: source,
+        secret_key: secret_key,
+        raw_operations: raw_operations
+      )
+    end
+  end
 
   describe "#originate_contract" do
     let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
@@ -150,8 +186,31 @@ RSpec.describe TezosClient, :vcr do
       expect(res).to be_a Hash
       expect(res).to have_key :operation_id
       expect(res).to have_key :originated_contract
+      expect(res).to have_key :rpc_operation_args
+
       expect(res[:operation_id]).to be_a String
       expect(res[:originated_contract]).to be_a String
+      expect(res[:rpc_operation_args]).to be_a Hash
+    end
+
+    context "simulate" do
+      it "works" do
+        res = subject.originate_contract(
+          from: source,
+          amount: amount,
+          script: script,
+          secret_key: secret_key,
+          init_params: init_params,
+          simulate: true
+        )
+
+        expect(res).to be_a Hash
+        expect(res).to have_key :originated_contract
+        expect(res).to have_key :rpc_operation_args
+
+        expect(res[:originated_contract]).to be_a String
+        expect(res[:rpc_operation_args]).to be_a Hash
+      end
     end
 
     context "with no script" do
@@ -171,7 +230,6 @@ RSpec.describe TezosClient, :vcr do
       end
     end
   end
-
 
   context "#multisig" do
     let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
