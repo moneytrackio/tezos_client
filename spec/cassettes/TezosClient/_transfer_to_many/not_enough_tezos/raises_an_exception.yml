@@ -17,7 +17,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 11 Sep 2019 09:53:03 GMT
+      - Wed, 11 Sep 2019 12:38:38 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -26,11 +26,11 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '"15471"
+      string: '"15489"
 
 '
     http_version: 
-  recorded_at: Wed, 11 Sep 2019 09:53:03 GMT
+  recorded_at: Wed, 11 Sep 2019 12:38:38 GMT
 - request:
     method: get
     uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
@@ -48,7 +48,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 11 Sep 2019 09:53:03 GMT
+      - Wed, 11 Sep 2019 12:38:40 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -57,50 +57,71 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '"BKzG1Xn5fU2KmZD6Mnscaht4jrNi41sVnzcrxaVMyfyAgkxDaon"
+      string: '"BLXzTeFgqZhQAzV6Ksq7dL2s2BxFXV2uyHaTuPcvcybzzp7A5rP"
 
 '
     http_version: 
-  recorded_at: Wed, 11 Sep 2019 09:53:03 GMT
+  recorded_at: Wed, 11 Sep 2019 12:38:40 GMT
 - request:
     method: post
     uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
-      string: '{"branch":"BKzG1Xn5fU2KmZD6Mnscaht4jrNi41sVnzcrxaVMyfyAgkxDaon","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"15472","fee":"50000","rpc_interface":"#<TezosClient::RpcInterface:0x00007f9e19e85ad0>"},{"kind":"transaction","amount":"100000000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","gas_limit":"100000","storage_limit":"6000","counter":"15473","fee":"50000","rpc_interface":"#<TezosClient::RpcInterface:0x00007f9e19e85ad0>"}]}'
+      string: '{"branch":"BLXzTeFgqZhQAzV6Ksq7dL2s2BxFXV2uyHaTuPcvcybzzp7A5rP","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"15490","fee":"50000"},{"kind":"transaction","amount":"100000000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","gas_limit":"100000","storage_limit":"6000","counter":"15491","fee":"50000"}]}'
     headers:
       Content-Type:
       - application/json
   response:
     status:
-      code: 400
-      message: Bad Request
+      code: 200
+      message: OK
     headers:
       Server:
       - nginx
       Date:
-      - Wed, 11 Sep 2019 09:53:03 GMT
+      - Wed, 11 Sep 2019 12:38:41 GMT
       Content-Type:
-      - text/plain
-      Transfer-Encoding:
-      - chunked
+      - application/json
+      Content-Length:
+      - '307'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |-
-        Failed to parse the request body: No case matched:
-          At /kind, unexpected string instead of endorsement
-          At /kind, unexpected string instead of seed_nonce_revelation
-          At /kind, unexpected string instead of double_endorsement_evidence
-          At /kind, unexpected string instead of double_baking_evidence
-          At /kind, unexpected string instead of activate_account
-          At /kind, unexpected string instead of proposals
-          At /kind, unexpected string instead of ballot
-          At /kind, unexpected string instead of reveal
-          Unexpected object field rpc_interface
-          At /kind, unexpected string instead of origination
-          At /kind, unexpected string instead of delegation
+      string: '"6c5447d49ff1750ac3ad4c46afe42affb169483310632d03329bb04ba3223706080000982fd7853b46e70022bc56f12b427855a2adb67ed086038279a08d06f02e904e0000982fd7853b46e70022bc56f12b427855a2adb67e00080000982fd7853b46e70022bc56f12b427855a2adb67ed086038379a08d06f02e80d0dbc3f4020000992ce5f891f96942de5e07fa5f85087b70a04e3100"
+
+'
     http_version: 
-  recorded_at: Wed, 11 Sep 2019 09:53:03 GMT
+  recorded_at: Wed, 11 Sep 2019 12:38:41 GMT
+- request:
+    method: post
+    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/scripts/run_operation
+    body:
+      encoding: UTF-8
+      string: '{"branch":"BLXzTeFgqZhQAzV6Ksq7dL2s2BxFXV2uyHaTuPcvcybzzp7A5rP","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"15490","fee":"50000"},{"kind":"transaction","amount":"100000000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","gas_limit":"100000","storage_limit":"6000","counter":"15491","fee":"50000"}],"signature":"edsigtsxLFaL8FHaBc2GAJev2UCWn2wSbYraV7xyfsZ4uWovPEE1PzbDjCZ58jbr1ggVAuBDVxyoS75a4Eo2AT7iAWTnB5BHvvD"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 11 Sep 2019 12:38:41 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1524'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"15490","gas_limit":"100000","storage_limit":"6000","amount":"10000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":318,"change":"50000"}],"operation_result":{"status":"backtracked","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-10000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"10000"}],"consumed_gas":"10200"}}},{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"15491","gas_limit":"100000","storage_limit":"6000","amount":"100000000000","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":318,"change":"50000"}],"operation_result":{"status":"failed","errors":[{"kind":"temporary","id":"proto.004-Pt24m4xi.contract.balance_too_low","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","balance":"656962553","amount":"100000000000"}]}}}],"signature":"edsigtsxLFaL8FHaBc2GAJev2UCWn2wSbYraV7xyfsZ4uWovPEE1PzbDjCZ58jbr1ggVAuBDVxyoS75a4Eo2AT7iAWTnB5BHvvD"}
+
+'
+    http_version: 
+  recorded_at: Wed, 11 Sep 2019 12:38:41 GMT
 recorded_with: VCR 4.0.0
