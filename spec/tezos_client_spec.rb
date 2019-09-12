@@ -130,7 +130,7 @@ RSpec.describe TezosClient, :vcr do
     end
   end
 
-  describe "random_operation" do
+  describe "inject_raw_operations" do
     let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
     let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
     let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
@@ -144,7 +144,7 @@ RSpec.describe TezosClient, :vcr do
         script: script,
         secret_key: secret_key,
         init_params: init_params,
-        simulate: true
+        dry_run: true
       )
 
       transfer = subject.transfer_to_many(
@@ -154,12 +154,12 @@ RSpec.describe TezosClient, :vcr do
           "tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn" => 0.02
         },
         secret_key: secret_key,
-        simulate: true
+        dry_run: true
       )
 
       raw_operations = transfer[:rpc_operation_args].push(origination[:rpc_operation_args])
 
-      subject.random_operation(
+      subject.inject_raw_operations(
         from: source,
         secret_key: secret_key,
         raw_operations: raw_operations
@@ -193,7 +193,7 @@ RSpec.describe TezosClient, :vcr do
       expect(res[:rpc_operation_args]).to be_a Hash
     end
 
-    context "simulate" do
+    context "dry_run" do
       it "works" do
         res = subject.originate_contract(
           from: source,
@@ -201,7 +201,7 @@ RSpec.describe TezosClient, :vcr do
           script: script,
           secret_key: secret_key,
           init_params: init_params,
-          simulate: true
+          dry_run: true
         )
 
         expect(res).to be_a Hash

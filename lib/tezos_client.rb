@@ -20,7 +20,6 @@ require "tezos_client/operations/origination_operation"
 require "tezos_client/operations/transaction_operation"
 require "tezos_client/operations/transactions_operation"
 require "tezos_client/operations/activate_account_operation"
-require "tezos_client/operations/random_operation"
 require "tezos_client/operations/reveal_operation"
 require "tezos_client/operations/raw_operation_array"
 require "tezos_client/operations/operation_array"
@@ -80,7 +79,7 @@ class TezosClient
   #
   # @return [Hash] result of the origination containing :operation_id, :operation_result and :originated_contract
   #
-  def originate_contract(from:, amount:, secret_key:, script: nil, init_params: nil, simulate: false, **args)
+  def originate_contract(from:, amount:, secret_key:, script: nil, init_params: nil, dry_run: false, **args)
     origination_args = {
       rpc_interface: rpc_interface,
       from: from,
@@ -98,7 +97,7 @@ class TezosClient
     end
 
     operation = OriginationOperation.new(origination_args)
-    res = broadcast_operation(operation: operation, simulate: simulate)
+    res = broadcast_operation(operation: operation, dry_run: dry_run)
 
     res.merge(
       originated_contract: res[:operation_results][0][:originated_contracts][0]
@@ -115,7 +114,7 @@ class TezosClient
   #
   # @return [Hash] result of the transfer containing :operation_id and :operation_result
   #
-  def transfer(from:, amount:, to:, secret_key:, simulate: false, **args)
+  def transfer(from:, amount:, to:, secret_key:, dry_run: false, **args)
     operation = TransactionOperation.new(
       rpc_interface: rpc_interface,
       from: from,
@@ -125,10 +124,10 @@ class TezosClient
       **args
     )
 
-    broadcast_operation(operation: operation, simulate: simulate)
+    broadcast_operation(operation: operation, dry_run: dry_run)
   end
 
-  def activate_account(pkh:, secret:, simulate: false, **args)
+  def activate_account(pkh:, secret:, dry_run: false, **args)
     operation = ActivateAccountOperation.new(
       rpc_interface: rpc_interface,
       pkh: pkh,
@@ -136,10 +135,10 @@ class TezosClient
       **args
     )
 
-    broadcast_operation(operation: operation, simulate: simulate)
+    broadcast_operation(operation: operation, dry_run: dry_run)
   end
 
-  def transfer_to_many(from:, amounts:, secret_key:, simulate: false, **args)
+  def transfer_to_many(from:, amounts:, secret_key:, dry_run: false, **args)
     operation = TransactionsOperation.new(
       rpc_interface: rpc_interface,
       from: from,
@@ -148,10 +147,10 @@ class TezosClient
       **args
     )
 
-    broadcast_operation(operation: operation, simulate: simulate)
+    broadcast_operation(operation: operation, dry_run: dry_run)
   end
 
-  def reveal_pubkey(secret_key:, simulate: false, **args)
+  def reveal_pubkey(secret_key:, dry_run: false, **args)
     public_key = secret_key_to_public_key(secret_key)
     from = public_key_to_address(public_key)
 
@@ -164,10 +163,10 @@ class TezosClient
       **args
     )
 
-    broadcast_operation(operation: operation, simulate: simulate)
+    broadcast_operation(operation: operation, dry_run: dry_run)
   end
 
-  def call_contract(args, simulate: false)
+  def call_contract(args, dry_run: false)
     parameters = args.fetch(:parameters)
 
     json_params = liquidity_interface.call_parameters(
@@ -175,16 +174,16 @@ class TezosClient
       parameters: parameters
     )
 
-    transfer_args = args.merge(parameters: json_params, simulate: simulate)
+    transfer_args = args.merge(parameters: json_params, dry_run: dry_run)
 
     transfer(transfer_args)
   end
 
-  def random_operation(secret_key:, raw_operations:, simulate: false, **args)
+  def inject_raw_operations(secret_key:, raw_operations:, dry_run: false, **args)
     public_key = secret_key_to_public_key(secret_key)
     from = public_key_to_address(public_key)
 
-    operation = RandomOperation.new(
+    operation = RawOperationArray.new(
       liquidity_interface: liquidity_interface,
       rpc_interface: rpc_interface,
       public_key: public_key,
@@ -194,7 +193,7 @@ class TezosClient
       **args
     )
 
-    broadcast_operation(operation: operation, simulate: simulate)
+    broadcast_operation(operation: operation, dry_run: dry_run)
   end
 
   def monitor_operation(operation_id, timeout: 120)
@@ -236,8 +235,8 @@ class TezosClient
 
   private
 
-  def broadcast_operation(operation:, simulate:)
-    res = if simulate
+  def broadcast_operation(operation:, dry_run:)
+    res = if dry_run
       operation.simulate
     else
       operation.test_and_broadcast
