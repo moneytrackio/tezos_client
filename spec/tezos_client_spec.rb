@@ -180,7 +180,10 @@ RSpec.describe TezosClient, :vcr do
     end
 
     it "works" do
-      puts subject.pending_operations
+      res = subject.pending_operations
+      expect(res).to be_a Hash
+      operations = res["applied"].select { |operation| operation.fetch("contents", []).map { |content| content&.fetch("source", nil) }&.include?("tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq") }
+      expect(operations.size).to eq 1
     end
   end
 
