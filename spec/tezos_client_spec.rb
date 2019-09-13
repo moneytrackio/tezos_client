@@ -167,6 +167,23 @@ RSpec.describe TezosClient, :vcr do
     end
   end
 
+  describe "#pending_operations" do
+
+    let!(:op_id) do
+      res = subject.transfer(
+        amount: 1,
+        from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+      )
+      res[:operation_id]
+    end
+
+    it "works" do
+      puts subject.pending_operations
+    end
+  end
+
   describe "#originate_contract" do
     let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
     let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }

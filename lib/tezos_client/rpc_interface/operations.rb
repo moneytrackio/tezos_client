@@ -39,6 +39,10 @@ class TezosClient
       def broadcast_operation(data)
         post("injection/operation?chain=main", data)
       end
+
+      def pending_operations
+        get("chains/main/mempool/pending_operations")
+      end
     end
   end
 end
