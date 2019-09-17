@@ -52,6 +52,8 @@ class TezosClient
   end
 
   class TezBalanceTooLow < OperationFailure
+    FIRST_ERROR_REGEXP = /proto\.[^.]*\.contract\.balance_too_low/
+
     attr_reader :contract
     attr_reader :balance
     attr_reader :amount
@@ -69,21 +71,22 @@ class TezosClient
   end
 
   class ScriptRuntimeError < OperationFailure
+    FIRST_ERROR_REGEXP = /proto.\d*-\w*\.(scriptRejectedRuntimeError|michelson_v\d\.runtime_error)/
+    ERROR_REGEXP = /proto.\d*-\w*\.(scriptRejectedRuntimeError|michelson_v\d\.script_rejected)/
+
     attr_reader :location
     attr_reader :with
     attr_reader :contract
 
     def initialize(metadata:, errors:, status:)
-      error = errors[0]
-      rejection_error = errors.detect { |error| error[:id] == "proto.003-PsddFKi3.scriptRejectedRuntimeError" }
+      first_error = errors[0]
+      rejection_error = errors.detect { |error| error[:id].match? ERROR_REGEXP }
 
       @location = rejection_error[:location]
-      @contract =  error[:contractHandle]
+      @contract =  first_error[:contractHandle]
       @with = rejection_error[:with]
       @message = "Script runtime Error when executing #{contract}: #{with} (location: #{location})"
       super
     end
   end
-
-
 end

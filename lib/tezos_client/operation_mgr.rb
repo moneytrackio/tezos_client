@@ -164,9 +164,9 @@ class TezosClient
     def exception_klass(errors)
       error = errors[0]
       case error[:id]
-      when /proto\.[^.]*\.contract\.balance_too_low/
+      when TezBalanceTooLow::FIRST_ERROR_REGEXP
         TezBalanceTooLow
-      when /proto\.[^.]*\.scriptRuntimeError/
+      when ScriptRuntimeError::FIRST_ERROR_REGEXP
         ScriptRuntimeError
       else
         OperationFailure
