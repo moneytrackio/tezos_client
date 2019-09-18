@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "vcr", "~> 4.0.0"
 
   spec.add_dependency "base58", "~> 0.2.3"
-  spec.add_dependency "httparty", "~> 0.16.2"
+  spec.add_dependency "httparty", "~> 0.17.0"
   spec.add_dependency "rbnacl", "~> 5.0.0"
   spec.add_dependency "rest-client", "~>2.0.0"
   spec.add_dependency "activesupport", "~> 5.2.3"
