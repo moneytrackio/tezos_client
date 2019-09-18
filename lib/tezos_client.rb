@@ -166,7 +166,7 @@ class TezosClient
     broadcast_operation(operation: operation, dry_run: dry_run)
   end
 
-  def call_contract(args, dry_run: false)
+  def call_contract(dry_run: false, **args)
     parameters = args.fetch(:parameters)
 
     json_params = liquidity_interface.call_parameters(
