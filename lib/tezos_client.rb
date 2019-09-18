@@ -5,6 +5,7 @@ require "active_support/core_ext/hash/indifferent_access"
 require "active_support/core_ext/string/inflections"
 require "active_support/core_ext/module/delegation"
 require "timeout"
+require "benchmark"
 
 require "tezos_client/version"
 require "tezos_client/string_utils"

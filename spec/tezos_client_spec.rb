@@ -450,7 +450,7 @@ RSpec.describe TezosClient, :vcr do
           to: contract_address,
           parameters: call_params
         )
-      end.to raise_exception TezosClient::ScriptRuntimeError
+      end.to raise_exception TezosClient::ScriptRuntimeError, 'Script runtime Error when executing : {"string"=>"Balance to low for withdrawal"} (location: 199)'
     end
   end
 end
