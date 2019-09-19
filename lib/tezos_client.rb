@@ -43,9 +43,10 @@ class TezosClient
 
   RANDOM_SIGNATURE = "edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"
 
-  def initialize(rpc_node_address: "127.0.0.1", rpc_node_port: 8732)
+  def initialize(rpc_node_address: "127.0.0.1", rpc_node_port: 8732, liquidity_options: {})
     @rpc_node_address = rpc_node_address
     @rpc_node_port = rpc_node_port
+    @liquidity_options = liquidity_options
 
     @client_config_file = ENV["TEZOS_CLIENT_CONFIG_FILE"]
     @client_interface = ClientInterface.new(
@@ -59,7 +60,8 @@ class TezosClient
 
     @liquidity_interface = LiquidityInterface.new(
       rpc_node_address: @rpc_node_address,
-      rpc_node_port: @rpc_node_port
+      rpc_node_port: @rpc_node_port,
+      options: @liquidity_options
     )
   end
 

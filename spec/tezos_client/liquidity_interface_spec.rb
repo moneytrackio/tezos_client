@@ -5,84 +5,80 @@ RSpec.describe TezosClient::LiquidityInterface do
   let(:from) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
   let(:contract_address) { "KT1FLmwGK2ptfyG8gxAPWPMVS7iGgPzkJEBE" }
 
-
   let(:rpc_node_address) { "alphanet-node.tzscan.io" }
   let(:rpc_node_port) { 80 }
-  subject { TezosClient::LiquidityInterface.new(rpc_node_address: rpc_node_address, rpc_node_port: rpc_node_port) }
 
-  describe "#forge_deploy" do
+  let(:default_options) { { rpc_node_address: rpc_node_address, rpc_node_port: rpc_node_port } }
 
-    it "works" do
-      res = subject.forge_deploy(
-        from: from,
-        script: script,
-        init_params: '"pierre"'
-      )
-      p res
-    end
-  end
+  context "with verbose option" do
+    let(:interface) { TezosClient::LiquidityInterface.new(default_options.merge(options: { verbose: true })) }
 
-  describe "#initial_storage" do
-    it "works" do
-      res = subject.initial_storage(
-        from: from,
-        script: script,
-        init_params: '"pierre"'
-      )
-      expect(res).to be_an Array
-    end
-  end
+    describe "#options" do
+      subject { interface.options }
 
-  describe "#json_script" do
-    it "works" do
-      json_init_script, json_contract_script = subject.json_scripts(
-        script: script
-      )
-      expect(json_init_script).to be_an Array
-      expect(json_contract_script).to be_an Array
-    end
-  end
-
-  describe "#origination_script" do
-    it "works" do
-      res = subject.origination_script(
-        from: from,
-        script: script,
-        init_params: '"pierre"'
-      )
-      expect(res).to be_a Hash
-      p res
-    end
-  end
-
-  describe "#get_storage" do
-    it "retrieves the current storage" do
-      res = subject.get_storage(
-        script: script,
-        contract_address: contract_address
-      )
-      expect(res).to be_a String
-      p res
-    end
-
-    context "multisig.liq contract" do
-      let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
-      let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
-      let(:init_params) { ["Set [#{from}]", "1p"] }
-      let(:call_parameters) do  ["pay", "()"]
+      it "sets verbose option" do
+        expect(subject).to eq verbose: true
       end
+    end
 
-      it "gets the initial storage" do
+    describe "#liquidity_cmd" do
+      subject { interface.liquidity_cmd verbose: true }
+
+      it "add verbose param" do
+        expect(subject).to match(/--verbose/)
+      end
+    end
+  end
+
+  context "without options" do
+    subject { TezosClient::LiquidityInterface.new(default_options) }
+
+    describe "#forge_deploy" do
+      it "works" do
+        res = subject.forge_deploy(
+          from: from,
+          script: script,
+          init_params: '"pierre"'
+        )
+        p res
+      end
+    end
+
+    describe "#initial_storage" do
+      it "works" do
         res = subject.initial_storage(
           from: from,
           script: script,
-          init_params: init_params
+          init_params: '"pierre"'
         )
-        p res
-        expect(res).to be_a Hash
+        expect(res).to be_an Array
       end
+    end
 
-      it "gets the current storage" do
+    describe "#json_script" do
+      it "works" do
+        json_init_script, json_contract_script = subject.json_scripts(
+          script: script
+        )
+        expect(json_init_script).to be_an Array
+        expect(json_contract_script).to be_an Array
+      end
+    end
+
+    describe "#origination_script" do
+      it "works" do
+        res = subject.origination_script(
+          from: from,
+          script: script,
+          init_params: '"pierre"'
+        )
+        expect(res).to be_a Hash
+        p res
+      end
+    end
+
+    describe "#get_storage" do
+      it "retrieves the current storage" do
         res = subject.get_storage(
           script: script,
           contract_address: contract_address
@@ -91,12 +87,39 @@ RSpec.describe TezosClient::LiquidityInterface do
         p res
       end
 
-      it "gets the current params" do
-        res = subject.call_parameters(
-          script: script,
-          parameters: call_parameters
-        )
-        p res
+      context "multisig.liq contract" do
+        let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
+        let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
+        let(:init_params) { ["Set [#{from}]", "1p"] }
+        let(:call_parameters) do  ["pay", "()"]
+        end
+
+        it "gets the initial storage" do
+          res = subject.initial_storage(
+            from: from,
+            script: script,
+            init_params: init_params
+          )
+          p res
+          expect(res).to be_a Hash
+        end
+
+        it "gets the current storage" do
+          res = subject.get_storage(
+            script: script,
+            contract_address: contract_address
+          )
+          expect(res).to be_a String
+          p res
+        end
+
+        it "gets the current params" do
+          res = subject.call_parameters(
+            script: script,
+            parameters: call_parameters
+          )
+          p res
+        end
       end
     end
   end

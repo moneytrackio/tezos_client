@@ -4,8 +4,8 @@ class TezosClient
   class LiquidityInterface
     # Wrapper used to call the tezos-client binary
     module LiquidityWrapper
-      def call_liquidity(command)
-        cmd = "#{liquidity_cmd} #{command}"
+      def call_liquidity(command, verbose: false)
+        cmd = "#{liquidity_cmd(verbose: verbose)} #{command}"
         log cmd
         Open3.popen3(cmd) do |_stdin, stdout, stderr, wait_thr|
           err = stderr.read
@@ -26,8 +26,9 @@ class TezosClient
         end
       end
 
-      def liquidity_cmd
-        "liquidity --tezos-node #{tezos_node}"
+      def liquidity_cmd(verbose:)
+        verbose_option = verbose ? "--verbose" : ""
+        "liquidity #{verbose_option} --tezos-node #{tezos_node}"
       end
     end
   end

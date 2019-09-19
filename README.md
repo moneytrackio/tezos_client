@@ -126,6 +126,17 @@ TezosClient.new.call_contract(
 )
 ```
 
+## Options
+
+### Liquidity options
+
+`TezosClient.new(..., liquidity_options: { options... })`
+
+Available options :
+
+* verbose (boolean) : enable verbose mode of Liquidity commands.
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

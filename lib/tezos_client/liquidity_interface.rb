@@ -7,9 +7,12 @@ class TezosClient
     include Logger
     include LiquidityWrapper
 
-    def initialize(rpc_node_address: "127.0.0.1", rpc_node_port: 8732)
+    attr_reader :options
+
+    def initialize(rpc_node_address: "127.0.0.1", rpc_node_port: 8732, options: {})
       @rpc_node_address = rpc_node_address
       @rpc_node_port = rpc_node_port
+      @options = options
     end
 
     def format_params(params)
@@ -24,7 +27,7 @@ class TezosClient
       init_params = format_params(init_params)
 
       with_tempfile(".json") do |json_file|
-        call_liquidity "--source #{from} --json #{script} -o #{json_file.path} --init-storage #{init_params}"
+        call_liquidity "--source #{from} --json #{script} -o #{json_file.path} --init-storage #{init_params}", verbose: options[:verbose]
         JSON.parse json_file.read.strip
       end
     end
