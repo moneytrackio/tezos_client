@@ -28,6 +28,18 @@ class TezosClient
     end
   end
 
+  class PreviouslyRevealedKey < RpcRequestFailure
+    attr_reader :contract
+
+    def initialize(error:, **_args)
+      @contract = error[:contract]
+
+      @message = "Previously revealed key for address #{contract}"
+
+      super
+    end
+  end
+
   class OperationFailure < Exception
     include Logger
 

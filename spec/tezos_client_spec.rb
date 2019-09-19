@@ -361,7 +361,30 @@ RSpec.describe TezosClient, :vcr do
 
       expect(res).to have_key(:operation_id)
       expect(res[:operation_id]).to match /o[a-zA-Z1-9]+/
-      pp res
+    end
+
+    context "previously revealed key" do
+
+      let(:key) { subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/1'") }
+      let(:secret_key) { key[:secret_key] }
+
+      before do
+        subject.transfer(
+          amount: 0.1,
+          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          to: key[:address],
+          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+        )
+        disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
+      end
+
+      it "raises an exception" do
+        expect do
+          subject.reveal_pubkey(secret_key: secret_key)
+          disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
+          subject.reveal_pubkey(secret_key: secret_key)
+        end.to raise_exception TezosClient::PreviouslyRevealedKey, "Previously revealed key for address tz1UTikevS42TFpT4uhtxkNbeYsG3ea7bsrB"
+      end
     end
   end
 

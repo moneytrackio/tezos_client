@@ -77,8 +77,10 @@ class TezosClient
 
       def exception_klass(error)
         case get_error_id(error)
-        when "proto.003-PsddFKi3.operation.invalid_activation"
+        when /proto\.[^.]*\.operation\.invalid_activation/
           TezosClient::InvalidActivation
+        when /proto\.[^.]*\.contract\.previously_revealed_key/
+          TezosClient::PreviouslyRevealedKey
         else
           TezosClient::RpcRequestFailure
         end
