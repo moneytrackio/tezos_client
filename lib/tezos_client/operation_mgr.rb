@@ -39,7 +39,7 @@ class TezosClient
 
       run_result[:operation_results].zip(rpc_operation_args) do |operation_result, rpc_operation_args|
         if rpc_operation_args.key?(:gas_limit)
-          rpc_operation_args[:gas_limit] = (operation_result[:consumed_gas] + 0.001).to_satoshi.to_s
+          rpc_operation_args[:gas_limit] = (operation_result[:consumed_gas].to_i.from_satoshi + 0.001).to_satoshi.to_s
         end
       end
     end
@@ -111,14 +111,14 @@ class TezosClient
         total_consumed_storage += compute_consumed_storage(metadata)
         consumed_gas = compute_consumed_gas(metadata)
         total_consumed_gas += consumed_gas
-        { result: metadata[:operation_result], consumed_gas: consumed_gas }
+        metadata[:operation_result]
       end
 
       {
         status: :applied,
         consumed_gas: total_consumed_gas,
         consumed_storage: total_consumed_storage,
-        operations_result: operations_result
+        operation_results: operation_results
       }
     end
 
