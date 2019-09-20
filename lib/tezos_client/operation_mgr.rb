@@ -37,9 +37,9 @@ class TezosClient
     def simulate_and_update_limits
       run_result = run
 
-      run_result[:operations_result].zip(rpc_operation_args) do |operation_result, rpc_operation_args|
+      run_result[:operation_results].zip(rpc_operation_args) do |operation_result, rpc_operation_args|
         if rpc_operation_args.key?(:gas_limit)
-          rpc_operation_args[:gas_limit] = (operation_result[:consumed_gas] + 0.001).to_satoshi.to_s
+          rpc_operation_args[:gas_limit] = (operation_result[:consumed_gas].to_i.from_satoshi + 0.001).to_satoshi.to_s
         end
       end
     end
@@ -73,16 +73,25 @@ class TezosClient
       @signed_hex
     end
 
-    def test_and_broadcast
+    def simulate
       # simulate operations and adjust gas limits
       simulate_and_update_limits
+      res = preapply
+      operation_results = res.map { |metadata| metadata[:operation_result] }
 
-      operations_result = preapply
+      {
+        operation_results: operation_results,
+      }
+    end
+
+    def test_and_broadcast
+      simulate_res = simulate
+
 
       op_id = broadcast
       {
         operation_id: op_id,
-        operations_result: operations_result,
+        operation_results: simulate_res[:operation_results],
       }
     end
 
@@ -97,19 +106,19 @@ class TezosClient
 
       ensure_applied!(rpc_responses)
 
-      operations_result = rpc_responses.map do |rpc_response|
+      operation_results = rpc_responses.map do |rpc_response|
         metadata = rpc_response[:metadata]
         total_consumed_storage += compute_consumed_storage(metadata)
         consumed_gas = compute_consumed_gas(metadata)
         total_consumed_gas += consumed_gas
-        { result: metadata[:operation_result], consumed_gas: consumed_gas }
+        metadata[:operation_result]
       end
 
       {
         status: :applied,
         consumed_gas: total_consumed_gas,
         consumed_storage: total_consumed_storage,
-        operations_result: operations_result
+        operation_results: operation_results
       }
     end
 
@@ -146,13 +155,14 @@ class TezosClient
     private
 
     def ensure_applied!(rpc_responses)
-      operation_results = rpc_responses.map { |response| response[:metadata][:operation_result] }
+      metadatas = rpc_responses.map { |response| response[:metadata] }
+      operation_results = metadatas.map { |metadata| metadata[:operation_result] }
 
       failed = operation_results.detect do |operation_result|
         operation_result != nil && operation_result[:status] != "applied"
       end
 
-      return operation_results if failed.nil?
+      return metadatas if failed.nil?
 
       failed_operation_result = operation_results.detect do |operation_result|
         operation_result[:status] == "failed"

@@ -17,7 +17,8 @@ class TezosClient
                    :blocks,
                    :balance,
                    :contract_manager_key,
-                   :contract_storage
+                   :contract_storage,
+                   :pending_operations
 
     def_delegators :client_interface,
                    :gen_keys,

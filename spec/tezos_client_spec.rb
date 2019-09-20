@@ -130,6 +130,62 @@ RSpec.describe TezosClient, :vcr do
     end
   end
 
+  describe "inject_raw_operations" do
+    let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
+    let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
+    let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
+    let(:amount) { 0 }
+    let(:init_params) { '"test"' }
+
+    it "works" do
+      origination = subject.originate_contract(
+        from: source,
+        amount: amount,
+        script: script,
+        secret_key: secret_key,
+        init_params: init_params,
+        dry_run: true
+      )
+
+      transfer = subject.transfer_to_many(
+        from: source,
+        amounts: {
+          "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" => 0.01,
+          "tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn" => 0.02
+        },
+        secret_key: secret_key,
+        dry_run: true
+      )
+
+      raw_operations = transfer[:rpc_operation_args].push(origination[:rpc_operation_args])
+
+      subject.inject_raw_operations(
+        from: source,
+        secret_key: secret_key,
+        raw_operations: raw_operations
+      )
+    end
+  end
+
+  describe "#pending_operations" do
+
+    let!(:op_id) do
+      res = subject.transfer(
+        amount: 1,
+        from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+      )
+      res[:operation_id]
+    end
+
+    it "works" do
+      res = subject.pending_operations
+      expect(res).to be_a Hash
+      operations = res["applied"].select { |operation| operation.fetch("contents", []).map { |content| content&.fetch("source", nil) }&.include?("tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq") }
+      expect(operations.size).to eq 1
+    end
+  end
 
   describe "#originate_contract" do
     let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
@@ -150,8 +206,31 @@ RSpec.describe TezosClient, :vcr do
       expect(res).to be_a Hash
       expect(res).to have_key :operation_id
       expect(res).to have_key :originated_contract
+      expect(res).to have_key :rpc_operation_args
+
       expect(res[:operation_id]).to be_a String
       expect(res[:originated_contract]).to be_a String
+      expect(res[:rpc_operation_args]).to be_a Hash
+    end
+
+    context "dry_run" do
+      it "works" do
+        res = subject.originate_contract(
+          from: source,
+          amount: amount,
+          script: script,
+          secret_key: secret_key,
+          init_params: init_params,
+          dry_run: true
+        )
+
+        expect(res).to be_a Hash
+        expect(res).to have_key :originated_contract
+        expect(res).to have_key :rpc_operation_args
+
+        expect(res[:originated_contract]).to be_a String
+        expect(res[:rpc_operation_args]).to be_a Hash
+      end
     end
 
     context "with no script" do
@@ -171,7 +250,6 @@ RSpec.describe TezosClient, :vcr do
       end
     end
   end
-
 
   context "#multisig" do
     let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
@@ -283,7 +361,30 @@ RSpec.describe TezosClient, :vcr do
 
       expect(res).to have_key(:operation_id)
       expect(res[:operation_id]).to match /o[a-zA-Z1-9]+/
-      pp res
+    end
+
+    context "previously revealed key" do
+
+      let(:key) { subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/1'") }
+      let(:secret_key) { key[:secret_key] }
+
+      before do
+        subject.transfer(
+          amount: 0.1,
+          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          to: key[:address],
+          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+        )
+        disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
+      end
+
+      it "raises an exception" do
+        expect do
+          subject.reveal_pubkey(secret_key: secret_key)
+          disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
+          subject.reveal_pubkey(secret_key: secret_key)
+        end.to raise_exception TezosClient::PreviouslyRevealedKey, "Previously revealed key for address tz1UTikevS42TFpT4uhtxkNbeYsG3ea7bsrB"
+      end
     end
   end
 
@@ -372,7 +473,7 @@ RSpec.describe TezosClient, :vcr do
           to: contract_address,
           parameters: call_params
         )
-      end.to raise_exception TezosClient::ScriptRuntimeError
+      end.to raise_exception TezosClient::ScriptRuntimeError, 'Script runtime Error when executing : {"string"=>"Balance to low for withdrawal"} (location: 199)'
     end
   end
 end

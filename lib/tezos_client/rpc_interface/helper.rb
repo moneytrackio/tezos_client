@@ -27,7 +27,7 @@ class TezosClient
           kind: "origination",
           delegatable: args.fetch(:delegatable, false),
           spendable: args.fetch(:spendable, false),
-          balance: args.fetch(:amount,0).to_satoshi.to_s,
+          balance: args.fetch(:amount, 0).to_satoshi.to_s,
           source: args.fetch(:from),
           gas_limit: args.fetch(:gas_limit, 0.1).to_satoshi.to_s,
           storage_limit: args.fetch(:storage_limit, 0.06).to_satoshi.to_s,

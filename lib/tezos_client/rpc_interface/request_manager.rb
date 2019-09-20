@@ -5,13 +5,15 @@ class TezosClient
     module RequestManager
       def get(path, query: {})
         url = "http://#{@host}:#{@port}/#{path}"
-
-        response = HTTParty.get(url, headers: { "Content-Type" => "application/json" }, query: query)
+        response = nil
+        exec_time = Benchmark.realtime do
+          response = HTTParty.get(url, headers: { "Content-Type" => "application/json" }, query: query)
+        end
         formatted_response = format_response(response.parsed_response)
 
         log("-------")
         log(">>> GET #{response.request.uri.to_s} \n")
-        log("<<< code: #{response.code} \n #{tezos_contents_log(formatted_response)}")
+        log("<<< code: #{response.code} \n    exec time: #{exec_time}\n #{tezos_contents_log(formatted_response)}")
         log("-------")
         unless response.success?
           failed!(url: url, code: response.code, responses: formatted_response)
@@ -22,15 +24,19 @@ class TezosClient
 
       def post(path, content)
         url = "http://#{@host}:#{@port}/#{path}"
-        response = HTTParty.post(url,
-                                 body: content.to_json,
-                                 headers: { "Content-Type" => "application/json" })
+
+        response = nil
+        exec_time = Benchmark.realtime do
+          response = HTTParty.post(url,
+                                   body: content.to_json,
+                                   headers: { "Content-Type" => "application/json" })
+        end
 
         formatted_response = format_response(response.parsed_response)
 
         log("-------")
         log(">>> POST #{url} \n #{tezos_contents_log(content)}")
-        log("<<< code: #{response.code} \n #{tezos_contents_log(formatted_response)}")
+        log("<<< code: #{response.code} \n    exec time: #{exec_time} \n #{tezos_contents_log(formatted_response)}")
         log("-------")
 
         unless response.success?
@@ -71,15 +77,17 @@ class TezosClient
 
       def exception_klass(error)
         case get_error_id(error)
-        when "proto.003-PsddFKi3.operation.invalid_activation"
+        when /proto\.[^.]*\.operation\.invalid_activation/
           TezosClient::InvalidActivation
+        when /proto\.[^.]*\.contract\.previously_revealed_key/
+          TezosClient::PreviouslyRevealedKey
         else
           TezosClient::RpcRequestFailure
         end
       end
 
       def failed!(url:, code:, responses:)
-        error = responses[0]
+        error = responses.is_a?(String) ? responses : responses[0]
         raise exception_klass(error).new(
           error: error,
           url: url,

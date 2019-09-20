@@ -3,9 +3,11 @@ class TezosClient
     include EncodeUtils
 
     def rpc_operation_args
-      rpc_interface.transaction_operation(
-        operation_args
-      )
+      @rpc_operation_args ||= begin
+        rpc_interface.transaction_operation(
+          operation_args
+        )
+      end
     end
 
     private
