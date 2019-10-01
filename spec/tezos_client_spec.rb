@@ -281,18 +281,30 @@ RSpec.describe TezosClient, :vcr do
     describe "#call Pay" do
       let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
       let(:call_params) { %w{pay ()} }
-      let(:amount) { 1 }
+      let(:amount) { 0.001 }
 
       it "works" do
-        res = subject.call_contract(
-          from: source,
-          amount: amount,
-          script: script,
-          secret_key: secret_key,
-          to: contract_address,
-          parameters: call_params
-        )
-        pp res
+        disabling_vcr do
+          res = subject.transfer(
+            amount: 0.1,
+            from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+            to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+            secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+          )
+          pp res
+          counter =  res[:rpc_operation_args][:counter].to_i + 1
+
+          20.times do |i|
+            res2 = subject.transfer(
+              amount: 0.01,
+              from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+              to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+              secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
+              cast_counter: counter + i
+            )
+            pp res2
+          end
+        end
       end
     end
 

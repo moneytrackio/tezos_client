@@ -16,6 +16,7 @@ class TezosClient
       @signed_operation_args_h = nil
       @branch = args[:branch]
       @protocol = args[:protocol]
+      @cast_counter = args[:cast_counter]
     end
 
     def multiple_operations?
@@ -149,6 +150,9 @@ class TezosClient
     end
 
     def broadcast
+      #puts "cast counter:: #{@cast_counter}"
+      #rpc_operation_args[0][:counter] = @cast_counter.to_s unless @cast_counter.nil?
+
       rpc_interface.broadcast_operation(signed_hex)
     end
 
