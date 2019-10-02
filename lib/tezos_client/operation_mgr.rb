@@ -1,3 +1,5 @@
+require "tezos_client/compute_operation_args_counters"
+
 class TezosClient
   class OperationMgr
     include Crypto
@@ -14,11 +16,15 @@ class TezosClient
       @signed_operation_args_h = nil
       @branch = args[:branch]
       @protocol = args[:protocol]
-      @cast_counter = args[:cast_counter]
+      @ignore_counter_error = args[:ignore_counter_error]
     end
 
     def multiple_operations?
       @multiple_operations
+    end
+
+    def ignore_counter_error?
+      !!@ignore_counter_error
     end
 
     def single_operation?
@@ -150,7 +156,7 @@ class TezosClient
       self.rpc_operation_args = ::TezosClient::ComputeOperationArgsCounters.new(
         pending_operations: rpc_interface.pending_operations,
         operation_args: rpc_operation_args
-      ).call
+      ).call if ignore_counter_error?
 
       rpc_interface.broadcast_operation(signed_hex)
     end

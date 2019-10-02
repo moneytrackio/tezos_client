@@ -28,7 +28,6 @@ require "tezos_client/operations/operation_array"
 require "tezos_client/client_interface"
 require "tezos_client/rpc_interface"
 require "tezos_client/liquidity_interface"
-require "tezos_client/compute_operation_args_counters"
 
 class TezosClient
   using CurrencyUtils
