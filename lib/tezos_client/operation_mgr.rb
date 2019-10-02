@@ -1,6 +1,4 @@
-
 class TezosClient
-
   class OperationMgr
     include Crypto
     using CurrencyUtils
@@ -87,9 +85,8 @@ class TezosClient
 
     def test_and_broadcast
       simulate_res = simulate
-
-
       op_id = broadcast
+
       {
         operation_id: op_id,
         operation_results: simulate_res[:operation_results],
@@ -150,8 +147,10 @@ class TezosClient
     end
 
     def broadcast
-      #puts "cast counter:: #{@cast_counter}"
-      #rpc_operation_args[0][:counter] = @cast_counter.to_s unless @cast_counter.nil?
+      self.rpc_operation_args = ::TezosClient::ComputeOperationArgsCounters.new(
+        pending_operations: rpc_interface.pending_operations,
+        operation_args: rpc_operation_args
+      ).call
 
       rpc_interface.broadcast_operation(signed_hex)
     end
