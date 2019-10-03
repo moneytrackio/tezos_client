@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tezos_client (0.4.8)
+    tezos_client (0.4.10)
       activesupport (~> 5.2.3)
       base58 (~> 0.2.3)
       bip_mnemonic (~> 0.0.2)
@@ -37,6 +37,7 @@ GEM
     base58 (0.2.3)
     bip_mnemonic (0.0.4)
     builder (3.2.3)
+    coderay (1.1.2)
     concurrent-ruby (1.1.5)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -49,7 +50,7 @@ GEM
     hashdiff (1.0.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    httparty (0.17.0)
+    httparty (0.17.1)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
     i18n (1.6.0)
@@ -73,6 +74,9 @@ GEM
     parallel (1.17.0)
     parser (2.6.4.0)
       ast (~> 2.4.0)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     public_suffix (4.0.1)
     rack (2.0.7)
     rack-test (1.1.0)
@@ -147,6 +151,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
+  pry
   rake (~> 10.0)
   rspec (~> 3.0)
   rubocop-rails_config

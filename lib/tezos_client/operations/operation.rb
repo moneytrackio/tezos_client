@@ -1,6 +1,6 @@
 class TezosClient
   class Operation
-    delegate :run, :preapply, :test_and_broadcast, :simulate, :signed_hex, to: :operation_mgr
+    delegate :run, :preapply, :test_and_broadcast, :broadcast, :simulate, :signed_hex, to: :operation_mgr
 
     def initialize(rpc_interface:, **args)
       @rpc_interface = rpc_interface
@@ -27,7 +27,7 @@ class TezosClient
     end
 
     def operation_options
-      @args.slice(:secret_key, :protocol, :branch)
+      @args.slice(:secret_key, :protocol, :branch, :ignore_counter_error)
     end
   end
 end

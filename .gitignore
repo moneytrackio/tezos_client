@@ -12,3 +12,6 @@
 
 # Rubymine configuration file
 .idea/*
+
+# vim ctags
+.tags

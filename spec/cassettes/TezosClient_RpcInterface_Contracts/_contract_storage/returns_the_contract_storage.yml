@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/KT1T1QYR6VD2LLtRSP4CHNyKkGbAPHoVu7wc/storage
+    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/KT1T1QYR6VD2LLtRSP4CHNyKkGbAPHoVu7wc/storage
     body:
       encoding: US-ASCII
       string: ''

@@ -1,6 +1,6 @@
+require "tezos_client/compute_operation_args_counters"
 
 class TezosClient
-
   class OperationMgr
     include Crypto
     using CurrencyUtils
@@ -16,10 +16,15 @@ class TezosClient
       @signed_operation_args_h = nil
       @branch = args[:branch]
       @protocol = args[:protocol]
+      @ignore_counter_error = args[:ignore_counter_error]
     end
 
     def multiple_operations?
       @multiple_operations
+    end
+
+    def ignore_counter_error?
+      !!@ignore_counter_error
     end
 
     def single_operation?
@@ -86,9 +91,8 @@ class TezosClient
 
     def test_and_broadcast
       simulate_res = simulate
-
-
       op_id = broadcast
+
       {
         operation_id: op_id,
         operation_results: simulate_res[:operation_results],
@@ -149,6 +153,11 @@ class TezosClient
     end
 
     def broadcast
+      self.rpc_operation_args = ::TezosClient::ComputeOperationArgsCounters.new(
+        pending_operations: rpc_interface.pending_operations,
+        operation_args: rpc_operation_args
+      ).call if ignore_counter_error?
+
       rpc_interface.broadcast_operation(signed_hex)
     end
 

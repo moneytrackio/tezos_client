@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -33,7 +33,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:19:47 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    uri: http://tezos_node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -64,7 +64,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:19:48 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BLivoPgeZG9yc9TCETHZTyWcndQg26tbuhsAwMefemUtLXn43KK","contents":[{"kind":"origination","delegatable":false,"spendable":false,"balance":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"60000","counter":"14898","fee":"50000","managerPubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR","annots":["@votes_slash_1"]}]]},{"prim":"CAR","annots":["@choice_slash_2"]},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
@@ -97,7 +97,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:19:48 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"branch":"BLivoPgeZG9yc9TCETHZTyWcndQg26tbuhsAwMefemUtLXn43KK","contents":[{"kind":"origination","delegatable":false,"spendable":false,"balance":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"60000","counter":"14898","fee":"50000","managerPubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR","annots":["@votes_slash_1"]}]]},{"prim":"CAR","annots":["@choice_slash_2"]},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
@@ -132,7 +132,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:19:48 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BLivoPgeZG9yc9TCETHZTyWcndQg26tbuhsAwMefemUtLXn43KK","contents":[{"kind":"origination","delegatable":false,"spendable":false,"balance":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"31949","storage_limit":"60000","counter":"14898","fee":"50000","managerPubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR","annots":["@votes_slash_1"]}]]},{"prim":"CAR","annots":["@choice_slash_2"]},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
@@ -165,7 +165,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:19:48 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/metadata
+    uri: http://tezos_node:8094//chains/main/blocks/head/metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -196,7 +196,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:19:48 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"PsddFKi32cMJ2qPjf43Qv5GDWLDPZb3T3bF6fLKiF5HtvHNU7aP","branch":"BLivoPgeZG9yc9TCETHZTyWcndQg26tbuhsAwMefemUtLXn43KK","contents":[{"kind":"origination","delegatable":false,"spendable":false,"balance":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"31949","storage_limit":"60000","counter":"14898","fee":"50000","managerPubkey":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","script":{"code":[{"prim":"parameter","args":[{"prim":"string"}]},{"prim":"storage","args":[{"prim":"map","args":[{"prim":"string"},{"prim":"int"}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"DIP","args":[[{"prim":"CDR","annots":["@votes_slash_1"]}]]},{"prim":"CAR","annots":["@choice_slash_2"]},{"prim":"PUSH","args":[{"prim":"mutez"},{"int":"5000000"}]},{"prim":"AMOUNT","annots":["@amount"]},{"prim":"COMPARE"},{"prim":"LT"},{"prim":"IF","args":[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"Not
@@ -231,7 +231,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:19:48 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/injection/operation?chain=main
+    uri: http://tezos_node:8094/injection/operation?chain=main
     body:
       encoding: UTF-8
       string: '"8529ad652bbc673c1dac29d2625e4370a93fec15dceaa3cb5f995cddee448991090000982fd7853b46e70022bc56f12b427855a2adb67ed08603b274cdf901e0d40300982fd7853b46e70022bc56f12b427855a2adb67e00000000ff000001bf02000001ba05000368050107600368035b050202000001a70321051f020000001404170000000e40766f7465735f736c6173685f3104160000000f4063686f6963655f736c6173685f320743036a0080ade20404130000000740616d6f756e7403190337072c02000000310743036801000000264e6f7420656e6f756768206d6f6e65792c206174206c656173742035747a20746f20766f7465032702000001130200000015051f020000000c04210000000640766f746573034c0200000016051f020000000d0421000000074063686f696365034c0329072f020000001307430368010000000842616420766f7465032702000000bd0200000023051f020000001a0200000015051f020000000c04210000000640766f746573034c034c0743035b0001020000001f051f02000000160200000011051f02000000080421000000024078034c034c03120200000032051f02000000290200000024051f020000001b0200000016051f020000000d0421000000074063686f696365034c034c034c051f02000000020346051f0200000010051f0200000009051f0200000002032004500000000640766f746573053d036d0342051f0200000004032003200000002c0200000027070401000000056f63616d6c00000704010000000370726f000007040100000004746573740000b7d6d0259774749856268370cf574a6ea0e4e8a4a6e842c19a165915161aeffe9435a883e8c75e90bb9744a81577b5228b4acd8958122231c4b8cd7051092801"'

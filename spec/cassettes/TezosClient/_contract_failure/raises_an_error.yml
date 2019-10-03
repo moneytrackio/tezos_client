@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -33,7 +33,7 @@ http_interactions:
   recorded_at: Thu, 19 Sep 2019 10:47:51 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    uri: http://tezos_node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -64,7 +64,7 @@ http_interactions:
   recorded_at: Thu, 19 Sep 2019 10:47:51 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BMJxy7NTaYhqu45tE4RgCHpZyqVq929ckmwmZEpnJEJUdjPSzKt","contents":[{"kind":"transaction","amount":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7","gas_limit":"100000","storage_limit":"6000","counter":"15610","fee":"50000","parameters":{"prim":"Right","args":[{"prim":"Some","args":[{"prim":"Pair","args":[{"string":"tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc"},{"int":"10000000000000000"}]}]}]}}]}'
@@ -95,7 +95,7 @@ http_interactions:
   recorded_at: Thu, 19 Sep 2019 10:47:51 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"branch":"BMJxy7NTaYhqu45tE4RgCHpZyqVq929ckmwmZEpnJEJUdjPSzKt","contents":[{"kind":"transaction","amount":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7","gas_limit":"100000","storage_limit":"6000","counter":"15610","fee":"50000","parameters":{"prim":"Right","args":[{"prim":"Some","args":[{"prim":"Pair","args":[{"string":"tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc"},{"int":"10000000000000000"}]}]}]}}],"signature":"edsigu3CNwQcKrjCpZZn5cJwhzbEc1AJPQGuTAyvnRVUVckcLtmdL5uPv6Uhce1YXYD9gwYhUJAzfMqHgJuSvm793PYdBs7bVYE"}'

@@ -29,7 +29,6 @@ require "tezos_client/client_interface"
 require "tezos_client/rpc_interface"
 require "tezos_client/liquidity_interface"
 
-
 class TezosClient
   using CurrencyUtils
   using StringUtils
