@@ -3,6 +3,7 @@
 require "bundler/setup"
 require "tezos_client"
 require "securerandom"
+require "pry"
 
 require_relative "../lib/tezos_client/string_utils"
 
