@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -33,7 +33,7 @@ http_interactions:
   recorded_at: Wed, 11 Sep 2019 10:06:46 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    uri: http://tezos_node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -64,7 +64,7 @@ http_interactions:
   recorded_at: Wed, 11 Sep 2019 10:06:46 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BL8dup3YQHvh6yP5M6b1cqHb7AuFQd7v2GZEGyb9GReK3nNUyLt","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"15474","fee":"50000"},{"kind":"transaction","amount":"20000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","gas_limit":"100000","storage_limit":"6000","counter":"15475","fee":"50000"}]}'
@@ -95,7 +95,7 @@ http_interactions:
   recorded_at: Wed, 11 Sep 2019 10:06:46 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"branch":"BL8dup3YQHvh6yP5M6b1cqHb7AuFQd7v2GZEGyb9GReK3nNUyLt","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"15474","fee":"50000"},{"kind":"transaction","amount":"20000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","gas_limit":"100000","storage_limit":"6000","counter":"15475","fee":"50000"}],"signature":"edsigtmLm5EjY61jMu4aP5J7ub7FKY5hN3pfRbh9KCK1qp2QtRWuWCS74UthEeD1pnZLhTKyproLKdAkKC6qLz2JKUor4aQcWJy"}'
@@ -126,7 +126,7 @@ http_interactions:
   recorded_at: Wed, 11 Sep 2019 10:06:47 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BL8dup3YQHvh6yP5M6b1cqHb7AuFQd7v2GZEGyb9GReK3nNUyLt","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"11200","storage_limit":"6000","counter":"15474","fee":"50000"},{"kind":"transaction","amount":"20000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","gas_limit":"11200","storage_limit":"6000","counter":"15475","fee":"50000"}]}'
@@ -157,7 +157,7 @@ http_interactions:
   recorded_at: Wed, 11 Sep 2019 10:06:47 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/metadata
+    uri: http://tezos_node:8094//chains/main/blocks/head/metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -188,7 +188,7 @@ http_interactions:
   recorded_at: Wed, 11 Sep 2019 10:06:47 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"Pt24m4xiPbLDhVgVfABUjirbmda3yohdN82Sp9FeuAXJ4eV9otd","branch":"BL8dup3YQHvh6yP5M6b1cqHb7AuFQd7v2GZEGyb9GReK3nNUyLt","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"11200","storage_limit":"6000","counter":"15474","fee":"50000"},{"kind":"transaction","amount":"20000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn","gas_limit":"11200","storage_limit":"6000","counter":"15475","fee":"50000"}],"signature":"edsigtqaJ6fkEbF1EVqfDHVqZfaVo9S7mpL6gdDSF6vDAiqxAc8wdvXW5WPzSuhLRBSzGXQHeQePQsh2bm3Q5AWQ8ZNZpmpcigw"}]'
@@ -219,7 +219,7 @@ http_interactions:
   recorded_at: Wed, 11 Sep 2019 10:06:47 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/injection/operation?chain=main
+    uri: http://tezos_node:8094/injection/operation?chain=main
     body:
       encoding: UTF-8
       string: '"374cea37319875f0411194f59020620a5a1a98c7fb59eda189f5d3ebe5ec663f080000982fd7853b46e70022bc56f12b427855a2adb67ed08603f278c057f02e904e0000982fd7853b46e70022bc56f12b427855a2adb67e00080000982fd7853b46e70022bc56f12b427855a2adb67ed08603f378c057f02ea09c010000992ce5f891f96942de5e07fa5f85087b70a04e310087cf5ad065762e9e1224fd9f7adb2a51f2b4bc168bd89c5fbf3951ccf396330962f3dc4d816a9f29c0b78aff1dd00cc664c20ce63ae74deada56565b0afa4809"'

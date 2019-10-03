@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    uri: http://tezos_node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -33,7 +33,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:12:55 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -64,7 +64,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:12:55 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BLjM5J1e4KWL8rihNkGnrhpSfFiiVULrn2qKKzBrn1ziirH7DSi","contents":[{"kind":"transaction","amount":"100000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ULB19s3BXyXkYL5M6i7VWXspWuxqQk3Xq","gas_limit":"100000","storage_limit":"6000","counter":"14496","fee":"50000"}]}'
@@ -95,7 +95,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:12:55 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"branch":"BLjM5J1e4KWL8rihNkGnrhpSfFiiVULrn2qKKzBrn1ziirH7DSi","contents":[{"kind":"transaction","amount":"100000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ULB19s3BXyXkYL5M6i7VWXspWuxqQk3Xq","gas_limit":"100000","storage_limit":"6000","counter":"14496","fee":"50000"}],"signature":"edsigtpB3cjUUSej1apGDBm3aCDwTyxL4Dj1RUmWbfZu9GZWDY8HErFZAeiXHC4aL7N9VGHH7ADaU5sQkJDygwoH1pryNFmtkJg"}'
@@ -126,7 +126,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:12:55 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BLjM5J1e4KWL8rihNkGnrhpSfFiiVULrn2qKKzBrn1ziirH7DSi","contents":[{"kind":"transaction","amount":"100000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ULB19s3BXyXkYL5M6i7VWXspWuxqQk3Xq","gas_limit":"20100","storage_limit":"6000","counter":"14496","fee":"50000"}]}'
@@ -157,7 +157,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:12:55 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/metadata
+    uri: http://tezos_node:8094//chains/main/blocks/head/metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -188,7 +188,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:12:55 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"PsddFKi32cMJ2qPjf43Qv5GDWLDPZb3T3bF6fLKiF5HtvHNU7aP","branch":"BLjM5J1e4KWL8rihNkGnrhpSfFiiVULrn2qKKzBrn1ziirH7DSi","contents":[{"kind":"transaction","amount":"100000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ULB19s3BXyXkYL5M6i7VWXspWuxqQk3Xq","gas_limit":"20100","storage_limit":"6000","counter":"14496","fee":"50000"}],"signature":"edsigtqtzSNcmqzHpxsTCaU2Vn3zaf831ovQbX3yjCvziCpVKXgDL6QCxxpWm5gxqr6MsDavtifyH3pPWg7tLBRqMgBxbc6iG3F"}]'
@@ -219,7 +219,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:12:56 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/injection/operation?chain=main
+    uri: http://tezos_node:8094/injection/operation?chain=main
     body:
       encoding: UTF-8
       string: '"861cf45a54b94436352e89cfe8e9111c2a4ad70f8fd24c583bec24d8dcea29f1080000982fd7853b46e70022bc56f12b427855a2adb67ed08603a071849d01f02ea08d0600005f589515cb9c439346a9e070837639187d4e49ba008a461707d140d8fa6ace5d40f4ef1584a6cf378d99527e678b816c996bd7e97d12430a1121590ca4d79671b6f7a71de98745f2038c0becfc7a04e2b75655a800"'
@@ -250,7 +250,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:12:56 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    uri: http://tezos_node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -281,7 +281,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:13:23 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ULB19s3BXyXkYL5M6i7VWXspWuxqQk3Xq/counter
+    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1ULB19s3BXyXkYL5M6i7VWXspWuxqQk3Xq/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -312,7 +312,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:13:23 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BLRQrFYKQWEJXijBXBTSyuopjxLynwo8iz5CTjsvEGmZp1WyEuE","contents":[{"kind":"reveal","source":"tz1ULB19s3BXyXkYL5M6i7VWXspWuxqQk3Xq","fee":"50000","counter":"15765","gas_limit":"100000","storage_limit":"0","public_key":"edpktvDT9zZ6kqhGhXeVbCxLcMNYMk6Gf7M2ypWqcoZzFvkEHkwXEi"}]}'
@@ -343,7 +343,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:13:23 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"branch":"BLRQrFYKQWEJXijBXBTSyuopjxLynwo8iz5CTjsvEGmZp1WyEuE","contents":[{"kind":"reveal","source":"tz1ULB19s3BXyXkYL5M6i7VWXspWuxqQk3Xq","fee":"50000","counter":"15765","gas_limit":"100000","storage_limit":"0","public_key":"edpktvDT9zZ6kqhGhXeVbCxLcMNYMk6Gf7M2ypWqcoZzFvkEHkwXEi"}],"signature":"edsigu5eSPPD9Q2LbyNiQC3LngWNoSPeVaJNeCiGQjpPQHb1UNrNsa2W5yyuQ6sQk9aQCetKVXzWjTgNCZ8Gecq474JYUT5kkDJ"}'
@@ -374,7 +374,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:13:23 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BLRQrFYKQWEJXijBXBTSyuopjxLynwo8iz5CTjsvEGmZp1WyEuE","contents":[{"kind":"reveal","source":"tz1ULB19s3BXyXkYL5M6i7VWXspWuxqQk3Xq","fee":"50000","counter":"15765","gas_limit":"20000","storage_limit":"6000","public_key":"edpktvDT9zZ6kqhGhXeVbCxLcMNYMk6Gf7M2ypWqcoZzFvkEHkwXEi"}]}'
@@ -405,7 +405,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:13:23 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/metadata
+    uri: http://tezos_node:8094//chains/main/blocks/head/metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -436,7 +436,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:13:23 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"PsddFKi32cMJ2qPjf43Qv5GDWLDPZb3T3bF6fLKiF5HtvHNU7aP","branch":"BLRQrFYKQWEJXijBXBTSyuopjxLynwo8iz5CTjsvEGmZp1WyEuE","contents":[{"kind":"reveal","source":"tz1ULB19s3BXyXkYL5M6i7VWXspWuxqQk3Xq","fee":"50000","counter":"15765","gas_limit":"20000","storage_limit":"6000","public_key":"edpktvDT9zZ6kqhGhXeVbCxLcMNYMk6Gf7M2ypWqcoZzFvkEHkwXEi"}],"signature":"edsigu6EBuYwGK4c6izqr8T7GUtnReQGZh5kCGAaeuPt5tfC4ce8DFMVscnQ8AXxT1aXMrnGqWsKinwPTERxNWRiwQVgBjR9swN"}]'
@@ -467,7 +467,7 @@ http_interactions:
   recorded_at: Fri, 18 Jan 2019 10:13:23 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/injection/operation?chain=main
+    uri: http://tezos_node:8094/injection/operation?chain=main
     body:
       encoding: UTF-8
       string: '"5d63c2e6f2e967eccff98c47a11278b09e02768aa3b2ae436e3fa67cab39fe2a0700005f589515cb9c439346a9e070837639187d4e49bad08603957ba09c01f02e00244f9b6e24da759585e45f24ba9f0e0a8290c8b089cf8145dc0d0b26dcd8c279f7d06ad37d9401affb40c902b23e09ccf8c12e6a7c7d43c4283df7a9770bd0e0a20358a29b4a3d4ba85ba1a6a7b20ee134ae352780de1edeb760e57e4f5de100"'

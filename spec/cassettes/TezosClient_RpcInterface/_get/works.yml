@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//monitor/bootstrapped
+    uri: http://tezos_node:8094//monitor/bootstrapped
     body:
       encoding: US-ASCII
       string: ''

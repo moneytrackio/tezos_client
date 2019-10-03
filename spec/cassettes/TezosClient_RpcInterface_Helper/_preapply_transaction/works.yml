@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    uri: http://tezos_node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -33,7 +33,7 @@ http_interactions:
   recorded_at: Wed, 09 Jan 2019 08:28:27 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -64,7 +64,7 @@ http_interactions:
   recorded_at: Wed, 09 Jan 2019 08:28:27 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BLUCQKdVD5wmB3MewiEr1NPHj7EnQ5HqTeB5wgpYKTc2cDg4Rrp","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"13851","fee":"50000"}]}'
@@ -95,7 +95,7 @@ http_interactions:
   recorded_at: Wed, 09 Jan 2019 08:28:27 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"PsddFKi32cMJ2qPjf43Qv5GDWLDPZb3T3bF6fLKiF5HtvHNU7aP","branch":"BLUCQKdVD5wmB3MewiEr1NPHj7EnQ5HqTeB5wgpYKTc2cDg4Rrp","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"13851","fee":"50000"}],"signature":"edsigtsvYNhFTyaS9jq3E6UEpgscqjG1mB72QeePp3nLxRt2KcN9XVwXfGkb9mSyo7fyzt2pqjATWugpnpZ91SFa4LbWUvk25x5"}]'

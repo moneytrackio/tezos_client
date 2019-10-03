@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -33,7 +33,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:39:55 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    uri: http://tezos_node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -64,7 +64,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:39:56 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BMNd1WHuHLGrt7aUYBJCVTTFL3ZS4k6xAMb1n1k4ghKJyBS3BE9","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"14899","fee":"50000"}]}'
@@ -95,7 +95,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:39:56 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"branch":"BMNd1WHuHLGrt7aUYBJCVTTFL3ZS4k6xAMb1n1k4ghKJyBS3BE9","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"14899","fee":"50000"}],"signature":"edsigtc3gxq6LBctazxpr4yPct5TKdJtx2fv3UQxsGHEe9T2H5hv3rUJQXXVMqxvDu2c329GUeEH4JxjHuqGtAZSc7Ax3rtT3MC"}'
@@ -126,7 +126,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:39:56 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BMNd1WHuHLGrt7aUYBJCVTTFL3ZS4k6xAMb1n1k4ghKJyBS3BE9","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"20100","storage_limit":"6000","counter":"14899","fee":"50000"}]}'
@@ -157,7 +157,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:39:56 GMT
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/metadata
+    uri: http://tezos_node:8094//chains/main/blocks/head/metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -188,7 +188,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:39:56 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"PsddFKi32cMJ2qPjf43Qv5GDWLDPZb3T3bF6fLKiF5HtvHNU7aP","branch":"BMNd1WHuHLGrt7aUYBJCVTTFL3ZS4k6xAMb1n1k4ghKJyBS3BE9","contents":[{"kind":"transaction","amount":"1000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"20100","storage_limit":"6000","counter":"14899","fee":"50000"}],"signature":"edsigu4dmhFuD35AX1EfFnV5yk2XbCvu9AUwgnD1nVkuryzD1H4qgs2FJeYSsRzEGjqM47kXvQKbFgUE3ByX2pK1mPWXsuwJECD"}]'
@@ -219,7 +219,7 @@ http_interactions:
   recorded_at: Fri, 26 Apr 2019 09:39:56 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/injection/operation?chain=main
+    uri: http://tezos_node:8094/injection/operation?chain=main
     body:
       encoding: UTF-8
       string: '"dabffcd127fe962678d065b369e872a165b995bf2cf8c2ac1525cc61c32ded0b080000982fd7853b46e70022bc56f12b427855a2adb67ed08603b374849d01f02ec0843d0000982fd7853b46e70022bc56f12b427855a2adb67e00eba281af50aa3406dde9b7e77e9745e237b08dd6eeddfd21120fd414322b3be344ac9c11d77e12d40bcc55cc726d10373bb67b1cb0167d19f0495bcac4987909"'

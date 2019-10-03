@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alphanet-node.tzscan.io//chains/main/blocks/head/hash
+    uri: http://tezos_node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -33,7 +33,7 @@ http_interactions:
   recorded_at: Tue, 30 Apr 2019 08:51:20 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BMced2yJeVexDQn7hdtCEvqYHoJ7CaArnpCNsbn2yaHKtjBXue8","contents":[{"kind":"activate_account","pkh":"tz1RdraebVC4gRbrnMDWQjZ28FtvgQZWJp21","secret":"23d18abce360452faa65b9909b6bf259562af0f8"}]}'
@@ -64,7 +64,7 @@ http_interactions:
   recorded_at: Tue, 30 Apr 2019 08:51:20 GMT
 - request:
     method: post
-    uri: http://alphanet-node.tzscan.io/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"branch":"BMced2yJeVexDQn7hdtCEvqYHoJ7CaArnpCNsbn2yaHKtjBXue8","contents":[{"kind":"activate_account","pkh":"tz1RdraebVC4gRbrnMDWQjZ28FtvgQZWJp21","secret":"23d18abce360452faa65b9909b6bf259562af0f8"}],"signature":"edsigtsZqmciGN9NeSbEGSZKHvcMnmvziJa67VtWjTNTprPTk2XYnPooGoNV5fsvXs9wQo6qPeKBZqtv6yjocEzen4CszavUvuZ"}'
