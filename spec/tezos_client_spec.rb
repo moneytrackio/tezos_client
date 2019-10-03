@@ -276,6 +276,24 @@ RSpec.describe TezosClient, :vcr do
       end
     end
 
+    describe "#call Pay" do
+      let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
+      let(:call_params) { %w{pay ()} }
+      let(:amount) { 1 }
+
+      it "works" do
+        res = subject.call_contract(
+          from: source,
+          amount: amount,
+          script: script,
+          secret_key: secret_key,
+          to: contract_address,
+          parameters: call_params
+        )
+        pp res
+      end
+    end
+
     describe "ignore_counter_error option" do
       let(:params) do
         {

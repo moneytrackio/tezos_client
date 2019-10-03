@@ -27,7 +27,7 @@ class TezosClient
     end
 
     def operation_options
-      @args.slice(:secret_key, :protocol, :branch, :cast_counter, :ignore_counter_error)
+      @args.slice(:secret_key, :protocol, :branch, :ignore_counter_error)
     end
   end
 end
