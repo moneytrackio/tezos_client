@@ -78,7 +78,8 @@ RSpec.describe TezosClient::LiquidityInterface do
     end
 
     describe "#get_storage" do
-      it "retrieves the current storage" do
+      # TODO: fix me when alphanet-node is up again
+      xit "retrieves the current storage" do
         res = subject.get_storage(
           script: script,
           contract_address: contract_address
@@ -104,7 +105,8 @@ RSpec.describe TezosClient::LiquidityInterface do
           expect(res).to be_a Hash
         end
 
-        it "gets the current storage" do
+        # TODO: fix me when alphanet-node is up again
+        xit "gets the current storage" do
           res = subject.get_storage(
             script: script,
             contract_address: contract_address

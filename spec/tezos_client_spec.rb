@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe TezosClient, :vcr do
-
   include_context "public rpc interface"
   subject { tezos_client }
 
@@ -168,7 +167,6 @@ RSpec.describe TezosClient, :vcr do
   end
 
   describe "#pending_operations" do
-
     let!(:op_id) do
       res = subject.transfer(
         amount: 1,
@@ -278,31 +276,39 @@ RSpec.describe TezosClient, :vcr do
       end
     end
 
-    describe "#call Pay" do
-      let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
-      let(:call_params) { %w{pay ()} }
-      let(:amount) { 0.001 }
+    describe "ignore_counter_error option" do
+      let(:params) do
+        {
+          amount: 0.1,
+          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
+          ignore_counter_error: ignore_counter_error
+        }
+      end
 
-      it "works" do
-        disabling_vcr do
-          res = subject.transfer(
-            amount: 0.1,
-            from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-            to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-            secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
-          )
-          pp res
-          counter =  res[:rpc_operation_args][:counter].to_i + 1
+      context "when the ignore_counter_error option is set to false" do
+        let(:ignore_counter_error) { false }
 
-          20.times do |i|
-            res2 = subject.transfer(
-              amount: 0.01,
-              from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-              to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-              secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
-              cast_counter: counter + i
-            )
-            pp res2
+        it "raises an error when two transactions from the same source are executed" do
+          disabling_vcr do
+            expect do
+              subject.transfer params.merge(amount: 0.01)
+              subject.transfer params
+            end.to raise_error TezosClient::RpcRequestFailure, /Counter .* already used for contract/
+          end
+        end
+      end
+
+      context "when the ignore_counter_error option is set to false" do
+        let(:ignore_counter_error) { true }
+
+        it "works when two transactions from the same source are executed" do
+          disabling_vcr do
+            expect do
+              subject.transfer params.merge(amount: 0.01)
+              subject.transfer params
+            end.not_to raise_error
           end
         end
       end
@@ -376,7 +382,6 @@ RSpec.describe TezosClient, :vcr do
     end
 
     context "previously revealed key" do
-
       let(:key) { subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/1'") }
       let(:secret_key) { key[:secret_key] }
 
@@ -429,7 +434,8 @@ RSpec.describe TezosClient, :vcr do
     let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
     let(:contract_address) { "KT1FLmwGK2ptfyG8gxAPWPMVS7iGgPzkJEBE" }
 
-    it "works" do
+    # TODO: fix me when alphanet-node is up again
+    xit "works" do
       res = subject.get_storage(script: script, contract_address: contract_address)
       expect(res).to be_a String
     end
