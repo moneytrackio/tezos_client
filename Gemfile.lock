@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tezos_client (0.4.10)
+    tezos_client (0.4.11)
       activesupport (~> 5.2.3)
       base58 (~> 0.2.3)
       bip_mnemonic (~> 0.0.2)
