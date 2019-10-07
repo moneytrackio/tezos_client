@@ -112,9 +112,12 @@ class TezosClient
 
       operation_results = rpc_responses.map do |rpc_response|
         metadata = rpc_response[:metadata]
+
         total_consumed_storage += compute_consumed_storage(metadata)
         consumed_gas = compute_consumed_gas(metadata)
         total_consumed_gas += consumed_gas
+
+        metadata[:operation_result][:consumed_gas] = consumed_gas if metadata.key? :operation_result
         metadata[:operation_result]
       end
 
@@ -127,11 +130,11 @@ class TezosClient
     end
 
     def compute_consumed_gas(metadata)
-      consumed_gas = (metadata.dig(:operation_result, :consumed_gas) || "0").to_i.from_satoshi
+      consumed_gas = (metadata.dig(:operation_result, :consumed_gas) || "0").to_i
 
       if metadata.key?(:internal_operation_results)
         metadata[:internal_operation_results].each do |internal_operation_result|
-          consumed_gas += (internal_operation_result[:result][:consumed_gas] || "0").to_i.from_satoshi
+          consumed_gas += (internal_operation_result[:result][:consumed_gas] || "0").to_i
         end
       end
       consumed_gas
