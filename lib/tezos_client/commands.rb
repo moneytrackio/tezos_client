@@ -29,6 +29,7 @@ class TezosClient
                    :transfer
 
     def_delegators :liquidity_interface,
-                   :get_storage
+                   :get_storage,
+                   :pack_data
   end
 end

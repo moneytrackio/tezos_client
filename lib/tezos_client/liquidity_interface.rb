@@ -128,5 +128,10 @@ class TezosClient
         JSON.parse res
       end
     end
+
+    def pack_data(data:, type:)
+      res = call_liquidity "--pack '#{data}' '#{type}'"
+      res.strip
+    end
   end
 end
