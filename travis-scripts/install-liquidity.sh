@@ -8,7 +8,8 @@ export OPAMYES=1
 [ -d "liquidity/.git" ] || git clone --depth=50 https://github.com/OCamlPro/liquidity.git liquidity
 cd liquidity
 git pull
-git checkout next
+# git checkout next
+git checkout 5ed5b09674cb96f8cd4ac83a55621f77d9a9110c
 
 eval `opam config env`
 
