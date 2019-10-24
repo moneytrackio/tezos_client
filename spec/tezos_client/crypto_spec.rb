@@ -6,6 +6,7 @@ RSpec.describe TezosClient::Crypto do
   describe "#generate_key" do
     it "generates keys" do
       key = subject.generate_key
+      puts key
       expect(key).to be_a Hash
     end
 
@@ -118,6 +119,21 @@ RSpec.describe TezosClient::Crypto do
       expect(key).to have_key :address
       expect(key).to have_key :secret_key
       expect(key).to have_key :activation_secret
+    end
+  end
+
+  describe "#edsk2_to_edsk" do
+    let(:edsk2_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
+    let(:pubkey) { "edpkugJHjEZLNyTuX3wW2dT4P7PY5crLqq3zeDFvXohAs3tnRAaZKR" }
+
+    it "has the correct pubkey" do
+      edsk_key = subject.edsk2_to_edsk(edsk2_key)
+      expect(subject.secret_key_to_public_key(edsk_key)).to eq pubkey
+    end
+
+    it "has the same public key" do
+      edsk_key = subject.edsk2_to_edsk(edsk2_key)
+      expect(subject.secret_key_to_public_key(edsk_key)).to eq subject.secret_key_to_public_key(edsk2_key)
     end
   end
 end
