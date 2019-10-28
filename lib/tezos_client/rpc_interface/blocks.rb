@@ -11,7 +11,7 @@ class TezosClient
         query = {
           length: length,
           head: head,
-          min_date: min_date&.utc&.iso8601
+          min_date: min_date&.to_i
         }.compact
 
         res = get "chains/main/blocks/", query: query

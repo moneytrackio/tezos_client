@@ -20,14 +20,6 @@ class TezosClient
                    :contract_storage,
                    :pending_operations
 
-    def_delegators :client_interface,
-                   :gen_keys,
-                   :addresses,
-                   :import_public_key,
-                   :import_secret_key,
-                   :known_contracts,
-                   :transfer
-
     def_delegators :liquidity_interface,
                    :get_storage,
                    :pack_data

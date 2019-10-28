@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe TezosClient::LiquidityInterface do
+  include_context "public rpc interface"
+  include_context "contract origination"
+
+
   let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
   let(:from) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
   let(:contract_address) { "KT1FLmwGK2ptfyG8gxAPWPMVS7iGgPzkJEBE" }
@@ -32,17 +36,6 @@ RSpec.describe TezosClient::LiquidityInterface do
 
   context "without options" do
     subject { TezosClient::LiquidityInterface.new(default_options) }
-
-    describe "#forge_deploy" do
-      it "works" do
-        res = subject.forge_deploy(
-          from: from,
-          script: script,
-          init_params: '"pierre"'
-        )
-        p res
-      end
-    end
 
     describe "#initial_storage" do
       it "works" do
@@ -78,8 +71,13 @@ RSpec.describe TezosClient::LiquidityInterface do
     end
 
     describe "#get_storage" do
-      # TODO: fix me when alphanet-node is up again
-      xit "retrieves the current storage" do
+      include_context "contract origination"
+
+      let!(:contract_address) do
+        originate_demo_contract
+      end
+
+      it "retrieves the current storage" do
         res = subject.get_storage(
           script: script,
           contract_address: contract_address
@@ -90,10 +88,10 @@ RSpec.describe TezosClient::LiquidityInterface do
 
       context "multisig.liq contract" do
         let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
-        let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
         let(:init_params) { ["Set [#{from}]", "1p"] }
-        let(:call_parameters) do  ["pay", "()"]
-        end
+        let(:call_parameters) { ["pay", "()"] }
+
+        let!(:contract_address) { originate_multisig_contract }
 
         it "gets the initial storage" do
           res = subject.initial_storage(
@@ -105,8 +103,7 @@ RSpec.describe TezosClient::LiquidityInterface do
           expect(res).to be_a Hash
         end
 
-        # TODO: fix me when alphanet-node is up again
-        xit "gets the current storage" do
+        it "gets the current storage" do
           res = subject.get_storage(
             script: script,
             contract_address: contract_address

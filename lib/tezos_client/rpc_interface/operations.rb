@@ -20,9 +20,12 @@ class TezosClient
 
       def run_operations(operations:, **options)
         content = {
-          branch: options.fetch(:branch),
-          contents: operations,
-          signature: options.fetch(:signature)
+          operation: {
+            branch: options.fetch(:branch),
+            contents: operations,
+            signature: options.fetch(:signature)
+          },
+          chain_id: options.fetch(:chain_id)
         }
         res = post("chains/main/blocks/head/helpers/scripts/run_operation", content)
         res["contents"]

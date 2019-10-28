@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
+RSpec.describe TezosClient::RpcInterface::Blocks do
   include_context "public rpc interface"
   subject { rpc_interface }
-
-  let(:block_hash) { "BLHKSpcKZkLjf1e4dPUy8AFcMVtdRRTAxfhfYJ7SM5dH38VDmZR" }
-
+  let(:block_hash) { subject.block_header.fetch(:hash) }
 
   describe "#blocks" do
     context "default arguments" do
@@ -17,12 +15,12 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
     end
 
     context "given a block head" do
-      let(:head) { "BLHKSpcKZkLjf1e4dPUy8AFcMVtdRRTAxfhfYJ7SM5dH38VDmZR" }
+      let(:head) { block_hash }
       it "returns the 50 previous blocks" do
         res = subject.blocks(head: head)
         expect(res).to be_an Array
         expect(res.length).to eq 50
-        expect(res[0]).to eq "BLHKSpcKZkLjf1e4dPUy8AFcMVtdRRTAxfhfYJ7SM5dH38VDmZR"
+        expect(res[0]).to match /B[1-9a-zA-Z]+/
       end
     end
 
@@ -35,7 +33,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
     end
 
     context "given a min_date and a block head" do
-      let(:head) { "BLHKSpcKZkLjf1e4dPUy8AFcMVtdRRTAxfhfYJ7SM5dH38VDmZR" }
+      let(:head) { block_hash }
       let(:min_date) { Time.parse("2050-09-26T00:00:00Z") }
       it "ignores the min_date argument :(" do
         res = subject.blocks(head: head, min_date: min_date)
@@ -89,17 +87,43 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
       end
     end
 
-    context "specific block" do
+    context "block with transaction" do
+      let!(:block_hash) do
+        res = tezos_client.transfer(
+          amount: 1,
+          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+        )
+        disabling_vcr { p tezos_client.monitor_operation(res[:operation_id], timeout: 120) }
+      end
+
       it "returns the block" do
         res = subject.block_operations(block_hash)
         expect(res).to be_an Array
-        expect(res[0]).to be_an Array
-        expect(res[0][0]).to have_key "hash"
+        expect(res[3]).to be_an Array
+        expect(res[3][0]).to have_key "hash"
       end
     end
 
-    context "bock with originations" do
-      let(:block_hash) { "BL1UtJ4HWFvM6Lz1ZA6ZEiPnv52Hqk63depECVqr34xuT3E25i3" }
+    context "block with origination" do
+      let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
+      let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
+      let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
+      let(:amount) { 0 }
+      let(:init_params) { '"test"' }
+
+      let!(:block_hash) do
+        res = tezos_client.originate_contract(
+          from: source,
+          amount: amount,
+          script: script,
+          secret_key: secret_key,
+          init_params: init_params
+        )
+        disabling_vcr { p tezos_client.monitor_operation(res[:operation_id], timeout: 120) }
+      end
+
       it "contain the origination operation" do
         res = subject.block_operations(block_hash)
         expect(res).to be_an Array
@@ -119,14 +143,23 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
       end
     end
 
-    context "specific block" do
+    context "Block with operations" do
+      let!(:block_hash) do
+        res = tezos_client.transfer(
+          amount: 1,
+          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+        )
+        disabling_vcr { tezos_client.monitor_operation(res[:operation_id], timeout: 120) }
+      end
+
       it "returns the block" do
         res = subject.block_operation_hashes(block_hash)
         expect(res).to be_an Array
-        expect(res[0]).to be_an Array
-        expect(res[0][0]).to be_a String
+        expect(res[3]).to be_an Array
+        expect(res[3][0]).to be_a String
       end
     end
   end
-
 end

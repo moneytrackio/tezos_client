@@ -58,8 +58,8 @@ class TezosClient
       File.delete(file_copy_path) if File.exists? file_copy_path
     end
 
-    def json_scripts(args)
-      with_file_copy(args[:script]) do |script_copy_path|
+    def json_scripts(script:)
+      with_file_copy(script) do |script_copy_path|
         script_basename = script_copy_path.sub(/.liq$/, "")
 
         json_init_script_path = "#{script_basename}.initializer.tz.json"
@@ -92,24 +92,12 @@ class TezosClient
 
     def origination_script(args)
       storage = initial_storage(args)
-      _json_init_script, json_contract_script = json_scripts(args)
+      _json_init_script, json_contract_script = json_scripts(script: args[:script])
 
       {
         code: json_contract_script,
         storage: storage
       }
-    end
-
-    def forge_deploy(args)
-      amount = args.fetch(:amount, 0)
-      spendable = args.fetch(:spendable, false)
-      delegatable = args.fetch(:delegatable, false)
-      source = args.fetch :from
-      script = args.fetch :script
-      init_params = args.fetch :init_params
-
-      res = call_liquidity "--source #{source} #{spendable ? '--spendable' : ''} #{delegatable ? '--delegatable' : ''} --amount #{amount}tz #{script} --forge-deploy '#{init_params}'"
-      res.strip
     end
 
     def tezos_node
