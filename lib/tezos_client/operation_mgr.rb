@@ -39,6 +39,10 @@ class TezosClient
       @protocol ||= rpc_interface.protocol
     end
 
+    def chain_id
+      @chain_id ||= rpc_interface.chain_id
+    end
+
     def simulate_and_update_limits
       run_result = run
 
@@ -103,7 +107,8 @@ class TezosClient
       rpc_responses = rpc_interface.run_operations(
         operations: rpc_operation_args,
         signature: base_58_signature,
-        branch: branch)
+        branch: branch,
+        chain_id: chain_id)
 
       total_consumed_storage = 0
       total_consumed_gas = 0

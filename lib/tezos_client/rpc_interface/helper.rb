@@ -16,24 +16,22 @@ class TezosClient
           counter: counter(args).to_s,
           fee: args.fetch(:fee, 0.05).to_satoshi.to_s
         }
-        operation[:parameters] = args[:parameters] if args[:parameters]
+
+        if args[:parameters]
+          operation[:parameters] = args[:parameters]
+        end
         operation
       end
 
       def origination_operation(args)
-        manager = (args.fetch(:manager) { args.fetch(:from) })
-
         operation = {
           kind: "origination",
-          delegatable: args.fetch(:delegatable, false),
-          spendable: args.fetch(:spendable, false),
           balance: args.fetch(:amount, 0).to_satoshi.to_s,
           source: args.fetch(:from),
           gas_limit: args.fetch(:gas_limit, 0.1).to_satoshi.to_s,
           storage_limit: args.fetch(:storage_limit, 0.06).to_satoshi.to_s,
           counter: counter(args).to_s,
           fee: args.fetch(:fee, 0.05).to_satoshi.to_s,
-          manager_pubkey: manager
         }
 
         operation[:script] = args[:script] if args[:script]

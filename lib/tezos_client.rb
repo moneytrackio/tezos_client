@@ -6,6 +6,7 @@ require "active_support/core_ext/string/inflections"
 require "active_support/core_ext/module/delegation"
 require "timeout"
 require "benchmark"
+require "open3"
 
 require "tezos_client/version"
 require "tezos_client/string_utils"
@@ -25,7 +26,6 @@ require "tezos_client/operations/reveal_operation"
 require "tezos_client/operations/raw_operation_array"
 require "tezos_client/operations/operation_array"
 
-require "tezos_client/client_interface"
 require "tezos_client/rpc_interface"
 require "tezos_client/liquidity_interface"
 
@@ -38,7 +38,6 @@ class TezosClient
   include Commands
   include Crypto
 
-  attr_accessor :client_interface
   attr_accessor :rpc_interface
   attr_accessor :liquidity_interface
 
@@ -50,9 +49,6 @@ class TezosClient
     @liquidity_options = liquidity_options
 
     @client_config_file = ENV["TEZOS_CLIENT_CONFIG_FILE"]
-    @client_interface = ClientInterface.new(
-      config_file: @client_config_file
-    )
 
     @rpc_interface = RpcInterface.new(
       host: @rpc_node_address,
@@ -174,7 +170,12 @@ class TezosClient
       parameters: parameters
     )
 
-    transfer_args = args.merge(parameters: json_params, dry_run: dry_run)
+    json_params = {
+      entrypoint: parameters[0],
+      value: json_params
+    }
+
+    transfer_args = args.merge(entrypoint: parameters[0], parameters: json_params, dry_run: dry_run)
 
     transfer(transfer_args)
   end

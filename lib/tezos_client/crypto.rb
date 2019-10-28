@@ -112,10 +112,7 @@ class TezosClient
     def generate_key(mnemonic: nil, password: nil, wallet_seed: nil, path: nil)
       signing_key = generate_signing_key(mnemonic: mnemonic, password: password, wallet_seed: wallet_seed, path: path).to_bytes.to_hex
 
-      verify_key = RbNaCl::SigningKey.new(signing_key.to_bin)
-      hex_pubkey = verify_key.to_s.to_hex
-
-      secret_key = encode_tz(:edsk, signing_key + hex_pubkey)
+      secret_key = encode_tz(:edsk2, signing_key)
       public_key = secret_key_to_public_key(secret_key)
       address = public_key_to_address(public_key)
 

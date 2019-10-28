@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
+RSpec.describe TezosClient::RpcInterface::Contracts do
   include_context "public rpc interface"
   subject { rpc_interface }
 
@@ -23,21 +23,32 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
   describe "#contract_manager_key" do
     it "returns the manager public key" do
       res = subject.contract_manager_key(contract_address)
-      expect(res).to be_a Hash
-      expect(res).to have_key "manager"
-      expect(res["manager"]).to start_with("tz1")
-
-      expect(res).to have_key "key"
-      expect(res["key"]).to start_with("edpk")
+      expect(res).to start_with("edpk")
     end
   end
 
   describe "#contract_storage" do
-    let(:contract_address) { "KT1T1QYR6VD2LLtRSP4CHNyKkGbAPHoVu7wc" }
+
+    let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
+    let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
+    let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
+    let(:amount) { 0 }
+    let(:init_params) { '"test"' }
+
+    let!(:contract_address) do
+      res = tezos_client.originate_contract(
+        from: source,
+        amount: amount,
+        script: script,
+        secret_key: secret_key,
+        init_params: init_params
+      )
+      disabling_vcr { p tezos_client.monitor_operation(res[:operation_id], timeout: 120) }
+      res[:originated_contract]
+    end
     it "returns the contract storage" do
       res = subject.contract_storage(contract_address)
       p res
-
     end
   end
 end

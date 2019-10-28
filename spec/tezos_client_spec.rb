@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient, :vcr do
+RSpec.describe TezosClient do
   include_context "public rpc interface"
+  include_context "contract origination"
   subject { tezos_client }
 
   def wait_new_block(timeout: 240)
@@ -19,11 +20,11 @@ RSpec.describe TezosClient, :vcr do
     end
     monitor_thread.terminate
 
-    raise "no block received for 4 minutes" unless received_blocks.size == blocks_to_wait
+    raise "no block received for 4 minutes" unless received_blocks.size >= blocks_to_wait
   end
 
   before do
-    disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
+    disabling_vcr { wait_new_block }
   end
 
   describe "#transfer" do
@@ -40,11 +41,15 @@ RSpec.describe TezosClient, :vcr do
     end
 
     context "with parameters" do
+      let!(:contract_address) do
+        originate_demo_contract
+      end
+
       it "works" do
         res = subject.transfer(
           amount: 5,
           from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-          to: "KT1FLmwGK2ptfyG8gxAPWPMVS7iGgPzkJEBE",
+          to: contract_address,
           secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
           parameters: '"pro"'
         )
@@ -91,7 +96,7 @@ RSpec.describe TezosClient, :vcr do
             from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
             amounts: {
               "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" => 0.01,
-              "tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn" => 100_000,
+              "tz1Zbws4QQPy4zKQjQApSHir9kTnKHt5grDn" => 1_000_000_000,
             },
             secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
           )
@@ -230,23 +235,6 @@ RSpec.describe TezosClient, :vcr do
         expect(res[:rpc_operation_args]).to be_a Hash
       end
     end
-
-    context "with no script" do
-      it "works" do
-        res = subject.originate_contract(
-          from: source,
-          amount: amount,
-          secret_key: secret_key,
-          spendable: true
-        )
-        expect(res).to be_a Hash
-        expect(res).to have_key :operation_id
-        expect(res).to have_key :originated_contract
-        expect(res[:operation_id]).to be_a String
-        expect(res[:originated_contract]).to be_a String
-        pp res
-      end
-    end
   end
 
   context "#multisig" do
@@ -277,7 +265,7 @@ RSpec.describe TezosClient, :vcr do
     end
 
     describe "#call Pay" do
-      let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
+      let(:contract_address) { originate_multisig_contract }
       let(:call_params) { %w{pay ()} }
       let(:amount) { 1 }
 
@@ -333,10 +321,24 @@ RSpec.describe TezosClient, :vcr do
     end
 
     describe "#call Manage" do
-      let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
-      let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })" ] }
+      let(:contract_address) { originate_multisig_contract }
+      let(:manage_amount) { 1 }
+      let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = #{manage_amount}tz })" ] }
+      before do
+        res = subject.call_contract(
+          from: source,
+          amount: manage_amount,
+          script: script,
+          secret_key: secret_key,
+          to: contract_address,
+          parameters: %w{pay ()}
+        )
+        puts res[:operation_id]
+        disabling_vcr { tezos_client.monitor_operation(res[:operation_id]) } #if VCR.current_cassette&.recording?
+      end
 
       it "works" do
+        puts contract_address
         res = subject.call_contract(
           from: source,
           amount: amount,
@@ -361,22 +363,22 @@ RSpec.describe TezosClient, :vcr do
     let(:pkh) { key[:address] }
 
 
-    it "works" do
+    it "fails in private chain" do
       expect(key[:address]).to eq "tz1RdraebVC4gRbrnMDWQjZ28FtvgQZWJp21"
 
-      res = subject.activate_account(
+      expect {
+        subject.activate_account(
         pkh: pkh,
         secret: secret,
         from: pkh,
         secret_key: secret_key
-      )
-      pp res
+      )}.to raise_error TezosClient::InvalidActivation
     end
   end
 
   describe "#reveal public key" do
     let(:wallet_seed) { "000102030405060708090a0b0c0d0e0f" }
-    let(:key) { subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/0'") }
+    let(:key) { subject.generate_key }
     let(:secret_key) { key[:secret_key] }
 
     before do
@@ -386,7 +388,7 @@ RSpec.describe TezosClient, :vcr do
         to: key[:address],
         secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
       )
-      disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
+      disabling_vcr { wait_new_block } #if VCR.current_cassette&.recording?
     end
 
 
@@ -410,13 +412,13 @@ RSpec.describe TezosClient, :vcr do
           to: key[:address],
           secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
         )
-        disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
+        disabling_vcr { wait_new_block } #if VCR.current_cassette&.recording?
       end
 
       it "raises an exception" do
         expect do
           subject.reveal_pubkey(secret_key: secret_key)
-          disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
+          disabling_vcr { wait_new_block } #if VCR.current_cassette&.recording?
           subject.reveal_pubkey(secret_key: secret_key)
         end.to raise_exception TezosClient::PreviouslyRevealedKey, "Previously revealed key for address tz1UTikevS42TFpT4uhtxkNbeYsG3ea7bsrB"
       end
@@ -425,14 +427,11 @@ RSpec.describe TezosClient, :vcr do
 
   describe "#contract_manager_key" do
     let(:wallet_seed) { "000102030405060708090a0b0c0d0e0f" }
-    let(:key) { subject.generate_key(wallet_seed: wallet_seed, path: "m/44'/1729'/0'/0'/0'") }
+    let(:address) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
 
     it "works" do
-      res = subject.contract_manager_key(key[:address])
-      expect(res).to have_key(:manager)
-      expect(res[:manager]).to eq key[:address]
-      expect(res).to have_key(:key)
-      expect(res[:key]).to match /edpk[a-zA-Z1-9]+/
+      res = subject.contract_manager_key(address)
+      expect(res).to match /edpk[a-zA-Z1-9]+/
     end
 
     context "not reveal key" do
@@ -441,19 +440,17 @@ RSpec.describe TezosClient, :vcr do
 
       it "works" do
         res = subject.contract_manager_key(key[:address])
-        expect(res).to have_key(:manager)
-        expect(res[:manager]).to eq key[:address]
-        expect(res).not_to have_key(:key)
+        expect(res).to be_nil
       end
     end
   end
 
   describe "#get_storage", vcr: false do
     let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
-    let(:contract_address) { "KT1FLmwGK2ptfyG8gxAPWPMVS7iGgPzkJEBE" }
+    let!(:contract_address) { originate_demo_contract }
 
     # TODO: fix me when alphanet-node is up again
-    xit "works" do
+    it "works" do
       res = subject.get_storage(script: script, contract_address: contract_address)
       expect(res).to be_a String
     end
@@ -495,7 +492,7 @@ RSpec.describe TezosClient, :vcr do
     let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
     let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
     let(:amount) { 0 }
-    let(:contract_address) { "KT1MX7W5bWVi9T3wivxKd96s2uFUyFx1nLx7" }
+    let!(:contract_address) { originate_multisig_contract }
     let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 10000000000tz })" ] }
 
 

@@ -32,7 +32,15 @@ class TezosClient
     end
 
     def parameters
-      (@args[:parameters].is_a? String) ? encode_args(@args[:parameters]) : @args[:parameters]
+      parameters = @args[:parameters].clone
+      if parameters.is_a? String
+        {
+          entrypoint: "default",
+          value: encode_args(@args[:parameters])
+        }
+      else
+        parameters
+      end
     end
   end
 end

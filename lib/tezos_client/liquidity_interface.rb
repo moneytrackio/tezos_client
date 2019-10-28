@@ -62,8 +62,8 @@ class TezosClient
       File.delete(file_copy_path) if File.exists? file_copy_path
     end
 
-    def json_scripts(args)
-      with_file_copy(args[:script]) do |script_copy_path|
+    def json_scripts(script:)
+      with_file_copy(script) do |script_copy_path|
         script_basename = script_copy_path.sub(/.liq$/, "")
 
         json_init_script_path = "#{script_basename}.initializer.tz.json"
@@ -96,7 +96,7 @@ class TezosClient
 
     def origination_script(args)
       storage = initial_storage(args)
-      _json_init_script, json_contract_script = json_scripts(args)
+      _json_init_script, json_contract_script = json_scripts(script: args[:script])
 
       {
         code: json_contract_script,
