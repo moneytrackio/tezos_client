@@ -12,7 +12,7 @@ class TezosClient
           status = wait_thr.value.exitstatus
 
           if status != 0
-            raise "command '#{cmd}' existed with status #{status}: #{err}"
+            raise LiquidityError, "command '#{cmd}' existed with status #{status}: #{err}"
           end
 
           log err
