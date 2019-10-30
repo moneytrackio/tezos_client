@@ -234,6 +234,25 @@ RSpec.describe TezosClient do
         expect(res[:originated_contract]).to be_a String
         expect(res[:rpc_operation_args]).to be_a Hash
       end
+
+      context "with no secret_key" do
+        it "works" do
+          res = subject.originate_contract(
+            from: source,
+            amount: amount,
+            script: script,
+            init_params: init_params,
+            dry_run: true
+          )
+
+          expect(res).to be_a Hash
+          expect(res).to have_key :originated_contract
+          expect(res).to have_key :rpc_operation_args
+
+          expect(res[:originated_contract]).to be_a String
+          expect(res[:rpc_operation_args]).to be_a Hash
+        end
+      end
     end
   end
 
