@@ -51,13 +51,21 @@ class TezosClient
           rpc_operation_args[:gas_limit] = (operation_result[:consumed_gas].to_i.from_satoshi + 0.001).to_satoshi.to_s
         end
       end
+
+      run_result
     end
 
     def to_hex
       rpc_interface.forge_operations(operations: rpc_operation_args, branch: branch)
     end
 
+    def valid_secret_key?
+      @secret_key&.match?(/^edsk/)
+    end
+
     def sign
+      raise ArgumentError, "Invalid secret key" unless valid_secret_key?
+
       sign_operation(
         secret_key: @secret_key,
         operation_hex: to_hex
@@ -84,13 +92,12 @@ class TezosClient
 
     def simulate
       # simulate operations and adjust gas limits
-      simulate_and_update_limits
-      res = preapply
-      operation_results = res.map { |metadata| metadata[:operation_result] }
-
-      {
-        operation_results: operation_results,
-      }
+      run_result = simulate_and_update_limits
+      if valid_secret_key?
+        preapply
+      else
+        run_result
+      end
     end
 
     def test_and_broadcast
@@ -106,7 +113,7 @@ class TezosClient
     def run
       rpc_responses = rpc_interface.run_operations(
         operations: rpc_operation_args,
-        signature: base_58_signature,
+        signature: RANDOM_SIGNATURE,
         branch: branch,
         chain_id: chain_id)
 
@@ -157,7 +164,12 @@ class TezosClient
         protocol: protocol,
         branch: branch)
 
-      ensure_applied!(rpc_responses)
+      metadatas = ensure_applied!(rpc_responses)
+      operation_results = metadatas.map { |metadata| metadata[:operation_result] }
+
+      {
+        operation_results: operation_results
+      }
     end
 
     def broadcast

@@ -75,7 +75,7 @@ class TezosClient
   #
   # @return [Hash] result of the origination containing :operation_id, :operation_result and :originated_contract
   #
-  def originate_contract(from:, amount:, secret_key:, script: nil, init_params: nil, dry_run: false, **args)
+  def originate_contract(from:, amount:, secret_key: nil, script: nil, init_params: nil, dry_run: false, **args)
     origination_args = {
       rpc_interface: rpc_interface,
       from: from,
@@ -244,7 +244,6 @@ class TezosClient
   end
 
   private
-
   def broadcast_operation(operation:, dry_run:)
     res = if dry_run
       operation.simulate
