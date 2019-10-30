@@ -24,10 +24,10 @@ class TezosClient
       from = args.fetch :from
       script = args.fetch :script
       init_params = args.fetch :init_params
-      init_params = format_params(init_params)
+      init_params = format_params(init_params) unless init_params.nil?
 
       with_tempfile(".json") do |json_file|
-        call_liquidity "--source #{from} --json #{script} -o #{json_file.path} --init-storage #{init_params}", verbose: options[:verbose]
+        call_liquidity "--source #{from} --json #{script} -o #{json_file.path} --init-storage" +(init_params.nil? ? "" : "#{init_params}"), verbose: options[:verbose]
         JSON.parse json_file.read.strip
       end
     end
