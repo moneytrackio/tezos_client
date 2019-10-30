@@ -16,6 +16,8 @@ class TezosClient
     end
 
     def format_params(params)
+      return "" if params.nil?
+
       params = [params] if params.is_a? String
       params.map { |s| "'#{s}'" }.join(" ")
     end
@@ -24,10 +26,10 @@ class TezosClient
       from = args.fetch :from
       script = args.fetch :script
       init_params = args.fetch :init_params
-      init_params = format_params(init_params) unless init_params.nil?
+      init_params = format_params(init_params)
 
       with_tempfile(".json") do |json_file|
-        call_liquidity "--source #{from} --json #{script} -o #{json_file.path} --init-storage" +(init_params.nil? ? "" : "#{init_params}"), verbose: options[:verbose]
+        call_liquidity "--source #{from} --json #{script} -o #{json_file.path} --init-storage #{init_params}", verbose: options[:verbose]
         JSON.parse json_file.read.strip
       end
     end
