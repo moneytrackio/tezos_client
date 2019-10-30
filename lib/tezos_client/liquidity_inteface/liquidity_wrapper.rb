@@ -13,7 +13,7 @@ class TezosClient
           log err
 
           if status != 0
-            raise "command '#{cmd}' existed with status #{status}: #{err}"
+            raise LiquidityError, "command '#{cmd}' existed with status #{status}: #{err}"
           end
 
           output = stdout.read

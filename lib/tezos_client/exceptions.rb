@@ -18,6 +18,9 @@ class TezosClient
     end
   end
 
+  class LiquidityError < RuntimeError
+  end
+
   class InvalidActivation < RpcRequestFailure
     attr_reader :pkh
 
