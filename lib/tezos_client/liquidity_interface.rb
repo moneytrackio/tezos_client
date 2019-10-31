@@ -16,6 +16,8 @@ class TezosClient
     end
 
     def format_params(params)
+      return "" if params.nil?
+
       params = [params] if params.is_a? String
       params.map { |s| "'#{s}'" }.join(" ")
     end
