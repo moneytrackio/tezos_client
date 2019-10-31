@@ -1,4 +1,6 @@
 ---
+service:
+  - docker
 dist: xenial
 language: ruby
 sudo: required
@@ -6,17 +8,15 @@ cache:
   bundler: true
   directories:
   - $HOME/.opam
-  - liquidity
 rvm:
   - 2.5.1
-env:
-  - OPAMYES=1
 before_install:
   - sh travis-scripts/prepare-ubuntu.sh
-  - sh travis-scripts/install-opam.sh
-  - sh travis-scripts/install-liquidity.sh
+  - docker pull moneytrack/liquidity:babylonnet
+  - id=$(docker create moneytrack/liquidity:babylonnet)
+  - docker cp $id:/home/opam/.opam/4.07/bin/liquidity - > liquidity
+  - chmod +x liquidity
   - gem install bundler -v 1.16.3
 script:
-  - eval `opam config env`
   - bundle install
   - bundle exec rake
