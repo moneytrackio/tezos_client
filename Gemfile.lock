@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tezos_client (0.4.13)
+    tezos_client (0.4.14)
       activesupport (~> 6.0.0)
       base58 (~> 0.2.3)
       bip_mnemonic (~> 0.0.2)
@@ -47,7 +47,7 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.9.0)
-    ffi (1.11.1)
+    ffi (1.11.2)
     hashdiff (1.0.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
