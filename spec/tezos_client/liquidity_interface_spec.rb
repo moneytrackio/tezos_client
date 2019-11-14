@@ -25,7 +25,7 @@ RSpec.describe TezosClient::LiquidityInterface do
       subject { interface.liquidity_cmd verbose: true }
 
       it "add verbose param" do
-        expect(subject).to match(/--verbose/)
+        expect(subject).to include("--verbose")
       end
     end
   end
