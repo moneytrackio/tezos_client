@@ -28,7 +28,6 @@ class TezosClient
       def client_cmd
         res = ["tezos-client", "-l"]
         if config_file
-          pp config_file
           res += ["-c", config_file]
         end
         res
