@@ -36,11 +36,3 @@ class TezosClient
     end
   end
 end
-
-#res = Open3.popen3(
-#    ["liquidity",
-#    "--tezos-node", "tezos_node:8094",
-#    "../../TPHN/smart-contract-spec/contracts/insurance/insurance_contract.liq",
-#    "--json", "-o", "/var/folders/p6/f3tstn_16v57wd9113bwl0tm0000gn/T/script20191113-23531-rpsa2f.json",
-#    "--data", "add_insuree", "(\"61715051100278\", tz1WUbuCKRKwtVZYAGKY23UDU9jyJXpp9Nji)"]
-#)
