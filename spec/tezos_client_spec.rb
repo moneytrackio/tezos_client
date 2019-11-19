@@ -262,7 +262,6 @@ RSpec.describe TezosClient do
       let(:init_params) { "MyContract(1, 2)" }
 
       it "works" do
-        pp script
         res = subject.originate_contract(
           from: source,
           amount: amount,
@@ -307,6 +306,33 @@ RSpec.describe TezosClient do
         expect(res[:operation_id]).to be_a String
         expect(res[:originated_contract]).to be_a String
         p res
+      end
+    end
+
+    context "with smartpy kk" do
+      describe "#call_contract " do
+        let(:contract_address) { originate_demo_contract_with_smartpy }
+        let(:call_params) do
+          [
+            "myEntryPoint",
+            "1"
+          ]
+        end
+        let(:amount) { 1 }
+        let(:script) { "./spec/fixtures/demo.py" }
+
+        it "works" do
+          res = subject.call_contract(
+            from: source,
+            amount: amount,
+            script: script,
+            secret_key: secret_key,
+            to: contract_address,
+            parameters: call_params,
+            init_params: "MyContract(1, 2)"
+          )
+          pp res
+        end
       end
     end
 
@@ -384,7 +410,6 @@ RSpec.describe TezosClient do
       end
 
       it "works" do
-        puts contract_address
         res = subject.call_contract(
           from: source,
           amount: amount,
@@ -397,7 +422,6 @@ RSpec.describe TezosClient do
       end
     end
   end
-
 
   describe "#activate account" do
     let(:mnemonic) { "twelve april shield tell audit fever strike radio lunch father orphan lock fancy clutch sister" }
@@ -414,11 +438,12 @@ RSpec.describe TezosClient do
 
       expect {
         subject.activate_account(
-        pkh: pkh,
-        secret: secret,
-        from: pkh,
-        secret_key: secret_key
-      )}.to raise_error TezosClient::InvalidActivation
+          pkh: pkh,
+          secret: secret,
+          from: pkh,
+          secret_key: secret_key
+        )
+      }.to raise_error TezosClient::InvalidActivation
     end
   end
 

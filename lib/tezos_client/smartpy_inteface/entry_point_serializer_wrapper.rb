@@ -5,7 +5,7 @@ class TezosClient
     module EntryPointSerializerWrapper
       def gen_entry_point_args(params_struct, entry_point, params)
         cmd = ["node", "./lib/conseil_lib/gen_entry_point_args.js", params_struct, entry_point] + params
-        pp cmd
+
         Open3.popen3(*cmd) do |_stdin, stdout, stderr, wait_thr|
           err = stderr.read
           status = wait_thr.value.exitstatus

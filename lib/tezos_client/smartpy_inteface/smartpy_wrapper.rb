@@ -6,7 +6,7 @@ class TezosClient
     module SmartpyWrapper
       def call_smartpy(command)
         cmd = smartpy_cmd + command
-        pp cmd
+
         log cmd.to_s
         Open3.popen3(*cmd) do |_stdin, stdout, stderr, wait_thr|
           err = stderr.read
