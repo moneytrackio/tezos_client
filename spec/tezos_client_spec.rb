@@ -312,24 +312,16 @@ RSpec.describe TezosClient do
     context "with smartpy kk" do
       describe "#call_contract " do
         let(:contract_address) { originate_demo_contract_with_smartpy }
-        let(:call_params) do
-          [
-            "myEntryPoint",
-            "1"
-          ]
-        end
         let(:amount) { 1 }
-        let(:script) { "./spec/fixtures/demo.py" }
 
         it "works" do
           res = subject.call_contract(
             from: source,
             amount: amount,
-            script: script,
             secret_key: secret_key,
             to: contract_address,
-            parameters: call_params,
-            init_params: "MyContract(1, 2)"
+            entry_point: "default",
+            params: { int:  "1" }
           )
           pp res
         end
