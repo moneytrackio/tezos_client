@@ -181,6 +181,7 @@ class TezosClient
 
   def call_contract(dry_run: false, **args)
     parameters = args.fetch(:parameters)
+    script = args.fetch(:script)
 
     if script != nil && liquidity_contract?(script)
       json_params = liquidity_interface.call_parameters(
