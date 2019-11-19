@@ -29,12 +29,8 @@ RSpec.describe TezosClient::SmartpyInterface do
   describe "#call_parameters" do
     let(:inputs) do
       {
-        script: script,
-        parameters: [
-          "myEntryPoint",
-          "1"
-        ],
-        init_params: init_params
+          entry_point: "myEntryPoint",
+          params: { int:  "1" }
       }
     end
 
