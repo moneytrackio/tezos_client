@@ -28,6 +28,7 @@ require "tezos_client/operations/operation_array"
 
 require "tezos_client/rpc_interface"
 require "tezos_client/liquidity_interface"
+require "tezos_client/smartpy_interface"
 
 class TezosClient
   using CurrencyUtils
@@ -40,6 +41,7 @@ class TezosClient
 
   attr_accessor :rpc_interface
   attr_accessor :liquidity_interface
+  attr_accessor :smartpy_interface
 
   RANDOM_SIGNATURE = "edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"
 
@@ -53,6 +55,11 @@ class TezosClient
     @rpc_interface = RpcInterface.new(
       host: @rpc_node_address,
       port: @rpc_node_port
+    )
+
+    @smartpy_interface = SmartpyInterface.new(
+      rpc_node_address: @rpc_node_address,
+      rpc_node_port: @rpc_node_port
     )
 
     @liquidity_interface = LiquidityInterface.new(
@@ -84,13 +91,23 @@ class TezosClient
       **args
     }
 
-    if script != nil
+    if script != nil && liquidity_contract?(script)
       origination_args[:script] = liquidity_interface.origination_script(
         from: from,
         script: script,
         init_params: init_params
       )
+    elsif script != nil && smartpy_contract?(script)
+      origination_args[:script] = smartpy_interface.origination_script(
+        from: from,
+        script: script,
+        init_params: init_params
+      )
+    else
+      raise NotImplementedError
     end
+
+    pp origination_args
 
     operation = OriginationOperation.new(origination_args)
     res = broadcast_operation(operation: operation, dry_run: dry_run)
@@ -165,10 +182,18 @@ class TezosClient
   def call_contract(dry_run: false, **args)
     parameters = args.fetch(:parameters)
 
-    json_params = liquidity_interface.call_parameters(
-      script: args.fetch(:script),
-      parameters: parameters
-    )
+    if script != nil && liquidity_contract?(script)
+      json_params = liquidity_interface.call_parameters(
+        script: args.fetch(:script),
+        parameters: parameters
+      )
+    elsif script != nil && smartpy_contract?(script)
+      json_params = smartpy_interface.call_parameters(
+        script: args.fetch(:script),
+        parameters: parameters,
+        init_params: args[:init_params]
+      )
+    end
 
     json_params = {
       entrypoint: parameters[0],
@@ -235,6 +260,7 @@ class TezosClient
   end
 
   private
+
   def broadcast_operation(operation:, dry_run:)
     res = if dry_run
       operation.simulate
@@ -247,4 +273,11 @@ class TezosClient
     )
   end
 
+  def liquidity_contract? filename
+    filename.end_with?(".liq")
+  end
+
+  def smartpy_contract? filename
+    filename.end_with?(".py")
+  end
 end

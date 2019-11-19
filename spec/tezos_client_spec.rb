@@ -191,48 +191,51 @@ RSpec.describe TezosClient do
   end
 
   describe "#originate_contract" do
-    let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
     let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
     let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
     let(:amount) { 0 }
-    let(:init_params) { '"test"' }
 
-    it "works" do
-      res = subject.originate_contract(
-        from: source,
-        amount: amount,
-        script: script,
-        secret_key: secret_key,
-        init_params: init_params
-      )
+    context "with liquidity" do
+      let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
+      let(:init_params) { '"test"' }
 
-      expect(res).to be_a Hash
-      expect(res).to have_key :operation_id
-      expect(res).to have_key :originated_contract
-      expect(res).to have_key :rpc_operation_args
-
-      expect(res[:operation_id]).to be_a String
-      expect(res[:originated_contract]).to be_a String
-      expect(res[:rpc_operation_args]).to be_a Hash
-    end
-
-    context "dry_run" do
       it "works" do
         res = subject.originate_contract(
           from: source,
           amount: amount,
           script: script,
           secret_key: secret_key,
-          init_params: init_params,
-          dry_run: true
+          init_params: init_params
         )
 
         expect(res).to be_a Hash
+        expect(res).to have_key :operation_id
         expect(res).to have_key :originated_contract
         expect(res).to have_key :rpc_operation_args
 
+        expect(res[:operation_id]).to be_a String
         expect(res[:originated_contract]).to be_a String
         expect(res[:rpc_operation_args]).to be_a Hash
+      end
+
+      context "dry_run" do
+        it "works" do
+          res = subject.originate_contract(
+            from: source,
+            amount: amount,
+            script: script,
+            secret_key: secret_key,
+            init_params: init_params,
+            dry_run: true
+          )
+
+          expect(res).to be_a Hash
+          expect(res).to have_key :originated_contract
+          expect(res).to have_key :rpc_operation_args
+
+          expect(res[:originated_contract]).to be_a String
+          expect(res[:rpc_operation_args]).to be_a Hash
+        end
       end
 
       context "with no secret_key" do
@@ -252,6 +255,30 @@ RSpec.describe TezosClient do
           expect(res[:originated_contract]).to be_a String
           expect(res[:rpc_operation_args]).to be_a Hash
         end
+      end
+    end
+    context "with smartpy" do
+      let(:script) { "./spec/fixtures/demo.py" }
+      let(:init_params) { "MyContract(1, 2)" }
+
+      it "works" do
+        pp script
+        res = subject.originate_contract(
+          from: source,
+          amount: amount,
+          script: script,
+          secret_key: secret_key,
+          init_params: init_params
+        )
+
+        expect(res).to be_a Hash
+        expect(res).to have_key :operation_id
+        expect(res).to have_key :originated_contract
+        expect(res).to have_key :rpc_operation_args
+
+        expect(res[:operation_id]).to be_a String
+        expect(res[:originated_contract]).to be_a String
+        expect(res[:rpc_operation_args]).to be_a Hash
       end
     end
   end
