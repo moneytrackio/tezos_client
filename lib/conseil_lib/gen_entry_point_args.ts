@@ -29,5 +29,8 @@ if (process.argv.length < 4) {
   }
 
   let entryPoint = selectEntryPoint(paramsStruct, entryPointsName);
-  console.log(TezosLanguageUtil.translateMichelsonToMicheline(entryPoint.generateParameter(...params)));
+  console.log(JSON.stringify({
+    entrypoint: entryPoint["name"] || "default",
+    value: JSON.parse(TezosLanguageUtil.translateMichelsonToMicheline(entryPoint.generateParameter(...params)))
+  }))
 }

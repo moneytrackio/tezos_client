@@ -107,8 +107,6 @@ class TezosClient
       raise NotImplementedError
     end
 
-    pp origination_args
-
     operation = OriginationOperation.new(origination_args)
     res = broadcast_operation(operation: operation, dry_run: dry_run)
 
@@ -188,18 +186,17 @@ class TezosClient
         script: args.fetch(:script),
         parameters: parameters
       )
+      json_params = {
+          entrypoint: parameters[0],
+          value: json_params
+      }
     elsif script != nil && smartpy_contract?(script)
       json_params = smartpy_interface.call_parameters(
         script: args.fetch(:script),
         parameters: parameters,
-        init_params: args[:init_params]
+        init_params: args.fetch(:init_params)
       )
     end
-
-    json_params = {
-      entrypoint: parameters[0],
-      value: json_params
-    }
 
     transfer_args = args.merge(entrypoint: parameters[0], parameters: json_params, dry_run: dry_run)
 

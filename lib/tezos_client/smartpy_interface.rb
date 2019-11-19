@@ -40,13 +40,10 @@ class TezosClient
     def call_parameters(args)
       compile_to_michelson(args) do |contract_script_filename, _|
         params_struct = read_file(contract_script_filename).split("\n").first
-        pp params_struct
+        entry_point = args[:parameters].first
+        params = args[:parameters][1..-1]
 
-        entry_point =  args[:parameters].first
-        pp entry_point
-        params =  args[:parameters][1..-1]
-        pp params
-        gen_entry_point_args(params_struct, entry_point, params)
+        JSON.parse(gen_entry_point_args(params_struct, entry_point, params))
       end
     end
 

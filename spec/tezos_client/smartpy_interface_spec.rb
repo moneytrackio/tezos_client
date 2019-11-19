@@ -15,7 +15,6 @@ RSpec.describe TezosClient::SmartpyInterface do
 
   subject { described_class.new(default_options) }
 
-
   describe "#json_script" do
     it "works" do
       json_init_script, json_contract_script = subject.json_scripts(
