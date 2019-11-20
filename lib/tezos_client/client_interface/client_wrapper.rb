@@ -5,8 +5,8 @@ class TezosClient
     # Wrapper used to call the tezos-client binary
     module ClientWrapper
       def call_client(command)
-        cmd = "#{client_cmd} #{command}"
-        Open3.popen3(cmd) do |_stdin, stdout, stderr, wait_thr|
+        cmd = client_cmd + command
+        Open3.popen3(*cmd) do |_stdin, stdout, stderr, wait_thr|
           err = stderr.read
           status = wait_thr.value.exitstatus
 
@@ -26,9 +26,9 @@ class TezosClient
       end
 
       def client_cmd
-        res = "tezos-client -l"
+        res = ["tezos-client", "-l"]
         if config_file
-          res = "#{res} -c #{config_file}"
+          res += ["-c", config_file]
         end
         res
       end

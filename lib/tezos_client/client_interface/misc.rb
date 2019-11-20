@@ -7,7 +7,7 @@ class TezosClient
   class ClientInterface
     module Misc
       def bootstrapped
-        call_client("bootstrapped") do |output|
+        call_client(["bootstrapped"]) do |output|
           output_format = /Current head: ([^ ]+) \(timestamp: ([^,]+), validation: (.+)\)/
           res = output_format.match(output)
           head = res[1]
