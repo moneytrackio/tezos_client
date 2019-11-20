@@ -4,7 +4,6 @@ class TezosClient
   class SmartpyInterface
     module MichelineSerializerWrapper
       def convert_michelson_to_micheline(script)
-        pp actual_project_path + "/lib/conseil_lib/convert_to_micheline.js"
         cmd = ["node", actual_project_path + "/lib/conseil_lib/convert_to_micheline.js", script]
 
         Open3.popen3(*cmd) do |_stdin, stdout, stderr, wait_thr|
