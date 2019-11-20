@@ -27,7 +27,7 @@ need the tezos version (not Dune version)
 [SmartPy](https://smartpy.io/)
 
 ```bash
-sh <(curl -s https://SmartPy.io/SmartPyBasic/SmartPy.sh) local-install ~
+sh <(curl -s https://SmartPy.io/SmartPyBasic/SmartPy.sh) local-install /
 ```
 
 ### TypeScript (for dev)
