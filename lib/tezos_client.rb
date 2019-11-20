@@ -276,10 +276,10 @@ class TezosClient
   end
 
   def liquidity_contract? filename
-    filename.end_with?(".liq")
+    filename.to_s.end_with?(".liq")
   end
 
   def smartpy_contract? filename
-    filename.end_with?(".py")
+    filename.to_s.end_with?(".py")
   end
 end
