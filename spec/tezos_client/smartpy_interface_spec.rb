@@ -4,16 +4,8 @@ RSpec.describe TezosClient::SmartpyInterface do
   let(:script) { File.expand_path("./spec/fixtures/demo.py") }
   let(:init_params) { "MyContract(1, 2)" }
 
-  let(:rpc_node_address) { "tezos_node" }
-  let(:rpc_node_port) { 8094 }
-  let(:default_options) do
-    {
-      rpc_node_address: rpc_node_address,
-      rpc_node_port: rpc_node_port
-    }
-  end
 
-  subject { described_class.new(default_options) }
+  subject { described_class.new }
 
   describe "#json_script" do
     it "works" do
