@@ -4,7 +4,7 @@ class TezosClient
   class SmartpyInterface
     module MichelineSerializerWrapper
       def convert_michelson_to_micheline(script)
-        cmd = ["node", actual_project_path + "/lib/conseil_lib/convert_to_micheline.js", script]
+        cmd = ["node", actual_project_path + "/conseil_lib/convert_to_micheline.js", script]
 
         Open3.popen3(*cmd) do |_stdin, stdout, stderr, wait_thr|
           err = stderr.read
@@ -27,8 +27,7 @@ class TezosClient
       end
 
       def actual_project_path
-        path = File.expand_path(File.dirname(__FILE__)).split("/")
-        path[0..path.index("tezos_client")].join("/")
+        TezosClient.root_path
       end
     end
   end

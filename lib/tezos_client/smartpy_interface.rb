@@ -13,12 +13,6 @@ class TezosClient
 
     attr_reader :options
 
-    def initialize(rpc_node_address: "127.0.0.1", rpc_node_port: 8732, options: {})
-      @rpc_node_address = rpc_node_address
-      @rpc_node_port = rpc_node_port
-      @options = options
-    end
-
     def json_scripts(args)
       compile_to_michelson(args) do |contract_script_filename, init_script_filename|
         micheline_contract = convert_michelson_to_micheline(read_file(contract_script_filename))
@@ -35,16 +29,6 @@ class TezosClient
         code: json_contract_script,
         storage: json_init_script
       }
-    end
-
-    def call_parameters(args)
-      compile_to_michelson(args) do |contract_script_filename, _|
-        params_struct = read_file(contract_script_filename).split("\n").first
-        entry_point = args[:parameters].first
-        params = args[:parameters][1..-1]
-
-        JSON.parse(gen_entry_point_args(params_struct, entry_point, params))
-      end
     end
 
     private
