@@ -57,10 +57,7 @@ class TezosClient
       port: @rpc_node_port
     )
 
-    @smartpy_interface = SmartpyInterface.new(
-      rpc_node_address: @rpc_node_address,
-      rpc_node_port: @rpc_node_port
-    )
+    @smartpy_interface = SmartpyInterface.new
 
     @liquidity_interface = LiquidityInterface.new(
       rpc_node_address: @rpc_node_address,
