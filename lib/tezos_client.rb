@@ -270,6 +270,10 @@ class TezosClient
     end
   end
 
+  def self.root_path
+    File.expand_path(File.dirname(__FILE__))
+  end
+
   private
 
   def broadcast_operation(operation:, dry_run:)
