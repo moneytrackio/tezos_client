@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "smartpy_inteface/smartpy_wrapper"
-require_relative "smartpy_inteface/entry_point_serializer_wrapper"
 require_relative "smartpy_inteface/micheline_serializer_wrapper"
 
 class TezosClient
