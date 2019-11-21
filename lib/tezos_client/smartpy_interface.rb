@@ -8,7 +8,6 @@ class TezosClient
     include Logger
     include SmartpyWrapper
     include MichelineSerializerWrapper
-    include EntryPointSerializerWrapper
 
     attr_reader :options
 
