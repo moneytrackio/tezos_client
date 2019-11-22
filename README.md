@@ -173,7 +173,7 @@ puts "Origination operation: #{res[:operation_id]}"
 puts "Contract address: #{res[:originated_contract]}"
 ```
 
-### Call a contract written in liquidity
+### Call a contract written in SmartPy
 ```ruby
 TezosClient.new.call_contract(
   from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",

@@ -17,17 +17,4 @@ RSpec.describe TezosClient::SmartpyInterface do
       expect(json_contract_script).to be_an Array
     end
   end
-
-  describe "#call_parameters" do
-    let(:inputs) do
-      {
-          entry_point: "myEntryPoint",
-          params: { int:  "1" }
-      }
-    end
-
-    it "work" do
-      subject.call_parameters(**inputs)
-    end
-  end
 end

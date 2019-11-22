@@ -26,6 +26,9 @@ require "tezos_client/operations/reveal_operation"
 require "tezos_client/operations/raw_operation_array"
 require "tezos_client/operations/operation_array"
 
+require "tezos_client/tools/system_call"
+require "tezos_client/tools/temporary_file"
+
 require "tezos_client/rpc_interface"
 require "tezos_client/liquidity_interface"
 require "tezos_client/smartpy_interface"
@@ -175,7 +178,6 @@ class TezosClient
   end
 
   def call_contract(dry_run: false, **args)
-    pp args
     parameters = args.fetch(:parameters) { nil }
     script = args.fetch(:script) { nil }
     entry_point = args.fetch(:entry_point) { nil }
