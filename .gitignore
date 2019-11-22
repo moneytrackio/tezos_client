@@ -17,4 +17,3 @@ node_modules/
 # vim ctags
 .tags
 
-package-lock.json

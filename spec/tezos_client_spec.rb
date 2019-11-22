@@ -320,7 +320,7 @@ RSpec.describe TezosClient do
             amount: amount,
             secret_key: secret_key,
             to: contract_address,
-            entry_point: "default",
+            entrypoint: "default",
             params: { int:  "1" }
           )
           pp res
