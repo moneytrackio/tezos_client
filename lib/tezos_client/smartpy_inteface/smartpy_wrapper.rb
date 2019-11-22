@@ -7,24 +7,7 @@ class TezosClient
       def call_smartpy(command)
         cmd = smartpy_cmd + command
 
-        log cmd.to_s
-        Open3.popen3(*cmd) do |_stdin, stdout, stderr, wait_thr|
-          err = stderr.read
-          status = wait_thr.value.exitstatus
-          log err
-
-          if status != 0
-            raise "command '#{cmd}' existed with status #{status}: #{err}"
-          end
-
-          output = stdout.read
-
-          if block_given?
-            yield(output)
-          else
-            output
-          end
-        end
+        ::Tools::SystemCall.execute(cmd)
       end
 
       def smartpy_cmd
