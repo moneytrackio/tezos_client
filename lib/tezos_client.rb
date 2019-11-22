@@ -91,21 +91,11 @@ class TezosClient
       **args
     }
 
-    if script != nil && liquidity_contract?(script)
-      origination_args[:script] = liquidity_interface.origination_script(
-        from: from,
-        script: script,
-        init_params: init_params
-      )
-    elsif script != nil && smartpy_contract?(script)
-      origination_args[:script] = smartpy_interface.origination_script(
-        from: from,
-        script: script,
-        init_params: init_params
-      )
-    else
-      raise NotImplementedError
-    end
+    origination_args[:script] = contract_interface(script).origination_script(
+      from: from,
+      script: script,
+      init_params: init_params
+    )
 
     operation = OriginationOperation.new(origination_args)
     res = broadcast_operation(operation: operation, dry_run: dry_run)
@@ -180,28 +170,28 @@ class TezosClient
   def call_contract(dry_run: false, **args)
     parameters = args.fetch(:parameters) { nil }
     script = args.fetch(:script) { nil }
-    entry_point = args.fetch(:entry_point) { nil }
+    entrypoint = args.fetch(:entrypoint) { nil }
     params = args.fetch(:params) { nil }
 
     if !script.nil? && liquidity_contract?(script)
-      entry_point = parameters[0]
+      entrypoint = parameters[0]
       json_params = {
-        entrypoint: entry_point,
+        entrypoint: entrypoint,
         value: liquidity_interface.call_parameters(
           script: args.fetch(:script),
           parameters: parameters
         )
       }
-    elsif !entry_point.nil? && !params.nil?
+    elsif !entrypoint.nil? && !params.nil?
       json_params = {
-        entrypoint: entry_point,
+        entrypoint: entrypoint,
         value: params
       }
     else
       raise StandardError("invalid args")
     end
 
-    transfer_args = args.merge(entrypoint: entry_point, parameters: json_params, dry_run: dry_run)
+    transfer_args = args.merge(entrypoint: entrypoint, parameters: json_params, dry_run: dry_run)
 
     transfer(transfer_args)
   end
@@ -284,5 +274,18 @@ class TezosClient
 
   def smartpy_contract? filename
     filename.to_s.end_with?(".py")
+  end
+
+  def contract_interface(script)
+    case script
+    when /[A-Za-z_]*.liq/
+      liquidity_interface
+    when /[A-Za-z_]*.py/
+      smartpy_interface
+    when nil
+      raise "script var unset"
+    else
+      raise "unknown contract type"
+    end
   end
 end

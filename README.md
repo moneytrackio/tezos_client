@@ -180,7 +180,7 @@ TezosClient.new.call_contract(
   secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
   to: "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs",
   amount: 0,
-  entry_point: "myEntryPoint",
+  entrypoint: "myEntryPoint",
   params: { int: 1 }
 )
 ```
