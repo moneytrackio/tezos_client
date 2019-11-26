@@ -167,29 +167,20 @@ class TezosClient
     broadcast_operation(operation: operation, dry_run: dry_run)
   end
 
-  def call_contract(dry_run: false, **args)
-    parameters = args.fetch(:parameters) { nil }
-    script = args.fetch(:script) { nil }
-    entrypoint = args.fetch(:entrypoint) { nil }
-    params = args.fetch(:params) { nil }
-
-    if !script.nil? && liquidity_contract?(script)
-      entrypoint = parameters[0]
-      json_params = {
+  def call_contract(dry_run: false, entrypoint:, params:, script: nil, **args)
+    if liquidity_contract?(script)
+      params = liquidity_interface.call_parameters(
+        script: script,
         entrypoint: entrypoint,
-        value: liquidity_interface.call_parameters(
-          script: args.fetch(:script),
-          parameters: parameters
-        )
-      }
-    elsif !entrypoint.nil? && !params.nil?
-      json_params = {
-        entrypoint: entrypoint,
-        value: params
-      }
-    else
-      raise StandardError("invalid args")
+        parameters: params
+      )
+      pp params
     end
+
+    json_params = {
+      entrypoint: entrypoint,
+      value: params
+    }
 
     transfer_args = args.merge(entrypoint: entrypoint, parameters: json_params, dry_run: dry_run)
 
@@ -278,11 +269,7 @@ class TezosClient
   end
 
   def liquidity_contract? filename
-    filename.to_s.end_with?(".liq")
-  end
-
-  def smartpy_contract? filename
-    filename.to_s.end_with?(".py")
+    filename&.to_s&.end_with?(".liq")
   end
 
   def contract_interface(script)

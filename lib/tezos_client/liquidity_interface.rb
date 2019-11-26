@@ -103,9 +103,10 @@ class TezosClient
       res.strip
     end
 
-    def call_parameters(script:, parameters:)
+    def call_parameters(script:, entrypoint:, parameters:)
       params = format_params parameters
       ::Tools::TemporaryFile.with_tempfile(".json") do |json_file|
+        params = [ entrypoint ] + params
         res = call_liquidity ["--json", "-o", "#{json_file.path}", "#{script}", "--data"] + params
         JSON.parse res
       end

@@ -309,7 +309,7 @@ RSpec.describe TezosClient do
       end
     end
 
-    context "with smartpy kk" do
+    context "with smartpy" do
       describe "#call_contract " do
         let(:contract_address) { originate_demo_contract_with_smartpy }
         let(:amount) { 1 }
@@ -330,7 +330,8 @@ RSpec.describe TezosClient do
 
     describe "#call Pay" do
       let(:contract_address) { originate_multisig_contract }
-      let(:call_params) { %w{pay ()} }
+      let(:entrypoint) { "pay" }
+      let(:params) { %w{ () } }
       let(:amount) { 1 }
 
       it "works" do
@@ -340,7 +341,8 @@ RSpec.describe TezosClient do
           script: script,
           secret_key: secret_key,
           to: contract_address,
-          parameters: call_params
+          entrypoint: entrypoint,
+          params: params
         )
         pp res
       end
@@ -387,7 +389,8 @@ RSpec.describe TezosClient do
     describe "#call Manage" do
       let(:contract_address) { originate_multisig_contract }
       let(:manage_amount) { 1 }
-      let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = #{manage_amount}tz })" ] }
+      let(:entrypoint) { "manage" }
+      let(:params) { [ "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = #{manage_amount}tz })" ] }
       before do
         res = subject.call_contract(
           from: source,
@@ -395,7 +398,8 @@ RSpec.describe TezosClient do
           script: script,
           secret_key: secret_key,
           to: contract_address,
-          parameters: %w{pay ()}
+          entrypoint: "pay",
+          params: %w{ () }
         )
         puts res[:operation_id]
         disabling_vcr { tezos_client.monitor_operation(res[:operation_id]) } #if VCR.current_cassette&.recording?
@@ -408,7 +412,8 @@ RSpec.describe TezosClient do
           script: script,
           secret_key: secret_key,
           to: contract_address,
-          parameters: call_params
+          entrypoint: entrypoint,
+          params: params
         )
         pp res
       end
@@ -556,7 +561,8 @@ RSpec.describe TezosClient do
     let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
     let(:amount) { 0 }
     let!(:contract_address) { originate_multisig_contract }
-    let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 10000000000tz })" ] }
+    let(:entrypoint) { "manage" }
+    let(:params) { [ "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 10000000000tz })" ] }
 
 
     it "raises an error" do
@@ -567,7 +573,8 @@ RSpec.describe TezosClient do
           script: script,
           secret_key: secret_key,
           to: contract_address,
-          parameters: call_params
+          entrypoint: entrypoint,
+          params: params
         )
       end.to raise_exception TezosClient::ScriptRuntimeError, 'Script runtime Error when executing : {"string"=>"Balance to low for withdrawal"} (location: 199)'
     end
