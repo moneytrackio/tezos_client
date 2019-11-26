@@ -331,7 +331,7 @@ RSpec.describe TezosClient do
     describe "#call Pay" do
       let(:contract_address) { originate_multisig_contract }
       let(:entrypoint) { "pay" }
-      let(:params) { %w{ () } }
+      let(:params) { "()" }
       let(:amount) { 1 }
 
       it "works" do
@@ -390,7 +390,7 @@ RSpec.describe TezosClient do
       let(:contract_address) { originate_multisig_contract }
       let(:manage_amount) { 1 }
       let(:entrypoint) { "manage" }
-      let(:params) { [ "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = #{manage_amount}tz })" ] }
+      let(:params) { "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = #{manage_amount}tz })" }
       before do
         res = subject.call_contract(
           from: source,
@@ -562,7 +562,7 @@ RSpec.describe TezosClient do
     let(:amount) { 0 }
     let!(:contract_address) { originate_multisig_contract }
     let(:entrypoint) { "manage" }
-    let(:params) { [ "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 10000000000tz })" ] }
+    let(:params) {  "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 10000000000tz })"  }
 
 
     it "raises an error" do

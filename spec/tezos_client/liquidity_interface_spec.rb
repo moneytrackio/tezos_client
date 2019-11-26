@@ -90,7 +90,7 @@ RSpec.describe TezosClient::LiquidityInterface do
         let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
         let(:init_params) { ["Set [#{from}]", "1p"] }
         let(:entrypoint) { "pay" }
-        let(:params) { [ "()" ] }
+        let(:params) { "()" }
 
         let!(:contract_address) { originate_multisig_contract }
 
