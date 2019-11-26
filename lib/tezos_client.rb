@@ -273,10 +273,10 @@ class TezosClient
   end
 
   def contract_interface(script)
-    case script
-    when /[A-Za-z_]*.liq/
+    case script.to_s
+    when /[A-Za-z_\/\-]*.liq/
       liquidity_interface
-    when /[A-Za-z_]*.py/
+    when /[A-Za-z_\/\-]*.py/
       smartpy_interface
     when nil
       raise "script var unset"
