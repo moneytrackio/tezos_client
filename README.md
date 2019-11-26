@@ -147,7 +147,8 @@ TezosClient.new.call_contract(
   script: File.expand_path("./spec/fixtures/demo.liq"),
   secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
   to: "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs",
-  parameters: [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })" ]
+  entrypoint: "manage"
+  params: "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })" 
 )
 ```
 
