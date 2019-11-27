@@ -167,22 +167,19 @@ class TezosClient
     broadcast_operation(operation: operation, dry_run: dry_run)
   end
 
-  def call_contract(dry_run: false, entrypoint:, params:, script: nil, **args)
-    if liquidity_contract?(script)
-      params = liquidity_interface.call_parameters(
-        script: script,
-        entrypoint: entrypoint,
-        parameters: params
-      )
-      pp params
-    end
-
-    json_params = {
+  def call_contract(dry_run: false, entrypoint:, params:, script: nil, params_type:, **args)
+    json_params = micheline_params(
+      params: params,
       entrypoint: entrypoint,
-      value: params
-    }
+      script: script,
+      params_type: params_type
+    )
 
-    transfer_args = args.merge(entrypoint: entrypoint, parameters: json_params, dry_run: dry_run)
+    transfer_args = args.merge(
+      entrypoint: entrypoint,
+      parameters: json_params,
+      dry_run: dry_run
+    )
 
     transfer(transfer_args)
   end
@@ -271,6 +268,36 @@ class TezosClient
   def liquidity_contract? filename
     filename&.to_s&.end_with?(".liq")
   end
+
+  def micheline_params(params:, entrypoint:, script: nil, params_type:)
+    {
+      entrypoint: entrypoint,
+      value: convert_params(
+        params: params,
+        entrypoint: entrypoint,
+        script: script,
+        params_type: params_type
+      )
+    }
+  end
+
+  def convert_params(params:, entrypoint:, script: nil, params_type:)
+    case params_type.to_sym
+    when :micheline
+      params
+    when :camel
+      raise ::ArgumentError, "need liquidity script path with camel type" if script.nil?
+
+      liquidity_interface.call_parameters(
+        script: script,
+        entrypoint: entrypoint,
+        parameters: params
+      )
+    else
+      raise ::ArgumentError, "params type must be equal to [ :micheline, :camel ]"
+    end
+  end
+
 
   def contract_interface(script)
     case script.to_s
