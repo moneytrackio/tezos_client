@@ -344,7 +344,7 @@ RSpec.describe TezosClient do
           to: contract_address,
           entrypoint: entrypoint,
           params: params,
-          params_type: :camel
+          params_type: :caml
         )
         pp res
       end
@@ -360,7 +360,7 @@ RSpec.describe TezosClient do
               to: contract_address,
               entrypoint: entrypoint,
               params: params,
-              params_type: :camel
+              params_type: :caml
             )
             pp res
           }.to raise_error ArgumentError, "need liquidity script path with camel type"
@@ -399,7 +399,7 @@ RSpec.describe TezosClient do
               params_type: :toto
             )
             pp res
-          }.to raise_error ArgumentError, "params type must be equal to [ :micheline, :camel ]"
+          }.to raise_error ArgumentError, "params type must be equal to [ :micheline, :caml ]"
         end
       end
     end
@@ -456,7 +456,7 @@ RSpec.describe TezosClient do
           to: contract_address,
           entrypoint: "pay",
           params: %w{ () },
-          params_type: :camel
+          params_type: :caml
         )
         puts res[:operation_id]
         disabling_vcr { tezos_client.monitor_operation(res[:operation_id]) } #if VCR.current_cassette&.recording?
@@ -471,7 +471,7 @@ RSpec.describe TezosClient do
           to: contract_address,
           entrypoint: entrypoint,
           params: params,
-          params_type: :camel
+          params_type: :caml
         )
         pp res
       end
@@ -633,7 +633,7 @@ RSpec.describe TezosClient do
           to: contract_address,
           entrypoint: entrypoint,
           params: params,
-          params_type: :camel
+          params_type: :caml
         )
       end.to raise_exception TezosClient::ScriptRuntimeError, 'Script runtime Error when executing : {"string"=>"Balance to low for withdrawal"} (location: 199)'
     end
