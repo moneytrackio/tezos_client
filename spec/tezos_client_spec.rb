@@ -310,7 +310,7 @@ RSpec.describe TezosClient do
     end
 
     context "with smartpy" do
-      describe "#call_contract " do
+      describe "#call_contract" do
         let(:contract_address) { originate_demo_contract_with_smartpy }
         let(:amount) { 1 }
 
@@ -321,7 +321,8 @@ RSpec.describe TezosClient do
             secret_key: secret_key,
             to: contract_address,
             entrypoint: "default",
-            params: { int:  "1" }
+            params: { int:  "1" },
+            params_type: :micheline
           )
           pp res
         end
@@ -342,9 +343,64 @@ RSpec.describe TezosClient do
           secret_key: secret_key,
           to: contract_address,
           entrypoint: entrypoint,
-          params: params
+          params: params,
+          params_type: :camel
         )
         pp res
+      end
+
+      context "without script" do
+        it "raise error" do
+          expect {
+            res = subject.call_contract(
+              from: source,
+              amount: amount,
+              script: nil,
+              secret_key: secret_key,
+              to: contract_address,
+              entrypoint: entrypoint,
+              params: params,
+              params_type: :camel
+            )
+            pp res
+          }.to raise_error ArgumentError, "need liquidity script path with camel type"
+        end
+      end
+
+      context "with bad params type" do
+        it "raise error" do
+          expect {
+            res = subject.call_contract(
+              from: source,
+              amount: amount,
+              script: script,
+              secret_key: secret_key,
+              to: contract_address,
+              entrypoint: entrypoint,
+              params: params,
+              params_type: :micheline
+            )
+            pp res
+          }.to raise_error
+        end
+      end
+
+      context "with unknown params type" do
+        it "raise error" do
+          expect {
+            res = subject.call_contract(
+              from: source,
+              amount: amount,
+              script: script,
+              secret_key: secret_key,
+              to: contract_address,
+              entrypoint: entrypoint,
+              params: params,
+              params_type: :toto
+            )
+            pp res
+          }.to raise_error ArgumentError, "params type must be equal to [ :micheline, :camel ]"
+        end
       end
     end
 
@@ -399,7 +455,8 @@ RSpec.describe TezosClient do
           secret_key: secret_key,
           to: contract_address,
           entrypoint: "pay",
-          params: %w{ () }
+          params: %w{ () },
+          params_type: :camel
         )
         puts res[:operation_id]
         disabling_vcr { tezos_client.monitor_operation(res[:operation_id]) } #if VCR.current_cassette&.recording?
@@ -413,7 +470,8 @@ RSpec.describe TezosClient do
           secret_key: secret_key,
           to: contract_address,
           entrypoint: entrypoint,
-          params: params
+          params: params,
+          params_type: :camel
         )
         pp res
       end
@@ -574,7 +632,8 @@ RSpec.describe TezosClient do
           secret_key: secret_key,
           to: contract_address,
           entrypoint: entrypoint,
-          params: params
+          params: params,
+          params_type: :camel
         )
       end.to raise_exception TezosClient::ScriptRuntimeError, 'Script runtime Error when executing : {"string"=>"Balance to low for withdrawal"} (location: 199)'
     end

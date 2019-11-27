@@ -117,7 +117,7 @@ RSpec.describe TezosClient::LiquidityInterface do
           res = subject.call_parameters(
             script: script,
             entrypoint: entrypoint,
-            params: params
+            parameters: params
           )
           p res
         end
