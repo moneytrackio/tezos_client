@@ -11,7 +11,7 @@ class TezosClient
       end
 
       def smartpy_cmd
-        liquidity_request = ["/SmartPyBasic/SmartPy.sh"]
+        liquidity_request = [ ENV["SMART_PY_PATH"] ]
         liquidity_request
       end
     end
