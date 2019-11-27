@@ -29,7 +29,7 @@ RSpec.describe TezosClient::LiquidityInterface do
       subject { interface.liquidity_cmd verbose: true }
 
       it "add verbose param" do
-        expect(subject).to match(/--verbose/)
+        expect(subject).to include("--verbose")
       end
     end
   end
@@ -89,7 +89,8 @@ RSpec.describe TezosClient::LiquidityInterface do
       context "multisig.liq contract" do
         let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
         let(:init_params) { ["Set [#{from}]", "1p"] }
-        let(:call_parameters) { ["pay", "()"] }
+        let(:entrypoint) { "pay" }
+        let(:params) { "()" }
 
         let!(:contract_address) { originate_multisig_contract }
 
@@ -115,7 +116,8 @@ RSpec.describe TezosClient::LiquidityInterface do
         it "gets the current params" do
           res = subject.call_parameters(
             script: script,
-            parameters: call_parameters
+            entrypoint: entrypoint,
+            parameters: params
           )
           p res
         end

@@ -26,8 +26,12 @@ require "tezos_client/operations/reveal_operation"
 require "tezos_client/operations/raw_operation_array"
 require "tezos_client/operations/operation_array"
 
+require "tezos_client/tools/system_call"
+require "tezos_client/tools/temporary_file"
+
 require "tezos_client/rpc_interface"
 require "tezos_client/liquidity_interface"
+require "tezos_client/smartpy_interface"
 
 class TezosClient
   using CurrencyUtils
@@ -40,6 +44,7 @@ class TezosClient
 
   attr_accessor :rpc_interface
   attr_accessor :liquidity_interface
+  attr_accessor :smartpy_interface
 
   RANDOM_SIGNATURE = "edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"
 
@@ -54,6 +59,8 @@ class TezosClient
       host: @rpc_node_address,
       port: @rpc_node_port
     )
+
+    @smartpy_interface = SmartpyInterface.new
 
     @liquidity_interface = LiquidityInterface.new(
       rpc_node_address: @rpc_node_address,
@@ -84,13 +91,11 @@ class TezosClient
       **args
     }
 
-    if script != nil
-      origination_args[:script] = liquidity_interface.origination_script(
-        from: from,
-        script: script,
-        init_params: init_params
-      )
-    end
+    origination_args[:script] = contract_interface(script).origination_script(
+      from: from,
+      script: script,
+      init_params: init_params
+    )
 
     operation = OriginationOperation.new(origination_args)
     res = broadcast_operation(operation: operation, dry_run: dry_run)
@@ -162,20 +167,19 @@ class TezosClient
     broadcast_operation(operation: operation, dry_run: dry_run)
   end
 
-  def call_contract(dry_run: false, **args)
-    parameters = args.fetch(:parameters)
-
-    json_params = liquidity_interface.call_parameters(
-      script: args.fetch(:script),
-      parameters: parameters
+  def call_contract(dry_run: false, entrypoint:, params:, script: nil, params_type:, **args)
+    json_params = micheline_params(
+      params: params,
+      entrypoint: entrypoint,
+      script: script,
+      params_type: params_type
     )
 
-    json_params = {
-      entrypoint: parameters[0],
-      value: json_params
-    }
-
-    transfer_args = args.merge(entrypoint: parameters[0], parameters: json_params, dry_run: dry_run)
+    transfer_args = args.merge(
+      entrypoint: entrypoint,
+      parameters: json_params,
+      dry_run: dry_run
+    )
 
     transfer(transfer_args)
   end
@@ -234,7 +238,12 @@ class TezosClient
     operations.flatten.include? operation_id
   end
 
+  def self.root_path
+    File.expand_path(File.dirname(__FILE__))
+  end
+
   private
+
   def broadcast_operation(operation:, dry_run:)
     res = if dry_run
       operation.simulate
@@ -247,4 +256,50 @@ class TezosClient
     )
   end
 
+  def liquidity_contract? filename
+    filename&.to_s&.end_with?(".liq")
+  end
+
+  def micheline_params(params:, entrypoint:, script: nil, params_type:)
+    {
+      entrypoint: entrypoint,
+      value: convert_params(
+        params: params,
+        entrypoint: entrypoint,
+        script: script,
+        params_type: params_type
+      )
+    }
+  end
+
+  def convert_params(params:, entrypoint:, script: nil, params_type:)
+    case params_type.to_sym
+    when :micheline
+      params
+    when :camel
+      raise ::ArgumentError, "need liquidity script path with camel type" if script.nil?
+
+      liquidity_interface.call_parameters(
+        script: script,
+        entrypoint: entrypoint,
+        parameters: params
+      )
+    else
+      raise ::ArgumentError, "params type must be equal to [ :micheline, :camel ]"
+    end
+  end
+
+
+  def contract_interface(script)
+    case script.to_s
+    when /[A-Za-z_\/\-]*.liq/
+      liquidity_interface
+    when /[A-Za-z_\/\-]*.py/
+      smartpy_interface
+    when nil
+      raise "script var unset"
+    else
+      raise "unknown contract type"
+    end
+  end
 end

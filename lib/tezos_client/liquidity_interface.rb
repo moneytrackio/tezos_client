@@ -16,10 +16,10 @@ class TezosClient
     end
 
     def format_params(params)
-      return "" if params.nil?
+      return [] if params.nil?
+      return [params] if params.is_a? String
 
-      params = [params] if params.is_a? String
-      params.map { |s| "'#{s}'" }.join(" ")
+      params
     end
 
     def initial_storage(args)
@@ -28,46 +28,22 @@ class TezosClient
       init_params = args.fetch :init_params
       init_params = format_params(init_params)
 
-      with_tempfile(".json") do |json_file|
-        call_liquidity "--source #{from} --json #{script} -o #{json_file.path} --init-storage #{init_params}", verbose: options[:verbose]
+      ::Tools::TemporaryFile.with_tempfile(".json") do |json_file|
+        cmd_opt = ["--source", from.to_s,"--json", script.to_s, "-o", json_file.path.to_s, "--init-storage"] + init_params
+
+        call_liquidity cmd_opt, verbose: options[:verbose]
         JSON.parse json_file.read.strip
       end
     end
 
-    def with_tempfile(extension)
-      file = Tempfile.new(["script", extension])
-      yield(file)
-
-    ensure
-      file.unlink
-    end
-
-    def with_file_copy(source_file_path)
-      source_file = File.open(source_file_path, "r")
-      source_extention = File.extname(source_file_path)
-
-      file_copy_path = nil
-
-      res = with_tempfile(source_extention) do |file_copy|
-        file_copy.write(source_file.read)
-        file_copy_path = file_copy.path
-        file_copy.close
-        yield(file_copy_path)
-      end
-
-      res
-    ensure
-      File.delete(file_copy_path) if File.exists? file_copy_path
-    end
-
     def json_scripts(script:)
-      with_file_copy(script) do |script_copy_path|
+      ::Tools::TemporaryFile.with_file_copy(script) do |script_copy_path|
         script_basename = script_copy_path.sub(/.liq$/, "")
 
         json_init_script_path = "#{script_basename}.initializer.tz.json"
         json_contract_script_path = "#{script_basename}.tz.json"
 
-        call_liquidity "--json #{script_copy_path}"
+        call_liquidity ["--json", "#{script_copy_path}"]
 
         json_contract_script_file = File.open(json_contract_script_path)
         json_contract_script = JSON.parse(json_contract_script_file.read)
@@ -107,20 +83,21 @@ class TezosClient
     end
 
     def get_storage(script:, contract_address:)
-      res = call_liquidity "#{script} --get-storage #{contract_address}"
+      res = call_liquidity ["#{script}", "--get-storage", "#{contract_address}"]
       res.strip
     end
 
-    def call_parameters(script:, parameters:)
-      parameters = format_params(parameters)
-      with_tempfile(".json") do |json_file|
-        res = call_liquidity "--json -o #{json_file.path} #{script} --data #{parameters}"
+    def call_parameters(script:, entrypoint:, parameters:)
+      params = format_params parameters
+      ::Tools::TemporaryFile.with_tempfile(".json") do |json_file|
+        params = [ entrypoint ] + params
+        res = call_liquidity ["--json", "-o", "#{json_file.path}", "#{script}", "--data"] + params
         JSON.parse res
       end
     end
 
     def pack_data(data:, type:)
-      res = call_liquidity "--pack '#{data}' '#{type}'"
+      res = call_liquidity ["--pack", "#{data}", "#{type}"]
       res.strip
     end
   end

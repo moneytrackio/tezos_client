@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tezos_client (0.4.13)
+    tezos_client (0.4.14)
       activesupport (~> 6.0.0)
       base58 (~> 0.2.3)
       bip_mnemonic (~> 0.0.2)
@@ -47,7 +47,7 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.9.0)
-    ffi (1.11.1)
+    ffi (1.11.3)
     hashdiff (1.0.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -65,7 +65,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.1009)
     mini_portile2 (2.4.0)
-    minitest (5.12.2)
+    minitest (5.13.0)
     money-tree (0.10.0)
       ffi
     multi_xml (0.6.0)
@@ -146,7 +146,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    zeitwerk (2.2.0)
+    zeitwerk (2.2.1)
 
 PLATFORMS
   ruby

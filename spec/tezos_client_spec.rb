@@ -191,48 +191,51 @@ RSpec.describe TezosClient do
   end
 
   describe "#originate_contract" do
-    let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
     let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
     let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
     let(:amount) { 0 }
-    let(:init_params) { '"test"' }
 
-    it "works" do
-      res = subject.originate_contract(
-        from: source,
-        amount: amount,
-        script: script,
-        secret_key: secret_key,
-        init_params: init_params
-      )
+    context "with liquidity" do
+      let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
+      let(:init_params) { '"test"' }
 
-      expect(res).to be_a Hash
-      expect(res).to have_key :operation_id
-      expect(res).to have_key :originated_contract
-      expect(res).to have_key :rpc_operation_args
-
-      expect(res[:operation_id]).to be_a String
-      expect(res[:originated_contract]).to be_a String
-      expect(res[:rpc_operation_args]).to be_a Hash
-    end
-
-    context "dry_run" do
       it "works" do
         res = subject.originate_contract(
           from: source,
           amount: amount,
           script: script,
           secret_key: secret_key,
-          init_params: init_params,
-          dry_run: true
+          init_params: init_params
         )
 
         expect(res).to be_a Hash
+        expect(res).to have_key :operation_id
         expect(res).to have_key :originated_contract
         expect(res).to have_key :rpc_operation_args
 
+        expect(res[:operation_id]).to be_a String
         expect(res[:originated_contract]).to be_a String
         expect(res[:rpc_operation_args]).to be_a Hash
+      end
+
+      context "dry_run" do
+        it "works" do
+          res = subject.originate_contract(
+            from: source,
+            amount: amount,
+            script: script,
+            secret_key: secret_key,
+            init_params: init_params,
+            dry_run: true
+          )
+
+          expect(res).to be_a Hash
+          expect(res).to have_key :originated_contract
+          expect(res).to have_key :rpc_operation_args
+
+          expect(res[:originated_contract]).to be_a String
+          expect(res[:rpc_operation_args]).to be_a Hash
+        end
       end
 
       context "with no secret_key" do
@@ -252,6 +255,29 @@ RSpec.describe TezosClient do
           expect(res[:originated_contract]).to be_a String
           expect(res[:rpc_operation_args]).to be_a Hash
         end
+      end
+    end
+    context "with smartpy" do
+      let(:script) { "./spec/fixtures/demo.py" }
+      let(:init_params) { "MyContract(1, 2)" }
+
+      it "works" do
+        res = subject.originate_contract(
+          from: source,
+          amount: amount,
+          script: script,
+          secret_key: secret_key,
+          init_params: init_params
+        )
+
+        expect(res).to be_a Hash
+        expect(res).to have_key :operation_id
+        expect(res).to have_key :originated_contract
+        expect(res).to have_key :rpc_operation_args
+
+        expect(res[:operation_id]).to be_a String
+        expect(res[:originated_contract]).to be_a String
+        expect(res[:rpc_operation_args]).to be_a Hash
       end
     end
   end
@@ -283,9 +309,30 @@ RSpec.describe TezosClient do
       end
     end
 
+    context "with smartpy" do
+      describe "#call_contract" do
+        let(:contract_address) { originate_demo_contract_with_smartpy }
+        let(:amount) { 1 }
+
+        it "works" do
+          res = subject.call_contract(
+            from: source,
+            amount: amount,
+            secret_key: secret_key,
+            to: contract_address,
+            entrypoint: "default",
+            params: { int:  "1" },
+            params_type: :micheline
+          )
+          pp res
+        end
+      end
+    end
+
     describe "#call Pay" do
       let(:contract_address) { originate_multisig_contract }
-      let(:call_params) { %w{pay ()} }
+      let(:entrypoint) { "pay" }
+      let(:params) { "()" }
       let(:amount) { 1 }
 
       it "works" do
@@ -295,9 +342,65 @@ RSpec.describe TezosClient do
           script: script,
           secret_key: secret_key,
           to: contract_address,
-          parameters: call_params
+          entrypoint: entrypoint,
+          params: params,
+          params_type: :camel
         )
         pp res
+      end
+
+      context "without script" do
+        it "raise error" do
+          expect {
+            res = subject.call_contract(
+              from: source,
+              amount: amount,
+              script: nil,
+              secret_key: secret_key,
+              to: contract_address,
+              entrypoint: entrypoint,
+              params: params,
+              params_type: :camel
+            )
+            pp res
+          }.to raise_error ArgumentError, "need liquidity script path with camel type"
+        end
+      end
+
+      context "with bad params type" do
+        it "raise error" do
+          expect {
+            res = subject.call_contract(
+              from: source,
+              amount: amount,
+              script: script,
+              secret_key: secret_key,
+              to: contract_address,
+              entrypoint: entrypoint,
+              params: params,
+              params_type: :micheline
+            )
+            pp res
+          }.to raise_error
+        end
+      end
+
+      context "with unknown params type" do
+        it "raise error" do
+          expect {
+            res = subject.call_contract(
+              from: source,
+              amount: amount,
+              script: script,
+              secret_key: secret_key,
+              to: contract_address,
+              entrypoint: entrypoint,
+              params: params,
+              params_type: :toto
+            )
+            pp res
+          }.to raise_error ArgumentError, "params type must be equal to [ :micheline, :camel ]"
+        end
       end
     end
 
@@ -342,7 +445,8 @@ RSpec.describe TezosClient do
     describe "#call Manage" do
       let(:contract_address) { originate_multisig_contract }
       let(:manage_amount) { 1 }
-      let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = #{manage_amount}tz })" ] }
+      let(:entrypoint) { "manage" }
+      let(:params) { "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = #{manage_amount}tz })" }
       before do
         res = subject.call_contract(
           from: source,
@@ -350,27 +454,29 @@ RSpec.describe TezosClient do
           script: script,
           secret_key: secret_key,
           to: contract_address,
-          parameters: %w{pay ()}
+          entrypoint: "pay",
+          params: %w{ () },
+          params_type: :camel
         )
         puts res[:operation_id]
         disabling_vcr { tezos_client.monitor_operation(res[:operation_id]) } #if VCR.current_cassette&.recording?
       end
 
       it "works" do
-        puts contract_address
         res = subject.call_contract(
           from: source,
           amount: amount,
           script: script,
           secret_key: secret_key,
           to: contract_address,
-          parameters: call_params
+          entrypoint: entrypoint,
+          params: params,
+          params_type: :camel
         )
         pp res
       end
     end
   end
-
 
   describe "#activate account" do
     let(:mnemonic) { "twelve april shield tell audit fever strike radio lunch father orphan lock fancy clutch sister" }
@@ -387,11 +493,12 @@ RSpec.describe TezosClient do
 
       expect {
         subject.activate_account(
-        pkh: pkh,
-        secret: secret,
-        from: pkh,
-        secret_key: secret_key
-      )}.to raise_error TezosClient::InvalidActivation
+          pkh: pkh,
+          secret: secret,
+          from: pkh,
+          secret_key: secret_key
+        )
+      }.to raise_error TezosClient::InvalidActivation
     end
   end
 
@@ -512,7 +619,8 @@ RSpec.describe TezosClient do
     let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
     let(:amount) { 0 }
     let!(:contract_address) { originate_multisig_contract }
-    let(:call_params) { [ "manage", "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 10000000000tz })" ] }
+    let(:entrypoint) { "manage" }
+    let(:params) {  "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 10000000000tz })"  }
 
 
     it "raises an error" do
@@ -523,7 +631,9 @@ RSpec.describe TezosClient do
           script: script,
           secret_key: secret_key,
           to: contract_address,
-          parameters: call_params
+          entrypoint: entrypoint,
+          params: params,
+          params_type: :camel
         )
       end.to raise_exception TezosClient::ScriptRuntimeError, 'Script runtime Error when executing : {"string"=>"Balance to low for withdrawal"} (location: 199)'
     end
