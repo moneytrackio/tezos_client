@@ -285,7 +285,7 @@ class TezosClient
         parameters: params
       )
     else
-      raise ::ArgumentError, "params type must be equal to [ :micheline, :camel ]"
+      raise ::ArgumentError, "params type must be equal to [ :micheline, :caml ]"
     end
   end
 
