@@ -285,7 +285,7 @@ class TezosClient
     case params_type.to_sym
     when :micheline
       params
-    when :camel
+    when :caml
       raise ::ArgumentError, "need liquidity script path with camel type" if script.nil?
 
       liquidity_interface.call_parameters(
