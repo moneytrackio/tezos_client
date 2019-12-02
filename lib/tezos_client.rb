@@ -97,6 +97,8 @@ class TezosClient
       init_params: init_params
     )
 
+    pp origination_args
+
     operation = OriginationOperation.new(origination_args)
     res = broadcast_operation(operation: operation, dry_run: dry_run)
 

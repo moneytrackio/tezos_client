@@ -22,9 +22,7 @@ class TezosClient
 
     def origination_script(args)
       json_init_script, json_contract_script = json_scripts(args)
-      pp json_contract_script
-      pp "================="
-      pp json_init_script
+
       {
         code: json_contract_script,
         storage: json_init_script
