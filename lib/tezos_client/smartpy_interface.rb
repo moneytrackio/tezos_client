@@ -13,7 +13,7 @@ class TezosClient
 
     def json_scripts(args)
       compile_to_michelson(args) do |contract_script_filename, init_script_filename|
-        micheline_contract = convert_michelson_to_micheline(read_file(contract_script_filename))
+        micheline_contract = read_file(contract_script_filename)
         micheline_storage = convert_michelson_to_micheline(read_file(init_script_filename))
 
         [JSON.parse(micheline_storage), JSON.parse(micheline_contract)]
@@ -36,7 +36,7 @@ class TezosClient
         script_basename = script_copy_path.split("/").last.sub(/.py$/, "")
         script_path = "/tmp/#{script_basename}/"
         init_script_filename = "contractStorage.tz"
-        contract_script_filename = "contractCode.tz"
+        contract_script_filename = "contractCode.tz.json"
         call_smartpy ["local-compile", script_copy_path, args[:init_params], script_path]
 
         yield(script_path + contract_script_filename, script_path + init_script_filename)
