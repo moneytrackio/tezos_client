@@ -71,7 +71,7 @@ class TezosClient
 
       def get_error_id(error)
         error[:id]
-      rescue TypeError
+      rescue TypeError, NoMethodError
         nil
       end
 
@@ -87,7 +87,7 @@ class TezosClient
       end
 
       def failed!(url:, code:, responses:)
-        error = responses.is_a?(String) ? responses : responses[0]
+        error = responses.is_a?(Array) ? responses[0] : responses
         raise exception_klass(error).new(
           error: error,
           url: url,
