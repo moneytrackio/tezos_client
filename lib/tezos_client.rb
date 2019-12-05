@@ -229,8 +229,17 @@ class TezosClient
   end
 
   def block_include_operation?(operation_id, block_id)
+    retries ||= 0
+
     operations = rpc_interface.get("chains/main/blocks/#{block_id}/operation_hashes")
     operations.flatten.include? operation_id
+  rescue TezosClient::RpcRequestFailure
+    if (retries += 1) < 3
+      sleep(2)
+      retry
+    else
+      raise
+    end
   end
 
   private
