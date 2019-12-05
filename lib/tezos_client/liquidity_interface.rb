@@ -19,7 +19,7 @@ class TezosClient
       return [] if params.nil?
       return [params] if params.is_a? String
 
-      params
+      params.map(&:to_s)
     end
 
     def initial_storage(args)
