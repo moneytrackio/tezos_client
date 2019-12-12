@@ -32,7 +32,7 @@ class TezosClient
     private
 
     def compile_to_michelson(args)
-      ::Tools::TemporaryFile.with_file_copy(args[:script]) do |script_copy_path|
+      Tools::TemporaryFile.with_file_copy(args[:script]) do |script_copy_path|
         script_basename = script_copy_path.split("/").last.sub(/.py$/, "")
         script_path = "/tmp/#{script_basename}/"
         init_script_filename = "contractStorage.tz"
