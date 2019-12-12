@@ -21,10 +21,10 @@ class TezosClient
   class SysCallError < RuntimeError
   end
 
-  class LiquidityError < SystemCallError
+  class LiquidityError < SysCallError
   end
 
-  class SmartPyError < SystemCallError
+  class SmartPyError < SysCallError
   end
 
   class InvalidActivation < RpcRequestFailure
