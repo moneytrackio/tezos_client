@@ -18,7 +18,7 @@ class TezosClient
     end
   end
 
-  class SystemCallError < RuntimeError
+  class SysCallError < RuntimeError
   end
 
   class LiquidityError < SystemCallError
