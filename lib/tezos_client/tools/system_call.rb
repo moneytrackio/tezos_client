@@ -1,20 +1,22 @@
-module Tools
-  module SystemCall
-    def self.execute(cmd)
-      Open3.popen3(*cmd) do |_stdin, stdout, stderr, wait_thr|
-        err = stderr.read
-        status = wait_thr.value.exitstatus
+class TezosClient
+  module Tools
+    module SystemCall
+      def self.execute(cmd)
+        Open3.popen3(*cmd) do |_stdin, stdout, stderr, wait_thr|
+          err = stderr.read
+          status = wait_thr.value.exitstatus
 
-        if status != 0
-          raise ::TezosClient::SysCallError, "command '#{cmd}' existed with status #{status}: #{err}"
-        end
+          if status != 0
+            raise ::TezosClient::SysCallError, "command '#{cmd}' existed with status #{status}: #{err}"
+          end
 
-        output = stdout.read
+          output = stdout.read
 
-        if block_given?
-          yield(output)
-        else
-          output
+          if block_given?
+            yield(output)
+          else
+            output
+          end
         end
       end
     end

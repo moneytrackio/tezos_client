@@ -28,7 +28,7 @@ class TezosClient
       init_params = args.fetch :init_params
       init_params = format_params(init_params)
 
-      ::Tools::TemporaryFile.with_tempfile(".json") do |json_file|
+      Tools::TemporaryFile.with_tempfile(".json") do |json_file|
         cmd_opt = ["--source", from.to_s,"--json", script.to_s, "-o", json_file.path.to_s, "--init-storage"] + init_params
 
         call_liquidity cmd_opt, verbose: options[:verbose]
@@ -37,7 +37,7 @@ class TezosClient
     end
 
     def json_scripts(script:)
-      ::Tools::TemporaryFile.with_file_copy(script) do |script_copy_path|
+      Tools::TemporaryFile.with_file_copy(script) do |script_copy_path|
         script_basename = script_copy_path.sub(/.liq$/, "")
 
         json_init_script_path = "#{script_basename}.initializer.tz.json"
@@ -105,7 +105,7 @@ class TezosClient
 
     def call_parameters(script:, entrypoint:, parameters:)
       params = format_params parameters
-      ::Tools::TemporaryFile.with_tempfile(".json") do |json_file|
+      Tools::TemporaryFile.with_tempfile(".json") do |json_file|
         params = [ entrypoint ] + params
         res = call_liquidity ["--json", "-o", "#{json_file.path}", "#{script}", "--data"] + params
         JSON.parse res

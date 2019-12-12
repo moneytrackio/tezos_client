@@ -7,7 +7,9 @@ class TezosClient
       def call_liquidity(command, verbose: false)
         cmd = liquidity_cmd(verbose: verbose).concat command
 
-        ::Tools::SystemCall.execute(cmd)
+        Tools::SystemCall.execute(cmd)
+      rescue SysCallError => e
+        raise LiquidityError, e.message
       end
 
       def liquidity_cmd(verbose:)
