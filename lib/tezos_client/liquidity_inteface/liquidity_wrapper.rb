@@ -9,7 +9,7 @@ class TezosClient
 
         ::Tools::SystemCall.execute(cmd)
       rescue ::TezosClient::SysCallError => e
-        raise ::TezosClient::LiquidityError, e.message
+        raise ::TezosClient::LiquidityError, e
       end
 
       def liquidity_cmd(verbose:)

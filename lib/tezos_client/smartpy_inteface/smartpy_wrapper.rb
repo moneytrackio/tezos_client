@@ -9,7 +9,7 @@ class TezosClient
 
         ::Tools::SystemCall.execute(cmd)
       rescue ::TezosClient::SysCallError => e
-        raise ::TezosClient::SmartPyError, e.message
+        raise ::TezosClient::SmartPyError, e
       end
 
       def smartpy_cmd
