@@ -6,7 +6,7 @@ module Tools
         status = wait_thr.value.exitstatus
 
         if status != 0
-          raise SysCallError, "command '#{cmd}' existed with status #{status}: #{err}"
+          raise SystemCallError, "command '#{cmd}' existed with status #{status}: #{err}"
         end
 
         output = stdout.read
