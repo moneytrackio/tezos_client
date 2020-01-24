@@ -18,10 +18,11 @@ class TezosClient
                    :balance,
                    :contract_manager_key,
                    :contract_storage,
-                   :pending_operations
+                   :pending_operations,
+                   :pack_data
 
     def_delegators :liquidity_interface,
                    :get_storage,
-                   :pack_data
+                   :liquidity_pack_data
   end
 end

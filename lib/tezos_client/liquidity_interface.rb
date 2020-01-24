@@ -96,7 +96,7 @@ class TezosClient
       end
     end
 
-    def pack_data(data:, type:)
+    def liquidity_pack_data(data:, type:)
       res = call_liquidity ["--pack", "#{data}", "#{type}"]
       res.strip
     end

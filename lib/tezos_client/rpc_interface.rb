@@ -26,6 +26,5 @@ class TezosClient
       @host = host
       @port = port
     end
-
   end
 end

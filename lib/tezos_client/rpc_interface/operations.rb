@@ -46,6 +46,14 @@ class TezosClient
       def pending_operations
         get("chains/main/mempool/pending_operations")
       end
+
+      def pack_data(data:, type:)
+        content = {
+            data: data,
+            type: type
+        }
+        post("/chains/main/blocks/head/helpers/scripts/pack_data", content)
+      end
     end
   end
 end
