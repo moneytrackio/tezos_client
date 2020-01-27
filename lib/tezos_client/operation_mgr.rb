@@ -122,7 +122,7 @@ class TezosClient
       convert_rpc_responce(rpc_responses)
     end
 
-    def convert_rpc_responce(rpc_responses)
+    def convert_rpc_response(rpc_responses)
       converted_rpc_responce = {
         status: :applied,
         operation_results: operation_results(rpc_responses),
