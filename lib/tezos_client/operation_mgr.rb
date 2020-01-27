@@ -185,12 +185,9 @@ class TezosClient
         protocol: protocol,
         branch: branch)
 
-      metadatas = ensure_applied!(rpc_responses)
-      operation_results = metadatas.map { |metadata| metadata[:operation_result] }
+      ensure_applied!(rpc_responses)
 
-      {
-        operation_results: operation_results
-      }
+      convert_rpc_responce(rpc_responses)
     end
 
     def broadcast
