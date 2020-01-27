@@ -143,7 +143,7 @@ class TezosClient
     def internal_operation_result(rpc_responses)
       rpc_responses.map do |rpc_response|
         rpc_response[:metadata][:internal_operation_results]
-      end.select { |elem| !elem.nil? }.flatten
+      end.compact.flatten
     end
 
     def consumed_tez(rpc_responses)
