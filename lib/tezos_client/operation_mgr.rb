@@ -119,7 +119,7 @@ class TezosClient
 
       ensure_applied!(rpc_responses)
 
-      convert_rpc_responce(rpc_responses)
+      convert_rpc_response(rpc_responses)
     end
 
     def convert_rpc_response(rpc_responses)
