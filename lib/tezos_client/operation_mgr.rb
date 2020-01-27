@@ -104,10 +104,10 @@ class TezosClient
       simulate_res = simulate
       op_id = broadcast
 
-      {
+
+      simulate_res.merge(
         operation_id: op_id,
-        operation_results: simulate_res[:operation_results],
-      }
+      )
     end
 
     def run
@@ -127,7 +127,7 @@ class TezosClient
       converted_rpc_responce = {
         status: :applied,
         operation_results: operation_results(rpc_responses),
-        internal_operation_result: internal_operation_result(rpc_responses)
+        internal_operation_results: internal_operation_result(rpc_responses)
       }
 
       converted_rpc_responce.merge(consumed_tez(rpc_responses))
