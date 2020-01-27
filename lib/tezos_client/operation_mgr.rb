@@ -104,10 +104,9 @@ class TezosClient
       simulate_res = simulate
       op_id = broadcast
 
-      {
+      simulate_res.merge(
         operation_id: op_id,
-        operation_results: simulate_res[:operation_results],
-      }
+      )
     end
 
     def run
@@ -115,29 +114,51 @@ class TezosClient
         operations: rpc_operation_args,
         signature: RANDOM_SIGNATURE,
         branch: branch,
-        chain_id: chain_id)
-
-      total_consumed_storage = 0
-      total_consumed_gas = 0
+        chain_id: chain_id
+      )
 
       ensure_applied!(rpc_responses)
 
-      operation_results = rpc_responses.map do |rpc_response|
+      convert_rpc_response(rpc_responses)
+    end
+
+    def convert_rpc_response(rpc_responses)
+      converted_rpc_responce = {
+        status: :applied,
+        operation_results: operation_results(rpc_responses),
+        internal_operation_results: internal_operation_result(rpc_responses)
+      }
+
+      converted_rpc_responce.merge(consumed_tez(rpc_responses))
+    end
+
+    def operation_results(rpc_responses)
+      rpc_responses.map do |rpc_response|
         metadata = rpc_response[:metadata]
-
-        total_consumed_storage += compute_consumed_storage(metadata)
-        consumed_gas = compute_consumed_gas(metadata)
-        total_consumed_gas += consumed_gas
-
-        metadata[:operation_result][:consumed_gas] = consumed_gas if metadata.key? :operation_result
+        metadata[:operation_result][:consumed_gas] = compute_consumed_gas(metadata) if metadata.key? :operation_result
         metadata[:operation_result]
+      end
+    end
+
+    def internal_operation_result(rpc_responses)
+      rpc_responses.map do |rpc_response|
+        rpc_response[:metadata][:internal_operation_results]
+      end.compact.flatten
+    end
+
+    def consumed_tez(rpc_responses)
+      total_consumed_storage = 0
+      total_consumed_gas = 0
+
+      rpc_responses.each do |rpc_response|
+        metadata = rpc_response[:metadata]
+        total_consumed_storage += compute_consumed_storage(metadata)
+        total_consumed_gas += compute_consumed_gas(metadata)
       end
 
       {
-        status: :applied,
-        consumed_gas: total_consumed_gas,
         consumed_storage: total_consumed_storage,
-        operation_results: operation_results
+        consumed_gas: total_consumed_gas
       }
     end
 
@@ -164,12 +185,9 @@ class TezosClient
         protocol: protocol,
         branch: branch)
 
-      metadatas = ensure_applied!(rpc_responses)
-      operation_results = metadatas.map { |metadata| metadata[:operation_result] }
+      ensure_applied!(rpc_responses)
 
-      {
-        operation_results: operation_results
-      }
+      convert_rpc_response(rpc_responses)
     end
 
     def broadcast
