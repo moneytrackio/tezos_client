@@ -104,7 +104,6 @@ class TezosClient
       simulate_res = simulate
       op_id = broadcast
 
-
       simulate_res.merge(
         operation_id: op_id,
       )
@@ -143,9 +142,8 @@ class TezosClient
 
     def internal_operation_result(rpc_responses)
       rpc_responses.map do |rpc_response|
-        metadata = rpc_response[:metadata]
-        metadata[:internal_operation_results]
-      end
+        rpc_response[:metadata][:internal_operation_results]
+      end.select { |elem| !elem.nil? }.flatten
     end
 
     def consumed_tez(rpc_responses)
