@@ -136,7 +136,7 @@ class TezosClient
     def operation_results(rpc_responses)
       rpc_responses.map do |rpc_response|
         metadata = rpc_response[:metadata]
-        metadata[:operation_result][:consumed_gas] = consumed_gas if metadata.key? :operation_result
+        metadata[:operation_result][:consumed_gas] = compute_consumed_gas(metadata) if metadata.key? :operation_result
         metadata[:operation_result]
       end
     end
