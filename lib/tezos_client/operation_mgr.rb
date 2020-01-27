@@ -115,29 +115,52 @@ class TezosClient
         operations: rpc_operation_args,
         signature: RANDOM_SIGNATURE,
         branch: branch,
-        chain_id: chain_id)
-
-      total_consumed_storage = 0
-      total_consumed_gas = 0
+        chain_id: chain_id
+      )
 
       ensure_applied!(rpc_responses)
 
-      operation_results = rpc_responses.map do |rpc_response|
+      convert_rpc_responce(rpc_responses)
+    end
+
+    def convert_rpc_responce(rpc_responses)
+      converted_rpc_responce = {
+        status: :applied,
+        operation_results: operation_results(rpc_responses),
+        internal_operation_result: internal_operation_result(rpc_responses)
+      }
+
+      converted_rpc_responce.merge(consumed_tez(rpc_responses))
+    end
+
+    def operation_results(rpc_responses)
+      rpc_responses.map do |rpc_response|
         metadata = rpc_response[:metadata]
-
-        total_consumed_storage += compute_consumed_storage(metadata)
-        consumed_gas = compute_consumed_gas(metadata)
-        total_consumed_gas += consumed_gas
-
         metadata[:operation_result][:consumed_gas] = consumed_gas if metadata.key? :operation_result
         metadata[:operation_result]
       end
+    end
+
+    def internal_operation_result(rpc_responses)
+      rpc_responses.map do |rpc_response|
+        metadata = rpc_response[:metadata]
+        metadata[:internal_operation_results]
+      end
+    end
+
+    def consumed_tez(rpc_responses)
+      total_consumed_storage = 0
+      total_consumed_gas = 0
+
+      rpc_responses.each do |rpc_response|
+        metadata = rpc_response[:metadata]
+        total_consumed_storage += compute_consumed_storage(metadata)
+        total_consumed_gas += compute_consumed_gas(metadata)
+      end
 
       {
-        status: :applied,
-        consumed_gas: total_consumed_gas,
         consumed_storage: total_consumed_storage,
-        operation_results: operation_results
+        consumed_gas: total_consumed_gas
       }
     end
 
