@@ -200,7 +200,7 @@ class TezosClient
     def encode_script_expr(data:, type:)
       packed_key = pack_data(data: data, type: type)
       raw_expr_key = RbNaCl::Hash::Blake2b.digest(packed_key["packed"].to_bin, digest_size: 32).to_hex
-      expr_key = encode_tz(:expr, raw_expr_key)
+      encode_tz(:expr, raw_expr_key)
     end
 
     private
