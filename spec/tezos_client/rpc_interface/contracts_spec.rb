@@ -57,7 +57,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts do
     let(:key) { { string: "InsuranceContract" } }
     let(:type_key) { { prim: "string" } }
 
-    it "returns the contract storage" do
+    it "returns the the big map value" do
       res = subject.big_map_value(big_map_id: big_map_id, key: key, type_key: type_key)
       expect(res).to eq(
         "prim" => "Pair",
@@ -66,7 +66,6 @@ RSpec.describe TezosClient::RpcInterface::Contracts do
           { "string" => "edpkugJHjEZLNyTuX3wW2dT4P7PY5crLqq3zeDFvXohAs3tnRAaZKR" }
         ]
       )
-      p res
     end
   end
 end
