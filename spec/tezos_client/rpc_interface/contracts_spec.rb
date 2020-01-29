@@ -60,10 +60,10 @@ RSpec.describe TezosClient::RpcInterface::Contracts do
     it "returns the contract storage" do
       res = subject.big_map_value(big_map_id: big_map_id, key: key, type_key: type_key)
       expect(res).to eq(
-        "prim"=>"Pair",
-        "args"=> [
-          {"string"=>"KT1J3z1Fbc4MgEh9b5pEe4ZzgK8Wcn7Q8F6M"},
-          {"string"=>"edpkugJHjEZLNyTuX3wW2dT4P7PY5crLqq3zeDFvXohAs3tnRAaZKR"}
+        "prim" => "Pair",
+        "args" => [
+          { "string" => "KT1J3z1Fbc4MgEh9b5pEe4ZzgK8Wcn7Q8F6M" },
+          { "string" => "edpkugJHjEZLNyTuX3wW2dT4P7PY5crLqq3zeDFvXohAs3tnRAaZKR" }
         ]
       )
       p res
