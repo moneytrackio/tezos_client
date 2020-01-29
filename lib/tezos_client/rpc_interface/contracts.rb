@@ -1,15 +1,8 @@
 # frozen_string_literal: true
 
-require "base58"
-require "rbnacl"
-require "digest"
-require "money-tree"
-require "bip_mnemonic"
-
 class TezosClient
   class RpcInterface
     using CurrencyUtils
-    using StringUtils
     include Crypto
 
     module Contracts
