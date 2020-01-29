@@ -3,6 +3,7 @@
 class TezosClient
   class RpcInterface
     using CurrencyUtils
+    include Crypto
 
     module Contracts
       def contract_link(contract_id)
@@ -25,6 +26,12 @@ class TezosClient
 
       def contract_storage(contract_id)
         get "#{contract_link(contract_id)}/storage"
+      end
+
+      def big_map_value(big_map_id:, key:, type_key:)
+        expr_key = encode_script_expr(data: key, type: type_key)
+
+        get "/chains/main/blocks/head/context/big_maps/#{big_map_id}/#{expr_key}"
       end
     end
   end

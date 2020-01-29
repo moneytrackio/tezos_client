@@ -15,6 +15,7 @@ class TezosClient
       tz2:    [6, 161, 161],
       tz3:    [6, 161, 164],
       KT:     [2, 90, 121],
+      expr:   [13, 44, 64, 27],
       edpk:   [13, 15, 37, 217],
       edsk2:  [13, 15, 58, 7],
       spsk:   [17, 162, 224, 201],
@@ -194,6 +195,12 @@ class TezosClient
       password = "#{wallet_config[:email]}#{wallet_config[:password]}"
       key = generate_key(mnemonic: mnemonic, password: password)
       key.merge(activation_secret: wallet_config[:secret])
+    end
+
+    def encode_script_expr(data:, type:)
+      packed_key = pack_data(data: data, type: type)
+      raw_expr_key = RbNaCl::Hash::Blake2b.digest(packed_key["packed"].to_bin, digest_size: 32).to_hex
+      encode_tz(:expr, raw_expr_key)
     end
 
     private
