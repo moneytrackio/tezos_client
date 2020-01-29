@@ -177,7 +177,6 @@ class TezosClient
       (metadata.dig(:operation_result, :paid_storage_size_diff) || "0").to_i.from_satoshi
     end
 
-
     def preapply
       rpc_responses = rpc_interface.preapply_operations(
         operations: rpc_operation_args,
