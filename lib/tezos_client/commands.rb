@@ -19,7 +19,8 @@ class TezosClient
                    :contract_manager_key,
                    :contract_storage,
                    :pending_operations,
-                   :pack_data
+                   :pack_data,
+                   :big_map_value
 
     def_delegators :liquidity_interface,
                    :get_storage,
