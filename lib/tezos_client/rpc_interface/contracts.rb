@@ -36,9 +36,7 @@ class TezosClient
       end
 
       def big_map_value(big_map_id:, key:, type_key:)
-        packed_key = pack_data(data: key, type: type_key)
-        raw_expr_key = RbNaCl::Hash::Blake2b.digest(packed_key["packed"].to_bin, digest_size: 32).to_hex
-        expr_key = encode_tz(:expr, raw_expr_key)
+        expr_key = encode_script_expr(data: key, type: type_key)
 
         get "/chains/main/blocks/head/context/big_maps/#{big_map_id}/#{expr_key}"
       end

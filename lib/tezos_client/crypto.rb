@@ -197,6 +197,12 @@ class TezosClient
       key.merge(activation_secret: wallet_config[:secret])
     end
 
+    def encode_script_expr(data:, type:)
+      packed_key = pack_data(data: data, type: type)
+      raw_expr_key = RbNaCl::Hash::Blake2b.digest(packed_key["packed"].to_bin, digest_size: 32).to_hex
+      expr_key = encode_tz(:expr, raw_expr_key)
+    end
+
     private
       def generate_signing_key(mnemonic: nil, password: nil, wallet_seed: nil, path: nil)
         if mnemonic
