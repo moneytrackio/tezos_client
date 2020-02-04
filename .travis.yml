@@ -16,6 +16,11 @@ before_install:
   - id=$(docker create moneytrack/liquidity:babylonnet)
   - docker cp $id:/home/opam/.opam/4.07/bin/liquidity - > liquidity
   - chmod +x liquidity
+  - curl -s https://SmartPy.io/SmartPyBasicTest2/SmartPy.sh > SmartPy.sh
+  - chmod +x ./SmartPy.sh
+  - ./SmartPy.sh local-install-custom SmartPyBasicTest2 /root/
+  - rm ./SmartPy.sh
+  - export PATH="$PATH:/smartpy/SmartPyBasic/"
   - gem install bundler -v 1.16.3
 script:
   - bundle install

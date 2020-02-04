@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient::RpcInterface::Contracts do
+RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
   include_context "public rpc interface"
   subject { rpc_interface }
 
@@ -52,7 +52,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts do
     end
   end
 
-  describe "#big_map_value", :vcr do
+  describe "#big_map_value" do
     let(:big_map_id) { 74 }
     let(:key) { { string: "InsuranceContract" } }
     let(:type_key) { { prim: "string" } }

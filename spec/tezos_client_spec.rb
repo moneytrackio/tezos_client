@@ -24,7 +24,7 @@ RSpec.describe TezosClient do
   end
 
   before do
-    disabling_vcr { wait_new_block }
+    disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
   end
 
   describe "#transfer" do
@@ -474,7 +474,7 @@ RSpec.describe TezosClient do
           params_type: :caml
         )
         puts res[:operation_id]
-        disabling_vcr { tezos_client.monitor_operation(res[:operation_id]) } #if VCR.current_cassette&.recording?
+        disabling_vcr { tezos_client.monitor_operation(res[:operation_id]) }
       end
 
       it "works" do
@@ -529,7 +529,7 @@ RSpec.describe TezosClient do
         to: key[:address],
         secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
       )
-      disabling_vcr { wait_new_block } #if VCR.current_cassette&.recording?
+      disabling_vcr { wait_new_block }
     end
 
 
@@ -553,13 +553,13 @@ RSpec.describe TezosClient do
           to: key[:address],
           secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
         )
-        disabling_vcr { wait_new_block } #if VCR.current_cassette&.recording?
+        disabling_vcr { wait_new_block }
       end
 
       it "raises an exception" do
         expect do
           subject.reveal_pubkey(secret_key: secret_key)
-          disabling_vcr { wait_new_block } #if VCR.current_cassette&.recording?
+          disabling_vcr { wait_new_block }
           subject.reveal_pubkey(secret_key: secret_key)
         end.to raise_exception TezosClient::PreviouslyRevealedKey, "Previously revealed key for address tz1UTikevS42TFpT4uhtxkNbeYsG3ea7bsrB"
       end
