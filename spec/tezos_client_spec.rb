@@ -22,7 +22,7 @@ RSpec.describe TezosClient, vcr: true do
       expect(res[:operation_id]).to be_a String
     end
 
-    context "with parameters" do
+    context "with parameters", :require_node do
       let!(:contract_address) do
         originate_demo_contract
       end
@@ -87,36 +87,34 @@ RSpec.describe TezosClient, vcr: true do
     end
   end
 
-  unless ENV["TRAVIS"]
-    describe "#monitor_operation" do
-      let(:op_id) do
-        res = subject.transfer(
-          amount: 1,
-          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
-        )
-        res[:operation_id]
+  describe "#monitor_operation", :require_node do
+    let(:op_id) do
+      res = subject.transfer(
+        amount: 1,
+        from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
+        secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+      )
+      res[:operation_id]
+    end
+    it "works" do
+      disabling_vcr do
+        block_id = subject.monitor_operation(op_id)
+        expect(block_id).to be_a String
       end
-      it "works" do
-        disabling_vcr do
-          block_id = subject.monitor_operation(op_id)
-          expect(block_id).to be_a String
-        end
-      end
+    end
 
-      context "when monitoring thread raises an exception" do
-        it "redirects the exception" do
-          disabling_vcr do
-            allow_any_instance_of(TezosClient).to receive(:block_include_operation?).and_raise(Exception, "rspec makes me fail")
-            expect { subject.monitor_operation(op_id) }.to raise_exception Exception, "rspec makes me fail"
-          end
+    context "when monitoring thread raises an exception" do
+      it "redirects the exception" do
+        disabling_vcr do
+          allow_any_instance_of(TezosClient).to receive(:block_include_operation?).and_raise(Exception, "rspec makes me fail")
+          expect { subject.monitor_operation(op_id) }.to raise_exception Exception, "rspec makes me fail"
         end
       end
     end
   end
 
-  describe "inject_raw_operations" do
+  describe "inject_raw_operations", :require_node do
     let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
     let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
     let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
@@ -177,7 +175,7 @@ RSpec.describe TezosClient, vcr: true do
     let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
     let(:amount) { 0 }
 
-    context "with liquidity" do
+    context "with liquidity", :require_node do
       let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
       let(:init_params) { '"test"' }
 
@@ -279,7 +277,7 @@ RSpec.describe TezosClient, vcr: true do
     end
   end
 
-  context "#multisig" do
+  context "#multisig", :require_node do
     let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
     let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
     let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
@@ -583,7 +581,7 @@ RSpec.describe TezosClient, vcr: true do
     end
   end
 
-  describe "#get_storage", vcr: false do
+  describe "#get_storage", :require_node, vcr: false do
     let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
     let!(:contract_address) { originate_demo_contract }
 
@@ -625,7 +623,7 @@ RSpec.describe TezosClient, vcr: true do
     end
   end
 
-  describe "#contract failure" do
+  describe "#contract failure", :require_node do
     let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
     let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
     let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }

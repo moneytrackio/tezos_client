@@ -12,7 +12,7 @@ rvm:
   - 2.5.1
 before_install:
   - sh travis-scripts/prepare-ubuntu.sh
-  - mkdir $HOME/bin
+  - mkdir -p $HOME/bin
   - docker pull moneytrack/liquidity:babylonnet
   - id=$(docker create moneytrack/liquidity:babylonnet)
   - docker cp $id:/home/opam/.opam/4.07/bin/liquidity - > $HOME/bin/liquidity
@@ -26,4 +26,4 @@ before_install:
   - gem install bundler -v 1.16.3
 script:
   - bundle install
-  - bundle exec rake
+  - bundle exec rspec --tag '~require_node'

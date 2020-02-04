@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient::RpcInterface::Blocks do
+RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
   include_context "public rpc interface"
   subject { rpc_interface }
   let(:block_hash) { subject.block_header.fetch(:hash) }
@@ -88,7 +88,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks do
     end
 
     context "block with transaction" do
-      let!(:block_hash) do
+      let(:new_operation_block) do
         res = tezos_client.transfer(
           amount: 1,
           from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
@@ -96,6 +96,16 @@ RSpec.describe TezosClient::RpcInterface::Blocks do
           secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
         )
         monitor_operation(res[:operation_id])
+      end
+
+      let!(:block_hash) do
+        if reading_vcr_cassette?
+          "BLSg2gFz4D4QJRoaJXCmJ5tM9LTkq7QRcYTzsohayZtEXkz9Hy3"
+        else
+          new_block_hash = new_operation_block
+          puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__-3}"
+          new_block_hash
+        end
       end
 
       it "returns the block" do
@@ -113,15 +123,25 @@ RSpec.describe TezosClient::RpcInterface::Blocks do
       let(:amount) { 0 }
       let(:init_params) { '"test"' }
 
-      let!(:block_hash) do
-        res = tezos_client.originate_contract(
+      let(:new_origination_block) do
+        tezos_client.originate_contract(
           from: source,
           amount: amount,
           script: script,
           secret_key: secret_key,
           init_params: init_params
         )
-        disabling_vcr { p tezos_client.monitor_operation(res[:operation_id], timeout: 120) }
+        monitor_operation(res[:operation_id])
+      end
+
+      let!(:block_hash) do
+        if reading_vcr_cassette?
+          "BLWm91SWkMwLucDysZS9a3kLpjCF3QBZDuA2dv6mhjQUvgn6K9q"
+        else
+          new_block_hash = new_operation_block
+          puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__-3}"
+          new_block_hash
+        end
       end
 
       it "contain the origination operation" do
@@ -144,7 +164,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks do
     end
 
     context "Block with operations" do
-      let!(:block_hash) do
+      let(:new_operation_block) do
         res = tezos_client.transfer(
           amount: 1,
           from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
@@ -152,6 +172,16 @@ RSpec.describe TezosClient::RpcInterface::Blocks do
           secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
         )
         monitor_operation(res[:operation_id])
+      end
+
+      let!(:block_hash) do
+        if reading_vcr_cassette?
+          "BKoGa2knW1hvCoBbTBMg1rvRNFH7vbWjr1TrNaKp4v733uJCn2A"
+        else
+          new_block_hash = new_operation_block
+          puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__-3}"
+          new_block_hash
+        end
       end
 
       it "returns the block" do

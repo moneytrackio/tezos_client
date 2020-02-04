@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient::RpcInterface::Monitor do
+RSpec.describe TezosClient::RpcInterface::Monitor, :require_node do
   include_context "public rpc interface"
 
   subject { rpc_interface }

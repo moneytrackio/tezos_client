@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient::LiquidityInterface do
+RSpec.describe TezosClient::LiquidityInterface, :require_node do
   include_context "public rpc interface"
   include_context "contract origination"
 
@@ -70,7 +70,7 @@ RSpec.describe TezosClient::LiquidityInterface do
       end
     end
 
-    describe "#get_storage" do
+    describe "#get_storage", :require_node do
       include_context "contract origination"
 
       let!(:contract_address) do

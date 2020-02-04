@@ -14,15 +14,15 @@ RSpec.describe TezosClient::RpcInterface::Helper do
   let(:branch) { subject.head_hash }
   let(:protocol) { "PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS" }
 
-  let(:liquidity_interface) { TezosClient::LiquidityInterface.new(rpc_node_address: rpc_node_address, rpc_node_port: rpc_node_port) }
+  let(:smartpy_interface) { TezosClient::SmartpyInterface.new }
 
-  let(:script_path) { File.expand_path("./spec/fixtures/demo.liq") }
+  let(:script_path) { File.expand_path("./spec/fixtures/demo.py") }
 
   let(:script) do
-    liquidity_interface.origination_script(
+    smartpy_interface.origination_script(
       from: from,
       script: script_path,
-      init_params: '"test"'
+      init_params: "MyContract(1, 2)"
     )
   end
 

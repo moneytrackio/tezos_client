@@ -35,7 +35,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
     let(:amount) { 0 }
     let(:init_params) { '"test"' }
 
-    let!(:contract_address) do
+    let(:new_contract_address) do
       res = tezos_client.originate_contract(
         from: source,
         amount: amount,
@@ -45,6 +45,16 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
       )
       monitor_operation(res[:operation_id])
       res[:originated_contract]
+    end
+
+    let!(:contract_address) do
+      if reading_vcr_cassette?
+        "KT1KxbB1jzRChznkjbqDQB86VJoEj7saVPzT"
+      else
+        new_kt_hash = new_contract_address
+        puts "please insert this contract hash here #{new_kt_hash} #{__FILE__}:#{__LINE__-3}"
+        new_kt_hash
+      end
     end
     it "returns the contract storage" do
       res = subject.contract_storage(contract_address)
