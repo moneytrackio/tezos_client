@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 
-RSpec.describe TezosClient::RpcInterface::Helper do
+RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   using TezosClient::StringUtils
 
   include_context "public rpc interface"
