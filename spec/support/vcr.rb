@@ -17,6 +17,10 @@ module VcrDisabler
   ensure
     WebMock.enable!
   end
+
+  def reading_vcr_cassette?
+    VCR.current_cassette && !VCR.current_cassette&.recording?
+  end
 end
 
 RSpec.configure do |config|

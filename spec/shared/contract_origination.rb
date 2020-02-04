@@ -14,7 +14,7 @@ RSpec.shared_context "contract origination", shared_context: :metadata do
       secret_key: SECRET_KEY,
       init_params: '"test"'
     )
-    disabling_vcr { tezos_client.monitor_operation(res[:operation_id], timeout: 120) }
+    monitor_operation(res[:operation_id])
     res[:originated_contract]
   end
 
@@ -27,7 +27,7 @@ RSpec.shared_context "contract origination", shared_context: :metadata do
         secret_key: SECRET_KEY,
         init_params: "MyContract(1, 2)"
       )
-      tezos_client.monitor_operation(res[:operation_id], timeout: 120)
+      monitor_operation(res[:operation_id])
       res[:originated_contract]
     }
   end
@@ -40,7 +40,7 @@ RSpec.shared_context "contract origination", shared_context: :metadata do
       secret_key: SECRET_KEY,
       init_params: ["Set [#{FROM}]", "1p"]
     )
-    disabling_vcr { tezos_client.monitor_operation(res[:operation_id], timeout: 120) }
+    monitor_operation(res[:operation_id])
     res[:originated_contract]
   end
 end

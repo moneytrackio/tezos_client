@@ -95,7 +95,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks do
           to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
           secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
         )
-        disabling_vcr { p tezos_client.monitor_operation(res[:operation_id], timeout: 120) }
+        monitor_operation(res[:operation_id])
       end
 
       it "returns the block" do
@@ -151,7 +151,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks do
           to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
           secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
         )
-        disabling_vcr { tezos_client.monitor_operation(res[:operation_id], timeout: 120) }
+        monitor_operation(res[:operation_id])
       end
 
       it "returns the block" do

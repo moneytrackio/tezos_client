@@ -1,0 +1,78 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://tezos_node:8094//chains/main/blocks/head/hash
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"BLNGR3NRbWtervogPRdm44svYqWs8t1DVMimVgLdUY5WUxFe1M7"
+
+'
+    http_version: 
+  recorded_at: Tue, 04 Feb 2020 10:45:13 GMT
+- request:
+    method: get
+    uri: http://tezos_node:8094//chains/main/chain_id
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '18'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '"NetXUdfLh6Gm88t"
+
+'
+    http_version: 
+  recorded_at: Tue, 04 Feb 2020 10:45:13 GMT
+- request:
+    method: post
+    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
+    body:
+      encoding: UTF-8
+      string: '{"operation":{"branch":"BLNGR3NRbWtervogPRdm44svYqWs8t1DVMimVgLdUY5WUxFe1M7","contents":[{"kind":"activate_account","pkh":"tz1RdraebVC4gRbrnMDWQjZ28FtvgQZWJp21","secret":"23d18abce360452faa65b9909b6bf259562af0f8"}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"},"chain_id":"NetXUdfLh6Gm88t"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Content-Length:
+      - '123'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '[{"kind":"permanent","id":"proto.005-PsBabyM1.operation.invalid_activation","pkh":"tz1RdraebVC4gRbrnMDWQjZ28FtvgQZWJp21"}]
+
+'
+    http_version: 
+  recorded_at: Tue, 04 Feb 2020 10:45:13 GMT
+recorded_with: VCR 4.0.0

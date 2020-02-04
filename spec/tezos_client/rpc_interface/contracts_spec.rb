@@ -43,7 +43,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
         secret_key: secret_key,
         init_params: init_params
       )
-      disabling_vcr { p tezos_client.monitor_operation(res[:operation_id], timeout: 120) }
+      monitor_operation(res[:operation_id])
       res[:originated_contract]
     end
     it "returns the contract storage" do

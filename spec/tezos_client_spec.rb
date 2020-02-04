@@ -1,30 +1,12 @@
 # frozen_string_literal: true
 
-RSpec.describe TezosClient do
+RSpec.describe TezosClient, vcr: true do
   include_context "public rpc interface"
   include_context "contract origination"
   subject { tezos_client }
 
-  def wait_new_block(timeout: 240)
-    blocks_to_wait = 2
-    received_blocks = []
-    monitor_thread = subject.monitor_block do |block|
-      received_blocks << block[:hash]
-      received_blocks.uniq!
-    end
-
-    limit_time = Time.now + timeout
-
-    while received_blocks.size < blocks_to_wait && Time.now < limit_time
-      sleep(1)
-    end
-    monitor_thread.terminate
-
-    raise "no block received for 4 minutes" unless received_blocks.size >= blocks_to_wait
-  end
-
   before do
-    disabling_vcr { wait_new_block } if VCR.current_cassette&.recording?
+    wait_new_block
   end
 
   describe "#transfer" do
@@ -473,8 +455,7 @@ RSpec.describe TezosClient do
           params: %w{ () },
           params_type: :caml
         )
-        puts res[:operation_id]
-        disabling_vcr { tezos_client.monitor_operation(res[:operation_id]) }
+        monitor_operation(res[:operation_id])
       end
 
       it "works" do
@@ -519,7 +500,23 @@ RSpec.describe TezosClient do
 
   describe "#reveal public key" do
     let(:wallet_seed) { "000102030405060708090a0b0c0d0e0f" }
-    let(:key) { subject.generate_key }
+    let(:registered_key) do
+      {
+        secret_key: "edsk4aJApTCTa5DHNi6yjgRVpNNZPz4YmiffJtSvgbsQTWEVU7QK2M",
+        public_key: "edpkusTky9AbPqUhnaJUeYiRQH6pUEyTr4vNv1qBPdTFNSQeyxeYBX",
+        address: "tz1L4WMuHychSsgJiS9At69TZx6ZbYVBKsfs"
+      }
+    end
+
+    let(:key) do
+      if reading_vcr_cassette?
+        registered_key
+      else
+        key = subject.generate_key
+        puts "Please update :registered_key to this value: #{key}"
+        key
+      end
+    end
     let(:secret_key) { key[:secret_key] }
 
     before do
@@ -529,7 +526,7 @@ RSpec.describe TezosClient do
         to: key[:address],
         secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
       )
-      disabling_vcr { wait_new_block }
+      wait_new_block
     end
 
 
@@ -553,13 +550,13 @@ RSpec.describe TezosClient do
           to: key[:address],
           secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
         )
-        disabling_vcr { wait_new_block }
+        wait_new_block
       end
 
       it "raises an exception" do
         expect do
           subject.reveal_pubkey(secret_key: secret_key)
-          disabling_vcr { wait_new_block }
+          wait_new_block
           subject.reveal_pubkey(secret_key: secret_key)
         end.to raise_exception TezosClient::PreviouslyRevealedKey, "Previously revealed key for address tz1UTikevS42TFpT4uhtxkNbeYsG3ea7bsrB"
       end
