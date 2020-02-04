@@ -12,15 +12,17 @@ rvm:
   - 2.5.1
 before_install:
   - sh travis-scripts/prepare-ubuntu.sh
+  - mkdir $HOME/bin
   - docker pull moneytrack/liquidity:babylonnet
   - id=$(docker create moneytrack/liquidity:babylonnet)
-  - docker cp $id:/home/opam/.opam/4.07/bin/liquidity - > liquidity
+  - docker cp $id:/home/opam/.opam/4.07/bin/liquidity - > $HOME/bin/liquidity
   - chmod +x liquidity
   - curl -s https://SmartPy.io/SmartPyBasicTest2/SmartPy.sh > SmartPy.sh
   - chmod +x ./SmartPy.sh
-  - ./SmartPy.sh local-install-custom SmartPyBasicTest2 $HOME/smartpy
+  - ./SmartPy.sh local-install-custom SmartPyBasicTest2 $HOME/bin/smartpy
   - rm ./SmartPy.sh
-  - export PATH="$PATH:$HOME/smartpy/SmartPyBasic/"
+  - export PATH="$PATH:$HOME/bin/:$HOME/bin/smartpy/SmartPyBasic/"
+  - npm link michelson-to-micheline
   - gem install bundler -v 1.16.3
 script:
   - bundle install
