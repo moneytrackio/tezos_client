@@ -4,7 +4,7 @@ class TezosClient
   class SmartpyInterface
     module MichelineSerializerWrapper
       def convert_michelson_to_micheline(script)
-        cmd = ["node", actual_project_path + "/conseil_lib/convert_michelson_to_micheline.js", script]
+        cmd = ["michelson-to-micheline", script]
 
         Tools::SystemCall.execute(cmd)
       end

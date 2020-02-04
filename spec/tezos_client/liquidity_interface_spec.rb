@@ -124,14 +124,14 @@ RSpec.describe TezosClient::LiquidityInterface do
       end
     end
 
-    describe "#pack_data" do
+    describe "#liquidity_pack_data" do
       let(:data) { '("blah", 12p, edpkuFkrBfbg6La44p5qdWMAUFCgVh6mY3HA7tGFBkixd7GThP4YQZ)' }
       let(:type) { "(string * nat * key)" }
 
       let(:packed_data) { "0x0507070100000004626c61680707000c0a000000210050ae93c352b148de86b3717e77cfd3c7c372878227cf38010b2faeb3d2aa7460" }
 
       it "works" do
-        expect(subject.pack_data(data: data, type: type)).to eq packed_data
+        expect(subject.liquidity_pack_data(data: data, type: type)).to eq packed_data
       end
     end
   end

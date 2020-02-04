@@ -12,10 +12,10 @@ For installing on linux, you can basically follow the steps coded in travis-scri
 
 ## Dependency 
 
-### ConseilJs 
+### michelson-to-micheline 
 ```bash
 sudo apt-get install nodejs
-npm i -g conseiljs
+npm i -g michelson-to-micheline
 ```
 
 ### liquidity

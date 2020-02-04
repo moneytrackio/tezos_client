@@ -13,8 +13,8 @@ class TezosClient
 
     def json_scripts(args)
       compile_to_michelson(args) do |contract_script_filename, init_script_filename|
-        micheline_contract = read_file(contract_script_filename)
-        micheline_storage = convert_michelson_to_micheline(read_file(init_script_filename))
+        micheline_contract = File.read(contract_script_filename)
+        micheline_storage = convert_michelson_to_micheline(File.read(init_script_filename))
 
         [JSON.parse(micheline_storage), JSON.parse(micheline_contract)]
       end
@@ -41,13 +41,6 @@ class TezosClient
 
         yield(script_path + contract_script_filename, script_path + init_script_filename)
       end
-    end
-
-    def read_file(filename)
-      file = File.open(filename)
-      file_data = file.read
-      file.close
-      file_data
     end
   end
 end
