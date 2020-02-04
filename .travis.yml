@@ -18,9 +18,9 @@ before_install:
   - chmod +x liquidity
   - curl -s https://SmartPy.io/SmartPyBasicTest2/SmartPy.sh > SmartPy.sh
   - chmod +x ./SmartPy.sh
-  - ./SmartPy.sh local-install-custom SmartPyBasicTest2 /root/
+  - ./SmartPy.sh local-install-custom SmartPyBasicTest2 $HOME/smartpy
   - rm ./SmartPy.sh
-  - export PATH="$PATH:/smartpy/SmartPyBasic/"
+  - export PATH="$PATH:$HOME/smartpy/SmartPyBasic/"
   - gem install bundler -v 1.16.3
 script:
   - bundle install
