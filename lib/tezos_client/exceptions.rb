@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TezosClient
-  class RpcRequestFailure < Exception
+  class RpcRequestFailure < StandardError
 
     attr_reader :status_code
     attr_reader :error
@@ -49,7 +49,7 @@ class TezosClient
     end
   end
 
-  class OperationFailure < Exception
+  class OperationFailure < StandardError
     include Logger
 
     attr_reader :metadata
