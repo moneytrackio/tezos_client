@@ -10,6 +10,10 @@ class TezosClient
         "/chains/main/blocks/head/context/contracts/#{contract_id}"
       end
 
+      def contract_detail(contract_id)
+        get contract_link(contract_id)
+      end
+
       def balance(contract_id)
         res = get("#{contract_link(contract_id)}/balance")
         res.to_i.from_satoshi

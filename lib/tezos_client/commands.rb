@@ -18,6 +18,7 @@ class TezosClient
                    :balance,
                    :contract_manager_key,
                    :contract_storage,
+                   :contract_detail,
                    :pending_operations,
                    :pack_data,
                    :big_map_value
