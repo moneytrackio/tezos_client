@@ -37,6 +37,17 @@ class TezosClient
 
         get "/chains/main/blocks/head/context/big_maps/#{big_map_id}/#{expr_key}"
       end
+
+      def list_big_map_by_contract(contract_address:)
+        contract_storage = contract_storage(contract_address)
+        contract = contract_detail(contract_address)
+        storage_type = contract[:script][:code].find { |elem| elem[:prim] == "storage" }[:args].first
+
+        TezosClient::Tools::FindBigMapsInStorage.run!(
+          storage: contract_storage,
+          storage_type: storage_type
+        )
+      end
     end
   end
 end

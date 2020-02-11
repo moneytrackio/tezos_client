@@ -7,6 +7,8 @@ require "active_support/core_ext/module/delegation"
 require "timeout"
 require "benchmark"
 require "open3"
+require "active_interaction"
+require "time"
 
 require "tezos_client/version"
 require "tezos_client/string_utils"
@@ -32,6 +34,9 @@ require "tezos_client/tools/temporary_file"
 require "tezos_client/rpc_interface"
 require "tezos_client/liquidity_interface"
 require "tezos_client/smartpy_interface"
+
+require "tezos_client/tools/convert_to_hash"
+require "tezos_client/tools/find_big_maps_in_storage"
 
 class TezosClient
   using CurrencyUtils
