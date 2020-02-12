@@ -85,13 +85,13 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
       expect(res).to eq([
         {
           name: :big_map_first,
-          id: "2",
+          id: "4",
           type_value: { prim: "int" },
           type_key: { prim: "string" }
         }.with_indifferent_access,
         {
           name: :big_map_second,
-          id: "3",
+          id: "5",
           type_value: { prim: "string" },
           type_key: { prim: "string" }
         }.with_indifferent_access
