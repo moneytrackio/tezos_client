@@ -31,14 +31,17 @@ class TezosClient::Tools::ConvertToHash < ActiveInteraction::Base
   def pair_type(data:, type:)
     raise "Not a 'Pair' type" unless data[:prim] == "Pair"
     raise "Difference detected between data and type \nDATA: #{data} \nTYPE:#{type} " unless data[:args].size == type[:args].size
+
     result = {}
-    (0 .. data[:args].size - 1).map do |iter|
-      compose(
-        TezosClient::Tools::ConvertToHash,
-        data: data[:args][iter],
-        type: type[:args][iter]
+    data[:args].size.times do |iter|
+      result.merge!(
+        compose(
+          TezosClient::Tools::ConvertToHash,
+          data: data[:args][iter],
+          type: type[:args][iter]
+        )
       )
-    end.each { |elem| result.merge!(elem) }
+    end
     result
   end
 

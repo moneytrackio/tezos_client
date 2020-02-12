@@ -89,7 +89,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
          chain_id: subject.chain_id,
          signature: TezosClient::RANDOM_SIGNATURE
       )
-      pp res
+
       expect(res).to have_key("metadata")
       expect(res["metadata"]).to have_key("operation_result")
       expect(res["metadata"]["operation_result"]).to have_key("status")
@@ -163,7 +163,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
           signature: signature
         )
       )
-      pp res
+
       expect(res).to have_key("metadata")
       expect(res["metadata"]).to have_key("operation_result")
       expect(res["metadata"]["operation_result"]).to have_key("status")
@@ -206,7 +206,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
           signature: signature
         )
       )
-      pp res
+
       expect(res).to have_key("metadata")
       expect(res["metadata"]).to have_key("operation_result")
       expect(res["metadata"]["operation_result"]).to have_key("status")

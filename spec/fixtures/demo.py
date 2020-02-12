@@ -12,12 +12,22 @@
 import smartpy as sp
 
 class MyContract(sp.Contract):
-    def __init__(self, myParameter1, myParameter2):
-        self.init(myParameter1 = myParameter1,
-                  myParameter2 = myParameter2)
+    def __init__(self):
+        self.init(
+            big_map_first = sp.big_map(
+                tkey = sp.TString,
+                tvalue = sp.TInt
+            ),
+            big_map_second = sp.big_map(
+                 tkey = sp.TString,
+                 tvalue = sp.TString
+             )
+        )
 
-    @sp.entryPoint
-    def myEntryPoint(self, params):
-        sp.verify(self.data.myParameter1 <= 123)
-        self.data.myParameter1 += params
+    @sp.entry_point
+    def add_first(self, params):
+        self.data.big_map_first[params.key] = params.value
 
+    @sp.entry_point
+    def add_second(self, params):
+        self.data.big_map_second[params.key] = params.value
