@@ -13,6 +13,8 @@ class TezosClient::Tools::ConvertToHash < ActiveInteraction::Base
       list_type(data: data, type: type)
     when "int"
       int_type(data: data, type: type)
+    when "nat"
+      int_type(data: data, type: type)
     when "key"
       key_type(data: data, type: type)
     when "timestamp"
