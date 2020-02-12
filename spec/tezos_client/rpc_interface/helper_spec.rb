@@ -22,7 +22,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
     smartpy_interface.origination_script(
       from: from,
       script: script_path,
-      init_params: "MyContract(1, 2)"
+      init_params: "MyContract()"
     )
   end
 

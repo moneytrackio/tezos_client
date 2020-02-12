@@ -254,7 +254,7 @@ RSpec.describe TezosClient, vcr: true do
     end
     context "with smartpy" do
       let(:script) { "./spec/fixtures/demo.py" }
-      let(:init_params) { "MyContract(1, 2)" }
+      let(:init_params) { "MyContract()" }
 
       it "works" do
         res = subject.originate_contract(
