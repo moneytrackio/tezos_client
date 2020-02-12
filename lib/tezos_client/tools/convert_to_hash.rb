@@ -70,7 +70,6 @@ class TezosClient::Tools::ConvertToHash < ActiveInteraction::Base
   end
 
   def timestamp_type(data:, type:)
-    Time.zone = 'UTC'
     { var_name(type) => Time.zone.at(data[:int].to_i) }
   end
 
