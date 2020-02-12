@@ -78,4 +78,24 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
       )
     end
   end
+
+  describe "#list_big_map_by_contract", :vcr, :deploying_simple_contract do
+    it "returns the list of big map in contract" do
+      res = subject.list_big_map_by_contract(contract_address: contract_address)
+      expect(res).to eq([
+        {
+          name: :big_map_first,
+          id: "4",
+          type_value: { prim: "int" },
+          type_key: { prim: "string" }
+        }.with_indifferent_access,
+        {
+          name: :big_map_second,
+          id: "5",
+          type_value: { prim: "string" },
+          type_key: { prim: "string" }
+        }.with_indifferent_access
+      ])
+    end
+  end
 end

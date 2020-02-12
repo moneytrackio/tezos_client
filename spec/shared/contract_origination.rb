@@ -25,7 +25,7 @@ RSpec.shared_context "contract origination", shared_context: :metadata do
         amount: 0,
         script: File.expand_path("./spec/fixtures/demo.py"),
         secret_key: SECRET_KEY,
-        init_params: "MyContract(1, 2)"
+        init_params: "MyContract()"
       )
       monitor_operation(res[:operation_id])
       res[:originated_contract]

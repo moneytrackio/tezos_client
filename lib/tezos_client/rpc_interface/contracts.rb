@@ -10,6 +10,10 @@ class TezosClient
         "/chains/main/blocks/head/context/contracts/#{contract_id}"
       end
 
+      def contract_detail(contract_id)
+        get contract_link(contract_id)
+      end
+
       def balance(contract_id)
         res = get("#{contract_link(contract_id)}/balance")
         res.to_i.from_satoshi
@@ -32,6 +36,17 @@ class TezosClient
         expr_key = encode_script_expr(data: key, type: type_key)
 
         get "/chains/main/blocks/head/context/big_maps/#{big_map_id}/#{expr_key}"
+      end
+
+      def list_big_map_by_contract(contract_address:)
+        contract_storage = contract_storage(contract_address)
+        contract = contract_detail(contract_address)
+        storage_type = contract[:script][:code].find { |elem| elem[:prim] == "storage" }[:args].first
+
+        TezosClient::Tools::FindBigMapsInStorage.run!(
+          storage: contract_storage,
+          storage_type: storage_type
+        )
       end
     end
   end

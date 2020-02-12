@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MonitorTezos
+
   def monitor_operation(operation_id)
     disabling_vcr { tezos_client.monitor_operation(operation_id) } unless reading_vcr_cassette?
   end

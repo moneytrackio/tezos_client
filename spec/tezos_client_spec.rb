@@ -107,8 +107,8 @@ RSpec.describe TezosClient, vcr: true do
     context "when monitoring thread raises an exception" do
       it "redirects the exception" do
         disabling_vcr do
-          allow_any_instance_of(TezosClient).to receive(:block_include_operation?).and_raise(Exception, "rspec makes me fail")
-          expect { subject.monitor_operation(op_id) }.to raise_exception Exception, "rspec makes me fail"
+          allow_any_instance_of(TezosClient).to receive(:block_include_operation?).and_raise(StandardError, "rspec makes me fail")
+          expect { subject.monitor_operation(op_id) }.to raise_exception StandardError, "rspec makes me fail"
         end
       end
     end
@@ -254,7 +254,7 @@ RSpec.describe TezosClient, vcr: true do
     end
     context "with smartpy" do
       let(:script) { "./spec/fixtures/demo.py" }
-      let(:init_params) { "MyContract(1, 2)" }
+      let(:init_params) { "MyContract()" }
 
       it "works" do
         res = subject.originate_contract(

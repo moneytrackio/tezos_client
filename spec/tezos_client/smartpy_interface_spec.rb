@@ -2,7 +2,7 @@
 
 RSpec.describe TezosClient::SmartpyInterface do
   let(:script) { File.expand_path("./spec/fixtures/demo.py") }
-  let(:init_params) { "MyContract(1, 2)" }
+  let(:init_params) { "MyContract()" }
 
 
   subject { described_class.new }
