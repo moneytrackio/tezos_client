@@ -1,0 +1,28 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://tezos_node:8094/chains/main/blocks/head/header
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '644'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","chain_id":"NetXdQprcVkpaWU","hash":"BLAb35ToZsc9yR8eRodp4E9MeZmqucTJePqXqZuyxkCx8zXNJun","level":48481,"proto":1,"predecessor":"BLooTzWh9TL8pKpJaYRQny3XNwdqTJkj9hSRHHcJUSMZAQgnzcg","timestamp":"2020-02-19T11:45:51Z","validation_pass":4,"operations_hash":"LLoZf2Bybc6KNWmjrgpDo9ba56ZJupvY4wURzgj4WoeAZ4wTBmAtE","fitness":["01","000000000000bd60"],"context":"CoVYid6RQCNsb8jxhKTg7LEdByUHwtZu1cADoJJ5nFN8vsTWj95L","priority":0,"proof_of_work_nonce":"756e6b6f00000000","signature":"sigTdEtWmcaw15a41d8pBwZRQBpy9buJhS5unz3Cx3X1ELpS5e9ZDKXJoMaFHGfvmxPS5aNj821RpWeGesRknTeL17Qgdv5u"}
+
+'
+    http_version: 
+  recorded_at: Wed, 19 Feb 2020 11:45:57 GMT
+recorded_with: VCR 4.0.0
