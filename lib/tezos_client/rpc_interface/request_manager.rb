@@ -12,7 +12,7 @@ class TezosClient
         formatted_response = format_response(response.parsed_response)
 
         log("-------")
-        log(">>> GET #{response.request.uri.to_s} \n")
+        log(">>> GET #{response.request.uri} \n")
         log("<<< code: #{response.code} \n    exec time: #{exec_time}\n #{tezos_contents_log(formatted_response)}")
         log("-------")
         unless response.success?
@@ -68,54 +68,53 @@ class TezosClient
       end
 
       private
-
-      def get_error_id(error)
-        error[:id]
-      rescue TypeError, NoMethodError
-        nil
-      end
-
-      def exception_klass(error)
-        case get_error_id(error)
-        when /proto\.[^.]*\.operation\.invalid_activation/
-          TezosClient::InvalidActivation
-        when /proto\.[^.]*\.contract\.previously_revealed_key/
-          TezosClient::PreviouslyRevealedKey
-        else
-          TezosClient::RpcRequestFailure
+        def get_error_id(error)
+          error[:id]
+        rescue TypeError, NoMethodError
+          nil
         end
-      end
 
-      def failed!(url:, code:, responses:)
-        error = responses.is_a?(Array) ? responses[0] : responses
-        raise exception_klass(error).new(
-          error: error,
-          url: url,
-          status_code: code
-        )
-      end
-
-      def monitor_event_reader(uuid, event_handler)
-        proc do |event_response|
-          event_response.read_body do |event_json|
-            event = format_response(JSON.parse(event_json))
-            log("Monitor #{uuid}: received chunk #{event.pretty_inspect}")
-            event_handler.call(event)
+        def exception_klass(error)
+          case get_error_id(error)
+          when /proto\.[^.]*\.operation\.invalid_activation/
+            TezosClient::InvalidActivation
+          when /proto\.[^.]*\.contract\.previously_revealed_key/
+            TezosClient::PreviouslyRevealedKey
+          else
+            TezosClient::RpcRequestFailure
           end
         end
-      end
 
-      def format_response(response)
-        if response.is_a? Array
-          response.map do |el|
-            (el.is_a? Hash) ? el.with_indifferent_access : el
-          end
-        elsif response.is_a? Hash
-          response.with_indifferent_access
-        else
-          response
+        def failed!(url:, code:, responses:)
+          error = responses.is_a?(Array) ? responses[0] : responses
+          raise exception_klass(error).new(
+            error: error,
+            url: url,
+            status_code: code
+          )
         end
-      end
+
+        def monitor_event_reader(uuid, event_handler)
+          proc do |event_response|
+            event_response.read_body do |event_json|
+              event = format_response(JSON.parse(event_json))
+              log("Monitor #{uuid}: received chunk #{event.pretty_inspect}")
+              event_handler.call(event)
+            end
+          end
+        end
+
+        def format_response(response)
+          if response.is_a? Array
+            response.map do |el|
+              (el.is_a? Hash) ? el.with_indifferent_access : el
+            end
+          elsif response.is_a? Hash
+            response.with_indifferent_access
+          else
+            response
+          end
+        end
     end
   end
 end

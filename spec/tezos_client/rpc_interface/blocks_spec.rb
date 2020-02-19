@@ -20,7 +20,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
         res = subject.blocks(head: head)
         expect(res).to be_an Array
         expect(res.length).to eq 50
-        expect(res[0]).to match /B[1-9a-zA-Z]+/
+        expect(res[0]).to match(/B[1-9a-zA-Z]+/)
       end
     end
 
@@ -100,7 +100,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
 
       let!(:block_hash) do
         if reading_vcr_cassette?
-          "BLSg2gFz4D4QJRoaJXCmJ5tM9LTkq7QRcYTzsohayZtEXkz9Hy3"
+          "BM4jU5xcqX55cKd1aa8m9sNBcnEBz6Qm8oQpRCSrtif9zrdvBkX"
         else
           new_block_hash = new_operation_block
           puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__-3}"
@@ -117,14 +117,14 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
     end
 
     context "block with origination" do
-      let(:script) { File.expand_path("./spec/fixtures/demo.liq") }
+      let(:script) { File.expand_path("./spec/fixtures/demo.py") }
       let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
       let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
       let(:amount) { 0 }
-      let(:init_params) { '"test"' }
+      let(:init_params) { "MyContract()" }
 
       let(:new_origination_block) do
-        tezos_client.originate_contract(
+        res = tezos_client.originate_contract(
           from: source,
           amount: amount,
           script: script,
@@ -136,9 +136,9 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
 
       let!(:block_hash) do
         if reading_vcr_cassette?
-          "BLWm91SWkMwLucDysZS9a3kLpjCF3QBZDuA2dv6mhjQUvgn6K9q"
+          "BMbkUuHcoABmSFLEKEzT1WmcYZUxkGKBA4L83hb9eMqmMVZtAcW"
         else
-          new_block_hash = new_operation_block
+          new_block_hash = new_origination_block
           puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__-3}"
           new_block_hash
         end
@@ -176,7 +176,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
 
       let!(:block_hash) do
         if reading_vcr_cassette?
-          "BKoGa2knW1hvCoBbTBMg1rvRNFH7vbWjr1TrNaKp4v733uJCn2A"
+          "BKriYRHoNeDKbsTj3BcZaGztjaZSmTkfmgMZ1XTmaZaPSqmENnr"
         else
           new_block_hash = new_operation_block
           puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__-3}"

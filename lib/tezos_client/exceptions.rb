@@ -2,7 +2,6 @@
 
 class TezosClient
   class RpcRequestFailure < StandardError
-
     attr_reader :status_code
     attr_reader :error
 
@@ -19,9 +18,6 @@ class TezosClient
   end
 
   class SysCallError < RuntimeError
-  end
-
-  class LiquidityError < SysCallError
   end
 
   class SmartPyError < SysCallError

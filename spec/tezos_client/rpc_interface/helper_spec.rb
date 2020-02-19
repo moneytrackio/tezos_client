@@ -76,18 +76,18 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
   describe "#run_transaction" do
     it "returns a hash" do
       res = subject.run_operation(
-         operation: subject.transaction_operation(
-             from: from,
-             to: from,
-             amount: 1,
-             fee: 0.05,
-             gas_limit: 0.05,
-             storage_limit: 0.006,
-             counter: counter
-           ),
-         branch: branch,
-         chain_id: subject.chain_id,
-         signature: TezosClient::RANDOM_SIGNATURE
+        operation: subject.transaction_operation(
+          from: from,
+          to: from,
+          amount: 1,
+          fee: 0.05,
+          gas_limit: 0.05,
+          storage_limit: 0.006,
+          counter: counter
+          ),
+        branch: branch,
+        chain_id: subject.chain_id,
+        signature: TezosClient::RANDOM_SIGNATURE
       )
 
       expect(res).to have_key("metadata")

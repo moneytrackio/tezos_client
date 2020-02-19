@@ -4,7 +4,7 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
   subject { described_class.run!(data: data, type: type) }
 
   before do
-    Time.zone = 'UTC'
+    Time.zone = "UTC"
   end
 
   context "complexe struct" do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TezosClient
   module Tools
     module SystemCall

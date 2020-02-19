@@ -32,7 +32,6 @@ require "tezos_client/tools/system_call"
 require "tezos_client/tools/temporary_file"
 
 require "tezos_client/rpc_interface"
-require "tezos_client/liquidity_interface"
 require "tezos_client/smartpy_interface"
 
 require "tezos_client/tools/convert_to_hash"
@@ -48,7 +47,6 @@ class TezosClient
   include Crypto
 
   attr_accessor :rpc_interface
-  attr_accessor :liquidity_interface
   attr_accessor :smartpy_interface
 
   RANDOM_SIGNATURE = "edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"
@@ -56,7 +54,6 @@ class TezosClient
   def initialize(rpc_node_address: "127.0.0.1", rpc_node_port: 8732, liquidity_options: {})
     @rpc_node_address = rpc_node_address
     @rpc_node_port = rpc_node_port
-    @liquidity_options = liquidity_options
 
     @client_config_file = ENV["TEZOS_CLIENT_CONFIG_FILE"]
 
@@ -66,12 +63,6 @@ class TezosClient
     )
 
     @smartpy_interface = SmartpyInterface.new
-
-    @liquidity_interface = LiquidityInterface.new(
-      rpc_node_address: @rpc_node_address,
-      rpc_node_port: @rpc_node_port,
-      options: @liquidity_options
-    )
   end
 
   # Originates a contract on the tezos blockchain
@@ -161,7 +152,6 @@ class TezosClient
     from = public_key_to_address(public_key)
 
     operation = RevealOperation.new(
-      liquidity_interface: liquidity_interface,
       rpc_interface: rpc_interface,
       public_key: public_key,
       from: from,
@@ -172,11 +162,10 @@ class TezosClient
     broadcast_operation(operation: operation, dry_run: dry_run)
   end
 
-  def call_contract(dry_run: false, entrypoint:, params:, script: nil, params_type:, **args)
+  def call_contract(dry_run: false, entrypoint:, params:, params_type:, **args)
     json_params = micheline_params(
       params: params,
       entrypoint: entrypoint,
-      script: script,
       params_type: params_type
     )
 
@@ -194,7 +183,6 @@ class TezosClient
     from = public_key_to_address(public_key)
 
     operation = RawOperationArray.new(
-      liquidity_interface: liquidity_interface,
       rpc_interface: rpc_interface,
       public_key: public_key,
       from: from,
@@ -257,63 +245,46 @@ class TezosClient
   end
 
   private
+    def broadcast_operation(operation:, dry_run:)
+      res = if dry_run
+        operation.simulate
+      else
+        operation.test_and_broadcast
+      end
 
-  def broadcast_operation(operation:, dry_run:)
-    res = if dry_run
-      operation.simulate
-    else
-      operation.test_and_broadcast
-    end
-
-    res.merge(
-      rpc_operation_args: operation.rpc_operation_args
-    )
-  end
-
-  def liquidity_contract? filename
-    filename&.to_s&.end_with?(".liq")
-  end
-
-  def micheline_params(params:, entrypoint:, script: nil, params_type:)
-    {
-      entrypoint: entrypoint,
-      value: convert_params(
-        params: params,
-        entrypoint: entrypoint,
-        script: script,
-        params_type: params_type
+      res.merge(
+        rpc_operation_args: operation.rpc_operation_args
       )
-    }
-  end
+    end
 
-  def convert_params(params:, entrypoint:, script: nil, params_type:)
-    case params_type.to_sym
-    when :micheline
-      params
-    when :caml
-      raise ::ArgumentError, "need liquidity script path with camel type" if script.nil?
-
-      liquidity_interface.call_parameters(
-        script: script,
+    def micheline_params(params:, entrypoint:, params_type:)
+      {
         entrypoint: entrypoint,
-        parameters: params
-      )
-    else
-      raise ::ArgumentError, "params type must be equal to [ :micheline, :caml ]"
+        value: convert_params(
+          params: params,
+          params_type: params_type
+        )
+      }
     end
-  end
+
+    def convert_params(params:,  params_type:)
+      case params_type.to_sym
+      when :micheline
+        params
+      else
+        raise ::ArgumentError, "params type must be equal to [ :micheline ]"
+      end
+    end
 
 
-  def contract_interface(script)
-    case script.to_s
-    when /[A-Za-z_\/\-]*.liq/
-      liquidity_interface
-    when /[A-Za-z_\/\-]*.py/
-      smartpy_interface
-    when nil
-      raise "script var unset"
-    else
-      raise "unknown contract type"
+    def contract_interface(script)
+      case script.to_s
+      when /[A-Za-z_\/\-]*.py/
+        smartpy_interface
+      when nil
+        raise "script var unset"
+      else
+        raise "unknown contract type"
+      end
     end
-  end
 end

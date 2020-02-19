@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class TezosClient
   class ActivateAccountOperation < Operation
-
     def rpc_operation_args
       @rpc_operation_args ||= rpc_interface.activate_account_operation(
         operation_args

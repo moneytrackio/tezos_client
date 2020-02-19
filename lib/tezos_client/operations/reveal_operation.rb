@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TezosClient
   class RevealOperation < Operation
     def rpc_operation_args

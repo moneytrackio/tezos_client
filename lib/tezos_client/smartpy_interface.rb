@@ -30,17 +30,16 @@ class TezosClient
     end
 
     private
+      def compile_to_michelson(args)
+        Tools::TemporaryFile.with_file_copy(args[:script]) do |script_copy_path|
+          script_basename = script_copy_path.split("/").last.sub(/.py$/, "")
+          script_path = "/tmp/#{script_basename}/"
+          init_script_filename = "contractStorage.tz"
+          contract_script_filename = "contractCode.tz.json"
+          call_smartpy ["local-compile", script_copy_path, args[:init_params], script_path]
 
-    def compile_to_michelson(args)
-      Tools::TemporaryFile.with_file_copy(args[:script]) do |script_copy_path|
-        script_basename = script_copy_path.split("/").last.sub(/.py$/, "")
-        script_path = "/tmp/#{script_basename}/"
-        init_script_filename = "contractStorage.tz"
-        contract_script_filename = "contractCode.tz.json"
-        call_smartpy ["local-compile", script_copy_path, args[:init_params], script_path]
-
-        yield(script_path + contract_script_filename, script_path + init_script_filename)
+          yield(script_path + contract_script_filename, script_path + init_script_filename)
+        end
       end
-    end
   end
 end
