@@ -326,12 +326,10 @@ RSpec.describe TezosClient, vcr: true do
       let(:ignore_counter_error) { false }
 
       it "raises an error when two transactions from the same source are executed" do
-        disabling_vcr do
-          expect do
-            subject.transfer params.merge(amount: 0.01)
-            subject.transfer params
-          end.to raise_error TezosClient::RpcRequestFailure, /Counter .* already used for contract/
-        end
+        expect do
+          subject.transfer params.merge(amount: 0.01)
+          subject.transfer params
+        end.to raise_error TezosClient::RpcRequestFailure, /Counter .* already used for contract/
       end
     end
 
@@ -339,12 +337,10 @@ RSpec.describe TezosClient, vcr: true do
       let(:ignore_counter_error) { true }
 
       it "works when two transactions from the same source are executed" do
-        disabling_vcr do
-          expect do
-            subject.transfer params.merge(amount: 0.01)
-            subject.transfer params
-          end.not_to raise_error
-        end
+        expect do
+          subject.transfer params.merge(amount: 0.01)
+          subject.transfer params
+        end.not_to raise_error
       end
     end
   end
