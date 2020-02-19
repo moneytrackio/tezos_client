@@ -207,20 +207,6 @@ RSpec.describe TezosClient, vcr: true do
         expect(res[:rpc_operation_args]).to be_a Hash
       end
 
-      context "with bad params" do
-        it "raise error" do
-          expect {
-            res = subject.originate_contract(
-              from: source,
-              amount: amount,
-              script: script,
-              secret_key: secret_key,
-              init_params: nil
-            )
-            pp res
-          }.to raise_error TypeError
-        end
-      end
       context "dry_run" do
         it "works" do
           res = subject.originate_contract(
