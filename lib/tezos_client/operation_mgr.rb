@@ -168,18 +168,39 @@ class TezosClient
 
     def ensure_applied!(rpc_responses)
       metadatas = rpc_responses.map { |response| response[:metadata] }
-      operation_results = metadatas.map { |metadata| metadata[:operation_result] }
+      operation_full_results = metadatas.map do |metadata|
+        { op_result: metadata[:operation_result], internal_operation_results: metadata[:internal_operation_results]}
+      end
 
-      failed = operation_results.detect do |operation_result|
+      failed = operation_full_results.map{|op_res| op_res[:op_result]}.detect do |operation_result|
         operation_result != nil && operation_result[:status] != "applied"
       end
 
       return metadatas if failed.nil?
 
-      failed_operation_result = operation_results.detect do |operation_result|
-        operation_result[:status] == "failed"
+      process_transaction_errors!(operation_full_results)
+    end
+
+    def process_transaction_errors!(operations_full_results)
+      detect_operation = ->(op_full_results, status: "failed") do
+        op_full_results.detect do |operation_result|
+          operation_result[:op_result][:status] == status
+        end
       end
 
+      failed_operation_result = detect_operation.call(operations_full_results)
+
+      if failed_operation_result.nil?
+        backtracked_operation_result = detect_operation.call(operations_full_results, status: "backtracked")
+        raise UnknownTransactionError if backtracked_operation_result.nil?
+
+        internal_operations_results = backtracked_operation_result[:internal_operation_results].map{|op| op[:result]}
+        failed_operation_result = internal_operations_results.detect { |op_result| op_result[:status] == "failed" }
+      else
+        failed_operation_result = failed_operation_result[:op_result]
+      end
+
+      operation_results = operations_full_results.map { |full_result| full_result[:op_result] }
       failed!("failed", failed_operation_result[:errors], operation_results)
     end
 

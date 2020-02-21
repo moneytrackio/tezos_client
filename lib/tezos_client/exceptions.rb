@@ -101,4 +101,6 @@ class TezosClient
       super
     end
   end
+
+  class UnknownTransactionError < Exception; end
 end
