@@ -120,11 +120,11 @@ client.transfer(
 ### Originate a contract written in liquidity
 
 ```ruby
-script = File.expand_path("./spec/fixtures/demo.liq")
+script = File.expand_path("./spec/fixtures/demo.py")
 source = "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq"
 secret_key = "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
 amount =  0
-init_params = '"test"'
+init_params= "MyContract()"
 client = TezosClient.new
 
 res = client.originate_contract(
@@ -137,20 +137,6 @@ res = client.originate_contract(
 
 puts "Origination operation: #{res[:operation_id]}"
 puts "Contract address: #{res[:originated_contract]}"
-```
-
-### Call a contract written in liquidity
-```ruby
-TezosClient.new.call_contract(
-  from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-  amount: 0,
-  script: File.expand_path("./spec/fixtures/demo.liq"),
-  secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
-  to: "KT1STzq9p2tfW3K4RdoM9iYd1htJ4QcJ8Njs",
-  entrypoint: "manage",
-  params: "(Some { destination = tz1YLtLqD1fWHthSVHPD116oYvsd4PTAHUoc; amount = 1tz })" ,
-  params_type: :caml
-)
 ```
 
 ### Originate a contract written in SmartPy
@@ -190,15 +176,6 @@ TezosClient.new.call_contract(
 
 
 ## Options
-
-### Liquidity options
-
-`TezosClient.new(..., liquidity_options: { options... })`
-
-Available options :
-
-* verbose (boolean) : enable verbose mode of Liquidity commands.
-
 
 ## Development
 

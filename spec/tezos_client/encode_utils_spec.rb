@@ -6,7 +6,7 @@ RSpec.describe TezosClient::EncodeUtils do
       include TezosClient::EncodeUtils
     end
   end
-  subject {test_klass.new}
+  subject { test_klass.new }
 
   describe "#encode_args" do
     it "works with a string" do

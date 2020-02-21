@@ -20,11 +20,11 @@ http_interactions:
       - application/json
     body:
       encoding: UTF-8
-      string: '"BMAyHshYzYfYYfU3EGhVH8wSieNqGohQSXtrC8c67qsYnvpSLvU"
+      string: '"BLQRGjHzhsBjA4UuAa8Z2hSBakHc3fiKz1rRCsLjcEgdTRRSbgw"
 
 '
     http_version: 
-  recorded_at: Tue, 04 Feb 2020 10:45:33 GMT
+  recorded_at: Wed, 19 Feb 2020 15:20:11 GMT
 - request:
     method: get
     uri: http://tezos_node:8094//chains/main/chain_id
@@ -45,17 +45,17 @@ http_interactions:
       - application/json
     body:
       encoding: UTF-8
-      string: '"NetXUdfLh6Gm88t"
+      string: '"NetXdQprcVkpaWU"
 
 '
     http_version: 
-  recorded_at: Tue, 04 Feb 2020 10:45:33 GMT
+  recorded_at: Wed, 19 Feb 2020 15:20:11 GMT
 - request:
     method: post
     uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
-      string: '{"operation":{"branch":"BMAyHshYzYfYYfU3EGhVH8wSieNqGohQSXtrC8c67qsYnvpSLvU","contents":[{"kind":"activate_account","pkh":"tz1RdraebVC4gRbrnMDWQjZ28FtvgQZWJp21","secret":"23d18abce360452faa65b9909b6bf259562af0f8"}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"},"chain_id":"NetXUdfLh6Gm88t"}'
+      string: '{"operation":{"branch":"BLQRGjHzhsBjA4UuAa8Z2hSBakHc3fiKz1rRCsLjcEgdTRRSbgw","contents":[{"kind":"activate_account","pkh":"tz1RdraebVC4gRbrnMDWQjZ28FtvgQZWJp21","secret":"23d18abce360452faa65b9909b6bf259562af0f8"}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"},"chain_id":"NetXdQprcVkpaWU"}'
     headers:
       Content-Type:
       - application/json
@@ -74,5 +74,5 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Tue, 04 Feb 2020 10:45:33 GMT
+  recorded_at: Wed, 19 Feb 2020 15:20:11 GMT
 recorded_with: VCR 4.0.0

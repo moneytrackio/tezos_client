@@ -10,35 +10,9 @@ RSpec.shared_context "contract origination", shared_context: :metadata do
     res = tezos_client.originate_contract(
       from: FROM,
       amount: 0,
-      script: File.expand_path("./spec/fixtures/demo.liq"),
+      script: File.expand_path("./spec/fixtures/demo.py"),
       secret_key: SECRET_KEY,
-      init_params: '"test"'
-    )
-    monitor_operation(res[:operation_id])
-    res[:originated_contract]
-  end
-
-  def originate_demo_contract_with_smartpy
-    disabling_vcr {
-      res = tezos_client.originate_contract(
-        from: FROM,
-        amount: 0,
-        script: File.expand_path("./spec/fixtures/demo.py"),
-        secret_key: SECRET_KEY,
-        init_params: "MyContract()"
-      )
-      monitor_operation(res[:operation_id])
-      res[:originated_contract]
-    }
-  end
-
-  def originate_multisig_contract
-    res = tezos_client.originate_contract(
-      from: FROM,
-      amount: 0,
-      script: File.expand_path("./spec/fixtures/multisig.liq"),
-      secret_key: SECRET_KEY,
-      init_params: ["Set [#{FROM}]", "1p"]
+      init_params: "MyContract()"
     )
     monitor_operation(res[:operation_id])
     res[:originated_contract]

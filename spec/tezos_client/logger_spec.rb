@@ -1,6 +1,6 @@
+# frozen_string_literal: true
 
 RSpec.describe TezosClient::Logger do
-
   subject { TezosClient.new }
 
   describe "#logger=" do

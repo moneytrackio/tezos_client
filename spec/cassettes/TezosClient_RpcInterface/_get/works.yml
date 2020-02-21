@@ -20,9 +20,9 @@ http_interactions:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"block":"BKpXqZFkkCGtpwUswm4MuYncefyTmDrkDQDs7YYbJYRrJLsjrRh","timestamp":"2019-11-21T09:48:50Z"}
+      string: '{"block":"BKxxh6SmNBEGRRTzjQSC8sdkna2LYeEZ7tjxAE5oQktr2QZNn3T","timestamp":"2020-02-19T11:46:21Z"}
 
-        '
+'
     http_version: 
-  recorded_at: Thu, 21 Nov 2019 09:48:50 GMT
+  recorded_at: Wed, 19 Feb 2020 11:46:21 GMT
 recorded_with: VCR 4.0.0

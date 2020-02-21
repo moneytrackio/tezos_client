@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 module MonitorTezos
-
   def monitor_operation(operation_id)
     disabling_vcr { tezos_client.monitor_operation(operation_id) } unless reading_vcr_cassette?
   end
 
-  def wait_new_block(timeout: 10)
+  def wait_new_block(timeout: 20)
     return if reading_vcr_cassette?
 
     disabling_vcr do

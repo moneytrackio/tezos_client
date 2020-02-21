@@ -13,10 +13,6 @@ rvm:
 before_install:
   - sh travis-scripts/prepare-ubuntu.sh
   - mkdir -p $HOME/bin
-  - docker pull moneytrack/liquidity:babylonnet
-  - id=$(docker create moneytrack/liquidity:babylonnet)
-  - docker cp $id:/home/opam/.opam/4.07/bin/liquidity - > $HOME/bin/liquidity
-  - chmod +x $HOME/bin/liquidity
   - curl -s https://SmartPy.io/SmartPyBasic/SmartPy.sh > SmartPy.sh
   - chmod +x ./SmartPy.sh
   - ./SmartPy.sh local-install $HOME/bin/smartpy

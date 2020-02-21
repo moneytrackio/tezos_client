@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class TezosClient
   class OperationArray < RawOperationArray
-
     def post_initialize(operations:, **args)
       @raw_operations = operations.map do |operation|
         operation_kind = operation.delete(:kind)
@@ -15,10 +16,8 @@ class TezosClient
     end
 
     private
-
-
-    def operation_klass(operation_name)
-      "tezos_client/#{operation_name}_operation".camelize.constantize
-    end
+      def operation_klass(operation_name)
+        "tezos_client/#{operation_name}_operation".camelize.constantize
+      end
   end
 end

@@ -31,3 +31,9 @@ class MyContract(sp.Contract):
     @sp.entry_point
     def add_second(self, params):
         self.data.big_map_second[params.key] = params.value
+
+    @sp.entry_point
+    def always_fail(self, params):
+        sp.set_type(params.amount, sp.TNat)
+        sp.if params.amount >= 0:
+          sp.failwith("I'm failing")

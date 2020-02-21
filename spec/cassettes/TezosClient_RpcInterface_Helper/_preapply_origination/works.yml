@@ -15,16 +15,16 @@ http_interactions:
       message: OK
     headers:
       Content-Length:
-      - '5'
+      - '6'
       Content-Type:
       - application/json
     body:
       encoding: UTF-8
-      string: '"27"
+      string: '"357"
 
 '
     http_version: 
-  recorded_at: Tue, 04 Feb 2020 14:59:08 GMT
+  recorded_at: Wed, 19 Feb 2020 12:55:11 GMT
 - request:
     method: get
     uri: http://tezos_node:8094//chains/main/blocks/head/hash
@@ -45,18 +45,17 @@ http_interactions:
       - application/json
     body:
       encoding: UTF-8
-      string: '"BMVDFSLnrRa5uZvAaHc9V1bxQc38s68srAY9ngii1SQXZrFHiyj"
+      string: '"BMDAThJHv8aZ7cZVAs1vs5ezSifp46rW868g2x742HWu1fHycmp"
 
 '
     http_version: 
-  recorded_at: Tue, 04 Feb 2020 14:59:11 GMT
+  recorded_at: Wed, 19 Feb 2020 12:55:13 GMT
 - request:
     method: post
     uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
-      string: '{"branch":"BMVDFSLnrRa5uZvAaHc9V1bxQc38s68srAY9ngii1SQXZrFHiyj","contents":[{"kind":"origination","balance":"50000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"28","fee":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"int","annots":["%myParameter1"]},{"prim":"int","annots":["%myParameter2"]}]}]},{"prim":"parameter","args":[{"prim":"int"}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"PUSH","args":[{"prim":"int"},{"int":"123"}]},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CAR"},{"prim":"COMPARE"},{"prim":"LE"},{"prim":"IF","args":[[[]],[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"WrongCondition:
-        self.data.myParameter1 <= 123"}]},{"prim":"FAILWITH"}]]]},{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"ADD"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}],"storage":{"prim":"Pair","args":[{"int":"1"},{"int":"2"}]}}}]}'
+      string: '{"branch":"BMDAThJHv8aZ7cZVAs1vs5ezSifp46rW868g2x742HWu1fHycmp","contents":[{"kind":"origination","balance":"50000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"358","fee":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"big_map","args":[{"prim":"string"},{"prim":"int"}],"annots":["%big_map_first"]},{"prim":"big_map","args":[{"prim":"string"},{"prim":"string"}],"annots":["%big_map_second"]}]}]},{"prim":"parameter","args":[{"prim":"or","args":[{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"int","annots":["%value"]}],"annots":["%add_first"]},{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"string","annots":["%value"]}],"annots":["%add_second"]}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"IF_LEFT","args":[[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]],[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CAR"},{"prim":"SWAP"},{"prim":"CDR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"SWAP"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]]]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}],"storage":{"prim":"Pair","args":[[],[]]}}}]}'
     headers:
       Content-Type:
       - application/json
@@ -66,23 +65,22 @@ http_interactions:
       message: OK
     headers:
       Content-Length:
-      - '595'
+      - '763'
       Content-Type:
       - application/json
     body:
       encoding: UTF-8
-      string: '"e9b6d21d8d8b0ff0dce0f51c5d6cca1bf43f941cb309673f33efc40b30b4b30d6d00982fd7853b46e70022bc56f12b427855a2adb67ed086031cd08603f02ed0860300000000d702000000d205010765045b0000000d256d79506172616d6574657231045b0000000d256d79506172616d65746572320500035b0502020000009d03210317034c03160743035b00bb0105700002032105710003031603190332072c02000000050200000000020000003d020000003807430368010000002d57726f6e67436f6e646974696f6e3a2073656c662e646174612e6d79506172616d6574657231203c3d203132330327034c0321057100020317034c032105710002057000030321057100040316031203420571000203200320053d036d034200000006070700010002"
+      string: '"c5466752a11ed11c34d3d4e8089969c4249dd1c9c546fda5211ead96559696496d00982fd7853b46e70022bc56f12b427855a2adb67ed08603e602d08603f02ed086030000000124020000011f0501076508610368035b0000000e256269675f6d61705f66697273740861036803680000000f256269675f6d61705f7365636f6e64050007640865046800000004256b6579045b000000062576616c75650000000a256164645f66697273740865046800000004256b65790468000000062576616c75650000000b256164645f7365636f6e640502020000009203210317034c0316072e020000003b0200000036034c03210571000203210317034c03160570000203210571000303170346057000030321057100040316035003420571000203200320020000003d0200000038034c03210571000203210316034c031705700002032105710003031703460570000303210571000403160350034c03420571000203200320053d036d03420000000c070702000000000200000000"
 
 '
     http_version: 
-  recorded_at: Tue, 04 Feb 2020 14:59:11 GMT
+  recorded_at: Wed, 19 Feb 2020 12:55:13 GMT
 - request:
     method: post
     uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
-      string: '[{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","branch":"BMVDFSLnrRa5uZvAaHc9V1bxQc38s68srAY9ngii1SQXZrFHiyj","contents":[{"kind":"origination","balance":"50000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"28","fee":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"int","annots":["%myParameter1"]},{"prim":"int","annots":["%myParameter2"]}]}]},{"prim":"parameter","args":[{"prim":"int"}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"PUSH","args":[{"prim":"int"},{"int":"123"}]},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CAR"},{"prim":"COMPARE"},{"prim":"LE"},{"prim":"IF","args":[[[]],[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"WrongCondition:
-        self.data.myParameter1 <= 123"}]},{"prim":"FAILWITH"}]]]},{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"ADD"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}],"storage":{"prim":"Pair","args":[{"int":"1"},{"int":"2"}]}}}],"signature":"edsigu5hBbzTt5b1K2eNZkaRDXUDaVkoiVAhDeCrQswL7PreDWm2EkurPoWKAaay2kWLi3yMsLEnahXPBC1PZEtbZLG4JtkFSTb"}]'
+      string: '[{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","branch":"BMDAThJHv8aZ7cZVAs1vs5ezSifp46rW868g2x742HWu1fHycmp","contents":[{"kind":"origination","balance":"50000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"50000","storage_limit":"6000","counter":"358","fee":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"big_map","args":[{"prim":"string"},{"prim":"int"}],"annots":["%big_map_first"]},{"prim":"big_map","args":[{"prim":"string"},{"prim":"string"}],"annots":["%big_map_second"]}]}]},{"prim":"parameter","args":[{"prim":"or","args":[{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"int","annots":["%value"]}],"annots":["%add_first"]},{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"string","annots":["%value"]}],"annots":["%add_second"]}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"IF_LEFT","args":[[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]],[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CAR"},{"prim":"SWAP"},{"prim":"CDR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"SWAP"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]]]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}],"storage":{"prim":"Pair","args":[[],[]]}}}],"signature":"edsigtchhD7LhF7gzmCsd4SFpatnTshcRvqx1fi7Rk9TEyyxzoQYuLGBDeSk7fin3jCn23nmJpQ4G2BaqUDrK4dxo3c8eBdFPAL"}]'
     headers:
       Content-Type:
       - application/json
@@ -92,15 +90,14 @@ http_interactions:
       message: OK
     headers:
       Content-Length:
-      - '2024'
+      - '2803'
       Content-Type:
       - application/json
     body:
       encoding: UTF-8
-      string: '[{"contents":[{"kind":"origination","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"28","gas_limit":"50000","storage_limit":"6000","balance":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"int","annots":["%myParameter1"]},{"prim":"int","annots":["%myParameter2"]}]}]},{"prim":"parameter","args":[{"prim":"int"}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"PUSH","args":[{"prim":"int"},{"int":"123"}]},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CAR"},{"prim":"COMPARE"},{"prim":"LE"},{"prim":"IF","args":[[[]],[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"WrongCondition:
-        self.data.myParameter1 <= 123"}]},{"prim":"FAILWITH"}]]]},{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"ADD"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}],"storage":{"prim":"Pair","args":[{"int":"1"},{"int":"2"}]}},"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":148,"change":"50000"}],"operation_result":{"status":"applied","big_map_diff":[],"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"contract","contract":"KT1TKaMPGvKFZekd2PdC6XHybxZmcGHNEGsN","change":"50000"}],"originated_contracts":["KT1TKaMPGvKFZekd2PdC6XHybxZmcGHNEGsN"],"consumed_gas":"15532","storage_size":"229","paid_storage_size_diff":"229"}}}],"signature":"edsigu5hBbzTt5b1K2eNZkaRDXUDaVkoiVAhDeCrQswL7PreDWm2EkurPoWKAaay2kWLi3yMsLEnahXPBC1PZEtbZLG4JtkFSTb"}]
+      string: '[{"contents":[{"kind":"origination","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"358","gas_limit":"50000","storage_limit":"6000","balance":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"big_map","args":[{"prim":"string"},{"prim":"int"}],"annots":["%big_map_first"]},{"prim":"big_map","args":[{"prim":"string"},{"prim":"string"}],"annots":["%big_map_second"]}]}]},{"prim":"parameter","args":[{"prim":"or","args":[{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"int","annots":["%value"]}],"annots":["%add_first"]},{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"string","annots":["%value"]}],"annots":["%add_second"]}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"IF_LEFT","args":[[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]],[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CAR"},{"prim":"SWAP"},{"prim":"CDR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"SWAP"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]]]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}],"storage":{"prim":"Pair","args":[[],[]]}},"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":6112,"change":"50000"}],"operation_result":{"status":"applied","big_map_diff":[{"action":"alloc","big_map":"340","key_type":{"prim":"string"},"value_type":{"prim":"string"}},{"action":"alloc","big_map":"339","key_type":{"prim":"string"},"value_type":{"prim":"int"}}],"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"contract","contract":"KT1XdtarKNihMTYunRFSLT64sPxqKf2yYnGj","change":"50000"}],"originated_contracts":["KT1XdtarKNihMTYunRFSLT64sPxqKf2yYnGj"],"consumed_gas":"18021","storage_size":"374","paid_storage_size_diff":"374"}}}],"signature":"edsigtchhD7LhF7gzmCsd4SFpatnTshcRvqx1fi7Rk9TEyyxzoQYuLGBDeSk7fin3jCn23nmJpQ4G2BaqUDrK4dxo3c8eBdFPAL"}]
 
 '
     http_version: 
-  recorded_at: Tue, 04 Feb 2020 14:59:11 GMT
+  recorded_at: Wed, 19 Feb 2020 12:55:14 GMT
 recorded_with: VCR 4.0.0

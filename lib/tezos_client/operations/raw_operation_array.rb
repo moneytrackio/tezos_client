@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class TezosClient
   class RawOperationArray < Operation
-
     def post_initialize(raw_operations:, **args)
       @raw_operations = raw_operations.clone
     end
@@ -19,6 +20,6 @@ class TezosClient
     end
 
     private
-    attr_reader :raw_operations
+      attr_reader :raw_operations
   end
 end

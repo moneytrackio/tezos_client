@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TezosClient
   module Tools
     module TemporaryFile
@@ -16,7 +18,7 @@ class TezosClient
 
         res
       ensure
-        File.delete(file_copy_path) if File.exists? file_copy_path
+        File.delete(file_copy_path) if File.exist? file_copy_path
       end
 
       def self.with_tempfile(extension)
