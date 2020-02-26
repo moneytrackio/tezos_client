@@ -46,9 +46,8 @@ class TezosClient::Tools::ConvertToHash < ActiveInteraction::Base
     end
 
     def list_type(data:, type:)
-      {
-        var_name(type) => convert_list_element(data: data, element_type: type[:args].first)
-      }
+      value = convert_list_element(data: data, element_type: type[:args].first)
+      decorate_value(value: value, type: type)
     end
 
     def convert_list_element(data:, element_type:)
@@ -62,26 +61,41 @@ class TezosClient::Tools::ConvertToHash < ActiveInteraction::Base
     end
 
     def int_type(data:, type:)
-      { var_name(type) => data[:int].to_i }
+      value = data[:int].to_i
+      decorate_value(value: value, type: type)
     end
 
     def key_type(data:, type:)
-      { var_name(type) => data[:bytes] || data[:string] }
+      value = data[:bytes] || data[:string]
+      decorate_value(value: value, type: type)
     end
 
     def timestamp_type(data:, type:)
-      { var_name(type) => Time.zone.at(data[:int].to_i) }
+      value = Time.zone.at(data[:int].to_i)
+      decorate_value(value: value, type: type)
     end
 
     def string_type(data:, type:)
-      { var_name(type) => data[:string] }
+      value = data[:string]
+      decorate_value(value: value, type: type)
     end
 
     def address_type(data:, type:)
-      { var_name(type) => data[:bytes] || data[:string] }
+      value = data[:bytes] || data[:string]
+      decorate_value(value: value, type: type)
+    end
+
+    def decorate_value(value:, type:)
+      anonymous?(type) ? value : { var_name(type) => value }
+    end
+
+    def anonymous?(type)
+      !type.key?(:annots)
     end
 
     def var_name(type)
+      return nil if anonymous?(type)
+
       "#{type[:annots].first[1..-1]}".to_sym
     end
 end
