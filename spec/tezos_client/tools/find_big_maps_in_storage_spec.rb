@@ -61,20 +61,20 @@ RSpec.describe TezosClient::Tools::FindBigMapsInStorage do
         {
           name: :contracts,
           id: "70",
-          type_value: {
+          value_type: {
             prim: "pair",
             args: [
               { prim: "address", annots: ["%contract_address"] },
               { prim: "key", annots: ["%contract_owner"] }
             ]
           },
-          type_key: { prim: "string" }
+          key_type: { prim: "string" }
         }.with_indifferent_access,
         {
           name: :spendings,
           id: "71",
-          type_value: { prim: "address" },
-          type_key: { prim: "string" }
+          value_type: { prim: "address" },
+          key_type: { prim: "string" }
         }.with_indifferent_access
       ])
     end

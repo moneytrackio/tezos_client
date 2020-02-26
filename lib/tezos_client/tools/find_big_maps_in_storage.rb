@@ -45,8 +45,8 @@ class TezosClient::Tools::FindBigMapsInStorage < ActiveInteraction::Base
     {
       name: var_name(type),
       id: data[:int],
-      type_value: type[:args].second,
-      type_key: type[:args].first
+      value_type: type[:args].second,
+      key_type: type[:args].first
     }.with_indifferent_access
   end
 

@@ -79,7 +79,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
 
     let(:big_map_id) { subject.list_big_map_by_contract(contract_address: contract_address)[1][:id] }
     let(:key) { "hello" }
-    let(:type_key) { { prim: "string" } }
+    let(:key_type) { { prim: "string" } }
 
     before do
       res = tezos_client.call_contract(
@@ -100,7 +100,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
     end
 
     it "returns the the big map value" do
-      res = subject.big_map_value(big_map_id: big_map_id, key: { "string" => key }, type_key: type_key)
+      res = subject.big_map_value(big_map_id: big_map_id, key: { "string" => key }, key_type: key_type)
       expect(res).to eq(
         "string" => "world"
       )
@@ -124,14 +124,14 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
         {
           name: :big_map_first,
           id: a_string_matching(/\A[0-9]+\z/),
-          type_value: { prim: "int" },
-          type_key: { prim: "string" }
+          value_type: { prim: "int" },
+          key_type: { prim: "string" }
         }.with_indifferent_access,
         {
           name: :big_map_second,
           id: a_string_matching(/\A[0-9]+\z/),
-          type_value: { prim: "string" },
-          type_key: { prim: "string" }
+          value_type: { prim: "string" },
+          key_type: { prim: "string" }
         }.with_indifferent_access
       ])
     end

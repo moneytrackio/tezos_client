@@ -32,8 +32,8 @@ class TezosClient
         get "#{contract_link(contract_id)}/storage"
       end
 
-      def big_map_value(big_map_id:, key:, type_key:)
-        expr_key = encode_script_expr(data: key, type: type_key)
+      def big_map_value(big_map_id:, key:, key_type:)
+        expr_key = encode_script_expr(data: key, type: key_type)
 
         get "/chains/main/blocks/head/context/big_maps/#{big_map_id}/#{expr_key}"
       end
