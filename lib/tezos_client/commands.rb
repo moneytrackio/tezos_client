@@ -22,6 +22,8 @@ class TezosClient
                    :pending_operations,
                    :pack_data,
                    :big_map_value,
-                   :list_big_map_by_contract
+                   :list_big_map_by_contract,
+                   :block_operations,
+                   :entrypoint
   end
 end

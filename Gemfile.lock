@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tezos_client (1.1.1)
+    tezos_client (1.1.2)
       active_interaction (~> 3.7)
       activesupport (~> 6.0.0)
       base58 (~> 0.2.3)
