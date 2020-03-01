@@ -32,6 +32,10 @@ class TezosClient
         get "#{contract_link(contract_id)}/storage"
       end
 
+      def entrypoint(contract_id, entryoint)
+        get("#{contract_link(contract_id)}/entrypoints/#{entryoint}")
+      end
+
       def big_map_value(big_map_id:, key:, key_type:)
         expr_key = encode_script_expr(data: key, type: key_type)
 
