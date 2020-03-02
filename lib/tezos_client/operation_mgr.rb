@@ -205,7 +205,7 @@ class TezosClient
     def ensure_applied!(rpc_responses)
       metadatas = rpc_responses.map { |response| response[:metadata] }
       operation_results = metadatas.map { |metadata| metadata[:operation_result] }
-      internal_operations = metadatas.map { |metadata| metadata[:internal_operation_results] }.compact
+      internal_operations = metadatas.map { |metadata| metadata[:internal_operation_results] }.flatten.compact
       operation_results.concat(internal_operations.map { |internal_operation| internal_operation[:result] })
 
       failed = operation_results.detect do |operation_result|
