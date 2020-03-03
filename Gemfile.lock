@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tezos_client (1.1.1)
+    tezos_client (1.1.2)
       active_interaction (~> 3.7)
       activesupport (~> 6.0.0)
       base58 (~> 0.2.3)
@@ -27,7 +27,7 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_interaction (3.7.1)
+    active_interaction (3.8.0)
       activemodel (>= 4, < 7)
     activemodel (6.0.0)
       activesupport (= 6.0.0)
