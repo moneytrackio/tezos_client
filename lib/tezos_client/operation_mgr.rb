@@ -201,37 +201,40 @@ class TezosClient
     end
 
     private
-      def ensure_applied!(rpc_responses)
-        metadatas = rpc_responses.map { |response| response[:metadata] }
-        operation_results = metadatas.map { |metadata| metadata[:operation_result] }
 
-        failed = operation_results.detect do |operation_result|
-          operation_result != nil && operation_result[:status] != "applied"
-        end
+    def ensure_applied!(rpc_responses)
+      metadatas = rpc_responses.map { |response| response[:metadata] }
+      operation_results = metadatas.map { |metadata| metadata[:operation_result] }
+      internal_operations = metadatas.map { |metadata| metadata[:internal_operation_results] }.flatten.compact
+      operation_results.concat(internal_operations.map { |internal_operation| internal_operation[:result] })
 
-        return metadatas if failed.nil?
-
-        failed_operation_result = operation_results.detect do |operation_result|
-          operation_result[:status] == "failed"
-        end
-
-        failed!("failed", failed_operation_result[:errors], operation_results)
+      failed = operation_results.detect do |operation_result|
+        operation_result != nil && operation_result[:status] != "applied"
       end
 
-      def exception_klass(errors)
-        error = errors[0]
-        case error[:id]
-        when TezBalanceTooLow::FIRST_ERROR_REGEXP
-          TezBalanceTooLow
-        when ScriptRuntimeError::FIRST_ERROR_REGEXP
-          ScriptRuntimeError
-        else
-          OperationFailure
-        end
+      return metadatas if failed.nil?
+
+      failed_operation_result = operation_results.detect do |operation_result|
+        operation_result[:status] == "failed"
       end
 
-      def failed!(status, errors, metadata)
-        raise exception_klass(errors).new(metadata: metadata, errors: errors, status: status)
+      failed!("failed", failed_operation_result[:errors], operation_results)
+    end
+
+    def exception_klass(errors)
+      error = errors[0]
+      case error[:id]
+      when TezBalanceTooLow::FIRST_ERROR_REGEXP
+        TezBalanceTooLow
+      when ScriptRuntimeError::FIRST_ERROR_REGEXP
+        ScriptRuntimeError
+      else
+        OperationFailure
       end
+    end
+
+    def failed!(status, errors, metadata)
+      raise exception_klass(errors).new(metadata: metadata, errors: errors, status: status)
+    end
   end
 end
