@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TezosClient::Tools::ConvertToHash < ActiveInteraction::Base
+  include TezosClient::Crypto
+
   interface :data
   interface :type
 
@@ -27,6 +29,12 @@ class TezosClient::Tools::ConvertToHash < ActiveInteraction::Base
       string_type
     when "address"
       address_type
+    when "bytes"
+      bytes_type
+    when "signature"
+      signature_type
+    when "big_map"
+      big_map_type
     else
       raise "type '#{type[:prim]}' not implemented"
     end
@@ -63,8 +71,24 @@ class TezosClient::Tools::ConvertToHash < ActiveInteraction::Base
     data[:int].to_i
   end
 
+  def big_map_type
+    "big_map##{data[:int].to_i}"
+  end
+
   def key_type
-    data[:bytes] || data[:string]
+    if data.key?(:bytes)
+      if data[:bytes].start_with?("00")
+        encode_tz(:edpk, data[:bytes][2..-1])
+      elsif data[:bytes].start_with?("01")
+        encode_tz(:sppk, data[:bytes][2..-1])
+      elsif data[:bytes].start_with?("02")
+        encode_tz(:p2pk, data[:bytes][2..-1])
+      else
+        data[:bytes]
+      end
+    else
+      data[:string]
+    end
   end
 
   def timestamp_type
@@ -76,7 +100,34 @@ class TezosClient::Tools::ConvertToHash < ActiveInteraction::Base
   end
 
   def address_type
+    if data.key?(:bytes)
+      if data[:bytes].start_with?("0000")
+        encode_tz(:tz1, data[:bytes][4..-1])
+      elsif data[:bytes].start_with?("0001")
+        encode_tz(:tz2, data[:bytes][4..-1])
+      elsif data[:bytes].start_with?("0002")
+        encode_tz(:tz3, data[:bytes][4..-1])
+      elsif data[:bytes].start_with?("01")
+        encode_tz(:KT, data[:bytes][2..-3])
+      else
+        data[:bytes]
+      end
+    else
+      data[:string]
+    end
+
+  end
+
+  def bytes_type
     data[:bytes] || data[:string]
+  end
+
+  def signature_type
+    if data.key?(:bytes)
+      encode_tz(:edsig, data[:bytes])
+    else
+      data[:string]
+    end
   end
 
   def decorated_value

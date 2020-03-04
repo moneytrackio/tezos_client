@@ -146,7 +146,7 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
 
     it "convert data to simple hash" do
       expect(subject).to eq(
-        pub_key: "00886860e486f58c10f8f01d2dac7853f0cc5266deab1e275b287ecae9e4dec586",
+        pub_key: "edpkugJHjEZLNyTuX3wW2dT4P7PY5crLqq3zeDFvXohAs3tnRAaZKR",
         spendings: [
           {
             date: Time.zone.parse("2020-01-24 14:55:25 +0000"),
