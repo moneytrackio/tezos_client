@@ -61,7 +61,7 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
           { practitioner_ref: "MTK-Practitioner-txrsh", spending_ref: "Spending--001" },
           { practitioner_ref: "MTK-Practitioner-2", spending_ref: "Spending--002" }
         ]
-      )
+                         )
     end
   end
 
@@ -105,39 +105,39 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
       {
         "prim": "pair",
         "args": [
-            {
-                "prim": "key",
-                "annots": ["%pub_key"]
-            },
-            {
-              "prim": "list",
-              "args": [
-                {
-                  "prim": "pair",
-                  "args": [
-                    {
-                      "prim": "pair",
-                      "args": [
-                        {
-                          "prim": "pair",
-                          "args": [
-                            {
-                              "prim": "pair",
-                              "args": [
-                                { "prim": "timestamp", "annots": ["%date"] },
-                                { "prim": "int", "annots": ["%practitioner_price"] }
-                              ]
-                            },
-                            { "prim": "string", "annots": ["%practitioner_ref"] }
-                          ]
-                        },
-                        { "prim": "int", "annots": ["%remainder_amount"] }
-                      ]
-                    },
-                    { "prim": "string", "annots": ["%spending_ref"] }
-                  ]
-                }
-              ], "annots": ["%spendings"]
+          {
+            "prim": "key",
+            "annots": ["%pub_key"]
+          },
+          {
+            "prim": "list",
+            "args": [
+              {
+                "prim": "pair",
+                "args": [
+                  {
+                    "prim": "pair",
+                    "args": [
+                      {
+                        "prim": "pair",
+                        "args": [
+                          {
+                            "prim": "pair",
+                            "args": [
+                              { "prim": "timestamp", "annots": ["%date"] },
+                              { "prim": "int", "annots": ["%practitioner_price"] }
+                            ]
+                          },
+                          { "prim": "string", "annots": ["%practitioner_ref"] }
+                        ]
+                      },
+                      { "prim": "int", "annots": ["%remainder_amount"] }
+                    ]
+                  },
+                  { "prim": "string", "annots": ["%spending_ref"] }
+                ]
+              }
+            ], "annots": ["%spendings"]
           }
         ]
       }
@@ -156,7 +156,85 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
             spending_ref: "Spending--001"
           }
         ]
-      )
+                         )
+    end
+  end
+
+  context "with big maps" do
+    let(:data) do
+      {
+        prim: "Pair",
+        args: [
+          {
+            prim: "Pair",
+            args: [
+              { int: "70" },
+              { string: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
+            ]
+          },
+          { int: "71" }
+        ]
+      }
+    end
+
+    let(:type) do
+      {
+        prim: "pair",
+        args: [
+          {
+            prim: "pair",
+            args: [
+              {
+                prim: "big_map",
+                args: [
+                  { prim: "string" },
+                  {
+                    prim: "pair",
+                    args: [
+                      { prim: "address", annots: ["%contract_address"] },
+                      { prim: "key", annots: ["%contract_owner"] }
+                    ]
+                  }
+                ],
+                annots: ["%contracts"]
+              },
+              { prim: "address", annots: ["%owner"] }
+            ]
+          },
+          {
+            prim: "big_map",
+            args: [
+              { prim: "string" },
+              { prim: "address" }
+            ],
+            annots: ["%spendings"]
+          }
+        ]
+      }
+    end
+
+    it "return all big maps" do
+      pp subject
+      expect(subject).to match hash_including(
+        contracts: TezosClient::BigMap.new(
+          :contracts,
+           "70",
+           {
+             prim: "pair",
+             args: [
+               { prim: "address", annots: ["%contract_address"] },
+               { prim: "key", annots: ["%contract_owner"] }
+             ]
+           },
+           { prim: "string" }
+        ),
+        spendings: TezosClient::BigMap.new(
+          :spendings,
+          "71",
+          { prim: "address" },
+          { prim: "string" }
+        )
+       )
     end
   end
 end
