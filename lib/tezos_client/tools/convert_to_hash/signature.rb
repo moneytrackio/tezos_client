@@ -3,7 +3,7 @@
 class TezosClient
   module Tools
     class ConvertToHash < ActiveInteraction::Base
-      class Address < Base
+      class Signature < Base
         include TezosClient::Crypto
 
         def decode
