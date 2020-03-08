@@ -61,7 +61,7 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
           { practitioner_ref: "MTK-Practitioner-txrsh", spending_ref: "Spending--001" },
           { practitioner_ref: "MTK-Practitioner-2", spending_ref: "Spending--002" }
         ]
-                         )
+      )
     end
   end
 

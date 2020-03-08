@@ -15,12 +15,11 @@ class TezosClient::Tools::FindBigMapsInStorage < ActiveInteraction::Base
   end
 
   private
-
-  def hash_storage
-    compose(
-      TezosClient::Tools::ConvertToHash,
-      data: storage,
-      type: storage_type
-    )
-  end
+    def hash_storage
+      compose(
+        TezosClient::Tools::ConvertToHash,
+        data: storage,
+        type: storage_type
+      )
+    end
 end
