@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "convert_to_hash/base"
+
 Dir[File.join(__dir__, "convert_to_hash", "*.rb")].each { |file| require file }
 
 class TezosClient
