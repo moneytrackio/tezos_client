@@ -110,7 +110,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
   describe "#contract_big_maps", :vcr, :deploying_simple_contract do
     let!(:contract_address) do
       if reading_vcr_cassette?
-        "KT1CVHHink8sJcD6jV4nuaeBFJUpP5vDKkCD"
+        "KT1DnEgdL9rCtYobkf47eEq3fWJi22vACPXD"
       else
         new_kt_hash = new_contract_address
         puts "please insert this contract hash here #{new_kt_hash} #{__FILE__}:#{__LINE__-3}"
