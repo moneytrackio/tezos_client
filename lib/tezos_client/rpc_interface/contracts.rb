@@ -47,7 +47,7 @@ class TezosClient
         get "/chains/main/blocks/head/context/big_maps/#{big_map_id}/#{expr_key}"
       end
 
-      def list_big_map_by_contract(contract_address:)
+      def contract_big_maps(contract_address)
         contract_storage = contract_storage(contract_address)
         storage_type = contract_storage_type(contract_address)
 
