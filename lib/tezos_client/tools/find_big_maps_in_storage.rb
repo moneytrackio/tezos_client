@@ -7,50 +7,19 @@ class TezosClient::Tools::FindBigMapsInStorage < ActiveInteraction::Base
        strip: false
 
   def execute
-    case storage_type[:prim]
-    when "pair"
-      pair_type(data: storage, type: storage_type)
-    when "list"
-      list_type(data: storage, type: storage_type)
-    when "big_map"
-      big_map_type(data: storage, type: storage_type)
-    end
+    hash_storage
+      .map(&:last)
+      .select { |value| value.is_a? TezosClient::BigMap }
+      .map(&:to_h)
+      .map(&:with_indifferent_access)
   end
 
-  def pair_type(data:, type:)
-    raise "Not a 'Pair' type" unless data[:prim] == "Pair"
-    raise "Difference detected between data and type \nDATA: #{data} \nTYPE:#{type} " unless data[:args].size == type[:args].size
-
-    (0 .. data[:args].size - 1).map do |iter|
-      compose(
-        TezosClient::Tools::FindBigMapsInStorage,
-        storage: data[:args][iter],
-        storage_type: type[:args][iter]
-      )
-    end.compact.flatten
-  end
-
-  def list_type(data:, type:)
-    element_type = type[:args].first
-    data.map do |elem|
+  private
+    def hash_storage
       compose(
         TezosClient::Tools::ConvertToHash,
-        data: elem,
-        type: element_type
+        data: storage,
+        type: storage_type
       )
     end
-  end
-
-  def big_map_type(data:, type:)
-    {
-      name: var_name(type),
-      id: data[:int],
-      value_type: type[:args].second,
-      key_type: type[:args].first
-    }.with_indifferent_access
-  end
-
-  def var_name(type)
-    "#{type[:annots].first[1..-1]}".to_sym
-  end
 end

@@ -77,7 +77,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
       end
     end
 
-    let(:big_map_id) { subject.list_big_map_by_contract(contract_address: contract_address)[1][:id] }
+    let(:big_map_id) { subject.contract_big_maps(contract_address)[1][:id] }
     let(:key) { "hello" }
     let(:key_type) { { prim: "string" } }
 
@@ -107,10 +107,10 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
     end
   end
 
-  describe "#list_big_map_by_contract", :vcr, :deploying_simple_contract do
+  describe "#contract_big_maps", :vcr, :deploying_simple_contract do
     let!(:contract_address) do
       if reading_vcr_cassette?
-        "KT1CVHHink8sJcD6jV4nuaeBFJUpP5vDKkCD"
+        "KT1DnEgdL9rCtYobkf47eEq3fWJi22vACPXD"
       else
         new_kt_hash = new_contract_address
         puts "please insert this contract hash here #{new_kt_hash} #{__FILE__}:#{__LINE__-3}"
@@ -119,7 +119,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
     end
 
     it "returns the list of big map in contract" do
-      res = subject.list_big_map_by_contract(contract_address: contract_address)
+      res = subject.contract_big_maps(contract_address)
       expect(res).to match_array([
         {
           name: :big_map_first,
