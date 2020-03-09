@@ -37,8 +37,8 @@ class TezosClient
         get "#{contract_link(contract_id)}/storage"
       end
 
-      def entrypoint(contract_id, entryoint)
-        get("#{contract_link(contract_id)}/entrypoints/#{entryoint}")
+      def entrypoint(contract_id, entrypoint)
+        get("#{contract_link(contract_id)}/entrypoints/#{entrypoint}")
       end
 
       def big_map_value(big_map_id:, key:, key_type:)
