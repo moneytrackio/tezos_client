@@ -156,7 +156,7 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
             spending_ref: "Spending--001"
           }
         ]
-                         )
+      )
     end
   end
 
@@ -235,6 +235,60 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
           { prim: "string" }
         )
        )
+    end
+  end
+
+  context "with big maps" do
+    let(:data) do
+      {
+        prim: "Pair",
+        args: [
+          { string: "edpkvH2XCYHmU2cpJxzQxzaJ9iMfmvkvSixFsEE1KqEmXBQeFq78PT" },
+          []
+        ]
+      }
+    end
+
+    let(:type) do
+      {
+        prim: "pair",
+        args: [
+          { prim: "key", annots: ["%pub_key"] },
+          {
+            prim: "map",
+            args:  [
+              { prim: "string" },
+              {
+                prim: "pair",
+                args:  [
+                  {
+                    prim: "pair",
+                    args:  [
+                      {
+                        prim: "pair",
+                        args:  [
+                          { prim: "timestamp", annots: ["%date"] },
+                          { prim: "nat", annots: ["%practitioner_price"] }
+                        ]
+                      },
+                      { prim: "string", annots: ["%practitioner_ref"] }
+                    ]
+                  },
+                  { prim: "nat", annots: ["%remainder_amount"] }
+                ]
+              }
+            ],
+            annots: ["%spendings"]
+          }
+        ]
+      }
+    end
+
+    it "return maps" do
+      expect(subject).to eq(
+         pub_key:"edpkvH2XCYHmU2cpJxzQxzaJ9iMfmvkvSixFsEE1KqEmXBQeFq78PT",
+         spendings: {}
+      )
     end
   end
 end
