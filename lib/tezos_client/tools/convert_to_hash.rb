@@ -13,7 +13,6 @@ class TezosClient
       def execute
         TezosClient::Tools::ConvertToHash::Base.new(data: data, type: type).value
       end
-
     end
   end
 end
