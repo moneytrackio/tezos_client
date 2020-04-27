@@ -156,7 +156,7 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
             spending_ref: "Spending--001"
           }
         ]
-                         )
+      )
     end
   end
 
@@ -235,6 +235,114 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
           { prim: "string" }
         )
        )
+    end
+  end
+
+  context "with big maps" do
+    let(:type) do
+      {
+        prim: "pair",
+        args: [
+          { prim: "key", annots: ["%pub_key"] },
+          {
+            prim: "map",
+            args: [
+              { prim: "string" },
+              {
+                prim: "pair",
+                args: [
+                  {
+                    prim: "pair",
+                    args: [
+                      {
+                        prim: "pair",
+                        args: [
+                          { prim: "timestamp", annots: ["%date"] },
+                          { prim: "nat", annots: ["%practitioner_price"] }
+                        ]
+                      },
+                      { prim: "string", annots: ["%practitioner_ref"] }
+                    ]
+                  },
+                  { prim: "nat", annots: ["%remainder_amount"] }
+                ]
+              }
+            ],
+            annots: ["%spendings"]
+          }
+        ]
+      }
+    end
+
+    context "with empty map" do
+      let(:data) do
+        {
+          prim: "Pair",
+          args: [
+            { string: "edpkvH2XCYHmU2cpJxzQxzaJ9iMfmvkvSixFsEE1KqEmXBQeFq78PT" },
+            []
+          ]
+        }
+      end
+
+      it "return maps" do
+        expect(subject).to eq(
+          pub_key: "edpkvH2XCYHmU2cpJxzQxzaJ9iMfmvkvSixFsEE1KqEmXBQeFq78PT",
+          spendings: {}
+        )
+      end
+    end
+
+    context "with element in map" do
+      let(:data) do
+        {
+          "prim": "Pair",
+          "args": [
+            { "string": "edpkvWLnfNsAKhWEDafxHaTmE8qtK19fSDJYAnLfg7J5Qf5jbkKgTW" },
+            [
+              {
+                "prim": "Elt",
+                "args": [
+                  { "string": "Spending--001" },
+                  {
+                    "prim": "Pair",
+                    "args": [
+                      {
+                        "prim": "Pair",
+                        "args": [
+                          {
+                            "prim": "Pair",
+                            "args": [
+                              { "string": "2020-04-27T13:48:28Z" },
+                              { "int": "6000" }
+                            ]
+                          },
+                          { "string": "HEALTH_PRACTITIONER_EG4WA" }
+                        ]
+                      },
+                      { "int": "1000" }
+                    ]
+                  }
+                ]
+              }
+            ]
+          ]
+        }
+      end
+
+      it "return maps" do
+        expect(subject).to eq(
+          pub_key: "edpkvWLnfNsAKhWEDafxHaTmE8qtK19fSDJYAnLfg7J5Qf5jbkKgTW",
+          spendings: {
+            "Spending--001" => {
+              date: Time.zone.parse("1970-01-01 00:00:00 +0000"),
+              practitioner_price: 6000,
+              practitioner_ref: "HEALTH_PRACTITIONER_EG4WA",
+              remainder_amount: 1000
+            }
+          },
+        )
+      end
     end
   end
 end
