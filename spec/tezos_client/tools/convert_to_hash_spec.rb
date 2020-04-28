@@ -84,7 +84,7 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
                         {
                           "prim": "Pair",
                           "args": [
-                            { "int": "1579877725" },
+                            { "int": "9876543" },
                             { "int": "60" }
                           ]
                         },
@@ -149,7 +149,7 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
         pub_key: "edpkugJHjEZLNyTuX3wW2dT4P7PY5crLqq3zeDFvXohAs3tnRAaZKR",
         spendings: [
           {
-            date: Time.zone.parse("2020-01-24 14:55:25 +0000"),
+            date: Time.zone.parse("1970-04-25 07:29:03.000000000 +0000"),
             practitioner_price: 60,
             practitioner_ref: "MTK-Practitioner-txrsh",
             remainder_amount: 10,
@@ -335,7 +335,7 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
           pub_key: "edpkvWLnfNsAKhWEDafxHaTmE8qtK19fSDJYAnLfg7J5Qf5jbkKgTW",
           spendings: {
             "Spending--001" => {
-              date: Time.zone.parse("1970-01-01 00:00:00 +0000"),
+              date: Time.zone.parse("2020-04-27T13:48:28Z"),
               practitioner_price: 6000,
               practitioner_ref: "HEALTH_PRACTITIONER_EG4WA",
               remainder_amount: 1000
