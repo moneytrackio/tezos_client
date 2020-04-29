@@ -184,7 +184,8 @@ class TezosClient
         operations: rpc_operation_args,
         signature: base_58_signature,
         protocol: protocol,
-        branch: branch)
+        branch: branch
+      )
 
       ensure_applied!(rpc_responses)
 
