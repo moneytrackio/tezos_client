@@ -36,6 +36,7 @@ require "tezos_client/smartpy_interface"
 
 require "tezos_client/tools/convert_to_hash"
 require "tezos_client/tools/find_big_maps_in_storage"
+require "tezos_client/tools/annots_to_type"
 
 class TezosClient
   using CurrencyUtils
