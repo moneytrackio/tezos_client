@@ -21,6 +21,7 @@ class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
   # }
   hash :params, strip: false
   hash :storage_type, strip: false, default: {}
+  interface :blockchain_client, methods: [:entrypoint], default: -> { TezosClient.new }
 
   # if storage_type is not received, it is fetched from the blockchain using
   # contract_address and entrypoint (that are mandatory in this case)
@@ -64,7 +65,7 @@ class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
     end
 
     def _storage_type
-      (storage_type.presence || TezosClient.new.entrypoint(contract_address, entrypoint)).deep_symbolize_keys
+      (storage_type.presence || blockchain_client.entrypoint(contract_address, entrypoint)).deep_symbolize_keys
     end
 
     def storage_type_or_contract_address_presence
