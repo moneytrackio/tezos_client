@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
+  # TODO: handle Arrays and Maps
   TYPES_MAPPING = {
     int: :int,
     nat: :int,
