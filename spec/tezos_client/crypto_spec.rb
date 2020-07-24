@@ -75,6 +75,48 @@ RSpec.describe TezosClient::Crypto do
     end
   end
 
+  describe "#check_signature" do
+    context "when the signature is valid" do
+      let(:public_key) { "edpkuc2R8gpyYxpJTLHE7dUfPc8DHjzTsgCzf3GeXN6rU1i58Y3EMn" }
+      let(:signature) { "edsigtp4wchrxPLWscwNQKyUssJixap4njeS3keCTwphwhx4MkQaFn8GfXkCJtk8vi5uV2ahrdS5YWc3qeC74awqWTGJfngKGrs" }
+      let(:payload) { "1234" }
+
+      it "returns true" do
+        expect(subject.check_signature(public_key: public_key, signature: signature, payload: payload)).to eq true
+      end
+    end
+
+    context "when the signature is invalid" do
+      let(:public_key) { "edpkuc2R8gpyYxpJTLHE7dUfPc8DHjzTsgCzf3GeXN6rU1i58Y3EMn" }
+      let(:signature) { "edsigtp4wchrxPLWscwNQKyUssJixap4njeS3keCTwphwhx4MkQaFn8GfXkCJtk8vi5uV2ahrdS5YWc3qeC74awqWTGJfngKGrs" }
+      let(:payload) { "12333" }
+
+      it "returns false" do
+        expect(subject.check_signature(public_key: public_key, signature: signature, payload: payload)).to eq false
+      end
+    end
+  end
+
+  describe "#check_signature!" do
+    before { allow(subject).to receive(:check_signature).and_return signature_validity }
+
+    context "when the signature is valid" do
+      let(:signature_validity) { true }
+
+      it "returns true" do
+        expect(subject.check_signature!(public_key: "", signature: "", payload: "")).to eq true
+      end
+    end
+
+    context "when the signature is valid" do
+      let(:signature_validity) { false }
+
+      it "raises an error" do
+        expect { subject.check_signature!(public_key: "", signature: "", payload: "") }.to raise_error TezosClient::BadSignatureError
+      end
+    end
+  end
+
   describe "secret_key_to_public_key" do
     let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
     let(:expected_public_key) { "edpkugJHjEZLNyTuX3wW2dT4P7PY5crLqq3zeDFvXohAs3tnRAaZKR" }

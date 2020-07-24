@@ -23,6 +23,9 @@ class TezosClient
   class SmartPyError < SysCallError
   end
 
+  class BadSignatureError < StandardError
+  end
+
   class InvalidActivation < RpcRequestFailure
     attr_reader :pkh
 
