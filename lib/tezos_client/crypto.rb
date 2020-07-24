@@ -165,6 +165,22 @@ class TezosClient
       end
     end
 
+    # payload must be bytes
+    def check_signature(public_key:, signature:, payload:)
+      verify_key = RbNaCl::VerifyKey.new(decode_tz(public_key).to_bin)
+
+      bin_sig = decode_tz(signature).to_bin
+      payload_hash = RbNaCl::Hash::Blake2b.digest(ignore_0x(payload).to_bin, digest_size: 32)
+
+      verify_key.verify(bin_sig, payload_hash)
+    rescue RbNaCl::BadSignatureError
+      false
+    end
+
+    def check_signature!(public_key:, signature:, payload:)
+      check_signature(public_key: public_key, signature: signature, payload: payload) || raise(BadSignatureError)
+    end
+
     def operation_id(signed_operation_hex)
       hash = RbNaCl::Hash::Blake2b.digest(
         signed_operation_hex.to_bin,
@@ -219,6 +235,10 @@ class TezosClient
         else
           RbNaCl::SigningKey.generate
         end
+      end
+
+      def ignore_0x(payload)
+        payload.starts_with?("0x") ? payload[2..-1] : payload
       end
   end
 end
