@@ -84,6 +84,30 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
         expect(subject.result).to eq({ string: params[:params][:payload] })
       end
     end
+
+    context "when only contract_address and params are provided" do
+      let(:params) {
+        {
+            contract_address: "KT1234567890",
+            params: {
+                payload: "payload"
+            }
+        }
+      }
+
+      before { allow_any_instance_of(TezosClient).to receive(:entrypoint).and_return({ prim: "string" }) }
+
+      it "calls TezosClient#entrypoint with valid params and default entrypoint" do
+        expect_any_instance_of(TezosClient).to receive(:entrypoint)
+                                                   .with(params[:contract_address], "default")
+
+        subject
+      end
+
+      it "returns a valid micheline" do
+        expect(subject.result).to eq({ string: params[:params][:payload] })
+      end
+    end
   end
 
   context "when the params are invalid" do

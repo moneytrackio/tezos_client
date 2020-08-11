@@ -14,7 +14,7 @@ class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
   }.freeze
 
   string :contract_address, default: nil
-  string :entrypoint, default: nil
+  string :entrypoint, default: "default"
   # example of params:
   # {
   #   spending_ref: "toto",
@@ -70,7 +70,7 @@ class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
     end
 
     def storage_type_or_contract_address_presence
-      return if storage_type.present? ^ (contract_address.present? && entrypoint.present?)
+      return if storage_type.present? ^ (contract_address.present?)
 
       errors.add(:base,
                  "You should provide the contract_address and the entrypoint only if storage_type is not provided")
