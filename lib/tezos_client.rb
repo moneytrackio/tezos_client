@@ -53,7 +53,7 @@ class TezosClient
 
   RANDOM_SIGNATURE = "edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"
 
-  def initialize(rpc_node_address: "127.0.0.1", rpc_node_port: 8732, liquidity_options: {})
+  def initialize(rpc_node_address: "127.0.0.1", rpc_node_port: 8732, http_client: ::HTTParty, liquidity_options: {})
     @rpc_node_address = rpc_node_address
     @rpc_node_port = rpc_node_port
 
@@ -61,7 +61,8 @@ class TezosClient
 
     @rpc_interface = RpcInterface.new(
       host: @rpc_node_address,
-      port: @rpc_node_port
+      port: @rpc_node_port,
+      http_client: http_client
     )
 
     @smartpy_interface = SmartpyInterface.new

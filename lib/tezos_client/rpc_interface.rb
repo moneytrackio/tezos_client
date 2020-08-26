@@ -22,9 +22,10 @@ class TezosClient
     include RequestManager
     include Blocks
 
-    def initialize(host: "127.0.0.1", port: "8732")
+    def initialize(host: "127.0.0.1", port: "8732", http_client: ::HTTParty)
       @host = host
       @port = port
+      @http_client = http_client
     end
   end
 end

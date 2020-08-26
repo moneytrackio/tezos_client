@@ -7,7 +7,7 @@ class TezosClient
         url = "http://#{@host}:#{@port}/#{path}"
         response = nil
         exec_time = Benchmark.realtime do
-          response = HTTParty.get(url, headers: { "Content-Type" => "application/json" }, query: query)
+          response = @http_client.get(url, headers: { "Content-Type" => "application/json" }, query: query)
         end
         formatted_response = format_response(response.parsed_response)
 
@@ -27,7 +27,7 @@ class TezosClient
 
         response = nil
         exec_time = Benchmark.realtime do
-          response = HTTParty.post(url,
+          response = @http_client.post(url,
                                    body: content.to_json,
                                    headers: { "Content-Type" => "application/json" })
         end
