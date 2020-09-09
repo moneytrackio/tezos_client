@@ -104,7 +104,7 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
 
         it "calls TezosClient#entrypoint with valid params" do
           expect_any_instance_of(TezosClient).to receive(:entrypoint)
-            .with(params[:contract_address], params[:entrypoint])
+            .with(params[:contract_address], "default")
 
           subject
         end
