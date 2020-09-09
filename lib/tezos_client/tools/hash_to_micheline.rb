@@ -14,7 +14,7 @@ class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
   }.freeze
 
   string :contract_address, default: nil
-  string :entrypoint, default: "default"
+  string :entrypoint, default: nil
   # example of params:
   # {
   #   spending_ref: "toto",
