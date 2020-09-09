@@ -88,10 +88,10 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
     context "when only contract_address and params are provided" do
       let(:params) {
         {
-            contract_address: "KT1234567890",
-            params: {
-                payload: "payload"
-            }
+          contract_address: "KT1234567890",
+          params: {
+            payload: "payload"
+          }
         }
       }
 
