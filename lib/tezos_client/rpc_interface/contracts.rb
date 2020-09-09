@@ -37,6 +37,10 @@ class TezosClient
         get "#{contract_link(contract_id)}/storage"
       end
 
+      def entrypoints(contract_id)
+        get("#{contract_link(contract_id)}/entrypoints")
+      end
+
       def entrypoint(contract_id, entrypoint)
         get("#{contract_link(contract_id)}/entrypoints/#{entrypoint}")
       end
