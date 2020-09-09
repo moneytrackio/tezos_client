@@ -60,58 +60,57 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
       end
     end
 
-      context "when storage_type is not provided" do
-        let(:params) {
-          {
-            contract_address: "KT1234567890",
-            entrypoint: "my_entrypoint",
-            params: {
-              payload: "payload"
-            }
+    context "when storage_type is not provided" do
+      let(:params) {
+        {
+          contract_address: "KT1234567890",
+          entrypoint: "my_entrypoint",
+          params: {
+            payload: "payload"
           }
         }
+      }
 
-        before { allow_any_instance_of(TezosClient).to receive(:entrypoint).and_return({ prim: "string" }) }
+      before { allow_any_instance_of(TezosClient).to receive(:entrypoint).and_return({ prim: "string" }) }
 
-        context "with many entrypoint" do
-          before do
-            allow_any_instance_of(TezosClient).to receive(:entrypoints).and_return({
-              "entrypoints" => {
-                  params[:entrypoint] => { prim: "string" },
-                  "other_entrypoint" => { prim: "string" },
-              }
-            })
-          end
-
-          it "calls TezosClient#entrypoint with valid params" do
-            expect_any_instance_of(TezosClient).to receive(:entrypoint)
-                                                       .with(params[:contract_address], params[:entrypoint])
-
-            subject
-          end
-
-          it "returns a valid micheline" do
-            expect(subject.result).to eq({ string: params[:params][:payload] })
-          end
+      context "with many entrypoint" do
+        before do
+          allow_any_instance_of(TezosClient).to receive(:entrypoints).and_return({
+            "entrypoints" => {
+                params[:entrypoint] => { prim: "string" },
+                "other_entrypoint" => { prim: "string" },
+            }
+          })
         end
 
-        context "with one entrypoint" do
-          before do
-            allow_any_instance_of(TezosClient).to receive(:entrypoints).and_return({
-              "entrypoints" => {}
-            })
-          end
+        it "calls TezosClient#entrypoint with valid params" do
+          expect_any_instance_of(TezosClient).to receive(:entrypoint)
+                                                     .with(params[:contract_address], params[:entrypoint])
 
-          it "calls TezosClient#entrypoint with valid params" do
-            expect_any_instance_of(TezosClient).to receive(:entrypoint)
-              .with(params[:contract_address], params[:entrypoint])
+          subject
+        end
 
-            subject
-          end
+        it "returns a valid micheline" do
+          expect(subject.result).to eq({ string: params[:params][:payload] })
+        end
+      end
 
-          it "returns a valid micheline" do
-            expect(subject.result).to eq({ string: params[:params][:payload] })
-          end
+      context "with one entrypoint" do
+        before do
+          allow_any_instance_of(TezosClient).to receive(:entrypoints).and_return({
+            "entrypoints" => {}
+          })
+        end
+
+        it "calls TezosClient#entrypoint with valid params" do
+          expect_any_instance_of(TezosClient).to receive(:entrypoint)
+            .with(params[:contract_address], params[:entrypoint])
+
+          subject
+        end
+
+        it "returns a valid micheline" do
+          expect(subject.result).to eq({ string: params[:params][:payload] })
         end
       end
     end
