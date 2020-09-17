@@ -23,20 +23,28 @@ class TezosClient::Tools::AnnotsToType < ActiveInteraction::Base
       annot_type = typed_annots[annot]
 
       unless annots.size == 1
-        return [{ "prim" => "pair", "args" => generate_type_args(annots) },
-                { "prim" => annot_type, "annots" => ["%#{annot}"] }]
+        return [
+          {
+            "prim" => annot_type,
+            "annots" => ["%#{annot}"]
+          },
+          {
+            "prim" => "pair",
+            "args" => generate_type_args(annots)
+          }
+        ]
       end
 
       generated_args = [{ "prim" => annot_type, "annots" => ["%#{annot}"] }]
       annot = annots.pop
       annot_type = typed_annots[annot]
-      generated_args.unshift({ "prim" => annot_type, "annots" => ["%#{annot}"] })
+      generated_args.append({ "prim" => annot_type, "annots" => ["%#{annot}"] })
 
       generated_args
     end
 
     def ordered_annots
-      @ordered_annots ||= typed_annots.keys.sort
+      @ordered_annots ||= typed_annots.keys.sort.reverse
     end
 
     def validate_types

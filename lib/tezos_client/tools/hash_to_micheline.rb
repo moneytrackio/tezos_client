@@ -40,7 +40,24 @@ class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
         next acc << { prim: "Pair", args: generate_micheline(h[:args]) } if h[:prim] == "pair"
 
         annot = h[:annots].first.slice(1..-1).to_sym # remove '%'
-        acc << hash_type_to_hash_data(h[:prim], params.fetch(annot))
+
+        if h[:prim] == "option"
+          value = params.fetch(annot)
+          if value
+            acc << {
+              "prim": "Some",
+              "args": [
+                hash_type_to_hash_data(h[:args][0][:prim], params.fetch(annot))
+              ]
+            }
+          else
+            acc << {
+              "prim": "None"
+            }
+          end
+        else
+          acc << hash_type_to_hash_data(h[:prim], params.fetch(annot))
+        end
       end
     end
 
