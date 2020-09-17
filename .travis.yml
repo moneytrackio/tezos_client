@@ -13,11 +13,11 @@ rvm:
 before_install:
   - sh travis-scripts/prepare-ubuntu.sh
   - mkdir -p $HOME/bin
-  - curl -s https://SmartPy.io/SmartPyBasic/SmartPy.sh > SmartPy.sh
+  - curl -s https://smartpy.io/dev-20200912-bbb4b34cb579f3d52320c3d2aed8ebcef04429b0/cli/SmartPy.sh > SmartPy.sh
   - chmod +x ./SmartPy.sh
-  - ./SmartPy.sh local-install $HOME/bin/smartpy
+  - ./SmartPy.sh local-install-auto $HOME/bin/smartpy/cli
   - rm ./SmartPy.sh
-  - export PATH="$PATH:$HOME/bin/:$HOME/bin/smartpy/SmartPyBasic/"
+  - export PATH="$PATH:$HOME/bin/:$HOME/bin/smartpy/cli/"
   - npm link michelson-to-micheline
   - gem install bundler -v 1.16.3
 script:
