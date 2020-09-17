@@ -27,13 +27,36 @@ RSpec.describe TezosClient::Tools::AnnotsToType do
           eq(
             { "prim"=>"pair",
                "args"=>
-                [{ "prim"=>"pair",
-                   "args"=>
-                      [{ "prim"=>"pair", "args"=>[
-                        { "prim"=>"timestamp", "annots"=>["%expires_at"] }, { "prim"=>"string", "annots"=>["%id"] }
-                      ] },
-                 { "prim"=>"bytes", "annots"=>["%payload"] }] },
-                 { "prim"=>"string", "annots"=>["%spending_ref"] }] }
+                [
+                  {
+                    "prim"=>"timestamp",
+                    "annots"=>["%expires_at"]
+                  },
+                  {
+                    "prim"=>"pair",
+                    "args"=>
+                      [
+                        {
+                          "prim"=>"string",
+                          "annots"=>["%id"]
+                        },
+                        {
+                          "prim"=>"pair",
+                          "args"=>[
+                            {
+                              "prim"=>"bytes",
+                              "annots"=>["%payload"]
+                            },
+                            {
+                              "prim"=>"string",
+                              "annots"=>["%spending_ref"]
+                            }
+                          ]
+                        },
+                      ]
+                  }
+                ]
+            }
           )
         )
       end
