@@ -5,10 +5,10 @@ class TezosClient
     module SystemCall
       def self.execute(cmd)
         Open3.popen3(*cmd) do |_stdin, stdout, stderr, wait_thr|
-          err = stderr.read
           status = wait_thr.value.exitstatus
 
           if status != 0
+            err  = stdout.read + stderr.read
             raise ::TezosClient::SysCallError, "command '#{cmd}' existed with status #{status}: #{err}"
           end
 
