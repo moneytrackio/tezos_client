@@ -496,7 +496,25 @@ RSpec.describe TezosClient, vcr: true do
         expect(res).to eq "default"
       end
     end
+    context "with contract with one entrypoint" do
+      before do
+        allow_any_instance_of(TezosClient).to receive(:entrypoints).and_return({
+          "entrypoints" => {
+            "entrypoint" => {},
+            "other_entrypoint" => {}
+          }
+        })
+      end
 
+      it "return the default entrypoint" do
+        res = subject.select_entrypoint(
+            contract_address: contract_address,
+            entrypoint: entrypoint
+        )
+
+        expect(res).to eq "default"
+      end
+    end
   end
 
   describe "#not enough tez error" do
