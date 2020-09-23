@@ -83,7 +83,7 @@ class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
     end
 
     def _entrypoint
-      @_entrypoint ||= select_entrypoint(
+      @_entrypoint ||= blockchain_client.select_entrypoint(
         contract_address: contract_address,
         entrypoint: entrypoint
       )
