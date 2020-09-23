@@ -462,12 +462,14 @@ RSpec.describe TezosClient, vcr: true do
     let(:contract_address) { "MyContractAddress" }
     context "with contract with multiple entrypoint" do
       before do
-        allow_any_instance_of(TezosClient).to receive(:entrypoints).and_return({
-          "entrypoints" => {
-            entrypoint => {},
-            "other_entrypoint" => {}
+        allow_any_instance_of(TezosClient).to receive(:entrypoints) do
+          {
+            "entrypoints" => {
+              entrypoint => {},
+              "other_entrypoint" => {}
+            }
           }
-        })
+        end
       end
 
       it "return the entrypoint" do
@@ -482,9 +484,11 @@ RSpec.describe TezosClient, vcr: true do
 
     context "with contract with one entrypoint" do
       before do
-        allow_any_instance_of(TezosClient).to receive(:entrypoints).and_return({
-          "entrypoints" => {}
-        })
+        allow_any_instance_of(TezosClient).to receive(:entrypoints) do
+          {
+            "entrypoints" => {}
+          }
+        end
       end
 
       it "return the default entrypoint" do
@@ -496,14 +500,17 @@ RSpec.describe TezosClient, vcr: true do
         expect(res).to eq "default"
       end
     end
+
     context "with contract with one entrypoint" do
       before do
-        allow_any_instance_of(TezosClient).to receive(:entrypoints).and_return({
-          "entrypoints" => {
-            "entrypoint" => {},
-            "other_entrypoint" => {}
+        allow_any_instance_of(TezosClient).to receive(:entrypoints) do
+          {
+            "entrypoints" => {
+              "entrypoint" => {},
+              "other_entrypoint" => {}
+            }
           }
-        })
+        end
       end
 
       it "return the default entrypoint" do
