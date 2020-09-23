@@ -83,18 +83,10 @@ class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
     end
 
     def _entrypoint
-      @_entrypoint ||= select_entrypoint
-    end
-
-    def select_entrypoint
-      entrypoints = blockchain_client.entrypoints(contract_address)["entrypoints"].keys
-      if entrypoints.count == 0
-        "default"
-      elsif entrypoints.include?(entrypoint)
-        entrypoint
-      else
-        errors.add(:entrypoint, :not_found)
-      end
+      @_entrypoint ||= select_entrypoint(
+        contract_address: contract_address,
+        entrypoint: entrypoint
+      )
     end
 
     def _storage_type
