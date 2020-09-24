@@ -214,7 +214,6 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
     end
 
     it "return all big maps" do
-      pp subject
       expect(subject).to match hash_including(
         contracts: TezosClient::BigMap.new(
           :contracts,
@@ -341,6 +340,72 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
               remainder_amount: 1000
             }
           },
+        )
+      end
+    end
+  end
+
+  context "with option" do
+    let(:type) do
+      {
+        prim: "pair",
+        args:
+          [
+            { prim: "option",
+             args: [{ prim: "signature" }],
+             annots: ["%topup_signature"]
+            },
+           { prim: "option",
+             args: [{ prim: "timestamp" }],
+             annots: ["%topup_valid_until"]
+            }
+          ]
+      }
+    end
+
+    context "with None value" do
+      let(:data) do
+        {prim: "Pair", args: [{prim: "None"}, {prim: "None"}]}
+      end
+
+      it "returns nil values" do
+        expect(subject).to eq(
+          topup_signature: nil,
+          topup_valid_until: nil
+        )
+      end
+    end
+    context "with some value" do
+      let(:topup_valid_until) { Time.zone.parse("1970-04-25 07:29:03.000000000 +0000") }
+
+      let(:data) do
+        {
+          prim: "Pair",
+          args: [
+            {
+              prim: "Some",
+              args:[
+                {
+                  string: "edsigtp4wchrxPLWscwNQKyUssJixap4njeS3keCTwphwhx4MkQaFn8GfXkCJtk8vi5uV2ahrdS5YWc3qeC74awqWTGJfngKGrs"
+                }
+              ]
+            },
+            {
+              prim: "Some",
+              args:[
+                {
+                  int: topup_valid_until.to_i
+                }
+              ]
+            }
+          ]
+        }
+      end
+
+      it "returns decoded values" do
+        expect(subject).to eq(
+         topup_signature: "edsigtp4wchrxPLWscwNQKyUssJixap4njeS3keCTwphwhx4MkQaFn8GfXkCJtk8vi5uV2ahrdS5YWc3qeC74awqWTGJfngKGrs",
+         topup_valid_until: topup_valid_until
         )
       end
     end
