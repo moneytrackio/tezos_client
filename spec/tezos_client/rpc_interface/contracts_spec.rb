@@ -19,7 +19,6 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
       secret_key: secret_key,
       init_params: init_params
     )
-    pp "HERE"
     pp res
     monitor_operation(res[:operation_id])
     res[:originated_contract]

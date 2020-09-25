@@ -292,7 +292,8 @@ RSpec.describe TezosClient, vcr: true do
               params: params,
               params_type: :micheline
             )
-          end.to raise_error ArgumentError, "entrypoint unknown not found in [\"always_fail\", \"add_second\", \"add_first\"]"
+          end.to raise_error ArgumentError,
+                             "entrypoint unknown not found in [\"always_fail\", \"add_second\", \"add_first\"]"
         end
       end
 
