@@ -101,9 +101,9 @@ RSpec.describe TezosClient, vcr: true do
       let(:op_id) do
         res = subject.transfer(
           amount: 1,
-          from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-          to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
-          secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
+          from: "tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG",
+          to: "tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG",
+          secret_key: "edsk3udS2CzqXNYq244B5rP6E1of8wZUXMkBFjN3NtHRDcGEMhFKcr"
         )
         res[:operation_id]
       end
@@ -251,9 +251,9 @@ RSpec.describe TezosClient, vcr: true do
     end
 
     describe "call_contract" do
-      let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
-      let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
-      let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
+#      let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
+      let(:source) { "tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG" }
+      let(:secret_key) { "edsk3udS2CzqXNYq244B5rP6E1of8wZUXMkBFjN3NtHRDcGEMhFKcr" }
       let(:amount) { 0 }
       let(:contract_address) { originate_demo_contract }
       let(:amount) { 1 }
@@ -286,7 +286,6 @@ RSpec.describe TezosClient, vcr: true do
             res = subject.call_contract(
               from: source,
               amount: amount,
-              script: script,
               secret_key: secret_key,
               to: contract_address,
               entrypoint: entrypoint,
@@ -486,7 +485,7 @@ RSpec.describe TezosClient, vcr: true do
       end
 
       it "raises an error" do
-        #   expect do
+        expect do
           subject.call_contract(
             from: source,
             amount: amount,
@@ -497,7 +496,7 @@ RSpec.describe TezosClient, vcr: true do
             params: params,
             params_type: :micheline
           )
-          #  end.to raise_exception TezosClient::ScriptRuntimeError, 'Script runtime Error when executing : {"string"=>"I\'m failing"} (location: 102)'
+        end.to raise_exception TezosClient::ScriptRuntimeError, /Script runtime Error when executing : \{"string"=>"I'm failing"\} \(location: \d*\)/
       end
     end
   end
