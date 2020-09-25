@@ -280,6 +280,22 @@ RSpec.describe TezosClient, vcr: true do
         pp res
       end
 
+      context "with unknown entrypoint" do
+        it "raise error" do
+          expect do
+            subject.call_contract(
+              from: source,
+              amount: amount,
+              secret_key: secret_key,
+              to: contract_address,
+              entrypoint: "unknown",
+              params: params,
+              params_type: :micheline
+            )
+          end.to raise_error ArgumentError, "entrypoint unknown not found in [\"always_fail\", \"add_second\", \"add_first\"]"
+        end
+      end
+
       context "with unknown params type" do
         it "raise error" do
           expect {
