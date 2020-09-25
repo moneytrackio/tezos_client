@@ -26,6 +26,7 @@ class TezosClient
                    :block_operations,
                    :contract_storage_type,
                    :entrypoint,
-                   :entrypoints
+                   :entrypoints,
+                   :select_entrypoint
   end
 end

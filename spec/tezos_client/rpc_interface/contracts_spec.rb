@@ -5,8 +5,8 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
   subject { rpc_interface }
 
   let(:script) { File.expand_path("./spec/fixtures/demo.py") }
-  let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
-  let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
+  let(:source) { "tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG" }
+  let(:secret_key) { "edsk3udS2CzqXNYq244B5rP6E1of8wZUXMkBFjN3NtHRDcGEMhFKcr" }
   let(:amount) { 0 }
   let(:init_params) { "MyContract()" }
 
@@ -19,6 +19,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
       secret_key: secret_key,
       init_params: init_params
     )
+    pp res
     monitor_operation(res[:operation_id])
     res[:originated_contract]
   end
@@ -69,7 +70,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
   describe "#big_map_value" do
     let!(:contract_address) do
       if reading_vcr_cassette?
-        "KT1PNYsy2w5EreQevZsaZgv4ux3okwNdLUCr"
+        "KT1X9TkfQ95iQ7423kVWrxDZB7aaG6rGcpnm"
       else
         new_kt_hash = new_contract_address
         puts "please insert this contract hash here #{new_kt_hash} #{__FILE__}:#{__LINE__-3}"

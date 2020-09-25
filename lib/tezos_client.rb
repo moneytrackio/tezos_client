@@ -165,19 +165,36 @@ class TezosClient
   end
 
   def call_contract(dry_run: false, entrypoint:, params:, params_type:, **args)
+    _entrypoint = select_entrypoint(
+      contract_address: args[:to],
+      entrypoint: entrypoint
+    )
+
     json_params = micheline_params(
       params: params,
-      entrypoint: entrypoint,
+      entrypoint: _entrypoint,
       params_type: params_type
     )
 
     transfer_args = args.merge(
-      entrypoint: entrypoint,
+      entrypoint: _entrypoint,
       parameters: json_params,
       dry_run: dry_run
     )
 
     transfer(transfer_args)
+  end
+
+  def select_entrypoint(contract_address:, entrypoint:)
+    entrypoints = entrypoints(contract_address)["entrypoints"].keys
+
+    if entrypoints.count == 0
+      "default"
+    elsif entrypoints.include?(entrypoint)
+      entrypoint
+    else
+      raise ::ArgumentError, "entrypoint #{entrypoint} not found in #{entrypoints}"
+    end
   end
 
   def inject_raw_operations(secret_key:, raw_operations:, dry_run: false, **args)
