@@ -6,9 +6,10 @@
 
 Tezos Client interracts with tezos nodes using RPC commands. 
 
-## Requirements:
-Tezos client requires liquidity to be installed in order to work properly.
-For installing on linux, you can basically follow the steps coded in travis-script folder. 
+## Requirements
+
+Tezos client requires SmartPy to be installed in order to work properly.
+To install it on Linux, you can basically follow the steps coded in travis-script folder. 
 
 ## Dependency 
 
@@ -17,11 +18,6 @@ For installing on linux, you can basically follow the steps coded in travis-scri
 sudo apt-get install nodejs
 npm i -g michelson-to-micheline
 ```
-
-### liquidity
-[liquidity installation](http://www.liquidity-lang.org/doc/installation/index.html)
-
-need the tezos version (not Dune version)
 
 ### SmartPy
 [SmartPy](https://smartpy.io/)
@@ -54,9 +50,10 @@ Or install it yourself as:
 
 ## Usage
 
-### Generate Tezos key paris
+### Generate Tezos key pairs
 
-Generate a prefectly random key pair:
+Generate a perfectly random key pair:
+
 ```ruby 
 client = TezosClient.new 
 key = subject.generate_key
@@ -69,6 +66,7 @@ key = subject.generate_key
 ```
 
 Generate a key pair from a seed and a BIP 44 Path:
+
 ```ruby
 key = subject.generate_key(wallet_seed:"000102030405060708090a0b0c0d0e0f", path: "m/44'/1729'/0'/0'/0'")
           expect(key[:address]).to eq "tz1RfnzRopJXH32SSDap2wMYGULBAnmHxdP1"
@@ -78,7 +76,8 @@ key = subject.generate_key(wallet_seed:"000102030405060708090a0b0c0d0e0f", path:
 #       :address=>"tz1a97x7GAvMDyrwwKTLQo131CoidXyUef48"
 #    }
 ```
-Generate a key pair from a  BIP-39 mnemonic sentence and a BIP 44 Path:
+Generate a key pair from a BIP-39 mnemonic sentence and a BIP 44 Path:
+
 ```ruby
 key = subject.generate_key(
           mnemonic: "below dove cushion divide future artefact orange congress maple fiscal flower enable", 
@@ -118,7 +117,7 @@ client.transfer(
 )
 ```
 
-### Originate a contract written in liquidity
+### Originate a contract written in SmartPy
 
 ```ruby
 script = File.expand_path("./spec/fixtures/demo.py")
@@ -163,6 +162,7 @@ puts "Contract address: #{res[:originated_contract]}"
 ```
 
 ### Call a contract written in SmartPy
+
 ```ruby
 TezosClient.new.call_contract(
   from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
