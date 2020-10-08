@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/moneytrackio/tezos_client.svg?branch=master)](https://travis-ci.org/moneytrackio/tezos_client)
 
-Tezos Client interracts with tezos nodes using RPC commands. 
+Tezos Client interacts with Tezos nodes using RPC commands. 
 
 ## Requirements
 
