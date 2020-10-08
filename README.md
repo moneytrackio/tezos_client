@@ -139,28 +139,6 @@ puts "Origination operation: #{res[:operation_id]}"
 puts "Contract address: #{res[:originated_contract]}"
 ```
 
-### Originate a contract written in SmartPy
-
-```ruby
-script = File.expand_path("./spec/fixtures/demo.py")
-source = "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq"
-secret_key = "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
-amount =  0
-init_params = "MyContract(1, 1)"
-client = TezosClient.new
-
-res = client.originate_contract(
-    from: source,
-    amount: amount,
-    script: script,
-    secret_key: secret_key,
-    init_params: init_params
-)
-
-puts "Origination operation: #{res[:operation_id]}"
-puts "Contract address: #{res[:originated_contract]}"
-```
-
 ### Call a contract written in SmartPy
 
 ```ruby
