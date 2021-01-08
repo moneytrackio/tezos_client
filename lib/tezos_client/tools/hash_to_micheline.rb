@@ -22,10 +22,18 @@ class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
   validate :storage_type_or_contract_address_presence
 
   def execute
-    TezosClient::Tools::HashToMicheline::Base.new(data: params, type: _storage_type).value
+    TezosClient::Tools::HashToMicheline::Base.new(data: _params, type: _storage_type).value
   end
 
   private
+    def _params
+      if params.respond_to?(:keys) && params.keys.size == 1
+        params.values.first
+      else
+        params
+      end
+    end
+
     def _entrypoint
       @_entrypoint ||= blockchain_client.select_entrypoint(
         contract_address: contract_address,

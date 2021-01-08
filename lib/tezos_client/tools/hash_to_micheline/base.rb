@@ -44,7 +44,7 @@ class TezosClient
 
         private
           def klass
-            "#{self.class.name.deconstantize}::#{type[:prim].camelize}".constantize
+            "#{self.class.name.deconstantize}::#{type[:prim].to_s.camelize}".constantize
           end
       end
     end

@@ -13,7 +13,7 @@ class TezosClient
       self.class.logger << out + "\n"
     end
 
-    FILTERED_KEYS = [:code, :contractCode]
+    FILTERED_KEYS = [:code, :contractCode, :contract_code]
     def tezos_contents_log_filter(content)
       if content.is_a? Array
         content.map { |el| tezos_contents_log_filter(el) }

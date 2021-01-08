@@ -11,4 +11,9 @@ sudo add-apt-repository "deb http://fr.archive.ubuntu.com/ubuntu bionic main uni
 sudo apt-get update -qq
 sudo apt-get install -y -qq \
      libsecp256k1-dev libsecp256k1-0 libsodium-dev libssl-dev \
-     bubblewrap libev-dev libhidapi-dev npm
+     bubblewrap libev-dev libhidapi-dev
+
+wget -qO- https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt install -y nodejs
+node --version
+npm --version

@@ -61,6 +61,62 @@ RSpec.describe TezosClient::Tools::AnnotsToType do
         )
       end
     end
+
+    context "when typed_annots contains an optionnal argument" do
+      let(:typed_annots) do
+        {
+          spending_ref: "string",
+          expires_at: "timestamp",
+          payload: "bytes",
+          id: "optional_string"
+        }
+      end
+
+      it "returns a valid result" do
+        puts subject.errors.full_messages unless subject.valid?
+        expect(subject).to be_valid
+
+        expect(subject.result).to(
+          eq(
+            { "prim"=>"pair",
+              "args"=>
+                [
+                  {
+                    "prim"=>"timestamp",
+                    "annots"=>["%expires_at"]
+                  },
+                  {
+                    "prim"=>"pair",
+                    "args"=>
+                      [
+                        {
+                          "prim"=>"option",
+                          "args" => [
+                            { "prim" => "string" }
+                          ],
+                          "annots"=>["%id"]
+                        },
+                        {
+                          "prim"=>"pair",
+                          "args"=>[
+                            {
+                              "prim"=>"bytes",
+                              "annots"=>["%payload"]
+                            },
+                            {
+                              "prim"=>"string",
+                              "annots"=>["%spending_ref"]
+                            }
+                          ]
+                        },
+                      ]
+                  }
+                ]
+            }
+          )
+        )
+      end
+    end
   end
 
   context "when typed_annots contains a forbidden type" do

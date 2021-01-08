@@ -5,7 +5,7 @@ class TezosClient
     class HashToMicheline < ActiveInteraction::Base
       class Nat < Base
         def encode
-          { int: data }
+          { int: data.to_s }
         end
       end
     end
