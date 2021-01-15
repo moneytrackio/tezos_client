@@ -2,7 +2,7 @@
 
 class TezosClient
   module Tools
-    class ConvertToHash < ActiveInteraction::Base
+    class HashToMicheline < ActiveInteraction::Base
       class Base
         def initialize(data:, type:)
           @data = data
@@ -12,17 +12,19 @@ class TezosClient
         attr_accessor :data, :type
 
         def value
-          anonymous? ? decode : { var_name => decode }
+          @data = anonymous? ? @data : @data.fetch(var_name)
+          encode
         end
 
         protected
-          def decode
+          def encode
             klass.new(
               data: data,
               type: type
-            ).decode
+            ).encode
 
           rescue NameError
+            raise
             raise NotImplementedError, "type '#{type[:prim]}' not implemented"
           end
 
@@ -42,7 +44,7 @@ class TezosClient
 
         private
           def klass
-            "#{self.class.name.deconstantize}::#{type[:prim].camelize}".constantize
+            "#{self.class.name.deconstantize}::#{type[:prim].to_s.camelize}".constantize
           end
       end
     end

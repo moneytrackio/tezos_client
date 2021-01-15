@@ -47,10 +47,27 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
       context "when there is only one parameter" do
         let(:params) do
           {
-            storage_type: { "prim" => "string" },
+            storage_type: {
+              "prim" => "string",
+              annots: ["%payload"]
+            },
             params: {
               payload: "payload"
             }
+          }
+        end
+
+        it "returns a valid micheline" do
+          expect(subject.result).to eq({ string: "payload" })
+        end
+      end
+      context "with an anonymous parameter" do
+        let(:params) do
+          {
+            storage_type: {
+              "prim" => "string"
+            },
+            params: "payload"
           }
         end
 
@@ -71,14 +88,14 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
         }
       }
 
-      before { allow_any_instance_of(TezosClient).to receive(:entrypoint).and_return({ prim: "string" }) }
+      before { allow_any_instance_of(TezosClient).to receive(:entrypoint).and_return({ prim: "string", annots: ["%payload"] }) }
 
       context "with many entrypoint" do
         before do
           allow_any_instance_of(TezosClient).to receive(:entrypoints).and_return({
             "entrypoints" => {
-                params[:entrypoint] => { prim: "string" },
-                "other_entrypoint" => { prim: "string" },
+                params[:entrypoint] => { prim: "string", annots: ["%payload"] },
+                "other_entrypoint" => { prim: "string", annots: ["%payload"] },
             }
           })
         end
@@ -126,7 +143,7 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
       }
 
       before do
-        allow_any_instance_of(TezosClient).to receive(:entrypoint).and_return({ prim: "string" })
+        allow_any_instance_of(TezosClient).to receive(:entrypoint).and_return({ prim: "string", annots: ["%payload"] })
         allow_any_instance_of(TezosClient).to receive(:entrypoints).and_return({
           "entrypoints" => {}
         })
@@ -170,13 +187,12 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
           params: {
             expires_at: 1594386282
           },
-          storage_type: { "prim" => "timestamp" }
+          storage_type: { "prim" => "timestamp", "annots"=>["%expires_at"] }
         }
       end
 
       it "is invalid" do
-        expect(subject).not_to be_valid
-        expect(subject.errors.full_messages).to eq ["timestamp input must be an instance of Time"]
+        expect { subject }.to raise_error RuntimeError, "timestamp input (1594386282) must be an instance of Time"
       end
     end
 
@@ -194,7 +210,164 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
       end
 
       it "raises an error" do
-        expect { subject }.to raise_error KeyError, /key not found: "expiration_date"/
+        expect { subject }.to raise_error KeyError, /key not found: :expiration_date/
+      end
+    end
+
+    context "with option" do
+      let(:storage_type) do
+        {
+          prim: "pair",
+          args:
+            [
+              { prim: "option",
+                args: [{ prim: "signature" }],
+                annots: ["%topup_signature"]
+              },
+              { prim: "option",
+                args: [{ prim: "timestamp" }],
+                annots: ["%topup_valid_until"]
+              }
+            ]
+        }
+      end
+
+      context "with None value" do
+        let(:params) do
+          {
+            params: {
+              topup_valid_until: nil,
+              topup_signature: nil
+            },
+            storage_type: storage_type
+          }
+        end
+
+        it "returns nil values" do
+          puts subject.errors.full_messages
+          expect(subject.result).to eq(
+            { prim: "Pair", args: [{ prim: "None" }, { prim: "None" }] }
+          )
+        end
+      end
+      context "with some value" do
+        let(:topup_valid_until) { Time.parse("1970-04-25 07:29:03.000000000 +0000") }
+        let(:params) do
+          {
+            params: {
+              topup_valid_until: topup_valid_until,
+              topup_signature: "edsigtp4wchrxPLWscwNQKyUssJixap4njeS3keCTwphwhx4MkQaFn8GfXkCJtk8vi5uV2ahrdS5YWc3qeC74awqWTGJfngKGrs"
+            },
+            storage_type: storage_type
+          }
+        end
+
+
+        it "returns decoded values" do
+          expect(subject.result).to eq(
+            {
+              prim: "Pair",
+              args: [
+                {
+                  prim: "Some",
+                  args: [
+                    {
+                      string: "edsigtp4wchrxPLWscwNQKyUssJixap4njeS3keCTwphwhx4MkQaFn8GfXkCJtk8vi5uV2ahrdS5YWc3qeC74awqWTGJfngKGrs"
+                    }
+                  ]
+                },
+                {
+                  prim: "Some",
+                  args: [
+                    { int: topup_valid_until.to_i.to_s }
+                  ]
+                }
+              ]
+            }
+          )
+        end
+      end
+    end
+
+    context "with view entrypoint" do
+      let(:params) do
+        {
+          params: %w[1234 KT1UDJmqKvMYRcGzP2TSFhQqejS2CKaDsNEx],
+          storage_type: {
+            prim: "pair",
+            args:  [
+              {
+                "prim"=>"bytes"
+              },
+              {
+                "prim"=>"contract",
+                "args"=>
+                         [
+                           {
+                             "prim"=>"pair",
+                                 "args"=>
+                                   [
+                                      {
+                                        "prim"=>"timestamp", "annots"=>["%created_at"]
+                                      },
+                                      {
+                                        "prim"=>"address", "annots"=>["%created_by"]
+                                      }
+                                   ]
+                           }
+                         ]
+              }
+            ]
+          }
+        }
+      end
+
+      it "is valid" do
+        puts subject.errors.full_messages
+        expect(subject).to be_valid
+      end
+
+      it "returns the correct value" do
+        expect(subject.result).to eq({ args: [{ bytes: "1234" }, { string: "KT1UDJmqKvMYRcGzP2TSFhQqejS2CKaDsNEx" }], prim: "Pair" })
+      end
+    end
+
+    context "with view entrypoint" do
+      let(:params) do
+        {
+          params: %w[1234 KT1UDJmqKvMYRcGzP2TSFhQqejS2CKaDsNEx 4567],
+          storage_type: {
+            prim: "pair",
+            args:  [
+              {
+                "prim"=>"string"
+              },
+              {
+                "prim"=>"pair",
+                "args"=>
+                  [
+                    {
+                      "prim"=>"string"
+                    },
+                    {
+                      "prim"=>"string"
+                    }
+                  ]
+              }
+            ]
+          }
+        }
+      end
+
+      it "is valid" do
+        puts subject.errors.full_messages
+        expect(subject).to be_valid
+      end
+
+      it "returns the correct value" do
+        expect(subject.result).to eq(
+          { args: [{ string: "1234" }, { args: [{ string: "KT1UDJmqKvMYRcGzP2TSFhQqejS2CKaDsNEx" }, { string: "4567" }], prim: "Pair" }], prim: "Pair" }
+        )
       end
     end
   end
