@@ -27,7 +27,7 @@ class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
 
   private
     def _params
-      if params.respond_to?(:keys) && params.keys.size == 1
+      if params.respond_to?(:keys) && params.keys.size == 1 && !_storage_type.key?(:annots)
         params.values.first
       else
         params
