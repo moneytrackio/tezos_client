@@ -6,6 +6,41 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
   before do
     Time.zone = "UTC"
   end
+  context "convert timestamp" do
+    let(:type) do
+      { prim: "timestamp" }
+    end
+
+    context "with date data format: timestamp(integer)" do
+      let(:data) do
+        { int: 1614620399 }
+      end
+
+      it "returns the correct value" do
+        expect(subject).to eq(Time.zone.at(1614620399))
+      end
+    end
+
+    context "with date data format: timestamp(integer)" do
+      let(:data) do
+        { string: "1614620399" }
+      end
+
+      it "returns the correct value" do
+        expect(subject).to eq(Time.zone.at(1614620399))
+      end
+    end
+
+    context "with date data format: timestamp(integer)" do
+      let(:data) do
+        { string: "2021-03-02 11:07:53" }
+      end
+
+      it "returns the correct value" do
+        expect(subject).to eq(Time.zone.parse("2021-03-02 11:07:53"))
+      end
+    end
+  end
 
   context "anonymous string" do
     let(:data) do
