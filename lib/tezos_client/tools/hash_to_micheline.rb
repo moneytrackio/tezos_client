@@ -13,7 +13,7 @@ class TezosClient::Tools::HashToMicheline < ActiveInteraction::Base
   #   spending_ref: "toto",
   #   expires_at: Time.now
   # }
-  interface :params
+  interface :params, methods: []
   hash :storage_type, strip: false, default: {}
   interface :blockchain_client, methods: %i[entrypoint entrypoints select_entrypoint], default: -> { TezosClient.new }
 
