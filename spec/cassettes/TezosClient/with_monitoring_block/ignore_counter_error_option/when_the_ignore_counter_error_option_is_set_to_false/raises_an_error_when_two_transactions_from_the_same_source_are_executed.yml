@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    uri: http://tezos-node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -23,11 +23,11 @@ http_interactions:
       string: '"458"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:21 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/hash
+    uri: http://tezos-node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -48,11 +48,11 @@ http_interactions:
       string: '"BMRbpzJMAkSAiHTyNrazvpmjiKuJtMSRB5wRhvcJCpYQpcdpqTs"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:21 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/chain_id
+    uri: http://tezos-node:8094//chains/main/chain_id
     body:
       encoding: US-ASCII
       string: ''
@@ -73,11 +73,11 @@ http_interactions:
       string: '"NetXdQprcVkpaWU"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:21 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"operation":{"branch":"BMRbpzJMAkSAiHTyNrazvpmjiKuJtMSRB5wRhvcJCpYQpcdpqTs","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"459","fee":"50000"}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"},"chain_id":"NetXdQprcVkpaWU"}'
@@ -98,11 +98,11 @@ http_interactions:
       string: '{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"459","gas_limit":"100000","storage_limit":"6000","amount":"10000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":6501,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-10000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"10000"}],"consumed_gas":"10207"}}}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"}
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:21 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BMRbpzJMAkSAiHTyNrazvpmjiKuJtMSRB5wRhvcJCpYQpcdpqTs","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"11207","storage_limit":"6000","counter":"459","fee":"50000"}]}'
@@ -123,11 +123,11 @@ http_interactions:
       string: '"e183fc756de086d51fc5687c8d6b1f17c852987b77ee871892b44d66cffae80d6c00982fd7853b46e70022bc56f12b427855a2adb67ed08603cb03c757f02e904e0000982fd7853b46e70022bc56f12b427855a2adb67e00"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:21 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/metadata
+    uri: http://tezos-node:8094//chains/main/blocks/head/metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -148,11 +148,11 @@ http_interactions:
       string: '{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","next_protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","test_chain_status":{"status":"not_running"},"max_operations_ttl":60,"max_operation_data_length":16384,"max_block_header_length":238,"max_operation_list_length":[{"max_size":32768,"max_op":32},{"max_size":32768},{"max_size":135168,"max_op":132},{"max_size":524288}],"baker":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","level":{"level":52012,"level_position":52011,"cycle":6501,"cycle_position":3,"voting_period":812,"voting_period_position":43,"expected_commitment":true},"voting_period_kind":"proposal","nonce_hash":"nceVjGqr3QKS5mtHe2SkTrL4BrNBncqU3M1n4GWEeSUsoaRyDFC4h","consumed_gas":"0","deactivated":[],"balance_updates":[{"kind":"contract","contract":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","change":"-512000000"},{"kind":"freezer","category":"deposits","delegate":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","cycle":6501,"change":"512000000"},{"kind":"freezer","category":"rewards","delegate":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","cycle":6501,"change":"16000000"}]}
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:21 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","branch":"BMRbpzJMAkSAiHTyNrazvpmjiKuJtMSRB5wRhvcJCpYQpcdpqTs","contents":[{"kind":"transaction","amount":"10000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"11207","storage_limit":"6000","counter":"459","fee":"50000"}],"signature":"edsigts5wGSsHyMQNEGmfUp7EBqja24h2PHmARc9fZMHnq5ejCqdN5qnNXpFHEFZ4dWigScDFfEoWka1JktWu4s1CGrH6uAzpRN"}]'
@@ -173,11 +173,11 @@ http_interactions:
       string: '[{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"459","gas_limit":"11207","storage_limit":"6000","amount":"10000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":6501,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-10000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"10000"}],"consumed_gas":"10207"}}}],"signature":"edsigts5wGSsHyMQNEGmfUp7EBqja24h2PHmARc9fZMHnq5ejCqdN5qnNXpFHEFZ4dWigScDFfEoWka1JktWu4s1CGrH6uAzpRN"}]
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:21 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/injection/operation?chain=main
+    uri: http://tezos-node:8094/injection/operation?chain=main
     body:
       encoding: UTF-8
       string: '"e183fc756de086d51fc5687c8d6b1f17c852987b77ee871892b44d66cffae80d6c00982fd7853b46e70022bc56f12b427855a2adb67ed08603cb03c757f02e904e0000982fd7853b46e70022bc56f12b427855a2adb67e00935c1da25d8e4281c526f86a895c89ff451696af7aa546ba23e811818325c2cdc673a1b8fb81463a68517859d7e4fdd9466b9592518d4087c85e2bbc80267e03"'
@@ -198,11 +198,11 @@ http_interactions:
       string: '"ooer7bZjeW7df58ocvvB2C84yCMZD9G1HGJtnL7uuJ4UsNCuvHb"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:21 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    uri: http://tezos-node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -223,11 +223,11 @@ http_interactions:
       string: '"458"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:22 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/hash
+    uri: http://tezos-node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -248,11 +248,11 @@ http_interactions:
       string: '"BMRbpzJMAkSAiHTyNrazvpmjiKuJtMSRB5wRhvcJCpYQpcdpqTs"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:22 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/chain_id
+    uri: http://tezos-node:8094//chains/main/chain_id
     body:
       encoding: US-ASCII
       string: ''
@@ -273,11 +273,11 @@ http_interactions:
       string: '"NetXdQprcVkpaWU"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:22 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"operation":{"branch":"BMRbpzJMAkSAiHTyNrazvpmjiKuJtMSRB5wRhvcJCpYQpcdpqTs","contents":[{"kind":"transaction","amount":"100000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"6000","counter":"459","fee":"50000"}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"},"chain_id":"NetXdQprcVkpaWU"}'
@@ -298,11 +298,11 @@ http_interactions:
       string: '{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"459","gas_limit":"100000","storage_limit":"6000","amount":"100000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":6501,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-100000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"100000"}],"consumed_gas":"10207"}}}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"}
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:22 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BMRbpzJMAkSAiHTyNrazvpmjiKuJtMSRB5wRhvcJCpYQpcdpqTs","contents":[{"kind":"transaction","amount":"100000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"11207","storage_limit":"6000","counter":"459","fee":"50000"}]}'
@@ -323,11 +323,11 @@ http_interactions:
       string: '"e183fc756de086d51fc5687c8d6b1f17c852987b77ee871892b44d66cffae80d6c00982fd7853b46e70022bc56f12b427855a2adb67ed08603cb03c757f02ea08d060000982fd7853b46e70022bc56f12b427855a2adb67e00"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:22 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/metadata
+    uri: http://tezos-node:8094//chains/main/blocks/head/metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -348,11 +348,11 @@ http_interactions:
       string: '{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","next_protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","test_chain_status":{"status":"not_running"},"max_operations_ttl":60,"max_operation_data_length":16384,"max_block_header_length":238,"max_operation_list_length":[{"max_size":32768,"max_op":32},{"max_size":32768},{"max_size":135168,"max_op":132},{"max_size":524288}],"baker":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","level":{"level":52012,"level_position":52011,"cycle":6501,"cycle_position":3,"voting_period":812,"voting_period_position":43,"expected_commitment":true},"voting_period_kind":"proposal","nonce_hash":"nceVjGqr3QKS5mtHe2SkTrL4BrNBncqU3M1n4GWEeSUsoaRyDFC4h","consumed_gas":"0","deactivated":[],"balance_updates":[{"kind":"contract","contract":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","change":"-512000000"},{"kind":"freezer","category":"deposits","delegate":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","cycle":6501,"change":"512000000"},{"kind":"freezer","category":"rewards","delegate":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","cycle":6501,"change":"16000000"}]}
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:22 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","branch":"BMRbpzJMAkSAiHTyNrazvpmjiKuJtMSRB5wRhvcJCpYQpcdpqTs","contents":[{"kind":"transaction","amount":"100000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"11207","storage_limit":"6000","counter":"459","fee":"50000"}],"signature":"edsigtdE3WPVe4X3WESAxm5SEmfcYi2HvRQEtAkGiT28oGiSiT8AVohj6aoSRB5oP5fKCw4UT2d1PHzYoexaQekZbJg9VgPUSPq"}]'
@@ -373,11 +373,11 @@ http_interactions:
       string: '[{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"459","gas_limit":"11207","storage_limit":"6000","amount":"100000","destination":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":6501,"change":"50000"}],"operation_result":{"status":"applied","balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-100000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"100000"}],"consumed_gas":"10207"}}}],"signature":"edsigtdE3WPVe4X3WESAxm5SEmfcYi2HvRQEtAkGiT28oGiSiT8AVohj6aoSRB5oP5fKCw4UT2d1PHzYoexaQekZbJg9VgPUSPq"}]
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:22 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/injection/operation?chain=main
+    uri: http://tezos-node:8094/injection/operation?chain=main
     body:
       encoding: UTF-8
       string: '"e183fc756de086d51fc5687c8d6b1f17c852987b77ee871892b44d66cffae80d6c00982fd7853b46e70022bc56f12b427855a2adb67ed08603cb03c757f02ea08d060000982fd7853b46e70022bc56f12b427855a2adb67e00296afec0763caf506b12b75dbc758df88fe6b75090f440534d6879b3f10fe1110c4bf4c6a488be3dbc45800e1e1ce344f3db0d7ca1bd5334349285bbf89eb607"'
@@ -401,6 +401,6 @@ http_interactions:
         460)\n)"}]
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 21:34:22 GMT
 recorded_with: VCR 4.0.0

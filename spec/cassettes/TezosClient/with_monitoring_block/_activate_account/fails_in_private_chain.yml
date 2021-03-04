@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/hash
+    uri: http://tezos-node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -23,11 +23,11 @@ http_interactions:
       string: '"BKviUsHZPyzjr7o621zhKBwPvPazyxf1AmwCxffTgazZ1NUKMcJ"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 11:49:52 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/chain_id
+    uri: http://tezos-node:8094//chains/main/chain_id
     body:
       encoding: US-ASCII
       string: ''
@@ -48,11 +48,11 @@ http_interactions:
       string: '"NetXdQprcVkpaWU"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 11:49:52 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"operation":{"branch":"BKviUsHZPyzjr7o621zhKBwPvPazyxf1AmwCxffTgazZ1NUKMcJ","contents":[{"kind":"activate_account","pkh":"tz1RdraebVC4gRbrnMDWQjZ28FtvgQZWJp21","secret":"23d18abce360452faa65b9909b6bf259562af0f8"}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"},"chain_id":"NetXdQprcVkpaWU"}'
@@ -73,6 +73,6 @@ http_interactions:
       string: '[{"kind":"permanent","id":"proto.005-PsBabyM1.operation.invalid_activation","pkh":"tz1RdraebVC4gRbrnMDWQjZ28FtvgQZWJp21"}]
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 11:49:52 GMT
 recorded_with: VCR 4.0.0

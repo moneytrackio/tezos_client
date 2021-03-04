@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    uri: http://tezos-node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -23,11 +23,11 @@ http_interactions:
       string: '"369"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:33 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/hash
+    uri: http://tezos-node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -48,11 +48,11 @@ http_interactions:
       string: '"BMaFmsaNjGBvzEmXQBPsznoWfMVAdrCN6KRYGa53ecavLSaS6jZ"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:33 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/chain_id
+    uri: http://tezos-node:8094//chains/main/chain_id
     body:
       encoding: US-ASCII
       string: ''
@@ -73,11 +73,11 @@ http_interactions:
       string: '"NetXdQprcVkpaWU"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:33 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"operation":{"branch":"BMaFmsaNjGBvzEmXQBPsznoWfMVAdrCN6KRYGa53ecavLSaS6jZ","contents":[{"kind":"origination","balance":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"100000","storage_limit":"60000","counter":"370","fee":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"big_map","args":[{"prim":"string"},{"prim":"int"}],"annots":["%big_map_first"]},{"prim":"big_map","args":[{"prim":"string"},{"prim":"string"}],"annots":["%big_map_second"]}]}]},{"prim":"parameter","args":[{"prim":"or","args":[{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"int","annots":["%value"]}],"annots":["%add_first"]},{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"string","annots":["%value"]}],"annots":["%add_second"]}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"IF_LEFT","args":[[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]],[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CAR"},{"prim":"SWAP"},{"prim":"CDR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"SWAP"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]]]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}],"storage":{"prim":"Pair","args":[[],[]]}}}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"},"chain_id":"NetXdQprcVkpaWU"}'
@@ -98,11 +98,11 @@ http_interactions:
       string: '{"contents":[{"kind":"origination","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"370","gas_limit":"100000","storage_limit":"60000","balance":"0","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"big_map","args":[{"prim":"string"},{"prim":"int"}],"annots":["%big_map_first"]},{"prim":"big_map","args":[{"prim":"string"},{"prim":"string"}],"annots":["%big_map_second"]}]}]},{"prim":"parameter","args":[{"prim":"or","args":[{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"int","annots":["%value"]}],"annots":["%add_first"]},{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"string","annots":["%value"]}],"annots":["%add_second"]}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"IF_LEFT","args":[[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]],[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CAR"},{"prim":"SWAP"},{"prim":"CDR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"SWAP"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]]]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}],"storage":{"prim":"Pair","args":[[],[]]}},"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":6275,"change":"50000"}],"operation_result":{"status":"applied","big_map_diff":[{"action":"alloc","big_map":"350","key_type":{"prim":"string"},"value_type":{"prim":"string"}},{"action":"alloc","big_map":"349","key_type":{"prim":"string"},"value_type":{"prim":"int"}}],"originated_contracts":["KT1MDJAzVWCmY7yJg48Sg3rEzGMYgGZ8Vk8i"],"consumed_gas":"18021","storage_size":"374","paid_storage_size_diff":"374"}}}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"}
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:33 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BMaFmsaNjGBvzEmXQBPsznoWfMVAdrCN6KRYGa53ecavLSaS6jZ","contents":[{"kind":"origination","balance":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"19021","storage_limit":"60000","counter":"370","fee":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"big_map","args":[{"prim":"string"},{"prim":"int"}],"annots":["%big_map_first"]},{"prim":"big_map","args":[{"prim":"string"},{"prim":"string"}],"annots":["%big_map_second"]}]}]},{"prim":"parameter","args":[{"prim":"or","args":[{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"int","annots":["%value"]}],"annots":["%add_first"]},{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"string","annots":["%value"]}],"annots":["%add_second"]}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"IF_LEFT","args":[[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]],[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CAR"},{"prim":"SWAP"},{"prim":"CDR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"SWAP"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]]]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}],"storage":{"prim":"Pair","args":[[],[]]}}}]}'
@@ -123,11 +123,11 @@ http_interactions:
       string: '"f52a853d2de98fdb30918ba94b28c14a864dea81719bd6d51f4d40c4e9646f1e6d00982fd7853b46e70022bc56f12b427855a2adb67ed08603f202cd9401e0d403000000000124020000011f0501076508610368035b0000000e256269675f6d61705f66697273740861036803680000000f256269675f6d61705f7365636f6e64050007640865046800000004256b6579045b000000062576616c75650000000a256164645f66697273740865046800000004256b65790468000000062576616c75650000000b256164645f7365636f6e640502020000009203210317034c0316072e020000003b0200000036034c03210571000203210317034c03160570000203210571000303170346057000030321057100040316035003420571000203200320020000003d0200000038034c03210571000203210316034c031705700002032105710003031703460570000303210571000403160350034c03420571000203200320053d036d03420000000c070702000000000200000000"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:33 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/metadata
+    uri: http://tezos-node:8094//chains/main/blocks/head/metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -148,11 +148,11 @@ http_interactions:
       string: '{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","next_protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","test_chain_status":{"status":"not_running"},"max_operations_ttl":60,"max_operation_data_length":16384,"max_block_header_length":238,"max_operation_list_length":[{"max_size":32768,"max_op":32},{"max_size":32768},{"max_size":135168,"max_op":132},{"max_size":524288}],"baker":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","level":{"level":50207,"level_position":50206,"cycle":6275,"cycle_position":6,"voting_period":784,"voting_period_position":30,"expected_commitment":false},"voting_period_kind":"proposal","nonce_hash":null,"consumed_gas":"0","deactivated":[],"balance_updates":[{"kind":"contract","contract":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","change":"-512000000"},{"kind":"freezer","category":"deposits","delegate":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","cycle":6275,"change":"512000000"},{"kind":"freezer","category":"rewards","delegate":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","cycle":6275,"change":"16000000"}]}
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:33 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","branch":"BMaFmsaNjGBvzEmXQBPsznoWfMVAdrCN6KRYGa53ecavLSaS6jZ","contents":[{"kind":"origination","balance":"0","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","gas_limit":"19021","storage_limit":"60000","counter":"370","fee":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"big_map","args":[{"prim":"string"},{"prim":"int"}],"annots":["%big_map_first"]},{"prim":"big_map","args":[{"prim":"string"},{"prim":"string"}],"annots":["%big_map_second"]}]}]},{"prim":"parameter","args":[{"prim":"or","args":[{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"int","annots":["%value"]}],"annots":["%add_first"]},{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"string","annots":["%value"]}],"annots":["%add_second"]}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"IF_LEFT","args":[[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]],[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CAR"},{"prim":"SWAP"},{"prim":"CDR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"SWAP"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]]]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}],"storage":{"prim":"Pair","args":[[],[]]}}}],"signature":"edsigtdpCheRZyTMJZrfSv2Aws5P5Gq7ne5qYyK3jSdHiZoABNxHL9uDoRcnpMr4HryC3bNAwCeiMwwy8uCkzLkAYcu4TpWz7At"}]'
@@ -173,11 +173,11 @@ http_interactions:
       string: '[{"contents":[{"kind":"origination","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"370","gas_limit":"19021","storage_limit":"60000","balance":"0","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"big_map","args":[{"prim":"string"},{"prim":"int"}],"annots":["%big_map_first"]},{"prim":"big_map","args":[{"prim":"string"},{"prim":"string"}],"annots":["%big_map_second"]}]}]},{"prim":"parameter","args":[{"prim":"or","args":[{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"int","annots":["%value"]}],"annots":["%add_first"]},{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"string","annots":["%value"]}],"annots":["%add_second"]}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"IF_LEFT","args":[[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]],[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CAR"},{"prim":"SWAP"},{"prim":"CDR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"SWAP"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]]]},{"prim":"NIL","args":[{"prim":"operation"}]},{"prim":"PAIR"}]]}],"storage":{"prim":"Pair","args":[[],[]]}},"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":6275,"change":"50000"}],"operation_result":{"status":"applied","big_map_diff":[{"action":"alloc","big_map":"350","key_type":{"prim":"string"},"value_type":{"prim":"string"}},{"action":"alloc","big_map":"349","key_type":{"prim":"string"},"value_type":{"prim":"int"}}],"originated_contracts":["KT1HQMUoSsKwYc7B5SPAqsNGQC7n5UhyFbS9"],"consumed_gas":"18021","storage_size":"374","paid_storage_size_diff":"374"}}}],"signature":"edsigtdpCheRZyTMJZrfSv2Aws5P5Gq7ne5qYyK3jSdHiZoABNxHL9uDoRcnpMr4HryC3bNAwCeiMwwy8uCkzLkAYcu4TpWz7At"}]
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:34 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/injection/operation?chain=main
+    uri: http://tezos-node:8094/injection/operation?chain=main
     body:
       encoding: UTF-8
       string: '"f52a853d2de98fdb30918ba94b28c14a864dea81719bd6d51f4d40c4e9646f1e6d00982fd7853b46e70022bc56f12b427855a2adb67ed08603f202cd9401e0d403000000000124020000011f0501076508610368035b0000000e256269675f6d61705f66697273740861036803680000000f256269675f6d61705f7365636f6e64050007640865046800000004256b6579045b000000062576616c75650000000a256164645f66697273740865046800000004256b65790468000000062576616c75650000000b256164645f7365636f6e640502020000009203210317034c0316072e020000003b0200000036034c03210571000203210317034c03160570000203210571000303170346057000030321057100040316035003420571000203200320020000003d0200000038034c03210571000203210316034c031705700002032105710003031703460570000303210571000403160350034c03420571000203200320053d036d03420000000c0707020000000002000000002deb68e0b488c9410795f213c80c8234f28f585d6fa2f99834061e918c9701bb09408d04a3e7bc66ab64385f2d45fa05bb574743dbdace4c92f9e5654894ce02"'
@@ -198,11 +198,11 @@ http_interactions:
       string: '"opHkeZFQSR5F4BCfWV4KHBjJvKEQgPGvHmeYK1f7KaAoEzCyYU5"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:34 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
+    uri: http://tezos-node:8094//chains/main/blocks/head/context/contracts/tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -223,11 +223,11 @@ http_interactions:
       string: '"370"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:41 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/hash
+    uri: http://tezos-node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -248,11 +248,11 @@ http_interactions:
       string: '"BL6Zi7kbzJV2RJUNvQ5GM7KqyYpKnFUeXYXmHP3v9HVquRFBTX7"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:41 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/chain_id
+    uri: http://tezos-node:8094//chains/main/chain_id
     body:
       encoding: US-ASCII
       string: ''
@@ -273,11 +273,11 @@ http_interactions:
       string: '"NetXdQprcVkpaWU"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:41 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"operation":{"branch":"BL6Zi7kbzJV2RJUNvQ5GM7KqyYpKnFUeXYXmHP3v9HVquRFBTX7","contents":[{"kind":"transaction","amount":"5000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"KT1HQMUoSsKwYc7B5SPAqsNGQC7n5UhyFbS9","gas_limit":"100000","storage_limit":"6000","counter":"371","fee":"50000","parameters":{"entrypoint":"add_second","value":{"prim":"Pair","args":[{"string":"hello"},{"string":"world"}]}}}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"},"chain_id":"NetXdQprcVkpaWU"}'
@@ -298,11 +298,11 @@ http_interactions:
       string: '{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"371","gas_limit":"100000","storage_limit":"6000","amount":"5000000","destination":"KT1HQMUoSsKwYc7B5SPAqsNGQC7n5UhyFbS9","parameters":{"entrypoint":"add_second","value":{"prim":"Pair","args":[{"string":"hello"},{"string":"world"}]}},"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":6275,"change":"50000"}],"operation_result":{"status":"applied","storage":{"prim":"Pair","args":[{"int":"349"},{"int":"350"}]},"big_map_diff":[{"action":"update","big_map":"350","key_hash":"exprtsjEVVZk3Gm82U9wEs8kvwRiQwUT7zipJwvCeFMNsApe2tQ15s","key":{"string":"hello"},"value":{"string":"world"}}],"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-5000000"},{"kind":"contract","contract":"KT1HQMUoSsKwYc7B5SPAqsNGQC7n5UhyFbS9","change":"5000000"}],"consumed_gas":"17756","storage_size":"449","paid_storage_size_diff":"75"}}}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"}
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:41 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BL6Zi7kbzJV2RJUNvQ5GM7KqyYpKnFUeXYXmHP3v9HVquRFBTX7","contents":[{"kind":"transaction","amount":"5000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"KT1HQMUoSsKwYc7B5SPAqsNGQC7n5UhyFbS9","gas_limit":"18756","storage_limit":"6000","counter":"371","fee":"50000","parameters":{"entrypoint":"add_second","value":{"prim":"Pair","args":[{"string":"hello"},{"string":"world"}]}}}]}'
@@ -323,11 +323,11 @@ http_interactions:
       string: '"32983f4cf5382f9ed41e68c54d7e5dc8c320715c0fc082ae03f363eafb7719d56c00982fd7853b46e70022bc56f12b427855a2adb67ed08603f302c49201f02ec096b1020160c0dde6e118d656a976a04b75c5fc3d1f01f38100ffff0a6164645f7365636f6e64000000160707010000000568656c6c6f0100000005776f726c64"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:41 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/metadata
+    uri: http://tezos-node:8094//chains/main/blocks/head/metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -348,11 +348,11 @@ http_interactions:
       string: '{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","next_protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","test_chain_status":{"status":"not_running"},"max_operations_ttl":60,"max_operation_data_length":16384,"max_block_header_length":238,"max_operation_list_length":[{"max_size":32768,"max_op":32},{"max_size":32768},{"max_size":135168,"max_op":132},{"max_size":524288}],"baker":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","level":{"level":50208,"level_position":50207,"cycle":6275,"cycle_position":7,"voting_period":784,"voting_period_position":31,"expected_commitment":true},"voting_period_kind":"proposal","nonce_hash":"nceUKarvWEYn8qftz7g7h1Kt955QG72k2Ymnbc9PDPMWtqpHYZQ3f","consumed_gas":"19333","deactivated":[],"balance_updates":[{"kind":"contract","contract":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","change":"-512000000"},{"kind":"freezer","category":"deposits","delegate":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","cycle":6275,"change":"512000000"},{"kind":"freezer","category":"rewards","delegate":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","cycle":6275,"change":"16000000"},{"kind":"freezer","category":"deposits","delegate":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","cycle":6273,"change":"-6336000000"},{"kind":"freezer","category":"rewards","delegate":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","cycle":6273,"change":"-198000000"},{"kind":"contract","contract":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","change":"6534000000"},{"kind":"freezer","category":"deposits","delegate":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","cycle":6273,"change":"-6912000000"},{"kind":"freezer","category":"fees","delegate":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","cycle":6273,"change":"-50000"},{"kind":"freezer","category":"rewards","delegate":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","cycle":6273,"change":"-216250000"},{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"7128300000"},{"kind":"freezer","category":"deposits","delegate":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","cycle":6273,"change":"-7232000000"},{"kind":"freezer","category":"rewards","delegate":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","cycle":6273,"change":"-226000000"},{"kind":"contract","contract":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","change":"7458000000"}]}
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:41 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","branch":"BL6Zi7kbzJV2RJUNvQ5GM7KqyYpKnFUeXYXmHP3v9HVquRFBTX7","contents":[{"kind":"transaction","amount":"5000000","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","destination":"KT1HQMUoSsKwYc7B5SPAqsNGQC7n5UhyFbS9","gas_limit":"18756","storage_limit":"6000","counter":"371","fee":"50000","parameters":{"entrypoint":"add_second","value":{"prim":"Pair","args":[{"string":"hello"},{"string":"world"}]}}}],"signature":"edsigtxSCC3ywiMLD4HbSDTLHidDvzBs4MMipudHofXCE7H7HtT5D5ACHgCN613dCfD2byv8jSqMX11z1hPB2BbunxEDuPHhvg6"}]'
@@ -373,11 +373,11 @@ http_interactions:
       string: '[{"contents":[{"kind":"transaction","source":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","fee":"50000","counter":"371","gas_limit":"18756","storage_limit":"6000","amount":"5000000","destination":"KT1HQMUoSsKwYc7B5SPAqsNGQC7n5UhyFbS9","parameters":{"entrypoint":"add_second","value":{"prim":"Pair","args":[{"string":"hello"},{"string":"world"}]}},"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-50000"},{"kind":"freezer","category":"fees","delegate":"tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU","cycle":6276,"change":"50000"}],"operation_result":{"status":"applied","storage":{"prim":"Pair","args":[{"int":"349"},{"int":"350"}]},"big_map_diff":[{"action":"update","big_map":"350","key_hash":"exprtsjEVVZk3Gm82U9wEs8kvwRiQwUT7zipJwvCeFMNsApe2tQ15s","key":{"string":"hello"},"value":{"string":"world"}}],"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-5000000"},{"kind":"contract","contract":"KT1HQMUoSsKwYc7B5SPAqsNGQC7n5UhyFbS9","change":"5000000"}],"consumed_gas":"17756","storage_size":"449","paid_storage_size_diff":"75"}}}],"signature":"edsigtxSCC3ywiMLD4HbSDTLHidDvzBs4MMipudHofXCE7H7HtT5D5ACHgCN613dCfD2byv8jSqMX11z1hPB2BbunxEDuPHhvg6"}]
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:41 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/injection/operation?chain=main
+    uri: http://tezos-node:8094/injection/operation?chain=main
     body:
       encoding: UTF-8
       string: '"32983f4cf5382f9ed41e68c54d7e5dc8c320715c0fc082ae03f363eafb7719d56c00982fd7853b46e70022bc56f12b427855a2adb67ed08603f302c49201f02ec096b1020160c0dde6e118d656a976a04b75c5fc3d1f01f38100ffff0a6164645f7365636f6e64000000160707010000000568656c6c6f0100000005776f726c64bc3f584ccf59edc9606787f0c187c0a67a33e22e74d0d72654ec765111cb3d0b575441242695dac93593cb1476f7dc54a5d642b6ce011309c2995063e8f6570c"'
@@ -398,6 +398,6 @@ http_interactions:
       string: '"onssjoi1Md4SQJsoJcADEGCn9ynqUAqnUcvxtDj2CYQ83xUcNu3"
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 16:33:41 GMT
 recorded_with: VCR 4.0.0

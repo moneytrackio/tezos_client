@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://tezos_node:8094/chains/main/blocks/head/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/operations
     body:
       encoding: US-ASCII
       string: ''
@@ -23,6 +23,6 @@ http_interactions:
       string: '[[{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","chain_id":"NetXdQprcVkpaWU","hash":"opNab1W7ot2rKfx9GTz5kHR48uHaCxUUK17Xanrt7Dr1keU8qFG","branch":"BLooTzWh9TL8pKpJaYRQny3XNwdqTJkj9hSRHHcJUSMZAQgnzcg","contents":[{"kind":"endorsement","level":48480,"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","change":"-384000000"},{"kind":"freezer","category":"deposits","delegate":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","cycle":6059,"change":"384000000"},{"kind":"freezer","category":"rewards","delegate":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","cycle":6059,"change":"12000000"}],"delegate":"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq","slots":[22,20,15,14,13,11]}}],"signature":"sigwLsWqDx7RknxuD2oHzw6FMePqpWqSZvpSJTFELSA1GnJBhYTrCfJgjYicYs3hLDCJspVHVfNzLUhAUoULZRck5J7WxMw1"},{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","chain_id":"NetXdQprcVkpaWU","hash":"oo67crykfXxj8ykmPqhEAyFySi219T6scDL8kWFebWqtmjn8e1Z","branch":"BLooTzWh9TL8pKpJaYRQny3XNwdqTJkj9hSRHHcJUSMZAQgnzcg","contents":[{"kind":"endorsement","level":48480,"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","change":"-768000000"},{"kind":"freezer","category":"deposits","delegate":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","cycle":6059,"change":"768000000"},{"kind":"freezer","category":"rewards","delegate":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","cycle":6059,"change":"24000000"}],"delegate":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","slots":[29,27,24,21,18,17,16,12,4,3,1,0]}}],"signature":"sigi58pu8C6XEfWNYjun2gT7UVC5YHZTob8kNJ2Nk7bKuLpjsREaR6yF1ZS4mSRBWk35EXRDirFU86b3GUWtCKTiXCFbvgD8"},{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","chain_id":"NetXdQprcVkpaWU","hash":"opF4SU7vRFGMbKFQJBDu8yxeggWPuGvYjZy4TKcdkKcQjLiVgEQ","branch":"BLooTzWh9TL8pKpJaYRQny3XNwdqTJkj9hSRHHcJUSMZAQgnzcg","contents":[{"kind":"endorsement","level":48480,"metadata":{"balance_updates":[{"kind":"contract","contract":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","change":"-896000000"},{"kind":"freezer","category":"deposits","delegate":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","cycle":6059,"change":"896000000"},{"kind":"freezer","category":"rewards","delegate":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","cycle":6059,"change":"28000000"}],"delegate":"tz1Sh54v759mZnS918CE6aSoeW8J743rvF3z","slots":[31,30,28,26,25,23,19,10,9,8,7,6,5,2]}}],"signature":"sigbfmg4g5hABEYyimrVuHCcazDAXWswRSwp6HTHgGupsf5TtAniJLkgELWcd59SWkDodTSDPoLBbDYbCo8onF7G5UteWwgg"}],[],[],[]]
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 11:45:57 GMT
 recorded_with: VCR 4.0.0

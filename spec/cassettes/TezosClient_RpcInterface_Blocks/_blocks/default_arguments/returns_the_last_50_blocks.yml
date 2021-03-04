@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://tezos_node:8094/chains/main/blocks/?length=50
+    uri: http://tezos-node:8094/chains/main/blocks/?length=50
     body:
       encoding: US-ASCII
       string: ''
@@ -23,6 +23,6 @@ http_interactions:
       string: '[["BLAb35ToZsc9yR8eRodp4E9MeZmqucTJePqXqZuyxkCx8zXNJun","BLooTzWh9TL8pKpJaYRQny3XNwdqTJkj9hSRHHcJUSMZAQgnzcg","BMWEB4Xn5P5cZ1DD6tDH1cCXJmVEoZ14xK2UuwczSp5uGQWSdQ7","BMRU8X9GvWo7c88QizNLLrL8CyaJEwsr1kYJj1cFcbvofYfVU2S","BLdkq6foATBMp5fiRepsmJiGFhzueB1eYS1EkFX9g3ZNwFxZsef","BLEU27yFS7BddkJ7ZNtpr6eEmKALsSapjFKeoiN9wwevaackyLy","BMCzFxPEnk2SUE2gt5H4hVmTpNV3G2rLeCcnQHY1E9PRdHEjJPH","BM73HrqDfKy8tLTs4RcnGLfouSsBz5Em8kHrdrNwvpmoB56nyPC","BLZvRTAj2aFE2UmHNfkyvzwfK2bU51wJB4dBBEeUukAJ8SKPetU","BLAesyoNYShZKCwtT1qjbphar7tV9SvYXqF26nTuJhHg1PPRzt9","BLHgv5aF6czSnJeczPXKyq8uMQr6sWQqyF4kmC2cmNogwa53d9L","BLXJgnQbhZ8EeTQHKkD1cGa5X1Vc56GmGZEu5SvF8BJMaqk3TMx","BKmdunfhraXH3fBs8E915jrQe5fe7oro18Hj3PCG4X971kn5LEM","BMS7VvTcYzscDJ7Tyg5ygeskfE5cnCKk6mot2HaeAcnvRxzg1Km","BLzTgcGrvaYNBLD9rJdne7XhNgCpzjL9MuH8sKQKQttupLmQfZx","BLrjmDd7ES8ncCes7KZJRjZSnZSPbmzf3GZDhateXxYTHjE7EaJ","BLGFAkBhFDH2xYEF2CcSC35hoJev4KMeXz7coPmqXxVDVrDFvqz","BKsdUK4FmDdGFK7g8w7kPNPgsmutaAdhmp2eUrn87nEFMSp2KBD","BLghc8gGp82ZE8QV2wkrXYrJwWiqkmHgeD2qTJeZNU1vwTpcSzz","BLfEXLMAUpn5v16DuCdcqy1V85Vuoywwdb9zZ4aoa493qeevo5C","BL13ymku54FTf42yp5jykNf1kWwX7cZepauVSNt5TJA4nk8TWvy","BMdzNQYqqhMNSnXKD4BBA3LpqAwAyu48Lo9dyJNtrZYnth7NhGB","BM7ZA2DNTznuaXDeb1kTd6koEoVrNUa6jzRcPbLJbn6erm5B3YH","BLJ9Jpp5NbRxy6pEKSoMa6SK39UhuHeYbCdgKbzZuPfvSVCXYUM","BMD6MY2zyrepK5eWZvq4furzWL177QRWNcb6zBn4mkf9dwa4MnH","BLc192ExoqkGqCjYYioPh6iwVB9qtY13uwZp9FUPTVtf1cve1hC","BLqzBkD1ctny66DQZRGaSQQhuxqgeCrnWzHNRcxdGJYetabZh49","BLpMnV8J2CEdiLque2gnDgFxsBGhwqi5TBDYozc38SWoWzwVaDm","BMTQWGpKqyJcKfkG8ipsq26wvoRt2wSFJSDRjbLnVQ79GdU4d79","BLZnc3E9pGseeufjtEumj35Kito356RPMzDG4RxZ8c8FwC5wpQo","BLNFLy7nBijnDEUfA2mUzLpQ6NMCfimAapZ7LtQZt1mUS8Xe54B","BLQUPbYWeYXtVC3yLtBc77F7e4nJP6jNfD2sjnR8GeNcPnzEsZc","BLEg8mNkY3YYLfj99emS8CUDJjWLXpDno3AH1X3jvuRP4amgWgf","BLdmEvF3bDkxBBQ3zvQSuTjyWNJJvpHHspoFghUuZsnznDokVnB","BMQNnRBj6qkeCWZkczwf6UEpT3ZpFmKg67jLgvdMeAfU4TFJJvy","BKppRfSJHmJNJ9edczAdzmRqD5zAjLKots7CvwfPmxAgPikccZy","BLBkabm8WiZBrqXXc5c5KxAKzmZZGscmYkMkAUK5FPP5SY1U2qs","BMNF7G5KMfJFKSb8yTA4ohnZVnMVYzdNCicytTNa4BbCcnzk5a1","BLkuK7KcM5UdFzU9XV8QrAtpU6UmvBbPNwyJtP8qzmAEC26KNpM","BLWZRH3JrpGGnAqHdS7CKaZAAUVG2nkiks8jXvm1nbZCZGaGWeW","BM9fxxAwbvZpebQVRx48fbSiWoyR7nTFJUHnQA39Stgs4ReE6FS","BMK1FBTprzmgG69ijuEDbJpRLea7nfkH9k3HGvbcq8hvJz5CUeG","BKjxhqVAt2Q2aqntphLcMr3KSPemiDmchkSDwiUQMUCdyvJ6fyv","BLEcSGQRCr152y29hsy64fjJ7RKHLUR5iRgrgkfi3Hm9oKYaWuC","BL166wcQMVh2tgdc2uLGoGxtt8pEWj1AMpGWg7Ur6XA2Jxdubnd","BLkRpY3hHyQ5ycjmEGBcGG3yu5gptCdp8Cc9XrDN8BnHd4tzbWG","BMXrRo1GXnw4foqQHMwoSSjp12feywQGnBvhvymXZFwM41N3LDS","BLBAhgnak7sxwyqjxjmARe9z7h9tRG8FQDPoYZqEkhcWWttULqC","BMbQLRnJyLbgwRW7sdMpKi3HAeEGGLmmDkgefRBufoYMoePyvCY","BLqXsrMptR2SnuPxLTeUP6Xa9wnmeYpHVSMRhywps8xhWTv7BDw"]]
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 11:45:56 GMT
 recorded_with: VCR 4.0.0

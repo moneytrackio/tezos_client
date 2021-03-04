@@ -1,6 +1,6 @@
 {
   "base_dir": "/tmp/rpsec/tezos-client",
-  "node_addr": "tezos_node",
+  "node_addr": "tezos-node",
   "node_port": 8094,
   "tls": false,
   "confirmations": 0

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG/counter
+    uri: http://tezos-node:8094//chains/main/blocks/head/context/contracts/tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -27,7 +27,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:51 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/hash
+    uri: http://tezos-node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -52,7 +52,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:51 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/chain_id
+    uri: http://tezos-node:8094//chains/main/chain_id
     body:
       encoding: US-ASCII
       string: ''
@@ -77,7 +77,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:51 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"operation":{"branch":"BLY8dWjBWerKFvWZTk47rAwDnihUQYubJben7JmB5mHELnLnnqn","contents":[{"kind":"origination","balance":"0","source":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","gas_limit":"100000","storage_limit":"60000","counter":"125","fee":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"big_map","args":[{"prim":"string"},{"prim":"int"}],"annots":["%big_map_first"]},{"prim":"big_map","args":[{"prim":"string"},{"prim":"string"}],"annots":["%big_map_second"]}]}]},{"prim":"parameter","args":[{"prim":"or","args":[{"prim":"or","args":[{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"int","annots":["%value"]}],"annots":["%add_first"]},{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"string","annots":["%value"]}],"annots":["%add_second"]}]},{"prim":"nat","annots":["%always_fail"]}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"IF_LEFT","args":[[{"prim":"IF_LEFT","args":[[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]],[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CAR"},{"prim":"SWAP"},{"prim":"CDR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"SWAP"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]]]}],[[{"prim":"DUP"},{"prim":"PUSH","args":[{"prim":"nat"},{"int":"0"}]},{"prim":"SWAP"},{"prim":"COMPARE"},{"prim":"GE"},{"prim":"IF","args":[[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"I''m
@@ -104,7 +104,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:51 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BLY8dWjBWerKFvWZTk47rAwDnihUQYubJben7JmB5mHELnLnnqn","contents":[{"kind":"origination","balance":"0","source":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","gas_limit":"21209","storage_limit":"60000","counter":"125","fee":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"big_map","args":[{"prim":"string"},{"prim":"int"}],"annots":["%big_map_first"]},{"prim":"big_map","args":[{"prim":"string"},{"prim":"string"}],"annots":["%big_map_second"]}]}]},{"prim":"parameter","args":[{"prim":"or","args":[{"prim":"or","args":[{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"int","annots":["%value"]}],"annots":["%add_first"]},{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"string","annots":["%value"]}],"annots":["%add_second"]}]},{"prim":"nat","annots":["%always_fail"]}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"IF_LEFT","args":[[{"prim":"IF_LEFT","args":[[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]],[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CAR"},{"prim":"SWAP"},{"prim":"CDR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"SWAP"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]]]}],[[{"prim":"DUP"},{"prim":"PUSH","args":[{"prim":"nat"},{"int":"0"}]},{"prim":"SWAP"},{"prim":"COMPARE"},{"prim":"GE"},{"prim":"IF","args":[[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"I''m
@@ -130,7 +130,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:51 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/metadata
+    uri: http://tezos-node:8094//chains/main/blocks/head/metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -155,7 +155,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:51 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","branch":"BLY8dWjBWerKFvWZTk47rAwDnihUQYubJben7JmB5mHELnLnnqn","contents":[{"kind":"origination","balance":"0","source":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","gas_limit":"21209","storage_limit":"60000","counter":"125","fee":"50000","script":{"code":[{"prim":"storage","args":[{"prim":"pair","args":[{"prim":"big_map","args":[{"prim":"string"},{"prim":"int"}],"annots":["%big_map_first"]},{"prim":"big_map","args":[{"prim":"string"},{"prim":"string"}],"annots":["%big_map_second"]}]}]},{"prim":"parameter","args":[{"prim":"or","args":[{"prim":"or","args":[{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"int","annots":["%value"]}],"annots":["%add_first"]},{"prim":"pair","args":[{"prim":"string","annots":["%key"]},{"prim":"string","annots":["%value"]}],"annots":["%add_second"]}]},{"prim":"nat","annots":["%always_fail"]}]}]},{"prim":"code","args":[[{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"IF_LEFT","args":[[{"prim":"IF_LEFT","args":[[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CDR"},{"prim":"SWAP"},{"prim":"CAR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]],[[{"prim":"SWAP"},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"CAR"},{"prim":"SWAP"},{"prim":"CDR"},{"prim":"DIG","args":[{"int":"2"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"3"}]},{"prim":"CDR"},{"prim":"SOME"},{"prim":"DIG","args":[{"int":"3"}]},{"prim":"DUP"},{"prim":"DUG","args":[{"int":"4"}]},{"prim":"CAR"},{"prim":"UPDATE"},{"prim":"SWAP"},{"prim":"PAIR"},{"prim":"DUG","args":[{"int":"2"}]},{"prim":"DROP"},{"prim":"DROP"}]]]}],[[{"prim":"DUP"},{"prim":"PUSH","args":[{"prim":"nat"},{"int":"0"}]},{"prim":"SWAP"},{"prim":"COMPARE"},{"prim":"GE"},{"prim":"IF","args":[[[{"prim":"PUSH","args":[{"prim":"string"},{"string":"I''m
@@ -182,7 +182,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:51 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/injection/operation?chain=main
+    uri: http://tezos-node:8094/injection/operation?chain=main
     body:
       encoding: UTF-8
       string: '"6ca6299ddf61a1881555917f98b7a0d6d16831a9372df23288c67c92bf1153066d00ad2daa0299eff4bc9406f6b6097ac496ef136871d086037dd9a501e0d40300000000018502000001800501076508610368035b0000000e256269675f6d61705f66697273740861036803680000000f256269675f6d61705f7365636f6e640500076407640865046800000004256b6579045b000000062576616c75650000000a256164645f66697273740865046800000004256b65790468000000062576616c75650000000b256164645f7365636f6e6404620000000c25616c776179735f6661696c050202000000df03210317034c0316072e0200000084072e020000003b0200000036034c03210571000203210317034c03160570000203210571000303170346057000030321057100040316035003420571000203200320020000003d0200000038034c03210571000203210316034c031705700002032105710003031703460570000303210571000403160350034c034205710002032003200200000041020000003c0321074303620000034c03190328072c020000001b020000001607430368010000000b49276d206661696c696e670327020000000502000000000320053d036d03420000000c07070200000000020000000018e6aa8e5bd55d991582e699f235a0703e4eaef44612814dc8dfde9ec73214f1848dccfa1b39aeda1279e4a2d02daee7191e8580267164bddcc898b5d3b19c06"'
@@ -207,7 +207,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:51 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/KT1X9TkfQ95iQ7423kVWrxDZB7aaG6rGcpnm/entrypoints
+    uri: http://tezos-node:8094//chains/main/blocks/head/context/contracts/KT1X9TkfQ95iQ7423kVWrxDZB7aaG6rGcpnm/entrypoints
     body:
       encoding: US-ASCII
       string: ''
@@ -232,7 +232,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:53 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG/counter
+    uri: http://tezos-node:8094//chains/main/blocks/head/context/contracts/tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG/counter
     body:
       encoding: US-ASCII
       string: ''
@@ -257,7 +257,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:53 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/hash
+    uri: http://tezos-node:8094//chains/main/blocks/head/hash
     body:
       encoding: US-ASCII
       string: ''
@@ -282,7 +282,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:53 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/chain_id
+    uri: http://tezos-node:8094//chains/main/chain_id
     body:
       encoding: US-ASCII
       string: ''
@@ -307,7 +307,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:53 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/scripts/run_operation
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/scripts/run_operation
     body:
       encoding: UTF-8
       string: '{"operation":{"branch":"BMKS7ZwD5WBnHBtcWKAaKSjspMRnPvSua6E1mhwam3Hc4WCNACF","contents":[{"kind":"transaction","amount":"0","source":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","destination":"KT1X9TkfQ95iQ7423kVWrxDZB7aaG6rGcpnm","gas_limit":"100000","storage_limit":"6000","counter":"126","fee":"50000","parameters":{"entrypoint":"add_second","value":{"prim":"Pair","args":[{"string":"hello"},{"string":"world"}]}}}],"signature":"edsigu165B7VFf3Dpw2QABVzEtCxJY2gsNBNcE3Ti7rRxtDUjqTFRpg67EdAQmY6YWPE5tKJDMnSTJDFu65gic8uLjbW2YwGvAZ"},"chain_id":"NetXdQprcVkpaWU"}'
@@ -332,7 +332,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:53 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/forge/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/forge/operations
     body:
       encoding: UTF-8
       string: '{"branch":"BMKS7ZwD5WBnHBtcWKAaKSjspMRnPvSua6E1mhwam3Hc4WCNACF","contents":[{"kind":"transaction","amount":"0","source":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","destination":"KT1X9TkfQ95iQ7423kVWrxDZB7aaG6rGcpnm","gas_limit":"20565","storage_limit":"6000","counter":"126","fee":"50000","parameters":{"entrypoint":"add_second","value":{"prim":"Pair","args":[{"string":"hello"},{"string":"world"}]}}}]}'
@@ -357,7 +357,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:53 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/metadata
+    uri: http://tezos-node:8094//chains/main/blocks/head/metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -382,7 +382,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:53 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/chains/main/blocks/head/helpers/preapply/operations
+    uri: http://tezos-node:8094/chains/main/blocks/head/helpers/preapply/operations
     body:
       encoding: UTF-8
       string: '[{"protocol":"PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS","branch":"BMKS7ZwD5WBnHBtcWKAaKSjspMRnPvSua6E1mhwam3Hc4WCNACF","contents":[{"kind":"transaction","amount":"0","source":"tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG","destination":"KT1X9TkfQ95iQ7423kVWrxDZB7aaG6rGcpnm","gas_limit":"20565","storage_limit":"6000","counter":"126","fee":"50000","parameters":{"entrypoint":"add_second","value":{"prim":"Pair","args":[{"string":"hello"},{"string":"world"}]}}}],"signature":"edsigu6ueZTMMciVQwNaXhihAEiCNXQSjrRSaLBWeZSK6mM6GEG4B8E2Er76zy5u14TJGQpH9nWwnMiE3ivTJQCGh73UMgJEWe1"}]'
@@ -407,7 +407,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:53 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094/injection/operation?chain=main
+    uri: http://tezos-node:8094/injection/operation?chain=main
     body:
       encoding: UTF-8
       string: '"d382f460edbd3be597f6cb8210f51de0f73e0457e9d73968457a4111a6e1ab376c00ad2daa0299eff4bc9406f6b6097ac496ef136871d086037ed5a001f02e0001f781a00bbf197b3c455342deebce11d0e1902d4400ffff0a6164645f7365636f6e64000000160707010000000568656c6c6f0100000005776f726c64fd03ac80e4633bda3fc65eb484e5451eff25d396cec4aef90ec639acb11775e8d5b9af5779e6ee87f43cc29047b020f6c1e9a4cd27a29f33e593b4c53d020b01"'
@@ -432,7 +432,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:53 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/KT1X9TkfQ95iQ7423kVWrxDZB7aaG6rGcpnm/storage
+    uri: http://tezos-node:8094//chains/main/blocks/head/context/contracts/KT1X9TkfQ95iQ7423kVWrxDZB7aaG6rGcpnm/storage
     body:
       encoding: US-ASCII
       string: ''
@@ -457,7 +457,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:56 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/context/contracts/KT1X9TkfQ95iQ7423kVWrxDZB7aaG6rGcpnm
+    uri: http://tezos-node:8094//chains/main/blocks/head/context/contracts/KT1X9TkfQ95iQ7423kVWrxDZB7aaG6rGcpnm
     body:
       encoding: US-ASCII
       string: ''
@@ -483,7 +483,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:56 GMT
 - request:
     method: post
-    uri: http://tezos_node:8094//chains/main/blocks/head/helpers/scripts/pack_data
+    uri: http://tezos-node:8094//chains/main/blocks/head/helpers/scripts/pack_data
     body:
       encoding: UTF-8
       string: '{"data":{"string":"hello"},"type":{"prim":"string"}}'
@@ -508,7 +508,7 @@ http_interactions:
   recorded_at: Fri, 25 Sep 2020 07:36:56 GMT
 - request:
     method: get
-    uri: http://tezos_node:8094//chains/main/blocks/head/context/big_maps/206/exprtsjEVVZk3Gm82U9wEs8kvwRiQwUT7zipJwvCeFMNsApe2tQ15s
+    uri: http://tezos-node:8094//chains/main/blocks/head/context/big_maps/206/exprtsjEVVZk3Gm82U9wEs8kvwRiQwUT7zipJwvCeFMNsApe2tQ15s
     body:
       encoding: US-ASCII
       string: ''

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://tezos_node:8094/chains/main/blocks/head/operation_hashes
+    uri: http://tezos-node:8094/chains/main/blocks/head/operation_hashes
     body:
       encoding: US-ASCII
       string: ''
@@ -23,6 +23,6 @@ http_interactions:
       string: '[["ooHFTCcCoMuEhzQXyZrTzmHnA4XbawqWwfDLG28S9GyqxbKdrPr","oofzyUZH4XVatGz2yk8AtpbDRQz68YKAyso7SjrckNjg5t6WEAK","oomwZo4S4cQA6yJFeeaLCidTCjbnYSusYeWYSBMvZsctwgQ88jr"],[],["oobFk3Gs9vPJ4YogqFQgd9yAMN7tvNneSRdUA6crYceNVsU9FVq","onsJxGoZzUTv6wo76PRRyKpbYpLdeHZEazAE2NUU4ZbXDqP47dj"],["onhPvFi666FwNr2H74cKMVXxXjZdczu3e6gZmvik7bsMQBJjRTM"]]
 
 '
-    http_version: 
+    http_version:
   recorded_at: Wed, 19 Feb 2020 11:46:03 GMT
 recorded_with: VCR 4.0.0

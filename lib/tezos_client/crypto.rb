@@ -238,7 +238,7 @@ class TezosClient
       end
 
       def ignore_0x(payload)
-        payload.starts_with?("0x") ? payload[2..-1] : payload
+        payload.start_with?("0x") ? payload[2..-1] : payload
       end
   end
 end
