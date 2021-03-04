@@ -8,7 +8,7 @@ class TezosClient
           if data.key? :int
             Time.zone.at(data[:int].to_i)
           elsif data.key? :string
-            return Time.zone.at(data[:string].to_i) if data[:string].match?(/\A[\d]*\z/)
+            return Time.zone.at(data[:string].to_i) if data[:string].match?(/\A\d+\z/)
 
             Time.zone.parse(data[:string])
           else
