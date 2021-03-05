@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "vcr", "~> 4.0.0"
   spec.add_development_dependency "pry"
 
-  spec.add_dependency "active_interaction", "> 3.8"
+  spec.add_dependency "active_interaction", ">= 3.8"
   spec.add_dependency "base58", "~> 0.2.3"
   spec.add_dependency "httparty", "~> 0.17.0"
   spec.add_dependency "rbnacl", "~> 5.0.0"
