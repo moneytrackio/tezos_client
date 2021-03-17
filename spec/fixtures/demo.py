@@ -10,17 +10,21 @@
 # should work.
 
 import smartpy as sp
+import sys
+import json
 
 class MyContract(sp.Contract):
-    def __init__(self):
+    def __init__(self, big_map_first, big_map_second):
         self.init(
             big_map_first = sp.big_map(
                 tkey = sp.TString,
-                tvalue = sp.TInt
+                tvalue = sp.TInt,
+                l = big_map_first
             ),
             big_map_second = sp.big_map(
                  tkey = sp.TString,
-                 tvalue = sp.TString
+                 tvalue = sp.TString,
+                 l = big_map_second
              )
         )
 
@@ -37,3 +41,10 @@ class MyContract(sp.Contract):
         sp.set_type(params.amount, sp.TNat)
         sp.if params.amount >= 0:
           sp.failwith("I'm failing")
+
+
+
+inputs = list(map(lambda input: json.loads(input), sys.argv[1:]))
+
+sp.add_compilation_target("default", MyContract(*inputs))
+
