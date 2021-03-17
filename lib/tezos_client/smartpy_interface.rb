@@ -56,7 +56,7 @@ class TezosClient
 
     def optional_flags(flags)
       (flags || {}).map do |key, value|
-        if value.is_a? Boolean
+        if value.is_a?(FalseClass) || value.is_a?(TrueClass)
           "--#{key}"
         else
           ["--#{key}", value.to_s]
