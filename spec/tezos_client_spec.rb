@@ -130,7 +130,7 @@ RSpec.describe TezosClient, vcr: true do
       let(:source) { "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }
       let(:secret_key) { "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN" }
       let(:amount) { 0 }
-      let(:init_params) { "MyContract()" }
+      let(:init_params) { [{}, {}] }
 
       it "works" do
         origination = subject.originate_contract(
@@ -188,7 +188,7 @@ RSpec.describe TezosClient, vcr: true do
 
       context "with smartpy" do
         let(:script) { "./spec/fixtures/demo.py" }
-        let(:init_params) { "MyContract()" }
+        let(:init_params) { [{}, {}] }
 
         it "works" do
           res = subject.originate_contract(

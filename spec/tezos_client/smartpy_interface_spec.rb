@@ -14,7 +14,7 @@ RSpec.describe TezosClient::SmartpyInterface do
       it "works" do
         json_init_script, json_contract_script = subject.json_scripts(
             script: script,
-            args: init_params
+            init_params: init_params
         )
 
         expect(json_init_script).to be_an Hash
@@ -28,7 +28,7 @@ RSpec.describe TezosClient::SmartpyInterface do
       it "works" do
         json_init_script, json_contract_script = subject.json_scripts(
             script: script,
-            args: init_params
+            init_params: init_params
         )
 
         expect(json_init_script).to be_an Hash

@@ -10,7 +10,7 @@ class TezosClient
     attr_reader :options
 
     def json_scripts(args)
-      compile_to_michelson(**args) do |contract_script_filename, init_script_filename|
+      compile_to_michelson(args) do |contract_script_filename, init_script_filename|
         micheline_contract = File.read(contract_script_filename)
         micheline_storage = File.read(init_script_filename)
 
@@ -28,15 +28,15 @@ class TezosClient
     end
 
     private
-    def compile_to_michelson(target: "compile", script:, flags: {}, args: [])
-      Tools::TemporaryFile.with_file_copy(script) do |script_copy_path|
+    def compile_to_michelson(args)
+      Tools::TemporaryFile.with_file_copy(args[:script]) do |script_copy_path|
         script_basename = script_copy_path.split("/").last.sub(/.py$/, "")
         script_path = "/tmp/#{script_basename}/"
         init_script_filename = "step_000_cont_0_storage.json"
         contract_script_filename = "step_000_cont_0_contract.json"
 
-        cmd_line = [target, script_copy_path, script_path].concat(
-          optional_inputs(flags, args)
+        cmd_line = ["compile", script_copy_path, script_path].concat(
+          optional_inputs(args[:smartpy_flags], args[:init_params])
         )
 
         call_smartpy cmd_line
@@ -45,17 +45,17 @@ class TezosClient
       end
     end
 
-    def optional_inputs(flags, args)
+    def optional_inputs(flags, init_params)
       inputs = []
 
       inputs.concat(optional_flags(flags))
-      inputs.concat(optional_args(args))
+      inputs.concat(optional_args(init_params))
 
       inputs
     end
 
     def optional_flags(flags)
-      flags.map do |key, value|
+      (flags || {}).map do |key, value|
         if value.is_a? Boolean
           "--#{key}"
         else
@@ -64,12 +64,12 @@ class TezosClient
       end.flatten
     end
 
-    def optional_args(args)
-      return [] if args.count.zero?
+    def optional_args(init_params = [])
+      return [] if init_params.count.zero?
 
       ["--"].concat(
-        args.map do |arg|
-          arg.to_json
+        init_params.map do |init_param|
+          init_param.to_json
         end
       )
     end
