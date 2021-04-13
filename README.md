@@ -20,10 +20,10 @@ npm i -g michelson-to-micheline
 ```
 
 ### SmartPy
-[SmartPy](https://smartpy.io/)
+[SmartPy](https://smartpy.io/releases/20210317-bc925bb73dc885ac2b4dde9689e805d9b0bc6125/)
 
 ```bash
-sh <(curl -s https://smartpy.io/dev-20200924-23b26494361d96abf034bdbb1ad1af396f95fd61/cli/SmartPy.sh) local-install-auto
+sh <(curl -s https://smartpy.io/releases/20210317-bc925bb73dc885ac2b4dde9689e805d9b0bc6125/cli/install.sh)
 export PATH=$PATH:$HOME/smartpy-cli/
 ```
 

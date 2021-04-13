@@ -82,7 +82,7 @@ class TezosClient
   #
   # @return [Hash] result of the origination containing :operation_id, :operation_result and :originated_contract
   #
-  def originate_contract(from:, amount:, secret_key: nil, script: nil, init_params: nil, dry_run: false, **args)
+  def originate_contract(from:, amount:, secret_key: nil, script: nil, init_params: [], dry_run: false, **args)
     origination_args = {
       rpc_interface: rpc_interface,
       from: from,
@@ -92,9 +92,9 @@ class TezosClient
     }
 
     origination_args[:script] = contract_interface(script).origination_script(
-      from: from,
       script: script,
-      init_params: init_params
+      init_params: init_params,
+      **args
     )
 
     operation = OriginationOperation.new(origination_args)

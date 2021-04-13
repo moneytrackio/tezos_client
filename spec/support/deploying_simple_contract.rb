@@ -13,7 +13,7 @@ module DeployingSimpleContract
       amount: 0,
       secret_key: secret_key,
       script: "./spec/fixtures/demo.py",
-      init_params: "MyContract()",
+      init_params: [{}, {}],
       dry_run: false,
       gas_limit: 0.7
     )
