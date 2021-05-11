@@ -46,7 +46,11 @@ class TezosClient
     end
 
     def simulate_and_update_limits
-      run_result = run
+      if valid_secret_key?
+        run_result = preapply
+      else
+        run_result = run
+      end
 
       run_result[:operation_results].zip(rpc_operation_args) do |operation_result, rpc_operation_args|
         if rpc_operation_args.key?(:gas_limit)
