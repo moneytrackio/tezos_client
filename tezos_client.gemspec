@@ -7,12 +7,12 @@ require "tezos_client/version"
 Gem::Specification.new do |spec|
   spec.name          = "tezos_client"
   spec.version       = TezosClient::VERSION
-  spec.authors       = ["Pierre Michard"]
-  spec.email         = ["pierre@moneytrack.io"]
+  spec.authors       = ["Pierre Michard", "Sébastien Lauret", "Othmane El Kesri"]
+  spec.email         = ["pierre@moneytrack.io", "sebastien@moneytrack.io", "othmane@moneytrack.io"]
 
   spec.summary       = "Wrapper to the tezos client."
   spec.description   = ""
-  spec.homepage      = "http://moneytrack.io"
+  spec.homepage      = "https://moneytrack.io"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.16"
+  spec.add_development_dependency "bundler", "~> 2.1"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "rubocop-rails_config"
