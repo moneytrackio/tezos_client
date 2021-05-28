@@ -18,7 +18,7 @@ class TezosClient
             TezosClient::Tools::ConvertToHash::Map.new(
               data: data,
               type: type
-            ).value
+            ).value[var_name]
           end
         end
       end
