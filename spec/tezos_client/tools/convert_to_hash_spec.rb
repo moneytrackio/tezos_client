@@ -445,4 +445,48 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
       end
     end
   end
+  context "with option with big map" do
+    let(:type) do
+      {"prim"=>"pair",
+       "args"=>
+           [{"prim"=>"address", "annots"=>["%bd_sender"]},
+            {"prim"=>"pair",
+             "args"=>
+                 [{"prim"=>"big_map",
+                   "args"=>[{"prim"=>"string"}, {"prim"=>"key"}],
+                   "annots"=>["%practitioners"]},
+                  {"prim"=>"option",
+                   "args"=>[{"prim"=>"address"}],
+                   "annots"=>["%replace_contract_address"]}]}]}.with_indifferent_access
+    end
+    let(:data) do
+      {"prim"=>"Pair",
+       "args"=>
+           [{"bytes"=>"0000ad2daa0299eff4bc9406f6b6097ac496ef136871"},
+            {"prim"=>"Pair",
+             "args"=>
+                 [[{"prim"=>"Elt",
+                    "args"=>
+                        [{"string"=>"HEALTH_PRACTITIONER_8Q2UE"},
+                         {"string"=>
+                              "0063b95178c0cecf6518d85ca12f7c719d0b82477cb72cddb788f16b9052159ce7"}]},
+                   {"prim"=>"Elt",
+                    "args"=>
+                        [{"string"=>"HEALTH_PRACTITIONER_HMOOK"},
+                         {"string"=>
+                              "002ee8a37dc654e3e711cc6a44750fcd777905b688c03a64b6f805462cb87623d4"}]}],
+                  {"prim"=>"None"}]}]}.with_indifferent_access
+    end
+
+    it "returns decoded values" do
+      expect(subject).to eq(
+                             :bd_sender => "tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG",
+                             :practitioners => {
+                                 "HEALTH_PRACTITIONER_8Q2UE"=>"edpkuQ9FTSQ27t6ByQuUwqsxv5hmdcAP6dyi9ThQgjAKCxTA5dp7Dn",
+                                 "HEALTH_PRACTITIONER_HMOOK"=>"edpktztA78rBSBbfyRQwoeErGMCyGjnZ3NXhu3g8Ag6VSrjUJfiuSP"
+                             },
+                             :replace_contract_address => nil
+                         )
+    end
+  end
 end

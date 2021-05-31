@@ -7,12 +7,19 @@ class TezosClient
     class ConvertToHash < ActiveInteraction::Base
       class BigMap < Base
         def decode
-          ::TezosClient::BigMap.new(
-            var_name,
-            data[:int],
-            type[:args].second,
-            type[:args].first
-          )
+          if data.is_a? Hash
+            ::TezosClient::BigMap.new(
+              var_name,
+              data[:int],
+              type[:args].second,
+              type[:args].first
+            )
+          else
+            TezosClient::Tools::ConvertToHash::Map.new(
+              data: data,
+              type: type
+            ).value[var_name]
+          end
         end
       end
     end

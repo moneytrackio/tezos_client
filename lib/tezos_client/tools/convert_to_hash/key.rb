@@ -7,19 +7,19 @@ class TezosClient
         include TezosClient::Crypto
 
         def decode
-          if data.key?(:bytes)
-            if data[:bytes].start_with?("00")
-              encode_tz(:edpk, data[:bytes][2..-1])
-            elsif data[:bytes].start_with?("01")
-              encode_tz(:sppk, data[:bytes][2..-1])
-            elsif data[:bytes].start_with?("02")
-              encode_tz(:p2pk, data[:bytes][2..-1])
-            else
-              data[:bytes]
-            end
+          if tmp_data.start_with?("00")
+            encode_tz(:edpk, tmp_data[2..-1])
+          elsif tmp_data.start_with?("01")
+            encode_tz(:sppk, tmp_data[2..-1])
+          elsif tmp_data.start_with?("02")
+            encode_tz(:p2pk, tmp_data[2..-1])
           else
-            data[:string]
+            tmp_data
           end
+        end
+
+        def tmp_data
+          @tmp_data ||= data[:bytes] || data[:string]
         end
       end
     end
