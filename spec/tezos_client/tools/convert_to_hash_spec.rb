@@ -489,4 +489,49 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
                          )
     end
   end
+
+  context "set type" do
+    let(:data) do
+      [
+        {
+          "prim": "Pair",
+          "args": [
+            { "string": "MTK-Practitioner-txrsh" },
+            { string: "Spending--001" }
+          ]
+        },
+        {
+          "prim": "Pair",
+          "args": [
+            { "string": "MTK-Practitioner-2" },
+            { string: "Spending--002" }
+          ]
+        }
+      ]
+    end
+    let(:type) do
+      {
+        "prim": "set",
+        "args": [
+          {
+            "prim": "pair",
+            "args": [
+              { "prim": "string", "annots": ["%practitioner_ref"] },
+              { "prim": "string", "annots": ["%spending_ref"] }
+            ]
+          }
+        ]
+      }
+    end
+
+    it "returns the correct value" do
+      expect(subject).to eq(
+        Set[
+          { practitioner_ref: "MTK-Practitioner-txrsh", spending_ref: "Spending--001" },
+          { practitioner_ref: "MTK-Practitioner-2", spending_ref: "Spending--002" }
+        ]
+      )
+    end
+
+  end
 end
