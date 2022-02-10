@@ -103,7 +103,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
           "BM4jU5xcqX55cKd1aa8m9sNBcnEBz6Qm8oQpRCSrtif9zrdvBkX"
         else
           new_block_hash = new_operation_block
-          puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__-3}"
+          puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__ - 3}"
           new_block_hash
         end
       end
@@ -139,7 +139,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
           "BMbkUuHcoABmSFLEKEzT1WmcYZUxkGKBA4L83hb9eMqmMVZtAcW"
         else
           new_block_hash = new_origination_block
-          puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__-3}"
+          puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__ - 3}"
           new_block_hash
         end
       end
@@ -179,7 +179,7 @@ RSpec.describe TezosClient::RpcInterface::Blocks, :vcr do
           "BKriYRHoNeDKbsTj3BcZaGztjaZSmTkfmgMZ1XTmaZaPSqmENnr"
         else
           new_block_hash = new_operation_block
-          puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__-3}"
+          puts "please insert this block hash here #{new_block_hash} #{__FILE__}:#{__LINE__ - 3}"
           new_block_hash
         end
       end

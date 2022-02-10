@@ -28,50 +28,50 @@ class TezosClient
     end
 
     private
-    def compile_to_michelson(args)
-      Tools::TemporaryFile.with_file_copy(args[:script]) do |script_copy_path|
-        script_basename = script_copy_path.split("/").last.sub(/.py$/, "")
-        script_path = "/tmp/#{script_basename}/"
-        init_script_filename = "step_000_cont_0_storage.json"
-        contract_script_filename = "step_000_cont_0_contract.json"
+      def compile_to_michelson(args)
+        Tools::TemporaryFile.with_file_copy(args[:script]) do |script_copy_path|
+          script_basename = script_copy_path.split("/").last.sub(/.py$/, "")
+          script_path = "/tmp/#{script_basename}/"
+          init_script_filename = "step_000_cont_0_storage.json"
+          contract_script_filename = "step_000_cont_0_contract.json"
 
-        cmd_line = ["compile", script_copy_path, script_path].concat(
-          optional_inputs(args[:smartpy_flags], args[:init_params])
-        )
+          cmd_line = ["compile", script_copy_path, script_path].concat(
+            optional_inputs(args[:smartpy_flags], args[:init_params])
+          )
 
-        call_smartpy cmd_line
+          call_smartpy cmd_line
 
-        yield(script_path + "default/" + contract_script_filename, script_path + "default/" + init_script_filename)
+          yield(script_path + "default/" + contract_script_filename, script_path + "default/" + init_script_filename)
+        end
       end
-    end
 
-    def optional_inputs(flags, init_params)
-      inputs = []
+      def optional_inputs(flags, init_params)
+        inputs = []
 
-      inputs.concat(optional_flags(flags))
-      inputs.concat(optional_args(init_params))
+        inputs.concat(optional_flags(flags))
+        inputs.concat(optional_args(init_params))
 
-      inputs
-    end
+        inputs
+      end
 
-    def optional_flags(flags)
-      (flags || {}).map do |key, value|
-        if value.is_a?(FalseClass) || value.is_a?(TrueClass)
-          "--#{key}"
-        else
-          ["--#{key}", value.to_s]
-        end
-      end.flatten
-    end
+      def optional_flags(flags)
+        (flags || {}).map do |key, value|
+          if value.is_a?(FalseClass) || value.is_a?(TrueClass)
+            "--#{key}"
+          else
+            ["--#{key}", value.to_s]
+          end
+        end.flatten
+      end
 
-    def optional_args(init_params = [])
-      return [] if init_params.count.zero?
+      def optional_args(init_params = [])
+        return [] if init_params.count.zero?
 
-      ["--"].concat(
-        init_params.map do |init_param|
-          init_param.to_json
-        end
-      )
-    end
+        ["--"].concat(
+          init_params.map do |init_param|
+            init_param.to_json
+          end
+        )
+      end
   end
 end

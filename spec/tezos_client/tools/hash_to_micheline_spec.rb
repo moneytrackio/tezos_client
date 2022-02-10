@@ -8,15 +8,15 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
       context "when there is multiple parameters" do
         let(:params) do
           {
-            storage_type: { "prim"=>"pair",
-                 "args"=>
-                  [{ "prim"=>"pair",
-                     "args"=>
-                        [{ "prim"=>"pair", "args"=>[
-                          { "prim"=>"timestamp", "annots"=>["%expires_at"] }, { "prim"=>"string", "annots"=>["%id"] }
+            storage_type: { "prim" => "pair",
+                 "args" =>
+                  [{ "prim" => "pair",
+                     "args" =>
+                        [{ "prim" => "pair", "args" => [
+                          { "prim" => "timestamp", "annots" => ["%expires_at"] }, { "prim" => "string", "annots" => ["%id"] }
                         ] },
-                   { "prim"=>"bytes", "annots"=>["%payload"] }] },
-                   { "prim"=>"string", "annots"=>["%spending_ref"] }] },
+                   { "prim" => "bytes", "annots" => ["%payload"] }] },
+                   { "prim" => "string", "annots" => ["%spending_ref"] }] },
             params: {
                      payload: "payload",
                      spending_ref: "spending_ref",
@@ -160,59 +160,6 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
         expect(subject.result).to eq({ string: params[:params][:payload] })
       end
     end
-  end
-
-  context "when the params are invalid" do
-    context "when storage_type, contract_address and entrypoint are provided" do
-      let(:params) do
-        {
-          contract_address: "KT1234567890",
-          entrypoint: "my_entrypoint",
-          params: {
-            payload: "payload"
-          },
-          storage_type: { "prim" => "string" }
-        }
-      end
-
-      it "is invalid" do
-        expect(subject).not_to be_valid
-        expect(subject.errors.full_messages).to eq ["You should provide the contract_address and the entrypoint only if storage_type is not provided"]
-      end
-    end
-
-    context "when a timestamp parameter is not an instance of Time" do
-      let(:params) do
-        {
-          params: {
-            expires_at: 1594386282
-          },
-          storage_type: { "prim" => "timestamp", "annots"=>["%expires_at"] }
-        }
-      end
-
-      it "is invalid" do
-        expect { subject }.to raise_error RuntimeError, "timestamp input (1594386282) must be an instance of Time"
-      end
-    end
-
-    context "when a key in the params is not found in the storage_type" do
-      let(:params) do
-        {
-          params: {
-            expires_at: Time.now,
-            spending_ref: "spending_ref"
-          },
-          storage_type: {
-            prim: "pair", args: [{ "prim" => "timestamp", annots: ["%expiration_date"] }, { "prim" => "string", annots: ["%spending_ref"] } ]
-          }
-        }
-      end
-
-      it "raises an error" do
-        expect { subject }.to raise_error KeyError, /key not found: :expiration_date/
-      end
-    end
 
     context "with option" do
       let(:storage_type) do
@@ -297,25 +244,25 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
             prim: "pair",
             args:  [
               {
-                "prim"=>"bytes"
+                "prim" => "bytes"
               },
               {
-                "prim"=>"contract",
-                "args"=>
-                         [
-                           {
-                             "prim"=>"pair",
-                                 "args"=>
-                                   [
-                                      {
-                                        "prim"=>"timestamp", "annots"=>["%created_at"]
-                                      },
-                                      {
-                                        "prim"=>"address", "annots"=>["%created_by"]
-                                      }
-                                   ]
-                           }
-                         ]
+                "prim" => "contract",
+                "args" =>
+                  [
+                    {
+                      "prim" => "pair",
+                      "args" =>
+                        [
+                          {
+                            "prim" => "timestamp", "annots" => ["%created_at"]
+                          },
+                          {
+                            "prim" => "address", "annots" => ["%created_by"]
+                          }
+                        ]
+                    }
+                  ]
               }
             ]
           }
@@ -332,7 +279,7 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
       end
     end
 
-    context "with view entrypoint" do
+    context "with view entrypoint (3 params)" do
       let(:params) do
         {
           params: %w[1234 KT1UDJmqKvMYRcGzP2TSFhQqejS2CKaDsNEx 4567],
@@ -340,19 +287,91 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
             prim: "pair",
             args:  [
               {
-                "prim"=>"string"
+                "prim" => "string"
               },
               {
-                "prim"=>"pair",
-                "args"=>
+                "prim" => "pair",
+                "args" =>
                   [
                     {
-                      "prim"=>"string"
+                      "prim" => "string"
                     },
                     {
-                      "prim"=>"string"
+                      "prim" => "string"
                     }
                   ]
+              }
+            ]
+          }
+        }
+      end
+
+      it "is valid" do
+        expect(subject).to be_valid
+      end
+
+      it "returns the correct value" do
+        expect(subject.result).to eq(
+          { args: [{ string: "1234" }, { args: [{ string: "KT1UDJmqKvMYRcGzP2TSFhQqejS2CKaDsNEx" }, { string: "4567" }], prim: "Pair" }], prim: "Pair" }
+        )
+      end
+    end
+    context "with comb pairs" do
+      let(:expiry_time) { Time.parse("2021-01-25 07:29:03.000000000 +0000") }
+      let(:params) do
+        {
+          params: {
+            contract_id: "23bd903d-d9d4-4ae5-99f1-56abb9d5c230",
+            beneficiary_ref: "msij3ur4n6",
+            payload_expires_at: expiry_time,
+            contract_expires_at: expiry_time,
+            signature:
+              "edsigtgQV4YX1fPURh5Tnk84BtTFDhLiD541qgKz74CasQCdEZxGY7T8i4BNxWLLESda9pJWgBqedZAChzUA1SKxtdXwW59p8p5",
+            public_key: "edpktm8Ut89CS1qBokNYytRZ9XBjquPb2MX1DSCjZd8d6j2psg1sTw"
+          },
+          storage_type: {
+            "prim": "pair",
+            "args": [
+              {
+                "prim": "pair",
+                "args": [
+                  {
+                    "prim": "string",
+                    "annots": [
+                      "%beneficiary_ref"
+                    ]
+                  },
+                  {
+                    "prim": "timestamp",
+                    "annots": [
+                      "%contract_expires_at"
+                    ]
+                  },
+                  {
+                    "prim": "string",
+                    "annots": [
+                      "%contract_id"
+                    ]
+                  }
+                ]
+              },
+              {
+                "prim": "timestamp",
+                "annots": [
+                  "%payload_expires_at"
+                ]
+              },
+              {
+                "prim": "key",
+                "annots": [
+                  "%public_key"
+                ]
+              },
+              {
+                "prim": "signature",
+                "annots": [
+                  "%signature"
+                ]
               }
             ]
           }
@@ -366,8 +385,78 @@ RSpec.describe TezosClient::Tools::HashToMicheline do
 
       it "returns the correct value" do
         expect(subject.result).to eq(
-          { args: [{ string: "1234" }, { args: [{ string: "KT1UDJmqKvMYRcGzP2TSFhQqejS2CKaDsNEx" }, { string: "4567" }], prim: "Pair" }], prim: "Pair" }
+          {
+            prim: "Pair",
+            args: [
+              {
+                args: [
+                  { string: "msij3ur4n6" },
+                  { int: expiry_time.to_i.to_s },
+                  { string: "23bd903d-d9d4-4ae5-99f1-56abb9d5c230" }],
+                prim: "Pair"
+              },
+              { int: expiry_time.to_i.to_s },
+              { string: "edpktm8Ut89CS1qBokNYytRZ9XBjquPb2MX1DSCjZd8d6j2psg1sTw" },
+              {
+                string:
+                  "edsigtgQV4YX1fPURh5Tnk84BtTFDhLiD541qgKz74CasQCdEZxGY7T8i4BNxWLLESda9pJWgBqedZAChzUA1SKxtdXwW59p8p5"
+              }
+            ]
+          }
         )
+      end
+    end
+  end
+
+  context "when the params are invalid" do
+    context "when storage_type, contract_address and entrypoint are provided" do
+      let(:params) do
+        {
+          contract_address: "KT1234567890",
+          entrypoint: "my_entrypoint",
+          params: {
+            payload: "payload"
+          },
+          storage_type: { "prim" => "string" }
+        }
+      end
+
+      it "is invalid" do
+        expect(subject).not_to be_valid
+        expect(subject.errors.full_messages).to eq ["You should provide the contract_address and the entrypoint only if storage_type is not provided"]
+      end
+    end
+
+    context "when a timestamp parameter is not an instance of Time" do
+      let(:params) do
+        {
+          params: {
+            expires_at: 1594386282
+          },
+          storage_type: { "prim" => "timestamp", "annots" => ["%expires_at"] }
+        }
+      end
+
+      it "is invalid" do
+        expect { subject }.to raise_error RuntimeError, "timestamp input (1594386282) must be an instance of Time"
+      end
+    end
+
+    context "when a key in the params is not found in the storage_type" do
+      let(:params) do
+        {
+          params: {
+            expires_at: Time.now,
+            spending_ref: "spending_ref"
+          },
+          storage_type: {
+            prim: "pair", args: [{ "prim" => "timestamp", annots: ["%expiration_date"] }, { "prim" => "string", annots: ["%spending_ref"] } ]
+          }
+        }
+      end
+
+      it "raises an error" do
+        expect { subject }.to raise_error KeyError, /key not found: :expiration_date/
       end
     end
   end

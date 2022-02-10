@@ -22,9 +22,7 @@ class TezosClient
               data: data,
               type: type
             ).encode
-
           rescue NameError
-            raise
             raise NotImplementedError, "type '#{type[:prim]}' not implemented"
           end
 

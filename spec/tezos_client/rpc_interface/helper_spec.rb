@@ -84,7 +84,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
           gas_limit: 0.05,
           storage_limit: 0.006,
           counter: counter
-          ),
+        ),
         branch: branch,
         chain_id: subject.chain_id,
         signature: TezosClient::RANDOM_SIGNATURE

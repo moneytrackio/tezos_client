@@ -17,11 +17,11 @@ RSpec.describe TezosClient::ComputeOperationArgsCounters do
   context "when there is one pending operation" do
     let(:pending_operations) do
       {
-        "applied"=>
+        "applied" =>
         [
-          { "hash"=>"oonsGDMUpW8iQFBsyKbPdw4X45sCVfF6U7EbaW5QJWsTtWdKHGv",
-            "contents"=>[{ "kind"=>"transaction", "source"=>"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq", "counter"=>"189", "destination"=>"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }],
-            "signature"=>"sigatFpAoRC2k85tXxKMzVQYvNvoQxKzYL12qvQtsPHyGpZCWJtLu4gJhRG1DMWYnpY9gKLYY3oRcNi9c8TC3bD5bj7AuWR3" }
+          { "hash" => "oonsGDMUpW8iQFBsyKbPdw4X45sCVfF6U7EbaW5QJWsTtWdKHGv",
+            "contents" => [{ "kind" => "transaction", "source" => "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq", "counter" => "189", "destination" => "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }],
+            "signature" => "sigatFpAoRC2k85tXxKMzVQYvNvoQxKzYL12qvQtsPHyGpZCWJtLu4gJhRG1DMWYnpY9gKLYY3oRcNi9c8TC3bD5bj7AuWR3" }
         ]
       }
     end
@@ -58,14 +58,14 @@ RSpec.describe TezosClient::ComputeOperationArgsCounters do
   context "when there is multiple pending operations from the same source" do
     let(:pending_operations) do
       {
-        "applied"=>
+        "applied" =>
         [
-          { "hash"=>"oonsGDMUpW8iQFBsyKbPdw4X45sCVfF6U7EbaW5QJWsTtWdKHGv",
-            "contents"=>[{ "kind"=>"transaction", "source"=>"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq", "counter"=>"189", "destination"=>"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }],
-            "signature"=>"sigatFpAoRC2k85tXxKMzVQYvNvoQxKzYL12qvQtsPHyGpZCWJtLu4gJhRG1DMWYnpY9gKLYY3oRcNi9c8TC3bD5bj7AuWR3" },
-          { "hash"=>"oonsGDMUpW8iQFBsyKbPdw4X45sCVfF6U7EbaW5QJWsTtWdKHGv",
-            "contents"=>[{ "kind"=>"transaction", "source"=>"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq", "counter"=>"190", "destination"=>"tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }],
-            "signature"=>"sigatFpAoRC2k85tXxKMzVQYvNvoQxKzYL12qvQtsPHyGpZCWJtLu4gJhRG1DMWYnpY9gKLYY3oRcNi9c8TC3bD5bj7AuWR3" }
+          { "hash" => "oonsGDMUpW8iQFBsyKbPdw4X45sCVfF6U7EbaW5QJWsTtWdKHGv",
+            "contents" => [{ "kind" => "transaction", "source" => "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq", "counter" => "189", "destination" => "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }],
+            "signature" => "sigatFpAoRC2k85tXxKMzVQYvNvoQxKzYL12qvQtsPHyGpZCWJtLu4gJhRG1DMWYnpY9gKLYY3oRcNi9c8TC3bD5bj7AuWR3" },
+          { "hash" => "oonsGDMUpW8iQFBsyKbPdw4X45sCVfF6U7EbaW5QJWsTtWdKHGv",
+            "contents" => [{ "kind" => "transaction", "source" => "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq", "counter" => "190", "destination" => "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq" }],
+            "signature" => "sigatFpAoRC2k85tXxKMzVQYvNvoQxKzYL12qvQtsPHyGpZCWJtLu4gJhRG1DMWYnpY9gKLYY3oRcNi9c8TC3bD5bj7AuWR3" }
         ]
       }
     end

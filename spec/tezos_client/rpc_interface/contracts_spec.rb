@@ -57,7 +57,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
         "KT1HftW8XhqWMyhRfZQYh9hVfi4SgyatEpve"
       else
         new_kt_hash = new_contract_address
-        STDERR.puts "please insert this contract hash here #{new_kt_hash} #{__FILE__}:#{__LINE__-3}"
+        STDERR.puts "please insert this contract hash here #{new_kt_hash} #{__FILE__}:#{__LINE__ - 3}"
         new_kt_hash
       end
     end
@@ -73,7 +73,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
         "KT1X9TkfQ95iQ7423kVWrxDZB7aaG6rGcpnm"
       else
         new_kt_hash = new_contract_address
-        puts "please insert this contract hash here #{new_kt_hash} #{__FILE__}:#{__LINE__-3}"
+        puts "please insert this contract hash here #{new_kt_hash} #{__FILE__}:#{__LINE__ - 3}"
         new_kt_hash
       end
     end
@@ -114,7 +114,7 @@ RSpec.describe TezosClient::RpcInterface::Contracts, :vcr do
         "KT1DnEgdL9rCtYobkf47eEq3fWJi22vACPXD"
       else
         new_kt_hash = new_contract_address
-        puts "please insert this contract hash here #{new_kt_hash} #{__FILE__}:#{__LINE__-3}"
+        puts "please insert this contract hash here #{new_kt_hash} #{__FILE__}:#{__LINE__ - 3}"
         new_kt_hash
       end
     end

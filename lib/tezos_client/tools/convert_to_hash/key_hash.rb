@@ -11,4 +11,3 @@ class TezosClient
     end
   end
 end
-

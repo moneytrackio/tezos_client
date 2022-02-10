@@ -6,7 +6,7 @@ class TezosClient
       class Option < Base
         def decode
           if data[:prim] == "None"
-            return nil
+            nil
           elsif data[:prim] == "Some"
             TezosClient::Tools::ConvertToHash::Base.new(
               data: data[:args][0],

@@ -13,7 +13,7 @@ RSpec.describe TezosClient::SmartpyInterface do
         json_init_script, json_contract_script = subject.json_scripts(
             script: script,
             init_params: init_params
-        )
+          )
 
         expect(json_init_script).to be_an Hash
         expect(json_contract_script).to be_an Array
@@ -21,13 +21,13 @@ RSpec.describe TezosClient::SmartpyInterface do
     end
 
     context "with hash set" do
-      let(:init_params) { [{value: 1}, {value: "2"}] }
+      let(:init_params) { [{ value: 1 }, { value: "2" }] }
 
       it "works" do
         json_init_script, json_contract_script = subject.json_scripts(
             script: script,
             init_params: init_params
-        )
+          )
 
         expect(json_init_script).to be_an Hash
         expect(json_contract_script).to be_an Array
@@ -41,7 +41,7 @@ RSpec.describe TezosClient::SmartpyInterface do
               smartpy_flags: {
                 protocol: "delphi"
               }
-          )
+            )
 
           expect(json_init_script).to be_an Hash
           expect(json_contract_script).to be_an Array

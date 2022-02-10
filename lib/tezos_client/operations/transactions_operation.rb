@@ -3,14 +3,12 @@
 class TezosClient
   class TransactionsOperation < Operation
     def rpc_operation_args
-      @rpc_operation_args ||= begin
-        OperationArray.new(
+      @rpc_operation_args ||= OperationArray.new(
           operations: operations,
           secret_key: @args.fetch(:secret_key),
           from: @args.fetch(:from),
           rpc_interface: rpc_interface
         ).rpc_operation_args
-      end
     end
 
     def operations

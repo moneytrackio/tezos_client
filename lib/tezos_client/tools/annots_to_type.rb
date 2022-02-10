@@ -72,7 +72,7 @@ class TezosClient::Tools::AnnotsToType < ActiveInteraction::Base
 
     def validate_types
       allowed_types = TYPES_MAPPING.keys
-      return if typed_annots.values.map{|type| type.to_s.delete_prefix("optional_").to_sym}.all? { |type| allowed_types.include? type }
+      return if typed_annots.values.map { |type| type.to_s.delete_prefix("optional_").to_sym }.all? { |type| allowed_types.include? type }
 
       errors.add(:base, "The allowed types are: #{allowed_types.join(', ')}")
     end

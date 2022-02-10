@@ -103,7 +103,7 @@ class TezosClient
       rejection_error = errors.detect { |error| error[:id].match? ERROR_REGEXP }
 
       @location = rejection_error[:location]
-      @contract =  first_error[:contractHandle]
+      @contract = first_error[:contractHandle]
       @with = rejection_error[:with]
       @message = "Script runtime Error when executing #{contract}: #{with} (location: #{location})"
       super

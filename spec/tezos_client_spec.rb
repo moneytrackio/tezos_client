@@ -251,7 +251,7 @@ RSpec.describe TezosClient, vcr: true do
     end
 
     describe "call_contract" do
-#      let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
+      #      let(:script) { File.expand_path("./spec/fixtures/multisig.liq") }
       let(:source) { "tz1bRiJ6wkVNnSF6AFV5ZDE2kon97ewBiQFG" }
       let(:secret_key) { "edsk3udS2CzqXNYq244B5rP6E1of8wZUXMkBFjN3NtHRDcGEMhFKcr" }
       let(:amount) { 0 }
@@ -538,7 +538,7 @@ RSpec.describe TezosClient, vcr: true do
         res = subject.select_entrypoint(
             contract_address: contract_address,
             entrypoint: entrypoint
-        )
+          )
 
         expect(res).to eq entrypoint
       end
@@ -557,7 +557,7 @@ RSpec.describe TezosClient, vcr: true do
         res = subject.select_entrypoint(
             contract_address: contract_address,
             entrypoint: entrypoint
-        )
+          )
 
         expect(res).to eq "default"
       end
@@ -577,9 +577,9 @@ RSpec.describe TezosClient, vcr: true do
 
       it "raise error" do
         expect do
-         subject.select_entrypoint(
-          contract_address: contract_address,
-          entrypoint: entrypoint
+          subject.select_entrypoint(
+           contract_address: contract_address,
+           entrypoint: entrypoint
          )
         end.to raise_error ArgumentError,
                            "entrypoint first_entrypoint not found in [\"entrypoint\", \"other_entrypoint\"]"

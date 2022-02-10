@@ -31,8 +31,8 @@ class TezosClient
       def group_by_max_counter(arr)
         arr.map(&:with_indifferent_access)
            .group_by { |hsh| hsh[:source] }
-           .each_with_object({}) do |(source, contents), acc|
-          acc[source] = contents.max_by { |content| content[:counter].to_i }[:counter]
+           .transform_values do |contents|
+          contents.max_by { |content| content[:counter].to_i }[:counter]
         end
       end
   end
