@@ -7,38 +7,37 @@ class TezosClient
         def encode
           {
             prim: "Pair",
-            args: [
-              TezosClient::Tools::HashToMicheline::Base.new(
-                data: data_0,
-                type: type[:args][0]
-              ).value,
-              TezosClient::Tools::HashToMicheline::Base.new(
-                data: data_1,
-                type: type[:args][1]
-              ).value
-            ]
+            args: args
           }
         end
 
-        def data_0
-          if data.is_a? ::Array
-            data[0]
-          else
-            data
-          end
-        end
-
-        def data_1
-          if data.is_a? ::Array
-            if data.size > 2
-              data.drop(1)
-            else
-              data[1]
+        private
+          def args
+            type[:args].each_with_index.map do |type, index|
+              TezosClient::Tools::HashToMicheline::Base.new(
+                data: data_n(index),
+                type: type
+              ).value
             end
-          else
-            data
           end
-        end
+
+          def args_count
+            type[:args].size
+          end
+
+          def data_n(n)
+            if data.is_a? ::Array
+              is_last_arg = n == (args_count - 1)
+              # Handle the case when last arg is i Pair, which arguments are the last elements of the data
+              if is_last_arg && data.size > args_count
+                data.drop(args_count - 1)
+              else
+                data[n]
+              end
+            else
+              data
+            end
+          end
       end
     end
   end
