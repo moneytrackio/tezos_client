@@ -25,31 +25,31 @@ RSpec.describe TezosClient::Tools::AnnotsToType do
       it "returns a valid result" do
         expect(subject.result).to(
           eq(
-            { "prim"=>"pair",
-               "args"=>
+            { "prim" => "pair",
+               "args" =>
                 [
                   {
-                    "prim"=>"timestamp",
-                    "annots"=>["%expires_at"]
+                    "prim" => "timestamp",
+                    "annots" => ["%expires_at"]
                   },
                   {
-                    "prim"=>"pair",
-                    "args"=>
+                    "prim" => "pair",
+                    "args" =>
                       [
                         {
-                          "prim"=>"string",
-                          "annots"=>["%id"]
+                          "prim" => "string",
+                          "annots" => ["%id"]
                         },
                         {
-                          "prim"=>"pair",
-                          "args"=>[
+                          "prim" => "pair",
+                          "args" => [
                             {
-                              "prim"=>"bytes",
-                              "annots"=>["%payload"]
+                              "prim" => "bytes",
+                              "annots" => ["%payload"]
                             },
                             {
-                              "prim"=>"string",
-                              "annots"=>["%spending_ref"]
+                              "prim" => "string",
+                              "annots" => ["%spending_ref"]
                             }
                           ]
                         },
@@ -78,34 +78,34 @@ RSpec.describe TezosClient::Tools::AnnotsToType do
 
         expect(subject.result).to(
           eq(
-            { "prim"=>"pair",
-              "args"=>
+            { "prim" => "pair",
+              "args" =>
                 [
                   {
-                    "prim"=>"timestamp",
-                    "annots"=>["%expires_at"]
+                    "prim" => "timestamp",
+                    "annots" => ["%expires_at"]
                   },
                   {
-                    "prim"=>"pair",
-                    "args"=>
+                    "prim" => "pair",
+                    "args" =>
                       [
                         {
-                          "prim"=>"option",
+                          "prim" => "option",
                           "args" => [
                             { "prim" => "string" }
                           ],
-                          "annots"=>["%id"]
+                          "annots" => ["%id"]
                         },
                         {
-                          "prim"=>"pair",
-                          "args"=>[
+                          "prim" => "pair",
+                          "args" => [
                             {
-                              "prim"=>"bytes",
-                              "annots"=>["%payload"]
+                              "prim" => "bytes",
+                              "annots" => ["%payload"]
                             },
                             {
-                              "prim"=>"string",
-                              "annots"=>["%spending_ref"]
+                              "prim" => "string",
+                              "annots" => ["%spending_ref"]
                             }
                           ]
                         },
