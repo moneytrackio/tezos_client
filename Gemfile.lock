@@ -14,15 +14,15 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    actionpack (6.0.4.4)
-      actionview (= 6.0.4.4)
-      activesupport (= 6.0.4.4)
+    actionpack (6.0.4.6)
+      actionview (= 6.0.4.6)
+      activesupport (= 6.0.4.6)
       rack (~> 2.0, >= 2.0.8)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
-    actionview (6.0.4.4)
-      activesupport (= 6.0.4.4)
+    actionview (6.0.4.6)
+      activesupport (= 6.0.4.6)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
@@ -30,9 +30,9 @@ GEM
     active_interaction (4.1.0)
       activemodel (>= 5, < 8)
       activesupport (>= 5, < 8)
-    activemodel (6.0.4.4)
-      activesupport (= 6.0.4.4)
-    activesupport (6.0.4.4)
+    activemodel (6.0.4.6)
+      activesupport (= 6.0.4.6)
+    activesupport (6.0.4.6)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -62,7 +62,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.9.1)
       concurrent-ruby (~> 1.0)
-    loofah (2.13.0)
+    loofah (2.14.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     method_source (1.0.0)
@@ -75,6 +75,8 @@ GEM
     multi_xml (0.6.0)
     netrc (0.11.0)
     nokogiri (1.13.1-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
     parallel (1.21.0)
     parser (3.1.0.0)
@@ -92,9 +94,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
-    railties (6.0.4.4)
-      actionpack (= 6.0.4.4)
-      activesupport (= 6.0.4.4)
+    railties (6.0.4.6)
+      actionpack (= 6.0.4.6)
+      activesupport (= 6.0.4.6)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
@@ -169,6 +171,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-19
+  x86_64-linux
 
 DEPENDENCIES
   bundler (~> 2.1)
