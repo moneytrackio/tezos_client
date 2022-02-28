@@ -33,20 +33,20 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 2.1"
+  spec.add_development_dependency "bundler", "~> 2.2"
   spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "rubocop-rails_config"
-  spec.add_development_dependency "webmock"
-  spec.add_development_dependency "vcr", "~> 4.0.0"
-  spec.add_development_dependency "pry"
+  spec.add_development_dependency "rspec", "~> 3.11"
+  spec.add_development_dependency "rubocop-rails_config", "~> 1.8"
+  spec.add_development_dependency "webmock", "~> 3.14"
+  spec.add_development_dependency "vcr", "~> 4.0"
+  spec.add_development_dependency "pry", "~> 0.14.1"
 
-  spec.add_dependency "active_interaction", ">= 3.8"
+  spec.add_dependency "active_interaction", "~> 4.1"
   spec.add_dependency "base58", "~> 0.2.3"
-  spec.add_dependency "httparty", "~> 0.17.0"
-  spec.add_dependency "rbnacl", "~> 5.0.0"
-  spec.add_dependency "rest-client", "~>2.0.0"
-  spec.add_dependency "activesupport", "~> 6.0.0"
+  spec.add_dependency "httparty", "~> 0.17.3"
+  spec.add_dependency "rbnacl", "~> 7.1"
+  spec.add_dependency "rest-client", "~> 2.0"
+  spec.add_dependency "activesupport", "~> 7.0"
   spec.add_dependency "money-tree", "~> 0.10.0"
-  spec.add_dependency "bip_mnemonic", "~> 0.0.2"
+  spec.add_dependency "bip_mnemonic", "~> 0.0.4"
 end

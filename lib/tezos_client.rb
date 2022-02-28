@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 require "pp"
-require "active_support/core_ext/hash/indifferent_access"
-require "active_support/core_ext/string/inflections"
-require "active_support/core_ext/module/delegation"
-require "active_support/core_ext/time"
-require "active_support/core_ext/array"
+require "active_support/all"
 require "timeout"
 require "benchmark"
 require "open3"
