@@ -490,6 +490,157 @@ RSpec.describe TezosClient::Tools::ConvertToHash do
     end
   end
 
+  context "random" do
+    let(:data) do
+      [
+        [
+          {
+            prim: "Pair",
+            args: [
+              { bytes: "0000d0fe9c7837b4ff8892a320af6e1307e269551363" },
+              { "int": "74" }
+            ]
+          },
+          { "bytes": "01a52eb8fe4d2e1de6a6d8f040eb47bb84286f5dd200" },
+          { "string": "78e7d60d-fd3c-4a07-b3e2-df12b7735cdc" },
+          { "bytes": "008a7f4431b96abc0f5a3e90f4b2d36ea2fd04ae78e11588d40dc4c028cf47dbcc" }
+        ],
+        {
+          "prim": "Pair",
+          "args":
+            [
+              { "bytes": "01b2ff04b712d7c496fa31803a0fe1810a1307addf00" },
+              {
+                "prim": "Pair",
+                "args":
+                  [
+                    { "bytes": "01fe05cb5755e03286401adebddf142636987ad5ba00" },
+                    { "int": "2000" }
+                  ]
+              }
+            ]
+        },
+        { "prim": "None" },
+        {
+          "prim": "Pair",
+          "args": [
+            { "int": "5000" },
+            { "int": "10000" }
+          ]
+        },
+        { "string": "3" }
+      ]
+    end
+
+    let(:type) do
+      {
+        "prim" => "pair",
+        "args" =>
+          [
+            {
+              "prim" => "pair",
+              "args" => [
+                {
+                  "prim" => "pair",
+                  "args" =>
+                    [
+                      { "prim" => "address", "annots" => ["%bd_sender"] },
+                      {
+                        "prim" => "big_map",
+                        "args" => [
+                          { "prim" => "string" },
+                          {
+                            "prim" => "pair",
+                            "args" => [
+                              {
+                                "prim" => "timestamp",
+                                "annots" => ["%expires_at"]
+                              },
+                              {
+                                "prim" => "map",
+                                "args" => [
+                                  { "prim" => "address" },
+                                  { "prim" => "key" }
+                                ],
+                                "annots" => ["%keystores"]
+                              },
+                              {
+                                "prim" => "map",
+                                "args" => [
+                                  { "prim" => "string" },
+                                  {
+                                    "prim" => "pair",
+                                    "args" => [
+                                      {
+                                        "prim" => "pair",
+                                        "args" => [
+                                          { "prim" => "timestamp", "annots" => ["%created_at"] },
+                                          { "prim" => "nat", "annots" => ["%practitioner_price"] }
+                                        ]
+                                      },
+                                      { "prim" => "string", "annots" => ["%practitioner_ref"] },
+                                      { "prim" => "nat", "annots" => ["%remainder_amount"] }] }
+                                ],
+                                "annots" => ["%spendings"] }
+                            ]
+                          }
+                        ],
+                        "annots" => ["%beneficiaries"]
+                      }
+                    ]
+                },
+                {
+                  "prim" => "address",
+                  "annots" => ["%contract_whitelist_contract_address"]
+                },
+                { "prim" => "string", "annots" => ["%insurance_id"] },
+                { "prim" => "key", "annots" => ["%insurer_key"] }
+              ]
+            },
+            {
+              "prim" => "pair",
+              "args" => [
+                { "prim" => "address", "annots" => ["%mtk_signer_contract_address"] },
+                { "prim" => "address", "annots" => ["%practitioner_contract_address"] },
+                { "prim" => "nat", "annots" => ["%remainder_amount_sandbox"] }
+              ]
+            },
+            {
+              "prim" => "option",
+              "args" => [{ "prim" => "address" }],
+              "annots" => ["%replace_contract_address"]
+            },
+            {
+              "prim" => "pair",
+              "args" => [
+                { "prim" => "nat", "annots" => ["%max_amount"] },
+                { "prim" => "nat", "annots" => ["%max_occurrence"]
+                }
+              ],
+              "annots" => ["%service"]
+            },
+            { "prim" => "string", "annots" => ["%version"] }
+          ]
+      }.with_indifferent_access
+    end
+
+    it "returns the correct value" do
+      expect(subject).to match(
+        bd_sender: "tz1eh6FiXrnjdWtTcuutR45ARZyWBJ3xidJh",
+        beneficiaries: instance_of(TezosClient::BigMap),
+        contract_whitelist_contract_address: "KT1PeB2mBxAcCxspwB2BFuXWgeCQ9P4Ym9yt",
+        insurance_id: "78e7d60d-fd3c-4a07-b3e2-df12b7735cdc",
+        insurer_key: "edpkuhDfFWPdxhqq5L4TQ4Sdr8KU4rW3jbpcybUyiAD49BrPFhVpbb",
+        mtk_signer_contract_address: "KT1QuDLuF937jEyb8iSKFGMMrytQAjLT3wK9",
+        practitioner_contract_address: "KT1Xjv95ui4FdYSNDzXNMcxWiA5Gs1E3r6xi",
+        remainder_amount_sandbox: 2000,
+        replace_contract_address: nil,
+        service: { max_amount: 5000, max_occurrence: 10000 },
+        version: "3"
+      )
+    end
+  end
+
   context "set type" do
     let(:data) do
       [
