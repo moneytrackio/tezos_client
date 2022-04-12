@@ -5,6 +5,23 @@ RSpec.describe TezosClient::SmartpyInterface do
 
   subject { described_class.new }
 
+  describe "#origination_script" do
+    context "with empty hash" do
+      let(:init_params) { [{}, {}] }
+
+      it "works" do
+        origination_script = subject.origination_script(
+          script: script,
+          init_params: init_params
+        )
+        file = File.open("demo_script.json", "w")
+        file.write JSON.pretty_generate(origination_script)
+
+        expect(origination_script).to be_an Hash
+      end
+    end
+  end
+
   describe "#json_script" do
     context "with empty hash" do
       let(:init_params) { [{}, {}] }
