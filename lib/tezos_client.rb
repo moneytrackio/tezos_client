@@ -166,23 +166,23 @@ class TezosClient
     broadcast_operation(operation: operation, dry_run: dry_run)
   end
 
+  def build_transaction(dry_run: false, entrypoint:, params:, params_type:, **args)
+    transfer_args = transfer_args(dry_run: dry_run, entrypoint: entrypoint, params: params, params_type:params_type, **args)
+
+    transaction = TransactionOperation.new(
+      rpc_interface: rpc_interface,
+      **transfer_args
+    )
+
+    transaction.rpc_operation_args
+  end
+
   def call_contract(dry_run: false, entrypoint:, params:, params_type:, **args)
-    _entrypoint = select_entrypoint(
-      contract_address: args[:to],
-      entrypoint: entrypoint
-    )
-
-    json_params = micheline_params(
-      params: params,
-      entrypoint: _entrypoint,
-      params_type: params_type
-    )
-
-    transfer_args = args.merge(
-      entrypoint: _entrypoint,
-      parameters: json_params,
-      dry_run: dry_run
-    )
+    transfer_args = transfer_args(dry_run: dry_run,
+                                  entrypoint: entrypoint,
+                                  params: params,
+                                  params_type:params_type,
+                                  **args)
 
     transfer(transfer_args)
   end
@@ -266,6 +266,26 @@ class TezosClient
   end
 
   private
+    def transfer_args(dry_run: false, entrypoint:, params:, params_type:, **args)
+      _entrypoint = select_entrypoint(
+        contract_address: args[:to],
+        entrypoint: entrypoint
+      )
+
+      json_params = micheline_params(
+        params: params,
+        entrypoint: _entrypoint,
+        params_type: params_type
+      )
+
+      args.merge(
+        entrypoint: _entrypoint,
+        parameters: json_params,
+        dry_run: dry_run
+      )
+    end
+
+
     def broadcast_operation(operation:, dry_run:)
       res = if dry_run
         operation.simulate
