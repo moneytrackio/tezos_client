@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tezos_client (1.4.3)
+    tezos_client (1.4.5)
       active_interaction (>= 3.8)
       activesupport (~> 6.0.0)
       base58 (~> 0.2.3)
@@ -27,9 +27,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_interaction (5.1.1)
-      activemodel (>= 5.2, < 8)
-      activesupport (>= 5.2, < 8)
+    active_interaction (4.1.0)
+      activemodel (>= 5, < 8)
+      activesupport (>= 5, < 8)
     activemodel (6.0.6)
       activesupport (= 6.0.6)
     activesupport (6.0.6)
@@ -55,7 +55,7 @@ GEM
     erubi (1.11.0)
     ffi (1.15.5)
     hashdiff (1.0.1)
-    http-cookie (1.0.4)
+    http-cookie (1.0.5)
       domain_name (~> 0.5)
     httparty (0.17.3)
       mime-types (~> 3.0)
@@ -162,7 +162,7 @@ GEM
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.8)
+    unf_ext (0.0.8.2)
     unicode-display_width (2.3.0)
     vcr (4.0.0)
     webmock (3.14.0)
