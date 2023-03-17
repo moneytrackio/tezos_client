@@ -46,7 +46,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "httparty", "~> 0.21.0"
   spec.add_dependency "rbnacl", "~> 5.0.0"
   spec.add_dependency "rest-client", "~>2.0.0"
-  spec.add_dependency "activesupport", "~> 6.0.0"
+  spec.add_dependency "activesupport", ">= 6.0", "< 7.1"
   spec.add_dependency "money-tree", "~> 0.10.0"
   spec.add_dependency "bip_mnemonic", "~> 0.0.2"
 end
