@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class TezosClient
-  VERSION = "1.4.5"
+  VERSION = "2.0.0"
 end
