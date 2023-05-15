@@ -3,7 +3,7 @@ PATH
   specs:
     tezos_client (2.0.0)
       active_interaction (>= 3.8)
-      activesupport (~> 7.0.4, >= 7.0.4.3)
+      activesupport (>= 6.0)
       base58 (~> 0.2.3)
       bip_mnemonic (~> 0.0.2)
       httparty (~> 0.21.0)
