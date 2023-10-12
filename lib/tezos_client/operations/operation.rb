@@ -22,9 +22,11 @@ class TezosClient
 
       def operation_mgr
         @operation_mgr ||= OperationMgr.new(
-          rpc_interface: rpc_interface,
-          rpc_operation_args: rpc_operation_args,
-          **operation_options)
+          **operation_options.merge(
+            rpc_interface: rpc_interface,
+            rpc_operation_args: rpc_operation_args,
+          )
+        )
       end
 
       def operation_options

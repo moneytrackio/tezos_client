@@ -97,7 +97,7 @@ class TezosClient
       **args
     )
 
-    operation = OriginationOperation.new(origination_args)
+    operation = OriginationOperation.new(**origination_args)
     res = broadcast_operation(operation: operation, dry_run: dry_run)
 
     res.merge(
@@ -167,7 +167,7 @@ class TezosClient
   end
 
   def build_transaction(dry_run: false, entrypoint:, params:, params_type:, **args)
-    transfer_args = transfer_args(dry_run: dry_run, entrypoint: entrypoint, params: params, params_type:params_type, **args)
+    transfer_args = transfer_args(dry_run: dry_run, entrypoint: entrypoint, params: params, params_type: params_type, **args)
 
     transaction = TransactionOperation.new(
       rpc_interface: rpc_interface,
@@ -181,10 +181,10 @@ class TezosClient
     transfer_args = transfer_args(dry_run: dry_run,
                                   entrypoint: entrypoint,
                                   params: params,
-                                  params_type:params_type,
+                                  params_type: params_type,
                                   **args)
 
-    transfer(transfer_args)
+    transfer(**transfer_args)
   end
 
   def select_entrypoint(contract_address:, entrypoint:)
@@ -320,7 +320,7 @@ class TezosClient
 
     def contract_interface(script)
       case script.to_s
-      when /[A-Za-z_\/\-]*.py/
+      when /[A-Za-z_\/-]*.py/
         smartpy_interface
       when nil
         raise "script var unset"
