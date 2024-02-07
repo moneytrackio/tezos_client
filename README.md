@@ -4,16 +4,16 @@
 
 [![Build Status](https://travis-ci.org/moneytrackio/tezos_client.svg?branch=master)](https://travis-ci.org/moneytrackio/tezos_client)
 
-Tezos Client interacts with Tezos nodes using RPC commands. 
+Tezos Client interacts with Tezos nodes using RPC commands.
 
 ## Requirements
 
 Tezos client requires SmartPy to be installed in order to work properly.
-To install it on Linux, you can basically follow the steps coded in travis-script folder. 
+To install it on Linux, you can basically follow the steps coded in travis-script folder.
 
-## Dependency 
+## Dependency
 
-### michelson-to-micheline 
+### michelson-to-micheline
 ```bash
 sudo apt-get install nodejs
 npm i -g michelson-to-micheline
@@ -37,7 +37,7 @@ npm install -g typescript
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'tezos_client'
+gem "tezos_client"
 ```
 
 And then execute:
@@ -54,13 +54,13 @@ Or install it yourself as:
 
 Generate a perfectly random key pair:
 
-```ruby 
-client = TezosClient.new 
+```ruby
+client = TezosClient.new
 key = subject.generate_key
           expect(key[:address]).to eq "tz1RfnzRopJXH32SSDap2wMYGULBAnmHxdP1"
 # => {
-#       secret_key: "edsk4T2fHv5RLL3VSXHz82SQiyFx7vZ4wwtA2u67AvAaw5yqNEvuU2", 
-#       public_key: "edpkuncp7KSVhV57Qg7odwhMFcnAHnNrMppbitBPKBfvdg6fFVeNjr", 
+#       secret_key: "edsk4T2fHv5RLL3VSXHz82SQiyFx7vZ4wwtA2u67AvAaw5yqNEvuU2",
+#       public_key: "edpkuncp7KSVhV57Qg7odwhMFcnAHnNrMppbitBPKBfvdg6fFVeNjr",
 #       address: "tz1a97x7GAvMDyrwwKTLQo131CoidXyUef48"
 #    }
 ```
@@ -68,11 +68,11 @@ key = subject.generate_key
 Generate a key pair from a seed and a BIP 44 Path:
 
 ```ruby
-key = subject.generate_key(wallet_seed:"000102030405060708090a0b0c0d0e0f", path: "m/44'/1729'/0'/0'/0'")
+key = subject.generate_key(wallet_seed: "000102030405060708090a0b0c0d0e0f", path: "m/44'/1729'/0'/0'/0'")
           expect(key[:address]).to eq "tz1RfnzRopJXH32SSDap2wMYGULBAnmHxdP1"
 # => {
-#       secret_key: "edsk4T2fHv5RLL3VSXHz82SQiyFx7vZ4wwtA2u67AvAaw5yqNEvuU2", 
-#       public_key: "edpkuncp7KSVhV57Qg7odwhMFcnAHnNrMppbitBPKBfvdg6fFVeNjr", 
+#       secret_key: "edsk4T2fHv5RLL3VSXHz82SQiyFx7vZ4wwtA2u67AvAaw5yqNEvuU2",
+#       public_key: "edpkuncp7KSVhV57Qg7odwhMFcnAHnNrMppbitBPKBfvdg6fFVeNjr",
 #       address: "tz1a97x7GAvMDyrwwKTLQo131CoidXyUef48"
 #    }
 ```
@@ -80,12 +80,12 @@ Generate a key pair from a BIP-39 mnemonic sentence and a BIP 44 Path:
 
 ```ruby
 key = subject.generate_key(
-          mnemonic: "below dove cushion divide future artefact orange congress maple fiscal flower enable", 
+          mnemonic: "below dove cushion divide future artefact orange congress maple fiscal flower enable",
           path: "m/44'/1729'/0'/0'/0'")
           expect(key[:address]).to eq "tz1RfnzRopJXH32SSDap2wMYGULBAnmHxdP1"
 # => {
-#       secret_key: "edsk4T2fHv5RLL3VSXHz82SQiyFx7vZ4wwtA2u67AvAaw5yqNEvuU2", 
-#       public_key: "edpkuncp7KSVhV57Qg7odwhMFcnAHnNrMppbitBPKBfvdg6fFVeNjr", 
+#       secret_key: "edsk4T2fHv5RLL3VSXHz82SQiyFx7vZ4wwtA2u67AvAaw5yqNEvuU2",
+#       public_key: "edpkuncp7KSVhV57Qg7odwhMFcnAHnNrMppbitBPKBfvdg6fFVeNjr",
 #       address: "tz1a97x7GAvMDyrwwKTLQo131CoidXyUef48"
 #    }
 ```
@@ -93,28 +93,28 @@ key = subject.generate_key(
 
 ### Transfer funds
 
-```ruby 
-client = TezosClient.new 
+```ruby
+client = TezosClient.new
 
 client.transfer(
     amount: 1,
     from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
     to: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
     secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
-)
+  )
 ```
 
 ### Call a contract
 
 ```ruby
-client = TezosClient.new  
+client = TezosClient.new
 client.transfer(
     amount: 5,
     from: "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq",
     to: "KT1MZTrMDPB42P9yvjf7Cy8Lkjxjj4jetbCt",
     secret_key: "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN",
     parameters: '"pro"'
-)
+  )
 ```
 
 ### Originate a contract written in SmartPy
@@ -123,8 +123,8 @@ client.transfer(
 script = File.expand_path("./spec/fixtures/demo.py")
 source = "tz1ZWiiPXowuhN1UqNGVTrgNyf5tdxp4XUUq"
 secret_key = "edsk4EcqupPmaebat5mP57ZQ3zo8NDkwv8vQmafdYZyeXxrSc72pjN"
-amount =  0
-init_params= "MyContract()"
+amount = 0
+init_params = "MyContract()"
 client = TezosClient.new
 
 res = client.originate_contract(
@@ -133,7 +133,7 @@ res = client.originate_contract(
     script: script,
     secret_key: secret_key,
     init_params: init_params
-)
+  )
 
 puts "Origination operation: #{res[:operation_id]}"
 puts "Contract address: #{res[:originated_contract]}"

@@ -5,8 +5,9 @@ class TezosClient
     def post_initialize(operations:, **args)
       @raw_operations = operations.map do |operation|
         operation_kind = operation.delete(:kind)
-        operation_klass(operation_kind).new(
-          operation.merge(
+        operation_object = operation_klass(operation_kind)
+        operation_object.new(
+          **operation.merge(
             from: @args.fetch(:from),
             rpc_interface: rpc_interface,
             counter: 0 # will be set by raw_operation_array

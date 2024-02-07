@@ -17,48 +17,47 @@ class TezosClient
         end
 
         private
-
-        def normalized_type
-          if type[:args].size > 2
-            {
-              prim: "pair",
-              args: [
-                type[:args][0],
-                {
-                  prim: "pair",
-                  args: type[:args][1..]
-                }
-              ]
-            }
-          else
-            type
+          def normalized_type
+            if type[:args].size > 2
+              {
+                prim: "pair",
+                args: [
+                  type[:args][0],
+                  {
+                    prim: "pair",
+                    args: type[:args][1..nil]
+                  }
+                ]
+              }
+            else
+              type
+            end
           end
-        end
 
-        def expanded_data
-          if data.is_a?(Array)
-            {prim: "Pair", args: data}
-          else
-            data
+          def expanded_data
+            if data.is_a?(Array)
+              { prim: "Pair", args: data }
+            else
+              data
+            end
           end
-        end
 
-        def normalized_data
-          if expanded_data[:args].size > 2
-            {
-              prim: "Pair",
-              args: [
-                expanded_data[:args][0],
-                {
-                  prim: "Pair",
-                  args: expanded_data[:args][1..]
-                }
-              ]
-            }
-          else
-            expanded_data
+          def normalized_data
+            if expanded_data[:args].size > 2
+              {
+                prim: "Pair",
+                args: [
+                  expanded_data[:args][0],
+                  {
+                    prim: "Pair",
+                    args: expanded_data[:args][1..nil]
+                  }
+                ]
+              }
+            else
+              expanded_data
+            end
           end
-        end
       end
     end
   end

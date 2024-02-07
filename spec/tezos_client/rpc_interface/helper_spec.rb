@@ -147,7 +147,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
       }
     end
 
-    let(:transaction_hex) { subject.forge_operation(transaction_args) }
+    let(:transaction_hex) { subject.forge_operation(**transaction_args) }
 
     let(:signature) do
       TezosClient.new.sign_operation(
@@ -158,7 +158,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
 
     it "works" do
       res = subject.preapply_operation(
-        transaction_args.merge(
+        **transaction_args.merge(
           protocol: protocol,
           signature: signature
         )
@@ -190,7 +190,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
       }
     end
 
-    let(:origination_hex) { subject.forge_operation(origination_args) }
+    let(:origination_hex) { subject.forge_operation(**origination_args) }
 
     let(:signature) do
       TezosClient.new.sign_operation(
@@ -201,7 +201,7 @@ RSpec.describe TezosClient::RpcInterface::Helper, :vcr do
 
     it "works" do
       res = subject.preapply_operation(
-        origination_args.merge(
+        **origination_args.merge(
           protocol: protocol,
           signature: signature
         )
